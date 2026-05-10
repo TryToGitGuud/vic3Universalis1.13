@@ -1,0 +1,1057 @@
+# Italy Tyrone – all scripted progress bars (single file).
+# Austria–France stance, Patti lateranensi, constitutional tension, Garibaldi, sentiment, economy JEs.
+
+################################################################################
+# Austria–France diplomatic stance (same style as Great Game)
+# Left = France, Right = Austria. subtract = toward France, add = toward Austria.
+################################################################################
+italy_aus_fra_stance_bar = {
+	name = "italy_aus_fra_stance_bar_name"
+	desc = "italy_aus_fra_stance_bar_france_desc"
+	second_desc = "italy_aus_fra_stance_bar_austria_desc"
+	double_sided_gold = yes
+	start_value = 50
+	min_value = 0
+	max_value = 100
+	monthly_progress = {
+		# Defensive pact with France → +1 towards France (left)
+		if = {
+			limit = {
+				owner = {
+					any_scope_treaty = {
+						binds = c:FRA
+						any_scope_article = {
+							has_type = defensive_pact
+						}
+					}
+				}
+			}
+			subtract = {
+				desc = "italy_stance_defensive_pact_france_tt"
+				value = 1
+			}
+		}
+		# Defensive pact with Austria → +1 towards Austria (right)
+		if = {
+			limit = {
+				owner = {
+					any_scope_treaty = {
+						binds = c:AUS
+						any_scope_article = {
+							has_type = defensive_pact
+						}
+					}
+				}
+			}
+			add = {
+				desc = "italy_stance_defensive_pact_austria_tt"
+				value = 1
+			}
+		}
+		# Alliance with France → +1 towards France (left)
+		if = {
+			limit = {
+				owner = {
+					any_scope_treaty = {
+						binds = c:FRA
+						any_scope_article = {
+							has_type = alliance
+						}
+					}
+				}
+			}
+			subtract = {
+				desc = "italy_stance_alliance_france_tt"
+				value = 1
+			}
+		}
+		# Alliance with Austria → +1 towards Austria (right)
+		if = {
+			limit = {
+				owner = {
+					any_scope_treaty = {
+						binds = c:AUS
+						any_scope_article = {
+							has_type = alliance
+						}
+					}
+				}
+			}
+			add = {
+				desc = "italy_stance_alliance_austria_tt"
+				value = 1
+			}
+		}
+		# Military assistance with France → +1 towards France (left)
+		if = {
+			limit = {
+				owner = {
+					any_scope_treaty = {
+						binds = c:FRA
+						any_scope_article = {
+							has_type = military_assistance
+						}
+					}
+				}
+			}
+			subtract = {
+				desc = "italy_stance_military_assistance_france_tt"
+				value = 1
+			}
+		}
+		# Military assistance with Austria → +1 towards Austria (right)
+		if = {
+			limit = {
+				owner = {
+					any_scope_treaty = {
+						binds = c:AUS
+						any_scope_article = {
+							has_type = military_assistance
+						}
+					}
+				}
+			}
+			add = {
+				desc = "italy_stance_military_assistance_austria_tt"
+				value = 1
+			}
+		}
+		# Sardinia does not own Savoy → +1 towards France (left)
+		if = {
+			limit = {
+				c:SAR ?= {
+					NOT = { owns_entire_state_region = STATE_SAVOY }
+				}
+			}
+			subtract = {
+				desc = "italy_stance_savoy_lost_france_tt"
+				value = 1
+			}
+		}
+		# Sardinia owns Lombardy → +1 towards Austria (right)
+		if = {
+			limit = {
+				c:SAR ?= {
+					owns_entire_state_region = STATE_LOMBARDY
+				}
+			}
+			add = {
+				desc = "italy_stance_lombardy_austria_tt"
+				value = 1
+			}
+		}
+		# NIF: pull bar toward middle (50) by 1 — bar > 50 → move left
+		if = {
+			limit = {
+				owner = { has_variable = NIF_formed }
+				je:je_italy_diplo_stance = {
+					"scripted_bar_progress(italy_aus_fra_stance_bar)" > 50
+				}
+			}
+			subtract = {
+				desc = "italy_stance_nif_toward_center_tt"
+				value = 1
+			}
+		}
+		# NIF: pull bar toward middle (50) by 1 — bar < 50 → move right
+		if = {
+			limit = {
+				owner = { has_variable = NIF_formed }
+				je:italy_diplo_stance = {
+					"scripted_bar_progress(italy_aus_fra_stance_bar)" < 50
+				}
+			}
+			add = {
+				desc = "italy_stance_nif_toward_center_tt"
+				value = 1
+			}
+		}
+		# Bloc leader: pull bar toward middle (50) by 2 — bar > 50 → move left
+		if = {
+			limit = {
+				owner = { is_power_bloc_leader = yes }
+				je:italy_diplo_stance = {
+					"scripted_bar_progress(italy_aus_fra_stance_bar)" > 50
+				}
+			}
+			subtract = {
+				desc = "italy_stance_bloc_leader_toward_center_tt"
+				value = 1
+			}
+		}
+		# Bloc leader: pull bar toward middle (50) by 2 — bar < 50 → move right
+		if = {
+			limit = {
+				owner = { is_power_bloc_leader = yes }
+				je:italy_diplo_stance = {
+					"scripted_bar_progress(italy_aus_fra_stance_bar)" < 50
+				}
+			}
+			add = {
+				desc = "italy_stance_bloc_leader_toward_center_tt"
+				value = 1
+			}
+		}
+	}
+}
+
+################################################################################
+# Patti lateranensi: fills over 3 years (36 months), then JE on_complete annexes Papal State.
+################################################################################
+patti_lateranensi_bar = {
+	name = "patti_lateranensi_bar_name"
+	desc = "patti_lateranensi_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 36
+
+	monthly_progress = {
+		add = {
+			desc = "patti_lateranensi_bar_monthly_tt"
+			value = 1
+		}
+	}
+}
+
+################################################################################
+# Constitutional tension (Statuto Albertino): 0 = autocratic, 3 = Constitution by the king, 5 = by the people.
+# Bar tracks country variable constitutional_ita_tension_var (0–5). Sync var updated in JE on_monthly_pulse.
+################################################################################
+constitutional_ita_tension_bar = {
+	name = "constitutional_ita_tension_bar_name"
+	desc = "constitutional_ita_tension_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 5
+
+	monthly_progress = {
+		add = {
+			desc = "constitutional_ita_tension_bar_from_var_tt"
+			value = owner.var:constitutional_ita_tension_var
+		}
+		subtract = {
+			desc = "constitutional_ita_tension_bar_from_var_tt"
+			value = owner.var:constitutional_ita_tension_bar_sync
+		}
+	}
+}
+
+################################################################################
+# Garibaldi's Thousand Expedition: bar displays garibaldi_taking_sic_var (0–5). Variable-driven; sync updated in JE on_weekly_pulse.
+################################################################################
+garibaldi_expedition_progress_bar = {
+	name = "garibaldi_expedition_progress_bar_name"
+	desc = "garibaldi_expedition_progress_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 5
+
+	monthly_progress = {
+		add = {
+			desc = "garibaldi_expedition_progress_bar_var_tt"
+			value = owner.var:garibaldi_taking_sic_var
+		}
+		subtract = {
+			desc = "garibaldi_expedition_progress_bar_var_tt"
+			value = owner.var:garibaldi_expedition_bar_sync
+		}
+	}
+}
+
+################################################################################
+# Italian unification sentiment: bar tracks country variable italian_sentiment_var (0–100).
+# Sync var italian_sentiment_bar_sync is set each month after this runs so bar = variable.
+################################################################################
+italy_sentiment_bar = {
+	name = "italy_sentiment_bar_name"
+	desc = "italy_sentiment_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		add = {
+			desc = "italy_sentiment_bar_from_var_tt"
+			value = owner.var:italian_sentiment_var
+		}
+		subtract = {
+			desc = "italy_sentiment_bar_from_var_tt"
+			value = owner.var:italian_sentiment_bar_sync
+		}
+	}
+}
+
+################################################################################
+# Progress bar for ITA_French_economyJE: 5 periods of 6-month 5% GDP growth (Gründerzeit-style).
+# Progress only from the journal entry add_progress; no monthly_progress.
+################################################################################
+ita_french_economy_progress_bar = {
+	name = "ita_french_economy_progress_bar_name"
+	desc = "ita_french_economy_progress_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 5
+
+	monthly_progress = {
+	}
+}
+
+################################################################################
+# Progress bar for ITA_Austria_economyJE: 5 periods of 6-month 5% GDP growth (Austria path).
+# Progress only from the journal entry add_progress; no monthly_progress.
+################################################################################
+ita_austria_economy_progress_bar = {
+	name = "ita_austria_economy_progress_bar_name"
+	desc = "ita_austria_economy_progress_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 5
+
+	monthly_progress = {
+	}
+}
+
+
+################################################################################
+# Lombardo Venezia bars
+################################################################################
+
+ita_LV_confPO_main = {
+	name = "ita_LV_confPO_main_name"
+	desc = "ita_LV_confPO_main_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		# Radicals
+			subtract = {
+				desc = "ita_LV_confPO_main_radical_fraction_tt"
+				value = radical_fraction
+			multiply = 10
+			}
+
+			# Loyalists
+			add = {
+				desc = "ita_LV_confPO_main_loyalist_fraction_tt"
+				value = loyalist_fraction
+			multiply = 10
+			}
+		if = {
+			limit = {
+				is_subject = yes
+				top_overlord.relations:root > 0
+			}
+			add = {
+				desc = "ita_LV_confPO_main_overlord_relations_tt"
+				value = "top_overlord.relations(root)"
+				divide = 50
+			}
+		}
+		if = {
+			limit = {
+				liberty_desire > 75
+			}
+			subtract = {
+				desc = "ita_LV_confPO_main_from_high_liberty_desire"
+				value = ROOT.liberty_desire
+				divide = 50
+			}
+		}
+		if = {
+			limit = {
+				liberty_desire <= 75
+			}
+			add = {
+				desc = "ita_LV_confPO_main_from_low_liberty_desire"
+				value = 100
+				subtract = ROOT.liberty_desire
+				divide = 50
+			}
+		}
+		if = {
+			limit = {
+				is_subject = no
+			}
+			add = {
+				desc = "ita_LV_confPO_main_no_overlord_tt"
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				has_variable = LV_accepted_monarchy
+			}
+			add = {
+				desc = "ita_LV_confPO_main_monarchyDEC_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				has_variable = LV_accepted_republic
+			}
+			add = {
+				desc = "ita_LV_confPO_main_republicDEC_tt"
+				value = 1
+			}
+		}
+	}
+}
+
+ita_LV_confPO_sardinia = {
+	name = "ita_LV_confPO_sardinia_name"
+	desc = "ita_LV_confPO_sardinia_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		# Radicals
+			subtract = {
+				desc = "ita_LV_confPO_sardinia_radical_fraction_tt"
+				value = radical_fraction
+			}
+
+			# Loyalists
+			add = {
+				desc = "ita_LV_confPO_sardinia_loyalist_fraction_tt"
+				value = loyalist_fraction
+			}
+		if = {
+			limit = {
+				exists ?= c:SAR
+				owner = { c:SAR.relations:root > 0 }
+			}
+			add = {
+				desc = "ita_LV_confPO_sardinia_relations_tt"
+				value = "c:SAR.relations(root)"
+				divide = 20
+			}
+		}
+		if = {
+			limit = {
+				is_subject = no
+			}
+			add = {
+				desc = "ita_LV_confPO_sardinia_no_overlord_tt"
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				owner = { has_variable = LV_accepted_monarchy }
+			}
+			add = {
+				desc = "ita_LV_confPO_sardinia_monarchyDEC_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				owner = { has_variable = LV_accepted_republic }
+			}
+			add = {
+				desc = "ita_LV_confPO_sardinia_republicDEC_tt"
+				value = 1
+			}
+		}
+		owner = {
+			if = { 
+				limit = {
+					ig:ig_landowners = {
+						ig_approval > 0
+					}
+				}
+				add = {
+					desc = "ita_LV_confPO_sardinia_IGhappy_tt"
+					ig:ig_landowners = {
+						limit = {
+							ig_approval > 0
+						}
+						value = ig_approval
+						divide = 10
+					}
+				}
+			}
+		}
+	}
+}
+
+ita_LV_confPO_papal = {
+	name = "ita_LV_confPO_papal_name"
+	desc = "ita_LV_confPO_papal_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		# Radicals
+			subtract = {
+				desc = "ita_LV_confPO_papal_radical_fraction_tt"
+				value = radical_fraction
+			}
+
+			# Loyalists
+			add = {
+				desc = "ita_LV_confPO_papal_loyalist_fraction_tt"
+				value = loyalist_fraction
+			}
+		if = {
+			limit = {
+				exists ?= c:PAP
+				owner = { c:PAP.relations:root > 0 }
+			}
+			add = {
+				desc = "ita_LV_confPO_papal_relations_tt"
+				value = "c:PAP.relations(root)"
+				divide = 50
+			}
+		}
+		if = {
+			limit = {
+				is_subject = no
+			}
+			add = {
+				desc = "ita_LV_confPO_papal_no_overlord_tt"
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				owner = { has_variable = LV_accepted_monarchy }
+			}
+			add = {
+				desc = "ita_LV_confPO_papal_monarchyDEC_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				owner = { has_variable = LV_accepted_republic }
+			}
+			add = {
+				desc = "ita_LV_confPO_papal_republicDEC_tt"
+				value = 1
+			}
+		}
+		owner = {
+			if = { 
+				limit = {
+					ig:ig_landowners = {
+						ig_approval > 0
+					}
+				}
+				add = {
+					desc = "ita_LV_confPO_papal_IGhappy_tt"
+					ig:ig_devout = {
+						limit = {
+							ig_approval > 0
+						}
+						value = ig_approval
+						divide = 10
+					}
+				}
+			}
+		}
+	}
+}
+
+################################################################################
+# sic_dismantle_latifundia_fertilizer_bar: 0–25. Gains 1/month when >= 80% of
+# bg_staple_crops buildings in south Italian homelands use fertilizer.
+# Completes after 25 months of sustained fertilization.
+################################################################################
+sic_dismantle_latifundia_fertilizer_bar = {
+	name = "sic_dismantle_latifundia_fertilizer_bar_name"
+	desc = "sic_dismantle_latifundia_fertilizer_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 25
+
+	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					any_scope_building = {
+						filter = {
+							is_building_group = bg_staple_crops
+							state = {
+								state_region = {
+									is_homeland = cu:south_italian
+								}
+							}
+						}
+						OR = {
+							building_has_goods_shortage = no
+							has_active_production_method = pm_fertilization
+							hidden_trigger = {
+								has_active_production_method = pm_fertilization_building_rice_farm
+							}
+						}
+						percent >= 0.8
+					}
+				}
+			}
+			add = {
+				desc = "sic_dismantle_latifundia_fertilizer_bar_monthly_tt"
+				value = 1
+			}
+		}
+	}
+}
+
+################################################################################
+# sic_latifundia_reform_bar: 0–100. Driven by bg_agriculture + bg_plantations
+# building levels. ~3–4/month baseline → completes in ~25–35 months.
+################################################################################
+sic_latifundia_reform_bar = {
+	name = "sic_latifundia_reform_bar_name"
+	desc = "sic_latifundia_reform_bar_desc"
+
+	default_green = yes
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		# ── Base: building investment ───────────────────────────────────────
+		add = {
+			desc = "sic_latifundia_agri_levels_tt"
+			value = owner.sic_latifundia_agri_levels
+			divide = 50
+		}
+		# ── Positive laws ───────────────────────────────────────────────────
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_homesteading
+						has_law = law_type:law_tenant_farmers
+						has_law = law_type:law_expanded_latifundias
+					}
+				}
+			}
+			add = {
+				desc = "sic_latifundia_land_reform_law_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_laissez_faire
+						has_law = law_type:law_interventionism
+					}
+				}
+			}
+			add = {
+				desc = "sic_latifundia_free_market_tt"
+				value = 0.5
+			}
+		}
+		# ── Technology ──────────────────────────────────────────────────────
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = intensive_agriculture
+				}
+			}
+			add = {
+				desc = "sic_latifundia_intensive_agri_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_technology_researched = railways
+				}
+			}
+			add = {
+				desc = "sic_latifundia_intensive_agri_tt"
+				value = 0.25
+			}
+		}
+		# ── Negative laws ───────────────────────────────────────────────────
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_serfdom
+						has_law = law_type:law_sic_serfdom
+						has_law = law_type:law_latifundias
+					}
+				}
+			}
+			subtract = {
+				desc = "sic_latifundia_serfdom_tt"
+				value = 3
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_isolationism
+				}
+			}
+			subtract = {
+				desc = "sic_latifundia_isolationism_tt"
+				value = 3
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_traditionalism
+				}
+			}
+			subtract = {
+				desc = "sic_latifundia_traditionalism_tt"
+				value = 3
+			}
+		}
+	}
+}
+
+################################################################################
+# sic_modernizer_king_bar: 0–100. Law-based monthly tick.
+# Positive laws add 2–4/month; negative laws subtract 1–2/month.
+# Requires sustained reform to complete (~20–40 months depending on laws).
+################################################################################
+sic_modernizer_king_bar = {
+	name = "sic_modernizer_king_bar_name"
+	desc = "sic_modernizer_king_bar_desc"
+
+	default_green = yes
+
+	start_value = 5
+	min_value = 0
+	max_value = 100
+
+	monthly_progress = {
+		# ── Positive laws ──────────────────────────────────────────────────
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law_or_variant = law_type:law_peasant_proprietorship
+						has_law_or_variant = law_type:law_tenant_farmers
+					}
+				}
+			}
+			add = {
+				desc = "sic_mk_land_reform_law_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_census_voting
+						has_law = law_type:law_wealth_voting
+					}
+				}
+			}
+			add = {
+				desc = "sic_mk_voting_law_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_universal_suffrage
+				}
+			}
+			add = {
+				desc = "sic_mk_universal_suffrage_tt"
+				value = 4
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_laissez_faire
+						has_law = law_type:law_interventionism
+					}
+				}
+			}
+			add = {
+				desc = "sic_mk_economy_law_tt"
+				value = 4
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_public_schools
+						has_law = law_type:law_religious_schools
+					}
+				}
+			}
+			add = {
+				desc = "sic_mk_schools_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_charitable_health_system
+						has_law = law_type:law_public_health_insurance
+					}
+				}
+			}
+			add = {
+				desc = "sic_mk_healthcare_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_national_militia
+						has_law = law_type:law_guaranteed_liberties
+					}
+				}
+			}
+			add = {
+				desc = "sic_mk_liberties_tt"
+				value = 2
+			}
+		}
+		# ── Negative laws ──────────────────────────────────────────────────
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_serfdom
+				}
+			}
+			subtract = {
+				desc = "sic_mk_serfdom_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_autocracy
+						has_law = law_type:law_oligarchy
+					}
+				}
+			}
+			subtract = {
+				desc = "sic_mk_autocracy_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_traditionalism
+				}
+			}
+			subtract = {
+				desc = "sic_mk_traditionalism_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_censorship
+				}
+			}
+			subtract = {
+				desc = "sic_mk_censorship_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_schools
+				}
+			}
+			subtract = {
+				desc = "sic_mk_no_schools_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_health_system
+				}
+			}
+			subtract = {
+				desc = "sic_mk_no_healthcare_tt"
+				value = 2
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_no_home_affairs
+				}
+			}
+			subtract = {
+				desc = "sic_mk_no_policing_tt"
+				value = 2
+			}
+		}
+	}
+}
+
+################################################################################
+# Two Sicilies political balance bar: 0 = Bourbon Absolutists, 100 = neutral, 200 = Italian Nationalists.
+# Driven by two_sicilies_political_balance variable (-100..+100). Uses sync-variable pattern.
+# sic_balance_bar_display_var = balance + 100 (updated in JE on_monthly_pulse).
+################################################################################
+sic_political_balance_bar = {
+	name = "sic_political_balance_bar_name"
+	desc = "sic_political_balance_bar_absolutist_desc"
+	second_desc = "sic_political_balance_bar_nationalist_desc"
+	double_sided_gold = yes
+
+	start_value = 100
+	min_value = 0
+	max_value = 200
+
+	monthly_progress = {
+		# Player stance: absolutist — IG clout pushes toward 0
+			subtract = {
+				desc = "sic_bar_landowners_tt"
+				value = ig:ig_landowners.ig_clout
+				multiply = 2
+			}
+			subtract = {
+				desc = "sic_bar_devout_tt"
+				value = ig:ig_devout.ig_clout
+				multiply = 2
+			}
+		
+		# Player stance: nationalist — IG clout pushes toward 200
+			limit = { owner = { var:sic_fate_stance_var = 2 } }
+			add = {
+				desc = "sic_bar_intelligentsia_tt"
+				value = ig:ig_intelligentsia.ig_clout
+				multiply = 5
+			}
+			add = {
+				desc = "sic_bar_petite_bourgeoisie_tt"
+				value = ig:ig_petty_bourgeoisie.ig_clout
+				multiply = 5
+			}
+		
+		# Laws
+		if = {
+			limit = { owner = { has_law = law_type:law_censorship } }
+			subtract = { desc = "sic_bar_censorship_tt" value = 1 }
+		}
+		if = {
+			limit = {
+				owner = {
+					NOR = {
+						has_law = law_type:law_census_voting
+						has_law = law_type:law_universal_suffrage
+					}
+				}
+			}
+			subtract = { desc = "sic_bar_no_voting_tt" value = 1 }
+		}
+		if = {
+			limit = {
+				owner = {
+					OR = {
+						has_law = law_type:law_census_voting
+						has_law = law_type:law_universal_suffrage
+					}
+				}
+			}
+			add = { desc = "sic_bar_voting_tt" value = 2 }
+		}
+		# Literacy
+		if = {
+			limit = { owner = { literacy_rate >= 0.3 } }
+			add = { desc = "sic_bar_literacy_tt" value = 1 }
+		}
+		# Loyalists vs radicals
+		subtract = { desc = "sic_bar_loyalists_tt" value = loyalist_fraction multiply = 5 }
+		add = { desc = "sic_bar_radicals_tt" value = radical_fraction multiply = 5 }
+
+	}
+}
+
+################################################################################
+# bourbon_legitimacy_bar: 1–100. Tracks dynastic legitimacy of the Bourbon monarchy.
+# Loses 1/month for each of the 4 reform variables not yet set on the owner.
+################################################################################
+bourbon_legitimacy_bar = {
+	name = "bourbon_legitimacy_bar_name"
+	desc = "bourbon_legitimacy_bar_desc"
+
+	default_green = yes
+
+	start_value = 100
+	min_value = 1
+	max_value = 100
+
+	monthly_progress = {
+		if = {
+			limit = { owner = { NOT = { has_variable = sic_fix_police } } }
+			subtract = { desc = "bourbon_leg_missing_police_tt" value = 0.5 }
+		}
+		if = {
+			limit = { owner = { NOT = { has_variable = sic_fix_constitution } } }
+			subtract = { desc = "bourbon_leg_missing_constitution_tt" value = 0.5 }
+		}
+		if = {
+			limit = { owner = { NOT = { has_variable = sic_fix_economy } } }
+			subtract = { desc = "bourbon_leg_missing_economy_tt" value = 0.5 }
+		}
+		if = {
+			limit = { owner = { NOT = { has_variable = sic_fix_bureaucracy } } }
+			subtract = { desc = "bourbon_leg_missing_bureaucracy_tt" value = 0.5 }
+		}
+	}
+}

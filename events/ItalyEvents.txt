@@ -1,0 +1,4905 @@
+namespace = italy_tyrone_characters
+namespace = italyEventsTyrone
+namespace = GaribaldiExpd
+namespace = garibaldi_expedition
+namespace = ItalyStatutoAlbertino
+namespace = garibaldi_events
+namespace = italian_unification
+namespace = italian_development
+namespace = italyEventsTyroneLV
+namespace = sic_tyrone
+
+italy_tyrone_characters.1 = {
+	type = country_event
+	placement = root
+
+	title = italy_tyrone_characters.1.t
+	desc = italy_tyrone_characters.1.d
+	flavor = italy_tyrone_characters.1.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:mazzini_scope
+
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/europenorthamerica/political_extremism"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {	
+		create_character = {
+			template = agitator_giuseppe_mazzini
+			on_created = {
+				set_variable = italy_mazzini
+				set_character_immortal = yes
+			}
+		}
+		random_scope_character = {
+			limit = {
+				has_variable = italy_mazzini
+			}
+			save_scope_as = mazzini_scope
+		}
+		set_variable = {
+			name = italian_sentiment_var
+			value = 0
+		}
+		add_journal_entry = {
+			type = italy_risorgimento_stage
+		}
+		je:italy_risorgimento_stage = {
+			add_to_variable_list = {
+				name = com_risorgimento_mazzini
+				target = scope:mazzini_scope
+			}
+		}
+
+		every_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_SICILY
+					state_region = s:STATE_CALABRIA
+					state_region = s:STATE_CAMPANIA
+					state_region = s:STATE_APULIA
+					state_region = s:STATE_ABRUZZO
+					}
+				}
+				state_region = { add_state_trait = state_trait_sluggish_south }
+			}
+		every_state = {
+			limit = {
+				state_region = s:STATE_LAZIO
+				}
+				state_region = { add_state_trait = state_trait_city_of_rome }
+			}
+		every_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_LOMBARDY
+					state_region = s:STATE_ROMAGNA
+					state_region = s:STATE_VENETIA
+					}
+				}
+				state_region = { add_state_trait = state_trait_po_valley }
+			}
+
+
+
+	}
+
+	option = {
+		name = italy_tyrone_characters.1.a
+		default_option = yes
+
+		trigger_event = {
+			id = italy_tyrone_characters.2
+			popup = yes
+		}
+	}
+}
+
+italy_tyrone_characters.2 = {
+	type = country_event
+	placement = root
+
+	title = italy_tyrone_characters.2.t
+	desc = italy_tyrone_characters.2.d
+	flavor = italy_tyrone_characters.2.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:cavour_scope
+
+	icon = "gfx/interface/icons/event_icons/casaSavoia1.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/europenorthamerica/political_extremism"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		ruler = {
+			save_scope_as = italy_king_scope
+		}
+
+		create_character = {
+			template = ecchi_ita_cavour_character_template
+			ig_leader = yes
+			on_created = {
+				set_variable = italy_cavour
+				set_character_immortal = yes
+			}
+		}
+		random_scope_character = {
+			limit = {
+				has_variable = italy_cavour
+			}
+			save_scope_as = cavour_scope
+		}
+	}
+
+	option = {
+		name = italy_tyrone_characters.2.a
+		default_option = yes
+
+		add_journal_entry = {
+			type = italy_diplo_stance
+		}
+
+		je:italy_diplo_stance = {
+			add_to_variable_list = {
+				name = com_journal_characters
+				target = scope:italy_king_scope
+			}
+			add_to_variable_list = {
+				name = com_journal_characters
+				target = scope:cavour_scope
+			}
+			# Involved countries for flag widgets (order: first = France left, second = Austria right)
+			add_involved_country = c:FRA
+			add_involved_country = c:AUS
+		}
+
+		add_modifier = {
+			name = cavour_society_research
+			months = 60
+		}
+		create_bidirectional_truce = { country = c:PAP months = 360 }
+	}
+}
+
+# Treaty of Turin (France receives). Root = France. Sardinia (c:SAR) cedes Savoy/Provence.
+# Only fire when the mod context is active (Sardinia has diplo stance JE), so it does not proc from vanilla/other triggers.
+italyEventsTyrone.3 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.3.t
+	desc = italyEventsTyrone.3.d
+	flavor = italyEventsTyrone.3.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+
+	trigger = {
+		this = c:FRA
+		exists = c:SAR
+		c:SAR = { has_journal_entry = italy_diplo_stance }
+	}
+
+	option = {
+		name = italyEventsTyrone.3.a
+		# Sardinia gives Savoy and (if owned) Provence to France — base game pattern
+		c:SAR ?= {
+			ita_stance_increase_toward_france_effect = yes
+		}
+		trigger_event = { id = natural_borders.3 popup = yes }
+	}
+	option = {
+		name = italyEventsTyrone.3.b
+		c:SAR ?= {
+			change_relations = { country = root value = -15 }
+		}
+	}
+}
+
+# Lombardy cession (Austria receives). Root = Austria. Proposer = country with italy_treaty_lombardy_proposer.
+italyEventsTyrone.4 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.4.t
+	desc = italyEventsTyrone.4.d
+	flavor = italyEventsTyrone.4.f
+
+	event_image = {
+		video = "ip3_official_reading_dictate"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.4.a
+		# Whoever owns Lombardy (Austria or Austrian subject) cedes every Lombardy state to Sardinia
+		any_country = {
+			limit = {
+				OR = {
+					this = c:AUS
+					is_subject_of = c:AUS
+				}
+				any_scope_state = {
+					state_region = s:STATE_LOMBARDY
+				}
+			}
+			any_scope_state = {
+				limit = {
+					state_region = s:STATE_LOMBARDY
+				}
+				set_state_owner = c:SAR
+			}
+		}
+		c:SAR ?= {
+			ita_stance_increase_toward_austria_effect = yes
+			remove_variable = italy_treaty_lombardy_proposer
+		}
+		every_state = {
+			limit = {
+				state_region = s:STATE_LOMBARDY
+			}
+			set_state_owner = c:SAR
+		}
+	}
+	option = {
+		name = italyEventsTyrone.4.b
+		c:SAR ?= {
+			change_relations = { country = root value = -15 }
+			remove_variable = italy_treaty_lombardy_proposer
+		}
+	}
+}
+
+# Savoy lost – Italian sentiment penalty. Fires on monthly pulse for countries with the Italian sentiment JE when Sardinia does not own Savoy.
+italyEventsTyrone.5 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.5.t
+	desc = italyEventsTyrone.5.d
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_journal_entry = italy_risorgimento_stage
+		exists = c:SAR
+		c:SAR = {
+			NOT = { owns_entire_state_region = STATE_SAVOY }
+		}
+	}
+
+	option = {
+		name = italyEventsTyrone.5.a
+		custom_tooltip = italyEventsTyrone.5.a_tt
+		add_radicals = {
+			culture = cu:north_italian
+			value = medium_radicals
+		}
+		change_variable = {
+			name = italian_sentiment_var
+			subtract = 10
+		}
+	}
+}
+
+# Root annexes Parma, Modena, Tuscany, Lucca with incorporation.
+italyEventsTyrone.6 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.6.t
+	desc = italyEventsTyrone.6.d
+	flavor = italyEventsTyrone.6.f
+
+	event_image = {
+		video = "ip3_official_reading_dictate"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.6.a
+		default_option = yes
+		custom_tooltip = italyEventsTyrone.6.a_sentiment_tt
+		change_variable = {
+			name = italian_sentiment_var
+			subtract = 15
+		}
+		c:SAR = {
+			annex_with_incorporation = c:PAR
+			annex_with_incorporation = c:MOD
+			annex_with_incorporation = c:TUS
+			annex_with_incorporation = c:LUC
+		}
+	}
+}
+
+# Industrialists pushing for Laissez-Faire (when not enacting any law)
+italyEventsTyrone.7 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.7.t
+	desc = italyEventsTyrone.7.d
+	flavor = italyEventsTyrone.7.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:industrialist_leader_scope
+
+	icon = "gfx/interface/icons/ig_icons/industrialists.dds"
+	duration = 3
+	cooldown = { years = 5 }
+
+	trigger = {
+		enacting_any_law = no
+		NOT = { has_law_or_variant = law_type:law_laissez_faire }
+	}
+
+	cancellation_trigger = {
+		enacting_any_law = yes
+	}
+
+	immediate = {
+		ig:ig_industrialists ?= {
+			leader = {
+				save_scope_as = industrialist_leader_scope
+			}
+		}
+	}
+
+	option = {
+		name = italyEventsTyrone.7.a
+		default_option = yes
+		start_enactment = law_type:law_laissez_faire
+		add_enactment_modifier = {
+			name = industrialists_laissez_faire_push
+		}
+	}
+
+	option = {
+		name = italyEventsTyrone.7.b
+		add_modifier = {
+			name = industrialists_disregarded
+			years = 6
+		}
+	}
+}
+
+# Laissez-faire enactment: shape the law (industrialists, partial control, or seize investment)
+italyEventsTyrone.8 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.8.t
+	desc = italyEventsTyrone.8.d
+	flavor = italyEventsTyrone.8.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:industrialist_leader_scope
+
+	category = enactment
+	icon = "gfx/interface/icons/law_icons/laissez_faire.dds"
+	duration = 3
+	cooldown = { years = 30 }
+
+	trigger = {
+		is_enacting_law = law_type:law_laissez_faire
+		NOT = {
+			currently_enacting_law = {
+				has_amendment = amendment_type:amendment_corporate_control
+			}
+		}
+	}
+
+	immediate = {
+		currently_enacting_law = {
+			save_scope_as = current_law_scope
+		}
+		ig:ig_industrialists ?= {
+			save_scope_as = industrialists_ig
+		}
+		ig:ig_industrialists ?= {
+			leader = {
+				save_scope_as = industrialist_leader_scope
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOT = { currently_enacting_law = scope:current_law_scope }
+	}
+
+	option = {
+		name = italyEventsTyrone.8.a
+		currently_enacting_law = {
+			add_amendment = {
+				type = amendment_corporate_control
+				sponsor = scope:industrialists_ig
+				cooldown = 120
+			}
+		}
+	}
+
+	option = {
+		name = italyEventsTyrone.8.b
+		default_option = yes
+		add_enactment_modifier = {
+			name = laissez_faire_partial_control_stall
+		}
+	}
+
+	option = {
+		name = italyEventsTyrone.8.c
+		add_modifier = {
+			name = state_seized_investment
+			years = 4
+		}
+	}
+}
+
+# Talks with the Pope – in French or Austrian bloc, sentiment >= 40. Italy gets claims on Umbria & Romagna and passes Religious school, Charity hospitals, State religion.
+italyEventsTyrone.9 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.9.t
+	desc = italyEventsTyrone.9.d
+	flavor = italyEventsTyrone.9.f
+
+	event_image = {
+		video = "southamerica_christianity"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.9.a
+		default_option = yes
+		activate_law = law_type:law_state_religion
+		activate_law = law_type:law_religious_schools
+		activate_law = law_type:law_charitable_health_system
+		transfer_state = {
+			STATE = s:STATE_UMBRIA
+			GIVER = c:PAP
+			TAKER = root
+		}
+		transfer_state = {
+			STATE = s:STATE_ROMAGNA
+			GIVER = c:PAP
+			TAKER = root
+		}
+		s:STATE_UMBRIA = {
+			every_scope_state = {
+				limit = { owner = root }
+				set_state_type = incorporated
+			}
+		}
+		s:STATE_ROMAGNA = {
+			every_scope_state = {
+				limit = { owner = root }
+				set_state_type = incorporated
+			}
+		}
+	}
+}
+
+# Italian Concordat – sentiment >= 60, Pope has Umbria and Romagna. Theocracy + three laws, annex Papal State, ruler and Devout leader become Theocrat.
+italyEventsTyrone.10 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.10.t
+	desc = italyEventsTyrone.10.d
+	flavor = italyEventsTyrone.10.f
+
+	event_image = {
+		video = "votp_monarch_holding_court"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.10.a
+		default_option = yes
+		activate_law = law_type:law_theocracy
+		activate_law = law_type:law_state_religion
+		activate_law = law_type:law_religious_schools
+		activate_law = law_type:law_charitable_health_system
+		annex_with_incorporation = c:PAP
+		ruler = { set_ideology = ideology:ideology_theocrat }
+		every_interest_group = {
+			limit = { is_interest_group_type = ig_devout }
+			leader = { set_ideology = ideology:ideology_theocrat }
+		}
+	}
+}
+
+# Annex Romagna only (unincorporated) – triggered by ita_annex_romagna_only_button. Bar 40–60, not in bloc, relations with Pope < -20.
+italyEventsTyrone.11 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.11.t
+	desc = italyEventsTyrone.11.d
+	flavor = italyEventsTyrone.11.f
+
+	event_image = {
+		video = "votp_garibaldi"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.11.a
+		default_option = yes
+		transfer_state = {
+			STATE = s:STATE_ROMAGNA
+			GIVER = c:PAP
+			TAKER = root
+		}
+		s:STATE_ROMAGNA = {
+			set_state_type = unincorporated
+			add_radicals_in_state = {
+				value = 0.2
+			}
+		}
+	}
+}
+
+# Italian Formation – fired by ita_form_italy_button. Three options (Economy, Army, Technology); effects depend on bloc (leader / Austria / France).
+italyEventsTyrone.16 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.16.t
+	desc = italyEventsTyrone.16.d
+	flavor = italyEventsTyrone.16.f
+
+	event_image = {
+		video = "votp_garibaldi"
+	}
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	duration = 3
+
+	trigger = { }
+
+	immediate = {
+		if = {
+			limit = {
+				is_player = no
+			}
+			add_primary_culture = cu:south_italian		
+		}
+		# Annex every subject whose capital is in Italy, with incorporation
+		every_subject_or_below = {
+			limit = {
+				capital = { is_in_geographic_region = geographic_region_italy }
+			}
+			root = { annex_with_incorporation = PREV }
+		}
+	}
+
+	# --- Economy ---
+	# Bloc leader: Bella Italia – 10% birth, 15% clergy/shopkeeper invest, 25% construction (8 yrs)
+	option = {
+		name = italyEventsTyrone.16.economy
+		trigger = {
+			OR = {
+				is_power_bloc_leader = yes
+				AND = {
+					NOT = { is_in_same_power_bloc = c:FRA }
+					NOT = { is_in_same_power_bloc = c:AUS }
+				}
+			}
+		}
+		add_modifier = {
+			name = bella_italia_economy
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+	# Austrian bloc: Italia Asburgica economy
+	option = {
+		name = italyEventsTyrone.16.economy
+		trigger = {
+			is_in_same_power_bloc = c:AUS
+		}
+		add_modifier = {
+			name = italia_asburgica_economy
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+	# France bloc: Italia Napoleonica economy
+	option = {
+		name = italyEventsTyrone.16.economy
+		trigger = {
+			is_in_same_power_bloc = c:FRA
+		}
+		add_modifier = {
+			name = italia_napoleonica_economy
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+
+	# --- Army ---
+	# Bloc leader: Bella Italia – 10% birth + JE Spenna la gallina austriaca
+	option = {
+		name = italyEventsTyrone.16.army
+		trigger = {
+			OR = {
+				is_power_bloc_leader = yes
+				AND = {
+					NOT = { is_in_same_power_bloc = c:FRA }
+					NOT = { is_in_same_power_bloc = c:AUS }
+				}
+			}
+		}
+		add_modifier = {
+			name = bella_italia_army
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+	# Austrian bloc: Italia Asburgica army
+	option = {
+		name = italyEventsTyrone.16.army
+		trigger = {
+			is_in_same_power_bloc = c:AUS
+		}
+		add_modifier = {
+			name = italia_asburgica_army
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+	# France bloc: Italia Napoleonica army
+	option = {
+		name = italyEventsTyrone.16.army
+		trigger = {
+			is_in_same_power_bloc = c:FRA
+		}
+		add_modifier = {
+			name = italia_napoleonica_army
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+
+	# --- Technology ---
+	# Bloc leader: Bella Italia – 10% birth, 30% tech spread, 15% research speed prod/society
+	option = {
+		name = italyEventsTyrone.16.technology
+		trigger = {
+			OR = {
+				is_power_bloc_leader = yes
+				AND = {
+					NOT = { is_in_same_power_bloc = c:FRA }
+					NOT = { is_in_same_power_bloc = c:AUS }
+				}
+			}
+		}
+		add_modifier = {
+			name = bella_italia_tech
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+	# Austrian bloc: Italia Asburgica tech
+	option = {
+		name = italyEventsTyrone.16.technology
+		trigger = {
+			is_in_same_power_bloc = c:AUS
+		}
+		add_modifier = {
+			name = italia_asburgica_tech
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+	# France bloc: Italia Napoleonica tech
+	option = {
+		name = italyEventsTyrone.16.technology
+		trigger = {
+			is_in_same_power_bloc = c:FRA
+		}
+		add_modifier = {
+			name = italia_napoleonica_tech
+			years = 8
+		}
+		if = {
+			limit = {
+				OR = { has_law = law_type:law_monarchy has_law = law_type:law_theocracy }
+				ruler = { NOT = { has_trait = ita_primo_cittadino_repubblica } }
+			}
+			ruler = { add_trait = ita_re_di_tutta_italia }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = garibaldi_republic_established }
+				OR = { has_law = law_type:law_presidential_republic has_law = law_type:law_parliamentary_republic }
+			}
+			ruler = { add_trait = ita_unificatore_italia }
+		}
+	}
+}
+
+# Italian Irredentism – claims on Albania, Montenegro, Dalmatia, Trieste, Trentino. Fired by JE Italian_Irredentism immediate.
+italyEventsTyrone.18 = {
+	type = country_event
+	placement = root
+	title = italyEventsTyrone.18.t
+	desc = italyEventsTyrone.18.d
+	flavor = italyEventsTyrone.18.f
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+
+	event_image = {
+		texture = "gfx/interface/icons/event_icons/ItalyIrredentism.png"
+	}
+
+	duration = 3
+	trigger = { }
+	immediate = {
+	}
+	option = {
+		name = italyEventsTyrone.18.a
+		default_option = yes
+		s:STATE_ALBANIA = {
+			add_claim = root
+		}
+		s:STATE_MONTENEGRO = {
+			add_claim = root
+		}
+		s:STATE_DALMATIA = {
+			add_claim = root
+		}
+		s:STATE_ISTRIA = {
+			add_claim = root
+		}
+		s:STATE_SOUTH_TYROL = {
+			add_claim = root
+		}
+		add_journal_entry = {
+			type = Italian_Irredentism_lybia
+		}
+		add_journal_entry = {
+			type = Italian_Irredentism_balkans
+		}
+		add_journal_entry = {
+			type = Italian_Irredentism_italian_land
+		}
+	}
+}
+
+# Garibaldi at the Helm – follow-up to Form Italy (Garibaldi) button. Fired 1 day after event 16. Three paths: monarchy with Garibaldi, oligarchy (stabilize Republic), or Garibaldi as president (no change).
+italyEventsTyrone.17 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.17.t
+	desc = italyEventsTyrone.17.d
+	flavor = italyEventsTyrone.17.f
+
+	event_image = { video = "votp_monarch_holding_court" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = { }
+
+	# Option 1: An unlikely monarch? – switch to monarchy, Garibaldi becomes monarch (liberal ideology), add Monarchia del Popolo amendment
+	option = {
+		name = italyEventsTyrone.17.a
+		activate_law = law_type:law_monarchy
+		create_character = {
+			template = garibaldi_character_template
+			is_general = yes
+			ig_leader = yes
+			ruler = yes
+			on_created = {
+				set_character_immortal = yes
+				add_trait = ita_primo_cittadino_repubblica
+				set_ideology = ideology:ideology_liberal
+			}
+		}
+	}
+	# Option 2: Garibaldi should take his time stabilizing the Repubblica Italiana – insta-pass oligarchy, Garibaldi as leader
+	option = {
+		name = italyEventsTyrone.17.b
+		activate_law = law_type:law_oligarchy
+		create_character = {
+			template = garibaldi_character_template
+			is_general = yes
+			ig_leader = yes
+			ruler = yes
+			on_created = {
+				set_character_immortal = yes
+				add_trait = ita_primo_cittadino_repubblica
+			}
+		}
+	}
+	# Option 3: The first term served by the man of the people – Garibaldi becomes leader, 15% loyalists for North and South Italian
+	option = {
+		name = italyEventsTyrone.17.c
+		default_option = yes
+		add_loyalists = {
+			value = 0.15
+			culture = cu:north_italian
+		}
+		add_loyalists = {
+			value = 0.15
+			culture = cu:south_italian
+		}
+		create_character = {
+			template = garibaldi_character_template
+			is_general = yes
+			ig_leader = yes
+			ruler = yes
+			on_created = {
+				set_character_immortal = yes
+				add_trait = ita_primo_cittadino_repubblica
+			}
+		}
+	}
+}
+
+# Declare the North Italian Federation. All options visible; only the one that matches conditions is clickable.
+italyEventsTyrone.12 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.12.t
+	desc = italyEventsTyrone.12.d
+	flavor = italyEventsTyrone.12.f
+
+	event_image = {
+		video = "ip3_official_reading_dictate"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	# Option 1: In Austria's bloc – demand Lombardy and Venetia from Austria (Austria gets event 13, can refuse)
+	option = {
+		name = italyEventsTyrone.12.a
+		trigger = {
+			is_in_same_power_bloc = c:AUS
+		}
+		show_as_unavailable = { always = yes }
+		set_variable = { name = NIF_formed }
+		add_journal_entry = { type = ita_garibaldi_thousand_expedition_JE }
+		c:AUS ?= {
+			trigger_event = { id = italyEventsTyrone.13 popup = yes }
+		}
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_PIEDMONT
+					state_region = s:STATE_SAVOY
+					state_region = s:STATE_EMILIA
+					state_region = s:STATE_TUSCANY
+					state_region = s:STATE_ROMAGNA
+					state_region = s:STATE_UMBRIA
+					state_region = s:STATE_SARDINIA
+				}
+			}
+			add_modifier = { 
+				name = nif_dependent_bonus 
+			}
+		}
+	}
+	# Option 2: In France's bloc – modifier "prepare to strike the Austrian" (5 yrs, 15% offense, 10% defense)
+	option = {
+		name = italyEventsTyrone.12.b
+		trigger = {
+			is_in_same_power_bloc = c:FRA
+		}
+		show_as_unavailable = { always = yes }
+		set_variable = { name = NIF_formed }
+		add_journal_entry = { type = ita_garibaldi_thousand_expedition_JE }
+		add_modifier = {
+			name = prepare_to_strike_austrian
+			years = 5
+		}
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_PIEDMONT
+					state_region = s:STATE_SAVOY
+					state_region = s:STATE_EMILIA
+					state_region = s:STATE_TUSCANY
+					state_region = s:STATE_ROMAGNA
+					state_region = s:STATE_UMBRIA
+					state_region = s:STATE_SARDINIA
+				}
+			}
+			add_modifier = { 
+				name = nif_independent_bonus 
+				multiplier = 0.5
+			}
+		}
+	}
+	# Option 3: Leader of a bloc or not in any bloc – all Italian states owned by root get +5% birth rate, 5% throughput, 10% construction (permanent)
+	option = {
+		name = italyEventsTyrone.12.c
+		trigger = {
+			OR = {
+				is_power_bloc_leader = yes
+				AND = {
+					NOT = { is_in_same_power_bloc = c:FRA }
+					NOT = { is_in_same_power_bloc = c:AUS }
+				}
+			}
+		}
+		show_as_unavailable = { always = yes }
+		set_variable = { name = NIF_formed }
+		set_variable = { name = ita_nif_stand_alone }
+		add_journal_entry = { type = ita_garibaldi_thousand_expedition_JE }
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_PIEDMONT
+					state_region = s:STATE_SAVOY
+					state_region = s:STATE_EMILIA
+					state_region = s:STATE_TUSCANY
+					state_region = s:STATE_ROMAGNA
+					state_region = s:STATE_UMBRIA
+					state_region = s:STATE_SARDINIA
+				}
+			}
+			add_modifier = { name = nif_independent_bonus }
+		}
+	}
+}
+
+# Austria receives: Italy (in Austria's bloc) demands Lombardy and Venetia. Root = Austria. Italy = country with NIF_formed in Austria's bloc.
+italyEventsTyrone.13 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.13.t
+	desc = italyEventsTyrone.13.d
+	flavor = italyEventsTyrone.13.f
+
+	event_image = {
+		video = "ip3_official_reading_dictate"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.13.a
+		default_option = yes
+		trigger = {
+			OR = {
+				country_or_subject_owns_entire_state_region = STATE_VENETIA
+				country_or_subject_owns_entire_state_region = STATE_LOMBARDY
+			}	
+		}
+		every_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_LOMBARDY
+					state_region = s:STATE_VENETIA
+				}
+				OR = {
+					owner = c:AUS
+					owner = { is_subject_of = c:AUS }
+				}
+			}
+			set_state_owner = c:SAR
+			set_state_type = incorporated
+		}
+	}
+	option = {
+		name = italyEventsTyrone.13.b
+	}
+}
+
+# No Papal Recognition: fired when player uses "Annex the Pope" button. Applies permanent debuff (Devout -500% pol str, clergymen -300 vote power, -2% birth rate).
+italyEventsTyrone.15 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.15.t
+	desc = italyEventsTyrone.15.d
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.15.a
+		default_option = yes
+		add_modifier = {
+			name = no_papal_recognition
+		}
+	}
+}
+
+# Consolidating the South JE: explains the debuff when the journal entry starts. Option applies the debuff to South Italian states.
+italyEventsTyrone.14 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.14.t
+	desc = italyEventsTyrone.14.d
+	flavor = italyEventsTyrone.14.f
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.14.a
+		default_option = yes
+		every_state = {
+			limit = {
+				state_region = {
+					is_homeland = cu:south_italian
+				}
+			}
+			add_modifier = {
+				name = ita_consolidating_south_debuff
+			}
+		}
+	}
+}
+
+############################################################
+# GARIBALDI'S EXPEDITION OF THE THOUSAND (garibaldi_expedition)
+# Chain: event 1 (button) → 2 → 3 → 4 → 5 → 6 → 7 (finale), 21–48 days between each.
+# Garibaldi: save_scope_as = garibaldi in immediate; use [SCOPE.sCharacter('garibaldi').GetFullName] in localization.
+############################################################
+
+garibaldi_expedition.1 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.1.t
+	desc   = garibaldi_expedition.1.d
+	flavor = garibaldi_expedition.1.f
+
+	event_image = { video = "votp_agitator_speaking" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+		any_character = { has_variable = garibaldi_char_var }
+	}
+
+	immediate = {
+		set_variable = {
+			name  = garibaldi_taking_sic_var
+			value = 5
+		}
+		random_character = {
+			limit = { has_variable = garibaldi_char_var }
+			save_scope_as = garibaldi
+		}
+	}
+
+	left_icon = scope:garibaldi
+
+	option = {
+		name = garibaldi_expedition.1.a
+		custom_tooltip = {
+			text = garibaldi_expedition.1.a.tt
+		}
+		trigger_event = { id = garibaldi_expedition.2 popup = yes days = 28 }
+	}
+}
+
+garibaldi_expedition.2 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.2.t
+	desc   = garibaldi_expedition.2.d
+	flavor = garibaldi_expedition.2.f
+
+	event_image = { video = "asia_westerners_arriving" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+		any_character = { has_variable = garibaldi_char_var }
+	}
+
+	immediate = {
+		change_variable = {
+			name = garibaldi_taking_sic_var
+			add  = -1
+		}
+		random_character = {
+			limit = { has_variable = garibaldi_char_var }
+			save_scope_as = garibaldi
+		}
+	}
+
+	left_icon = scope:garibaldi
+
+	option = {
+		name = garibaldi_expedition.2.a
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.2.char.tt
+			}
+		}
+		trigger_event = { id = garibaldi_expedition.3 popup = yes days = 35 }
+	}
+}
+
+garibaldi_expedition.3 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.3.t
+	desc   = garibaldi_expedition.3.d
+	flavor = garibaldi_expedition.3.f
+
+	event_image = { video = "southamerica_war_civilians" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+		any_character = { has_variable = garibaldi_char_var }
+	}
+
+	immediate = {
+		change_variable = {
+			name = garibaldi_taking_sic_var
+			add  = -1
+		}
+		random_character = {
+			limit = { has_variable = garibaldi_char_var }
+			save_scope_as = garibaldi
+		}
+	}
+
+	left_icon = scope:garibaldi
+
+	option = {
+		name = garibaldi_expedition.3.a
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.3.char.tt
+				create_country = {
+		            tag = XNP
+		            origin = c:SIC
+		            province = p:x8A0548
+		            on_created = {
+						set_variable = garibaldi_exp_country
+						activate_law = law_type:law_presidential_republic
+						activate_law = law_type:law_autocracy
+						c:SAR ?= {
+							create_diplomatic_pact = {
+								country = root
+								type = puppet
+							}
+						}
+						create_character = {
+							template = garibaldi_character_template
+							is_general = yes
+							ig_leader = yes
+							ruler = yes
+							on_created = {
+								set_variable = fake_garibaldi_char_var
+								set_character_immortal = yes
+							}
+						}
+					}
+		        }
+			}
+		}
+		trigger_event = { id = garibaldi_expedition.4 popup = yes days = 3 }
+	}
+}
+
+garibaldi_expedition.4 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.4.t
+	desc   = garibaldi_expedition.4.d
+	flavor = garibaldi_expedition.4.f
+
+	event_image = { video = "europenorthamerica_political_extremism" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+		any_character = { has_variable = garibaldi_char_var }
+	}
+
+	immediate = {
+		random_country = {
+			limit = { has_variable = garibaldi_exp_country }
+			save_scope_as = exp_country
+		}
+		change_variable = {
+			name = garibaldi_taking_sic_var
+			add  = -1
+		}
+		random_character = {
+			limit = { has_variable = garibaldi_char_var }
+			save_scope_as = garibaldi
+		}
+	}
+
+	left_icon = scope:garibaldi
+
+	option = {
+		name = garibaldi_expedition.4.a
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.4.char.tt
+				S:STATE_SICILY = { 
+					set_owner_of_provinces = {
+					country = scope:exp_country
+					provinces = { xF0AF66 }
+					}
+				}
+				
+			}
+		}
+		trigger_event = { id = garibaldi_expedition.5 popup = yes days = 24 }
+	}
+}
+
+garibaldi_expedition.5 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.5.t
+	desc   = garibaldi_expedition.5.d
+	flavor = garibaldi_expedition.5.f
+
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+		any_character = { has_variable = garibaldi_char_var }
+	}
+
+	immediate = {
+		random_country = {
+			limit = { has_variable = garibaldi_exp_country }
+			save_scope_as = exp_country
+		}
+		change_variable = {
+			name = garibaldi_taking_sic_var
+			add  = -1
+		}
+		random_character = {
+			limit = { has_variable = garibaldi_char_var }
+			save_scope_as = garibaldi
+		}
+	}
+
+	left_icon = scope:garibaldi
+
+	option = {
+		name = garibaldi_expedition.5.a
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.5.char.tt
+				every_state = {
+					limit = {
+						state_region = s:STATE_SICILY
+					}
+					set_state_owner = scope:exp_country
+				}
+			}
+		}
+		trigger_event = { id = garibaldi_expedition.6 popup = yes days = 38 }
+	}
+}
+
+garibaldi_expedition.6 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.6.t
+	desc   = garibaldi_expedition.6.d
+	flavor = garibaldi_expedition.6.f
+
+	event_image = { video = "asia_westerners_arriving" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+		any_character = { has_variable = garibaldi_char_var }
+	}
+
+	immediate = {
+		random_country = {
+			limit = { has_variable = garibaldi_exp_country }
+			save_scope_as = exp_country
+		}
+		change_variable = {
+			name = garibaldi_taking_sic_var
+			add  = -1
+		}
+		random_character = {
+			limit = { has_variable = garibaldi_char_var }
+			save_scope_as = garibaldi
+		}
+	}
+
+	left_icon = scope:garibaldi
+
+	option = {
+		name = garibaldi_expedition.6.a
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.6.char.tt
+				S:STATE_CALABRIA = { 
+					set_owner_of_provinces = {
+					country = scope:exp_country
+					provinces = { xC01020 xC050E0 x785460 }
+					}
+				}
+				S:STATE_CAMPANIA = { 
+					set_owner_of_provinces = {
+					country = scope:exp_country
+					provinces = { x4090A0 xDF1CE3 }
+					}
+				}
+			}
+		}
+		trigger_event = { id = garibaldi_expedition.7 popup = yes days = 45 }
+	}
+}
+
+garibaldi_expedition.7 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.7.t
+	desc   = garibaldi_expedition.7.d
+	flavor = garibaldi_expedition.7.f
+
+	event_image = { video = "votp_monarch_holding_court" }
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+		any_character = { has_variable = garibaldi_char_var }
+	}
+
+	immediate = {
+		random_country = {
+			limit = { has_variable = garibaldi_exp_country }
+			annex = c:SIC
+		}
+		remove_variable = garibaldi_taking_sic_var
+		random_character = {
+			limit = { has_variable = garibaldi_char_var }
+			save_scope_as = garibaldi
+		}
+	}
+
+	left_icon = scope:garibaldi
+
+	option = {
+		name = garibaldi_expedition.7.a
+		complete_journal_entry = { type = ita_garibaldi_thousand_expedition_JE }
+		custom_tooltip = {
+			text = garibaldi_expedition.7.a.unrest.tt
+		}
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.7.a.char.tt
+			}
+		}
+		# Sardinia annexes Naples (XNP) without incorporation — south remains unincorporated
+		if = {
+			limit = { exists = c:XNP }
+			annex = c:XNP
+		}
+		# Follow-up: unrest in the south (event 8 after a short delay)
+		trigger_event = { id = garibaldi_expedition.8 days = 30 popup = yes }
+	}
+
+	option = {
+		name = garibaldi_expedition.7.b
+		complete_journal_entry = { type = ita_garibaldi_thousand_expedition_JE }
+		custom_tooltip = {
+			text = garibaldi_expedition.7.b.temp.tt
+		}
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.7.b.char.tt
+			}
+		}
+		
+		hidden_effect = { # Kill fake Garibaldi (ruler of Naples/XNP)
+			random_character = {
+				limit = { has_variable = fake_garibaldi_char_var }
+				kill_character = yes
+			}
+			scope:garibaldi = { # Kill true Garibaldi (in Sardinia)
+				kill_character = yes
+			}
+		}
+		
+		
+		# Create new Garibaldi as ruler of Naples (no Primo Cittadino trait)
+		c:XNP ?= {
+			create_character = {
+				template = garibaldi_character_template
+				is_general = yes
+				ig_leader = yes
+				ruler = yes
+				on_created = {
+					set_character_immortal = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = garibaldi_expedition.7.c
+		complete_journal_entry = { type = ita_garibaldi_thousand_expedition_JE }
+		custom_tooltip = {
+			text = garibaldi_expedition.7.c.republic.tt
+		}
+		scope:garibaldi = {
+			custom_tooltip = {
+				text = garibaldi_expedition.7.c.char.tt
+			}
+		}
+		set_global_variable = garibaldi_republic_established
+		# Kill fake Garibaldi (ruler of Naples/XNP, created in Sicily during expedition)
+		random_character = {
+			limit = { has_variable = fake_garibaldi_char_var }
+			kill_character = yes
+		}
+		# Kill true Garibaldi (in Sardinia)
+		scope:garibaldi = {
+			kill_character = yes
+		}
+		# Create new Garibaldi as ruler of the Republic of Naples with the Primo Cittadino trait
+		c:XNP ?= {
+			create_character = {
+				template = garibaldi_character_template
+				is_general = yes
+				ig_leader = yes
+				ruler = yes
+				on_created = {
+					add_trait = ita_primo_cittadino_repubblica
+					set_character_immortal = yes
+				}
+			}
+		}
+	}
+}
+
+# Follow-up to 7.a: unrest in the south after Sardinia annexes Naples without incorporation
+garibaldi_expedition.8 = {
+	type = country_event
+	placement = root
+
+	title  = garibaldi_expedition.8.t
+	desc   = garibaldi_expedition.8.d
+	flavor = garibaldi_expedition.8.f
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	event_image = { video = "europenorthamerica_political_extremism" }
+	duration = 3
+
+	trigger = {
+		this = c:SAR
+	}
+
+	# +20% radicals in all South Italian homeland states
+	option = {
+		name = garibaldi_expedition.8.a
+		default_option = yes
+			add_radicals = {
+				value = 0.2
+				culture = cu:south_italian
+			}
+		
+	}
+}
+
+############################################################
+# ItalyStatutoAlbertino – constitutional tension events
+############################################################
+
+ItalyStatutoAlbertino.1 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.1.t
+	desc = ItalyStatutoAlbertino.1.d
+	flavor = ItalyStatutoAlbertino.1.f
+	event_image = { video = "votp_agitator_speaking" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event1.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.1.a
+		add_modifier = { name = statuto_petition_concession years = 3 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.1.b
+		add_radicals = { culture = cu:north_italian value = medium_radicals }
+		italy_statuto_sentiment_15_effect = yes
+		add_modifier = { name = statuto_petition_repression years = 3 }
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+ItalyStatutoAlbertino.2 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.2.t
+	desc = ItalyStatutoAlbertino.2.d
+	flavor = ItalyStatutoAlbertino.2.f
+	event_image = { video = "votp_monarch_holding_court" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event2.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.2.a
+		add_modifier = { name = statuto_salotto_reform years = 3 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.2.b
+		add_radicals = { culture = cu:north_italian value = medium_radicals }
+		italy_statuto_sentiment_10_effect = yes
+		add_modifier = { name = statuto_salotto_silence years = 3 }
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+ItalyStatutoAlbertino.3 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.3.t
+	desc = ItalyStatutoAlbertino.3.d
+	flavor = ItalyStatutoAlbertino.3.f
+	event_image = { video = "votp_conspiring" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event3.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.3.a
+		add_modifier = { name = statuto_carbonari_concession years = 3 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.3.b
+		add_radicals = { culture = cu:north_italian value = large_radicals }
+		italy_statuto_sentiment_20_effect = yes
+		add_modifier = { name = statuto_carbonari_crackdown years = 4 }
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+ItalyStatutoAlbertino.4 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.4.t
+	desc = ItalyStatutoAlbertino.4.d
+	flavor = ItalyStatutoAlbertino.4.f
+	event_image = { video = "europenorthamerica_political_extremism" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event1.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.4.a
+		add_modifier = { name = statuto_pamphlets_debate years = 3 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.4.b
+		add_radicals = { culture = cu:north_italian value = very_large_radicals }
+		italy_statuto_sentiment_20_effect = yes
+		add_modifier = { name = statuto_pamphlets_purge years = 5 }
+	}
+}
+
+ItalyStatutoAlbertino.5 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.5.t
+	desc = ItalyStatutoAlbertino.5.d
+	flavor = ItalyStatutoAlbertino.5.f
+	event_image = { video = "ip3_official_reading_dictate" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event2.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+		NOT = { has_law_or_variant = law_type:law_right_of_assembly }
+	}
+	option = {
+		name = ItalyStatutoAlbertino.5.a
+		activate_law = law_type:law_right_of_assembly
+		add_modifier = { name = statuto_landowners_anger_assembly years = 4 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.5.b
+		add_radicals = { culture = cu:north_italian value = medium_radicals }
+		italy_statuto_sentiment_15_effect = yes
+		add_modifier = { name = statuto_assembly_refused years = 3 }
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+ItalyStatutoAlbertino.6 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.6.t
+	desc = ItalyStatutoAlbertino.6.d
+	flavor = ItalyStatutoAlbertino.6.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event3.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+		var:constitutional_ita_tension_var >= 5
+	}
+	option = {
+		name = ItalyStatutoAlbertino.6.a
+		add_modifier = { name = statuto_ultimatum_concession years = 10 }
+		activate_law = law_type:law_census_voting
+		active_law:lawgroup_distribution_of_power ?= {
+			add_amendment = {
+				type = italian_constitution
+				sponsor = PREV.ig:ig_trade_unions
+				cooldown = 240
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.6.b
+		add_radicals = { culture = cu:north_italian value = large_radicals }
+		italy_statuto_sentiment_15_effect = yes
+		add_modifier = { name = constitutional_law_blockade years = 10 }
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+ItalyStatutoAlbertino.7 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.7.t
+	desc = ItalyStatutoAlbertino.7.d
+	flavor = ItalyStatutoAlbertino.7.f
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event1.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.7.a
+		add_modifier = { name = constitutional_intelligentsia_power years = 3 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.7.b
+		italy_statuto_sentiment_10_effect = yes
+		add_modifier = { name = statuto_intelligentsia_snub years = 3 }
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+ItalyStatutoAlbertino.8 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.8.t
+	desc = ItalyStatutoAlbertino.8.d
+	flavor = ItalyStatutoAlbertino.8.f
+	event_image = { video = "europenorthamerica_political_extremism" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event2.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.8.a
+		add_modifier = { name = peasant_liberties_ita_accept years = 3 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.8.b
+		add_radicals = { culture = cu:north_italian value = large_radicals }
+		italy_statuto_sentiment_15_effect = yes
+		add_modifier = { name = peasant_liberties_ita_deny years = 3 }
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+ItalyStatutoAlbertino.9 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.9.t
+	desc = ItalyStatutoAlbertino.9.d
+	flavor = ItalyStatutoAlbertino.9.f
+	event_image = { video = "southamerica_christianity" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event3.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.9.a
+		add_modifier = { name = statuto_anticlerical_spirit years = 4 }
+		italy_statuto_momentum_plus_effect = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_intelligentsia
+			ideology = ideology_nihilist
+		}
+	}
+	option = {
+		name = ItalyStatutoAlbertino.9.b
+		add_radicals = { culture = cu:north_italian value = medium_radicals }
+		italy_statuto_sentiment_15_effect = yes
+		add_modifier = { name = statuto_devout_favored years = 3 }
+		italy_statuto_autocratic_point_effect = yes
+		create_character = {
+			is_agitator = yes
+			interest_group = ig_intelligentsia
+			ideology = ideology_theocrat
+		}
+	}
+}
+
+ItalyStatutoAlbertino.10 = {
+	type = country_event
+	placement = root
+	title = ItalyStatutoAlbertino.10.t
+	desc = ItalyStatutoAlbertino.10.d
+	flavor = ItalyStatutoAlbertino.10.f
+	event_image = { video = "ip3_police_raid" }
+	icon = "gfx/interface/icons/event_icons/ita_statuto_event1.png"
+	duration = 3
+	cooldown = { years = 5 }
+	trigger = {
+		OR = {
+			AND = {
+				has_journal_entry = ITA_French_lawsJE
+				NOT = { has_variable = ita_french_laws_done }
+			}
+			AND = {
+				has_journal_entry = ITA_Austria_lawsJE
+				NOT = { has_variable = ita_austria_laws_done }
+			}
+		}
+		any_country = { limit = { tag = AUS } }
+	}
+	option = {
+		name = ItalyStatutoAlbertino.10.a
+		add_loyalists = {
+			value = 0.25
+			culture = cu:north_italian
+		}
+		change_relations = { country = c:AUS value = -40 }
+		italy_statuto_momentum_plus_effect = yes
+	}
+	option = {
+		name = ItalyStatutoAlbertino.10.b
+		change_relations = { country = c:AUS value = 25 }
+		add_radicals = { culture = cu:north_italian value = 0.15 }
+		italy_statuto_sentiment_10_effect = yes
+		italy_statuto_autocratic_point_effect = yes
+	}
+}
+
+############################################################
+# Italian Irredentism – choose colony policy modifier
+############################################################
+italyEventsTyrone.30 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.30.t
+	desc = italyEventsTyrone.30.d
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	event_image = {
+		texture = "gfx/interface/icons/event_icons/ItalyAlgeria.png"
+	}
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.30.a
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_TRIPOLI
+					state_region = s:STATE_LIBYA
+					state_region = s:STATE_LIBYAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_incorporation_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.30.b
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_TRIPOLI
+					state_region = s:STATE_LIBYA
+					state_region = s:STATE_LIBYAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_state_bonuses_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.30.c
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_TRIPOLI
+					state_region = s:STATE_LIBYA
+					state_region = s:STATE_LIBYAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_migration_irredentism
+			}
+		}
+	}
+}
+
+italyEventsTyrone.31 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.31.t
+	desc = italyEventsTyrone.31.d
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	event_image = {
+		texture = "gfx/interface/icons/event_icons/ItalyAlgeria.png"
+	}
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.31.a
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_LOWER_EGYPT
+					state_region = s:STATE_MIDDLE_EGYPT
+					state_region = s:STATE_UPPER_EGYPT
+					state_region = s:STATE_MATRUH
+					state_region = s:STATE_EGYPTIAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_incorporation_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.31.b
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_LOWER_EGYPT
+					state_region = s:STATE_MIDDLE_EGYPT
+					state_region = s:STATE_UPPER_EGYPT
+					state_region = s:STATE_MATRUH
+					state_region = s:STATE_EGYPTIAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_state_bonuses_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.31.c
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_LOWER_EGYPT
+					state_region = s:STATE_MIDDLE_EGYPT
+					state_region = s:STATE_UPPER_EGYPT
+					state_region = s:STATE_MATRUH
+					state_region = s:STATE_EGYPTIAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_migration_irredentism
+			}
+		}
+	}
+}
+
+italyEventsTyrone.32 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.32.t
+	desc = italyEventsTyrone.32.d
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	event_image = {
+		texture = "gfx/interface/icons/event_icons/ItalyAlgeria.png"
+	}
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.32.a
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_CRETE
+					state_region = s:STATE_CYPRUS
+					state_region = s:STATE_EAST_AEGEAN_ISLANDS
+					state_region = s:STATE_WEST_AEGEAN_ISLANDS
+					state_region = s:STATE_EGYPTIAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_incorporation_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.32.b
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_CRETE
+					state_region = s:STATE_CYPRUS
+					state_region = s:STATE_EAST_AEGEAN_ISLANDS
+					state_region = s:STATE_WEST_AEGEAN_ISLANDS
+					state_region = s:STATE_EGYPTIAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_state_bonuses_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.32.c
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_CRETE
+					state_region = s:STATE_CYPRUS
+					state_region = s:STATE_EAST_AEGEAN_ISLANDS
+					state_region = s:STATE_WEST_AEGEAN_ISLANDS
+					state_region = s:STATE_EGYPTIAN_DESERT
+				}
+			}
+			add_modifier = {
+				name = italia_colony_migration_irredentism
+			}
+		}
+	}
+}
+
+italyEventsTyrone.33 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.33.t
+	desc = italyEventsTyrone.33.d
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	event_image = {
+		texture = "gfx/interface/icons/event_icons/ItalyAlgeria.png"
+	}
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.33.a
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_PALESTINE
+				}
+			}
+			add_modifier = {
+				name = italia_colony_incorporation_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.33.b
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_PALESTINE
+				}
+			}
+			add_modifier = {
+				name = italia_colony_state_bonuses_irredentism
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyrone.33.c
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_PALESTINE
+				}
+			}
+			add_modifier = {
+				name = italia_colony_migration_irredentism
+			}
+		}
+	}
+}
+
+italyEventsTyrone.34 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.34.t
+	desc = italyEventsTyrone.34.d
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	event_image = {
+		texture = "gfx/interface/icons/event_icons/ItalyIrredentism.png"
+	}
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.34.a
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_ALBANIA
+					state_region = s:STATE_MONTENEGRO
+					state_region = s:STATE_DALMATIA
+				}
+			}
+			add_modifier = {
+				name = italia_colony_incorporation_irredentism
+			}
+		}
+	}
+}
+
+italyEventsTyrone.35 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.35.t
+	desc = italyEventsTyrone.35.d
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	event_image = {
+		texture = "gfx/interface/icons/event_icons/ItalyIrredentism.png"
+	}
+	duration = 3
+
+	trigger = { }
+
+	option = {
+		name = italyEventsTyrone.35.a
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_ISTRIA
+					state_region = s:STATE_SOUTH_TYROL
+				}
+			}
+			add_modifier = {
+				name = italia_colony_incorporation_irredentism
+			}
+		}
+	}
+}
+
+italian_development.1 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyrone.1.t
+	desc = italyEventsTyrone.1.d
+	flavor = italyEventsTyrone.1.f
+
+	cooldown = { days = 370 }
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		ita_industry_calculate_sluggish_effect = yes
+		ita_industry_modifier_update_effect = yes
+		set_variable = { #anti-CHEESE
+			name = ita_investment_power_var
+			value = 0
+		}
+
+			set_variable = {
+				name = north_gdp_ita_var
+				value = ita_north_states_gdp
+			}
+			set_variable = {
+				name = south_gdp_ita_var
+				value = ita_south_states_gdp
+			}
+			
+			if = {
+				limit = {
+					var:north_gdp_ita_var >= var:north_gdp_objective_ita_var
+				}
+				change_variable = {
+					name = industrious_north_ita_var
+					add = 1
+				}
+			}
+			else = {
+				change_variable = {
+					name = industrious_north_ita_var
+					add = 0
+				}
+			}
+			if = {
+				limit = {
+					var:south_gdp_ita_var >= var:south_gdp_objective_ita_var
+				}
+				change_variable = {
+					name = sluggish_south_ita_var
+					add = 1
+				}
+			}
+			else = {
+				change_variable = {
+					name = sluggish_south_ita_var
+					add = 0
+				}
+			}
+
+			set_variable = {
+				name = north_gdp_objective_ita_var
+				value = ita_north_gdp_8pct_target
+			}
+			set_variable = {
+				name = south_gdp_objective_ita_var
+				value = ita_south_gdp_8pct_target
+			}
+
+	}
+
+	option = {
+		name = italian_development.1.a
+		set_variable = { #assign investment counter
+			name = ita_investment_power_var
+			value = 4
+		} 
+		add_modifier = {
+				name = ita_industrial_dev_investment_costs
+				months = 13
+				multiplier = 6
+			}
+	}
+	option = {
+		name = italian_development.1.b
+		set_variable = { #assign investment counter
+			name = ita_investment_power_var
+			value = 2
+		}
+		add_modifier = {
+				name = ita_industrial_dev_investment_costs
+				months = 13
+				multiplier = 3
+			}
+	}
+	option = {
+		name = italian_development.c.a
+		set_variable = { #assign investment counter
+			name = ita_investment_power_var
+			value = 0
+		}
+	}
+}
+
+############################################################
+# Garibaldi vanilla overrides – stubs so Garibaldi never spawns/leaves
+############################################################
+
+garibaldi_events.1 = {
+	trigger = { always = no }
+}
+garibaldi_events.2 = {
+	trigger = { always = no }
+}
+garibaldi_events.3 = {
+	trigger = { always = no }
+}
+garibaldi_events.4 = {
+	trigger = { always = no }
+}
+
+italian_unification.1 = {
+	trigger = { always = no }
+} 
+italian_unification.2 = {
+	trigger = { always = no }
+}
+italian_unification.3 = {
+	trigger = { always = no }
+}
+italian_unification.4 = {
+	trigger = { always = no }
+}
+
+
+#--------------------------------------------------------------
+#------------------Lombardo Venezia----------------------------
+
+italyEventsTyroneLV.1 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.1.t
+	desc = italyEventsTyroneLV.1.d
+	flavor = italyEventsTyroneLV.1.f
+
+	event_image = {
+		video = "europenorthamerica_art_gallery"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/Lombardy-Venetia.dds"
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = italyEventsTyroneLV.1.a
+		add_modifier = {
+			name = ita_LV_reformed
+			months = 61
+		}
+		add_loyalists = {
+			value = 0.05
+			culture = cu:north_italian
+		}
+		add_journal_entry = {
+			type = italy_LV_federationPo
+		}
+	}
+}
+
+italyEventsTyroneLV.2 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.2.t
+	desc = italyEventsTyroneLV.2.d
+	flavor = italyEventsTyroneLV.2.f
+
+	event_image = {
+		video = "africa_leader_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	duration = 3
+
+	immediate = {
+		top_overlord = {
+			save_scope_as = LV_overlord_country
+			random_scope_culture = {
+				limit = {
+					is_primary_culture_of = scope:LV_overlord_country
+				}
+				save_scope_as = migration_culture
+			}
+		}
+	}
+
+	trigger = {
+	}
+
+	option = {
+		name = italyEventsTyroneLV.2.a
+		active_law:lawgroup_internal_security ?= {
+				add_amendment = {
+					type = amendment_ageofliberty_LV
+					sponsor = PREV.ig:ig_petty_bourgeoisie
+					cooldown = 20
+				}
+			}
+		
+		capital = {
+			create_mass_migration = {
+				origin = scope:LV_overlord_country
+				culture = scope:migration_culture
+			}
+		}
+	}
+
+	option = {
+		name = italyEventsTyroneLV.2.b
+		active_law:lawgroup_internal_security ?= {
+				add_amendment = {
+					type = amendment_ageofliberty_LV
+					sponsor = PREV.ig:ig_petty_bourgeoisie
+					cooldown = 20
+				}
+			}
+
+		add_loyalists = {
+			value = 0.05
+			culture = cu:north_italian
+		}
+	}
+}
+
+italyEventsTyroneLV.3 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.3.t
+	desc = italyEventsTyroneLV.3.d
+	flavor = italyEventsTyroneLV.3.f
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = italyEventsTyroneLV.3.a
+		activate_law = law_type:law_neo_absolutism
+		add_modifier = {
+			name = italy_LV_neoautBUFF
+			years = 10
+			is_decaying = yes
+		}
+	}
+}
+
+italyEventsTyroneLV.4 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.4.t
+	desc = italyEventsTyroneLV.4.d
+	flavor = italyEventsTyroneLV.4.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		if = {
+			limit = { exists = c:SAR }
+			annex_with_incorporation = c:SAR
+		}
+		if = {
+			limit = { exists = c:PAP }
+			annex_with_incorporation = c:PAP
+		}
+		hidden_effect = {
+			if = {
+				limit = { exists = c:TUS }
+				annex_with_incorporation = c:TUS
+			}
+			if = {
+				limit = { exists = c:MOD }
+				annex_with_incorporation = c:MOD
+			}
+			if = {
+				limit = { exists = c:LUC }
+				annex_with_incorporation = c:LUC
+			}
+			if = {
+				limit = { exists = c:PAR }
+				annex_with_incorporation = c:PAR
+			}
+		}
+	}
+
+	option = {
+		name = italyEventsTyroneLV.4.a
+		if = {
+			limit = { has_variable = LV_accepted_monarchy }
+			activate_law = law_type:law_monarchy
+			trigger_event = { id = italyEventsTyroneLV.5 popup = yes }
+		}
+
+		if = {
+			limit = { has_variable = LV_accepted_republic }
+			activate_law = law_type:law_presidential_republic
+				add_modifier = {
+				name = italy_LV_republic_formed
+				months = 37
+				is_decaying = yes
+			}
+		}
+		trigger_event = { id = italyEventsTyroneLV.7 popup = yes }
+		every_state = {
+			limit = {
+				owner = root
+				OR = {
+					state_region = s:STATE_PIEDMONT
+					state_region = s:STATE_EMILIA
+					state_region = s:STATE_TUSCANY
+					state_region = s:STATE_ROMAGNA
+					state_region = s:STATE_UMBRIA
+					state_region = s:STATE_VENETIA
+					state_region = s:STATE_LOMBARDY
+				}
+			}
+			add_modifier = { 
+				name = nif_dependent_bonus 
+			}
+		}
+	}
+}
+
+italyEventsTyroneLV.5 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.5.t
+	desc = italyEventsTyroneLV.5.d
+	flavor = italyEventsTyroneLV.5.f
+
+	event_image = {
+		video = "votp_monarch_holding_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/law_icons/monarchy.dds"
+	duration = 3
+
+	immediate = {
+		if = {
+			limit = {
+				top_overlord = { 
+					c:AUS ?= this
+				}
+			}
+			c:AUS = {
+				create_diplomatic_pact = {
+						country = c:LMV
+						type = protectorate
+					}
+			}
+		}
+	}
+
+	trigger = {
+	}
+
+	option = {
+		name = italyEventsTyroneLV.5.a
+		custom_tooltip = {
+			text = LV_von_hohenzollern_tt
+			create_character = {
+				last_name = "von_Hohenzollern"
+				culture = cu:north_german
+				interest_group = ig_armed_forces
+				ruler = yes
+				ideology = ideology_moderate
+				traits = {
+					ambitious
+				}
+				on_created = {
+						set_variable = house_hohenzollern
+				}
+			}
+		}
+	}
+
+	option = {
+		name = italyEventsTyroneLV.5.b
+		custom_tooltip = {
+			text = LV_de_savoy_tt
+			create_character = {
+				last_name = "di_Savoia"
+				culture = cu:north_italian
+				interest_group = ig_intelligentsia
+				ruler = yes
+				ideology = ideology_reformer
+				traits = {
+					ambitious
+				}
+				on_created = {
+					set_variable = house_savoy
+				}
+			}
+		}
+	}
+	option = {
+		name = italyEventsTyroneLV.5.c
+		custom_tooltip = {
+			text = LV_bonaparte_tt
+			create_character = {
+				last_name = "Bonaparte"
+				culture = cu:french
+				interest_group = ig_petty_bourgeoisie
+				ruler = yes
+				ideology = ideology_bonapartist
+				traits = {
+					ambitious
+				}
+				on_created = {
+					set_variable = house_bonaparte
+				}
+			}
+		}
+	}
+
+	option = {
+		name = italyEventsTyroneLV.5.e
+		custom_tooltip = {
+			text = LV_habsburg_tt
+			create_character = {
+				last_name = "von_Habsburg_Lothringen"
+				culture = cu:south_german
+				interest_group = ig_landowners
+				ruler = yes
+				ideology = ideology_royalist
+				traits = {
+					ambitious
+				}
+				on_created = {
+					set_variable = house_habsburg
+				}
+			}
+		}
+	}
+
+	option = { #LARP
+		name = italyEventsTyroneLV.5.g
+		custom_tooltip = {
+			text = LV_saxegotha_tt
+			create_character = {
+				last_name = "of_Saxe-Coburg-Gotha"
+				culture = cu:british
+				interest_group = ig_industrialists
+				ruler = yes
+				ideology = ideology_market_liberal
+				traits = {
+					ambitious
+				}
+				on_created = {
+					set_variable = house_demedici
+				}
+			}
+		}
+	}
+
+	option = { #Become a PU
+		name = italyEventsTyroneLV.5.h
+		trigger = {
+			limit = {
+				top_overlord = { 
+					c:AUS ?= this
+				}
+			}
+		}
+		c:AUS = {
+			create_diplomatic_pact = {
+				country = c:LMV
+				type = personal_union
+			}
+		}
+	}
+}
+
+italyEventsTyroneLV.6 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.6.t
+	desc = italyEventsTyroneLV.6.d
+	flavor = italyEventsTyroneLV.6.f
+
+	event_image = {
+		video = "ep1_power_blocs"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		if = {
+			limit = { exists = c:SAR }
+			annex_with_incorporation = c:SAR
+		}
+		if = {
+			limit = { exists = c:ki_SRD }
+			annex_with_incorporation = c:ki_SRD
+		}
+		if = {
+			limit = { exists = c:PAP }
+			annex_with_incorporation = c:PAP
+		}
+		if = {
+			limit = { exists = c:TUS }
+			annex_with_incorporation = c:TUS
+		}
+		if = {
+			limit = { exists = c:SIC }
+			annex_with_incorporation = c:SIC
+		}
+		if = {
+			limit = { exists = c:XNP }
+			annex_with_incorporation = c:XNP
+		}
+		
+	}
+
+	option = {
+		name = italyEventsTyroneLV.6.a
+		custom_tooltip = {
+			text = LV_centralization_1_tt
+			every_state = {
+				limit = {
+					owner = root
+					state_region = {
+						OR = {
+							is_homeland = cu:north_italian
+							is_homeland = cu:south_italian
+						}
+					}
+				}
+				add_modifier = { 
+					name = LV_italian_federation_centralized1 
+				}
+			}
+		}
+		
+		add_loyalists = {
+			value = 0.10
+			culture = cu:north_italian
+		}
+		add_loyalists = {
+			value = 0.10
+			culture = cu:south_italian
+		}
+	}
+
+	option = {
+		name = italyEventsTyroneLV.6.b
+		custom_tooltip = {
+			text = LV_centralization_2_tt
+			every_state = {
+				limit = {
+					owner = root
+					state_region = {
+						OR = {
+							is_homeland = cu:north_italian
+							is_homeland = cu:south_italian
+						}
+					}
+				}
+				add_modifier = { 
+					name = LV_italian_federation_centralized2 
+				}
+			}
+		}
+		
+		add_loyalists = {
+			value = 0.10
+			culture = cu:north_italian
+		}
+		add_loyalists = {
+			value = 0.10
+			culture = cu:south_italian
+		}
+	}
+	option = {
+		name = italyEventsTyroneLV.6.c
+		custom_tooltip = {
+			text = LV_centralization_3_tt
+			every_state = {
+				limit = {
+					owner = root
+					state_region = {
+						OR = {
+							is_homeland = cu:north_italian
+							is_homeland = cu:south_italian
+						}
+					}
+				}
+				add_modifier = { 
+					name = LV_italian_federation_centralized3 
+				}
+			}
+		}
+		
+		add_loyalists = {
+			value = 0.10
+			culture = cu:north_italian
+		}
+		add_loyalists = {
+			value = 0.10
+			culture = cu:south_italian
+		}
+	}
+}
+
+italyEventsTyroneLV.7 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.7.t
+	desc = italyEventsTyroneLV.7.d
+	flavor = italyEventsTyroneLV.7.f
+
+	event_image = {
+		video = "ip3_village_school"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/invention_icons/bureaucracy.dds"
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = italyEventsTyroneLV.7.a
+		custom_tooltip = {
+			text = ita_path_to_fed_tt
+			add_journal_entry = {
+				type = italy_LV_federationItaly
+			}
+		}
+	}
+
+	option = {
+		name = italyEventsTyroneLV.7.b
+		custom_tooltip = {
+			text = ita_path_to_centralize_tt
+			add_journal_entry = {
+				type = italy_LV_centralizedItaly
+			}
+		}
+	}
+}
+# ========== Two Sicilies: The Fate of the Kingdom events ==========
+
+# Outcome event: Absolutist Victory
+sic_tyrone.101 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.101.t
+	desc = sic_tyrone.101.d
+	flavor = sic_tyrone.101.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:ruler_scope
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/europenorthamerica/political_extremism"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		set_variable = sic_conqueror_of_italy_var
+		ruler = { save_scope_as = ruler_scope }
+	}
+
+	option = {
+		name = sic_tyrone.101.a
+		add_modifier = { name = sic_absolutist_dominance days = long_modifier_time }
+		add_journal_entry = { type = sic_conqueror_of_italy }
+	}
+
+	option = {
+		name = sic_tyrone.101.b
+		add_modifier = { name = sic_absolutist_dominance2 days = long_modifier_time }
+		add_journal_entry = { type = sic_conqueror_of_italy }
+	}
+}
+
+# Outcome event: Nationalist Victory
+sic_tyrone.102 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.102.t
+	desc = sic_tyrone.102.d
+	flavor = sic_tyrone.102.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:ruler_scope
+
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/europenorthamerica/political_extremism"
+
+	duration = 3
+
+	trigger = {
+		c:SIC ?= root
+	}
+
+	immediate = {
+		set_variable = sic_ruler_of_italy_var
+		remove_variable = cant_form_italy_var
+		ruler = { save_scope_as = ruler_scope }
+	}
+
+	option = {
+		name = sic_tyrone.102.a
+		add_modifier = { name = sic_nationalist_surge days = long_modifier_time }
+		add_journal_entry = { type = sic_ruler_of_italy }
+	}
+}
+
+# ========== Two Sicilies: Reform the Latifundia – flavor events ==========
+
+# Event 1: Export Boom
+sic_tyrone.3 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.3.t
+	desc = sic_tyrone.3.d
+	flavor = sic_tyrone.3.f
+
+	gui_window = event_window_1char_tabloid
+
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	event_image = { video = "europenorthamerica_capitalists_meeting" }
+
+	left_icon = scope:lo_leader
+
+	duration = 3
+
+	trigger = {
+		has_journal_entry = sic_latifundia_reform
+	}
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	immediate = {
+		ig:ig_landowners ?= {
+				leader = {
+					save_scope_as = lo_leader
+				}
+			}
+	}
+
+	option = {
+		name = sic_tyrone.3.a
+		# Export advantage + landowners approval
+		add_modifier = { name = sic_export_boom_domestic days = normal_modifier_time }
+		ig:ig_landowners = { add_modifier = { name = sic_landowners_approval_boost days = normal_modifier_time } }
+	}
+
+	option = {
+		name = sic_tyrone.3.b
+		# Naples trade hub + industrialists approval
+		every_scope_state = {
+			limit = { state_region = s:STATE_CAMPANIA }
+			add_modifier = { name = sic_naples_trade_hub days = normal_modifier_time }
+		}
+		ig:ig_industrialists = { add_modifier = { name = sic_industrialists_approval_boost days = normal_modifier_time } }
+	}
+}
+
+# Event 2: Rural Investment Crisis
+sic_tyrone.4 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.4.t
+	desc = sic_tyrone.4.d
+	flavor = sic_tyrone.4.f
+
+	gui_window = event_window_1char_tabloid
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	event_image = { video = "europenorthamerica_russian_serfs" }
+
+	left_icon = scope:lo_leader
+	
+
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_journal_entry = sic_latifundia_reform
+	}
+
+	immediate = {
+		ig:ig_landowners ?= {
+				leader = {
+					save_scope_as = lo_leader
+				}
+			}
+		random_scope_state = {
+			limit = { state_region = s:STATE_CAMPANIA }
+			save_scope_as = naples_state
+		}
+	}
+
+	option = {
+		name = sic_tyrone.4.a
+		# Send aid to the peasants
+		scope:naples_state = {
+			add_modifier = { name = sic_peasant_aid days = normal_modifier_time }
+		}
+	}
+
+	option = {
+		name = sic_tyrone.4.b
+		# Increase agricultural investment
+		add_treasury = -250000
+		scope:naples_state = {
+			add_modifier = { name = sic_agricultural_investment days = normal_modifier_time }
+		}
+	}
+
+	option = {
+		name = sic_tyrone.4.c
+		# Do nothing
+		scope:naples_state = {
+			add_modifier = { name = sic_neglected_peasants days = normal_modifier_time }
+		}
+	}
+}
+
+# Event 3: Land Reform Pressure
+sic_tyrone.5 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.5.t
+	desc = sic_tyrone.5.d
+	flavor = sic_tyrone.5.f
+
+	gui_window = event_window_1char_tabloid
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	event_image = { video = "southamerica_aristocrats" }
+
+	left_icon = scope:lo_leader
+
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_journal_entry = sic_latifundia_reform
+	}
+
+	immediate = {
+		ig:ig_landowners ?= {
+				leader = {
+					save_scope_as = lo_leader
+				}
+			}
+	}
+
+	option = {
+		name = sic_tyrone.5.a
+		# Preserve estates
+		ig:ig_landowners = { add_modifier = { name = sic_estates_preserved days = normal_modifier_time } }
+		ig:ig_intelligentsia = { add_modifier = { name = sic_ig_disapproved days = normal_modifier_time } }
+		add_radicals = {
+			value = medium_radicals
+			strata = lower
+		}
+	}
+
+	option = {
+		name = sic_tyrone.5.b
+		# Begin gradual land reform
+		ig:ig_intelligentsia = { add_modifier = { name = sic_ig_approved days = normal_modifier_time } }
+		ig:ig_landowners = { add_modifier = { name = sic_ig_disapproved days = normal_modifier_time } }
+		
+	}
+}
+
+# Event 4: Rural Modernization Initiative
+sic_tyrone.6 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.6.t
+	desc = sic_tyrone.6.d
+	flavor = sic_tyrone.6.f
+
+	gui_window = event_window_1char_tabloid
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	event_image = { video = "africa_prosperous_farm" }
+
+	left_icon = scope:int_leader
+
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_journal_entry = sic_latifundia_reform
+	}
+
+	immediate = {
+		ig:ig_intelligentsia ?= {
+				leader = {
+					save_scope_as = int_leader
+				}
+			}
+
+	}
+
+	option = {
+		name = sic_tyrone.6.a
+		# Rapid mechanization
+		add_modifier = { name = sic_rapid_mechanization days = short_modifier_time }
+		add_radicals = { value = small_radicals strata = lower }
+	}
+
+	option = {
+		name = sic_tyrone.6.b
+		# Gradual modernization
+		add_modifier = { name = sic_rapid_mechanization days = normal_modifier_time multiplier = 0.4 }
+		add_loyalists = { value = small_radicals strata = lower }
+	}
+}
+
+# Event 5 (Critical): The Question of Slavery
+sic_tyrone.7 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.7.t
+	desc = sic_tyrone.7.d
+	flavor = sic_tyrone.7.f
+
+	gui_window = event_window_1char_tabloid
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	event_image = { video = "votp_conspiring" }
+
+	left_icon = scope:lo_leader
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		set_variable = sic_slavery_event_fired
+		ig:ig_landowners ?= {
+				leader = {
+					save_scope_as = lo_leader
+				}
+			}
+	}
+
+	option = {
+		name = sic_tyrone.7.a
+		# Embrace the slave trade path
+		set_variable = king_modernizer_blocked
+		set_variable = sic_chose_slavery
+		hidden_effect = {
+			cancel_enactment = yes
+		}
+		start_enactment = law_type:law_sic_serfdom
+		hidden_effect = {
+			add_enactment_modifier = {
+				name = ita_passing_slavery_mod
+			}
+		}
+		add_modifier = { name = sic_slavery_economic_costs days = short_modifier_time }
+		ig:ig_landowners = { add_modifier = { name = sic_ig_approved days = short_modifier_time } }
+		add_journal_entry = {
+			type = sic_slavery_path
+			target = root
+		}
+		custom_tooltip = sic_tyrone.7.a_slavery_unlock_tt
+	}
+
+	option = {
+		name = sic_tyrone.7.b
+		# Reject the slavery path → opens Modernizer King chain
+		set_variable = sic_chose_modernizer
+		ig:ig_intelligentsia = { add_modifier = { name = sic_ig_approved days = short_modifier_time } }
+		ig:ig_landowners = { add_modifier = { name = sic_ig_disapproved days = short_modifier_time } }
+		add_journal_entry = {
+			type = sic_modernizer_king
+			target = root
+		}
+	}
+}
+
+# Event: Economic Ending Choice (fired on completion of sic_dismantle_latifundia)
+sic_tyrone.8 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.8.t
+	desc = sic_tyrone.8.d
+	flavor = sic_tyrone.8.f
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	event_image = { video = "asia_poor_people_moving" }
+
+	duration = 3
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_law = law_type:law_sic_serfdom }
+			}
+		}
+		activate_law = law_type:law_expanded_latifundias
+	}
+
+	option = {
+		name = sic_tyrone.8.a
+		# Path A: Industrial Transition
+		set_variable = sic_industrial_path_chosen
+		activate_law = law_type:law_sic_agrarian_reform
+		active_law:lawgroup_economic_system ?= { 
+			add_amendment = {
+				type = amendment_sic_industrialist
+				sponsor = PREV.ig:ig_industrialists
+				cooldown = 120
+			}
+		}
+	}
+
+	option = {
+		name = sic_tyrone.8.b
+		# Path B: Agrarian Export Economy
+		set_variable = sic_agrarian_path_chosen
+		activate_law = law_type:law_sic_agrarian_reform
+		active_law:lawgroup_economic_system ?= { 
+			add_amendment = {
+				type = amendment_sic_exporter
+				sponsor = PREV.ig:ig_rural_folk
+				cooldown = 120
+			}
+		}
+	}
+
+	option = {
+		name = sic_tyrone.8.c
+		# nothing
+	}
+}
+
+sic_tyrone.9 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.9.t
+	desc = sic_tyrone.9.d
+	flavor = sic_tyrone.9.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:ruler_scope
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	event_image = { video = "votp_monarch_holding_court" }
+
+	duration = 3
+
+	immediate = {
+		ruler = { 
+			save_scope_as = ruler_scope
+		}
+	}
+
+	option = {
+		name = sic_tyrone.9.a
+		# Accept modernization fully — reformist monarchy
+		add_modifier = { 
+				name = sic_modernizer_legacy 
+				days = long_modifier_time
+				is_decaying = yes 
+			}
+		add_loyalists = { value = medium_radicals strata = middle }
+		ruler = { 
+			set_ideology = ideology:ideology_modernizer_leader 
+		}
+		heir = { set_ideology = ideology:ideology_modernizer_leader }	
+	}
+
+	option = {
+		name = sic_tyrone.9.b
+		# Maintain reactionary monarchy
+		add_modifier = { 
+				name = sic_reactionary_legacy 
+				days = long_modifier_time 
+				is_decaying = yes
+			}
+		add_radicals = { value = small_radicals strata = middle }
+		ruler = { 
+			set_ideology = ideology:ideology_modernizer_leader 
+			save_scope_as = ruler_scope
+		}
+		heir = { set_ideology = ideology:ideology_modernizer_leader }	
+	}
+}
+
+# Event: Stop Emigration complete
+sic_tyrone.10 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.10.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_tyrone.10.d_borders
+				trigger = { has_law = law_type:law_closed_borders }
+			}
+			triggered_desc = {
+				desc = sic_tyrone.10.d_prosperity
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = sic_tyrone.10.f
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	event_image = { video = "asia_poor_people_moving" }
+
+	duration = 3
+
+	immediate = {}
+
+	option = {
+		name = sic_tyrone.10.a
+		trigger = { has_law = law_type:law_closed_borders }
+		every_scope_state = {
+			add_modifier = { name = ita_emigration_closed_borders months = 120 }
+		}
+	}
+
+	option = {
+		name = sic_tyrone.10.b
+		trigger = { NOT = { has_law = law_type:law_closed_borders } }
+		every_scope_state = {
+			add_modifier = { 
+			name = ita_emigration_prosperity 
+			months = 60 
+			}
+		}
+	}
+}
+
+
+sic_tyrone.11 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.11.t
+	desc = sic_tyrone.11.d
+	flavor = sic_tyrone.11.f
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	event_image = { video = "africa_prosperous_farm" }
+
+	duration = 3
+
+	trigger = {
+		NOT = { has_journal_entry = sic_dismantle_latifundia }
+		NOT = { has_variable = sic_dismantle_latifundia_started }
+	}
+
+	immediate = {
+		set_variable = sic_dismantle_latifundia_started
+	}
+
+	option = {
+		name = sic_tyrone.11.a
+		add_journal_entry = { type = sic_dismantle_latifundia }
+	}
+}
+
+# Event: Slavery Path complete – slave trade choice
+sic_tyrone.12 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.12.t
+	desc = sic_tyrone.12.d
+	flavor = sic_tyrone.12.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:slaver_boi
+
+	icon = "gfx/interface/icons/event_icons/event_skull.dds"
+
+	event_image = { video = "southamerica_aristocrats" }
+
+	duration = 3
+
+	immediate = {
+		ig:ig_landowners ?= {
+				leader = {
+					save_scope_as = slaver_boi
+					set_ideology = ideology:ideology_slaver
+				}
+			}
+	}
+
+	option = {
+		name = sic_tyrone.12.a
+		# Open the slave markets — import boost per state
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_SICILY
+					state_region = s:STATE_CALABRIA
+					state_region = s:STATE_CAMPANIA
+					state_region = s:STATE_APULIA
+					state_region = s:STATE_ABRUZZO
+				}
+			}
+			add_modifier = { name = sic_slavery_import_boost months = 60 }
+		}
+	}
+
+	option = {
+		name = sic_tyrone.12.b
+		# Mass importation — create slave pops then close the market
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_SICILY
+					state_region = s:STATE_CALABRIA
+					state_region = s:STATE_CAMPANIA
+					state_region = s:STATE_APULIA
+					state_region = s:STATE_ABRUZZO
+				}
+			}
+			create_pop = { pop_type = slaves culture = yoruba size = 10000 }
+			create_pop = { pop_type = slaves culture = hausa size = 10000 }
+			create_pop = { pop_type = slaves culture = fon size = 15000 }
+			create_pop = { pop_type = slaves culture = akan size = 15000 }
+			create_pop = { pop_type = slaves culture = ibo size = 12000 }
+			create_pop = { pop_type = slaves culture = bakongo size = 12000 }
+			add_modifier = { name = sic_slavery_import_closed months = 120 is_decaying = yes }
+		}
+	}
+}
+
+# Event: Conqueror of Italy – Italian claims
+sic_tyrone.13 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.13.t
+	desc = sic_tyrone.13.d
+	flavor = sic_tyrone.13.f
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	event_image = { video = "votp_garibaldi" }
+
+	duration = 3
+
+	immediate = {
+		every_state = {
+				limit = {
+					is_in_geographic_region = geographic_region_italy
+					NOT = {
+						owner = ROOT
+						has_claim_by = ROOT
+					}
+				}
+				state_region = {
+					add_claim = ROOT
+				}
+			}
+	}
+
+	option = {
+		name = sic_tyrone.13.a
+		add_technology_researched = percussion_cap
+		add_technology_researched = general_staff
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_CAMPANIA
+			}
+			create_building = {
+				building = building_munition_plant
+				level = 1
+			}
+		}
+		add_modifier = {
+			name = sic_italian_conqueror
+			days = normal_modifier_time
+		}		
+		custom_tooltip = {
+			text = sic_tyrone.13.a_claims_tt
+		}
+		if = { limit = { exists = c:PAP } 
+			c:PAP = { add_modifier = { name = sic_italian_debuff_conqueror days = long_modifier_time } }
+		}
+		if = { limit = { exists = c:SAR } 
+			c:SAR = { add_modifier = { name = sic_italian_debuff_conqueror days = long_modifier_time } }
+		} 
+	}
+}
+
+# Event: Iron Crown of Italy – Conqueror of Italy trait choice
+sic_tyrone.14 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.14.t
+	desc = sic_tyrone.14.d
+	flavor = sic_tyrone.14.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:ruler_scope
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	event_image = { video = "unspecific_military_parade" }
+
+	duration = 3
+
+	immediate = {
+		remove_variable = cant_form_italy_var
+		ruler = { save_scope_as = ruler_scope }
+	}
+
+	option = {
+		name = sic_tyrone.14.a
+		# Authority path
+		ruler = { add_trait = ita_conqueror_of_italy_authority }
+		heir = { add_trait = ita_conqueror_of_italy_authority }
+		add_loyalists = { value = 0.20 culture = cu:north_italian }
+		add_loyalists = { value = 0.10 culture = cu:south_italian }
+		if = { limit = { exists = c:SAR } 
+			annex_with_incorporation = c:SAR
+		} 
+	}
+
+	option = {
+		name = sic_tyrone.14.b
+		# Military path
+		ruler = { add_trait = ita_conqueror_of_italy_military }
+		heir = { add_trait = ita_conqueror_of_italy_military }
+		add_loyalists = { value = 0.20 culture = cu:north_italian }
+		add_loyalists = { value = 0.10 culture = cu:south_italian }
+		if = { limit = { exists = c:SAR } 
+			annex_with_incorporation = c:SAR
+		}
+	}
+
+	option = {
+		name = sic_tyrone.14.c
+		# Innovation path
+		ruler = { add_trait = ita_conqueror_of_italy_innovation }
+		heir = { add_trait = ita_conqueror_of_italy_innovation }
+		add_loyalists = { value = 0.20 culture = cu:north_italian }
+		add_loyalists = { value = 0.10 culture = cu:south_italian }
+		if = { limit = { exists = c:SAR } 
+			annex_with_incorporation = c:SAR
+		}
+	}
+}
+
+# Event: Ruler of Italy – Puppet Italian Minor
+sic_tyrone.15 = {
+    type = country_event
+    placement = scope:puppet_target
+
+    title = sic_tyrone.15.t
+    desc = sic_tyrone.15.d
+    flavor = sic_tyrone.15.f
+
+    icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+    event_image = { video = "votp_gunboat_diplomacy" }
+
+    duration = 3
+
+    cooldown = { days = 200 }
+
+    trigger = {
+        any_country = {
+            any_country = {
+            NOT = { this = ROOT }
+            is_subject = no
+            capital = { is_in_geographic_region = geographic_region_italy }
+                OR = {
+                    is_in_same_power_bloc = ROOT
+                    relations:ROOT >= 40
+                }
+            }
+        }
+    }
+
+    immediate = {
+        random_country = {
+            limit = {
+                NOT = { this = ROOT }
+                is_subject = no
+                capital = { is_in_geographic_region = geographic_region_italy }
+                OR = {
+                    is_in_same_power_bloc = ROOT
+                    relations:ROOT >= 40
+                }
+            }
+            save_scope_as = puppet_target
+        }
+    }
+
+    option = {
+        name = sic_tyrone.15.a
+        # Accept: absorb into sphere as puppet
+        create_diplomatic_pact = {
+            country = scope:puppet_target
+            type = puppet
+        }
+    }
+
+    option = {
+        name = sic_tyrone.15.b
+        # Decline
+    }
+}
+
+# Event: Voice of the Peninsula – nationalist pamphlet spreads to Italian minor
+sic_tyrone.16 = {
+	type = country_event
+
+	title = sic_tyrone.16.t
+	desc = sic_tyrone.16.d
+	flavor = sic_tyrone.16.f
+
+	cooldown = { days = 80 }
+
+	event_image = {
+		video = "votp_agitator_speaking"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		any_country = {
+			NOT = { this = ROOT }
+			is_subject = no
+			capital = { is_in_geographic_region = geographic_region_italy }
+			relations:ROOT >= 20
+			NOT = { has_technology_researched = nationalism }
+		}
+	}
+
+	immediate = {
+		random_country = {
+			limit = {
+				NOT = { this = ROOT }
+				is_subject = no
+				capital = { is_in_geographic_region = geographic_region_italy }
+				relations:ROOT >= 20
+			}
+			save_scope_as = pamphlet_country
+		}
+	}
+
+	option = {
+		name = sic_tyrone.16.a
+		default_option = yes
+		scope:pamphlet_country = { add_technology_researched = nationalism }
+		add_loyalists = {
+			value = 0.05
+			culture = cu:north_italian
+		}
+	}
+
+	option = {
+		name = sic_tyrone.16.b
+		change_relations = {
+			country = scope:pamphlet_country
+			value = 20
+		}
+	}
+}
+
+# Event: The Artisans' Pilgrimage – Italian craftsmen settle in the Kingdom
+sic_tyrone.17 = {
+	type = country_event
+
+	title = sic_tyrone.17.t
+	desc = sic_tyrone.17.d
+	flavor = sic_tyrone.17.f
+
+	event_image = {
+		video = "europenorthamerica_rich_and_poor"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	option = {
+		name = sic_tyrone.17.a
+		default_option = yes
+		add_modifier = {
+			name = sic_artisans_pilgrimage
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = sic_tyrone.17.b
+		add_loyalists = {
+			value = 0.05
+			culture = cu:south_italian
+		}
+		add_modifier = {
+			name = sic_artisans_pilgrimage
+			days = normal_modifier_time
+			multiplier = 0.5
+		}
+	}
+}
+
+# Event: Young Men of Italy – nationalist volunteers cross the border to enlist
+sic_tyrone.18 = {
+	type = country_event
+
+	title = sic_tyrone.18.t
+	desc = sic_tyrone.18.d
+	flavor = sic_tyrone.18.f
+
+	event_image = {
+		video = "votp_garibaldi"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	duration = 3
+
+	option = {
+		name = sic_tyrone.18.a
+		default_option = yes
+		add_modifier = {
+			name = sic_italian_volunteers
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = sic_tyrone.18.b
+		add_loyalists = {
+			value = 0.05
+			culture = cu:north_italian
+		}
+	}
+}
+
+# Event: The Question of Rome – annex the Papal States and move the capital to Rome
+sic_tyrone.19 = {
+	type = country_event
+
+	title = sic_tyrone.19.t
+	desc = sic_tyrone.19.d
+	flavor = sic_tyrone.19.f
+
+	event_image = {
+		video = "votp_monarch_holding_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		exists = c:PAP
+		relations:c:PAP >= relations_threshold:friendly
+		c:PAP = {
+			OR = {
+				is_subject_of = ROOT
+				NOT = { is_subject = yes }
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOT = { exists = c:PAP }
+	}
+
+	immediate = {
+		set_variable = sic_road_to_rome_fired
+	}
+
+	option = {
+		name = sic_tyrone.19.a
+		default_option = yes
+		if = {
+			limit = {
+				NOT = { c:PAP = { is_subject_of = ROOT } }
+			}
+			create_diplomatic_pact = {
+				country = c:PAP
+				type = puppet
+			}
+		}
+		annex_with_incorporation = c:PAP
+		set_capital = STATE_LAZIO
+		add_modifier = {
+			name = sic_rome_declared_capital
+			days = long_modifier_time
+		}
+	}
+
+	option = {
+		name = sic_tyrone.19.b
+		change_relations = {
+			country = c:PAP
+			value = 20
+		}
+		add_modifier = {
+			name = sic_papal_concordat
+			days = long_modifier_time
+		}
+	}
+}
+
+# Event: A Messenger from the South – Austria receives SIC's request to cede Lombardo-Venetia
+sic_tyrone.20 = {
+	type = country_event
+
+	title = sic_tyrone.20.t
+	desc = sic_tyrone.20.d
+	flavor = sic_tyrone.20.f
+
+	event_image = {
+		video = "votp_conspiring"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	cancellation_trigger = {
+	}
+
+	immediate = {
+		c:SIC = {
+			save_scope_as = sic_lmv_requester
+		}
+	}
+
+	option = {
+		name = sic_tyrone.20.a
+		s:STATE_LOMBARDY = {
+				random_scope_state = {
+					limit = {
+						owner = {
+							OR = {
+								c:AUS = THIS
+								is_subject_of = c:AUS
+							}
+						}
+					}
+					set_state_owner = c:SIC
+					set_state_type = incorporated
+				}
+			}
+		s:STATE_VENETIA = {
+				random_scope_state = {
+					limit = {
+						owner = {
+							OR = {
+								c:AUS = THIS
+								is_subject_of = c:AUS
+							}
+						}
+					}
+					set_state_owner = c:SIC
+					set_state_type = incorporated
+				}
+			}
+		change_relations = {
+			country = c:SIC
+			value = 25
+		}
+
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	option = {
+		name = sic_tyrone.20.b
+		default_option = yes
+		trigger = {
+			OR = {
+				is_player = yes
+				c:SIC = { relations:root < 10 }
+			}
+			
+		}
+		change_relations = {
+			country = c:SIC
+			value = -15
+		}
+
+		ai_chance = {
+			base = 95
+		}
+	}
+}
+
+# Ruler of Italy JE – bonus selection (fired on sic_ruler_of_italy JE completion)
+sic_tyrone.21 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.21.t
+	desc = sic_tyrone.21.d
+	flavor = sic_tyrone.21.f
+
+	event_image = {
+		video = "votp_garibaldi"
+	}
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	duration = 3
+	trigger = { }
+
+	# United in Tradition – birth rate, loyalists, mortality (all cultures)
+	option = {
+		name = sic_tyrone.21.a
+		default_option = yes
+		add_modifier = {
+			name = sic_founding_italy
+			years = 10
+		}
+		add_loyalists = {
+			value = 0.10
+		}
+	}
+}
+
+# ========== Ministry of Industry — select ideology (fired by ita_ministry_of_industry_decision) ==========
+italian_development.2 = {
+	type = country_event
+	placement = root
+
+	title = italian_development.2.t
+	desc = italian_development.2.d
+	flavor = italian_development.2.f
+
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	duration = 3
+
+	trigger = { }
+
+	# Market Liberal
+	option = {
+		name = italian_development.2.a
+		default_option = yes
+		create_character = {
+			ig_leader = yes
+			female = no
+			interest_group = ig_industrialists
+			ideology = ideology_market_liberal
+		}
+		add_modifier = { 
+			name = ita_ministry_market_liberal
+			months = 37 
+		}
+	}
+
+	# Protectionist
+	option = {
+		name = italian_development.2.b
+		create_character = {
+			ig_leader = yes
+			female = no
+			interest_group = ig_industrialists
+			ideology = ideology_protectionist
+		}
+		add_modifier = {
+		 	name = ita_ministry_protectionist 
+		 	months = 37 
+		}
+	}
+
+	# Jingoist
+	option = {
+		name = italian_development.2.c
+		create_character = {
+			ig_leader = yes
+			female = no
+			interest_group = ig_industrialists
+			ideology = ideology_jingoist
+		}
+		add_modifier = { 
+			name = ita_ministry_jingoist 	
+			months = 37 
+		}
+	}
+
+	# Utilitarian
+	option = {
+		name = italian_development.2.e
+		create_character = {
+			ig_leader = yes
+			female = no
+			interest_group = ig_industrialists
+			ideology = ideology_utilitarian_leader
+		}
+		add_modifier = { 
+			name = ita_ministry_utilitarian 
+			months = 37 
+		}
+	}
+}
+
+# ========== LMV requests protectorate status from Austria (fired by lmv_request_protectorate_decision) ==========
+italyEventsTyroneLV.8 = {
+	type = country_event
+	placement = root
+
+	title = italyEventsTyroneLV.8.t
+	desc = italyEventsTyroneLV.8.d
+	flavor = italyEventsTyroneLV.8.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	duration = 3
+
+	trigger = {
+		exists = c:LMV
+	}
+
+	option = {
+		name = italyEventsTyroneLV.8.a
+		default_option = yes
+		c:LMV = {
+			change_subject_type = subject_type_protectorate
+			add_liberty_desire = -25
+		}
+		change_relations = {
+			country = c:LMV
+			value = 20
+		}
+	}
+
+	option = {
+		name = italyEventsTyroneLV.8.b
+	}
+}
+
+# ========== Italian National Movement activism events (sic_tyrone.22-24) ==========
+# Fire from sic_bourbon_monarchy_main on_monthly_pulse. Each gives +15% activism to movement_italian_national.
+
+sic_tyrone.22 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.22.t
+	desc = sic_tyrone.22.d
+	flavor = sic_tyrone.22.f
+
+	event_image = {
+		video = "votp_agitator_speaking"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	duration = 3
+	cooldown = { days = long_modifier_time }
+
+	trigger = {
+		any_political_movement = {
+			is_political_movement_type = movement_italian_national
+		}
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_italian_national }
+			save_scope_as = ita_movement
+		}
+	}
+
+	option = {
+		name = sic_tyrone.22.a
+		default_option = yes
+		scope:ita_movement = {
+			add_modifier = {
+				name = sic_ita_national_activism
+				days = long_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = sic_tyrone.22.b
+		capital = {
+			add_radicals_in_state = {
+				value = 0.05
+			}
+		}
+	}
+}
+
+sic_tyrone.23 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.23.t
+	desc = sic_tyrone.23.d
+	flavor = sic_tyrone.23.f
+
+	event_image = {
+		video = "europenorthamerica_springtime_of_nations"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	duration = 3
+	cooldown = { days = long_modifier_time }
+
+	trigger = {
+		any_political_movement = {
+			is_political_movement_type = movement_italian_national
+		}
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_italian_national }
+			save_scope_as = ita_movement
+		}
+	}
+
+	option = {
+		name = sic_tyrone.23.a
+		default_option = yes
+		scope:ita_movement = {
+			add_modifier = {
+				name = sic_ita_national_activism
+				days = long_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = sic_tyrone.23.b
+		capital = {
+			add_radicals_in_state = {
+				value = 0.05
+			}
+		}
+	}
+}
+
+sic_tyrone.24 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.24.t
+	desc = sic_tyrone.24.d
+	flavor = sic_tyrone.24.f
+
+	event_image = {
+		video = "votp_conspiring"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	duration = 3
+	cooldown = { days = long_modifier_time }
+
+	trigger = {
+		any_political_movement = {
+			is_political_movement_type = movement_italian_national
+		}
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_italian_national }
+			save_scope_as = ita_movement
+		}
+	}
+
+	option = {
+		name = sic_tyrone.24.a
+		default_option = yes
+		scope:ita_movement = {
+			add_modifier = {
+				name = sic_ita_national_activism
+				days = long_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = sic_tyrone.24.b
+		capital = {
+			add_radicals_in_state = {
+				value = 0.05
+			}
+		}
+	}
+}
+
+# ========== Garibaldi's Coup ==========
+sic_tyrone.25 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.25.t
+	desc = sic_tyrone.25.d
+	flavor = sic_tyrone.25.f
+
+	cooldown = { days = very_long_modifier_time }
+
+	gui_window = event_window_1char_lord_kitchener
+	left_icon = scope:garibaldi
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/garibaldi_republic.dds"
+	duration = 3
+
+	trigger = {
+		has_variable = sic_court_done
+		has_journal_entry = sic_bourbon_monarchy_main
+		je:sic_bourbon_monarchy_main = {
+			"scripted_bar_progress(bourbon_legitimacy_bar)" <= 20
+		}
+	}
+
+	immediate = {
+		capital = {
+			save_scope_as = capital_scope
+		}
+		create_character = {
+			template = garibaldi_character_template
+			is_general = yes
+			ig_leader = yes
+			ruler = no
+			on_created = {
+				add_trait = ita_grande_generale
+				save_scope_as = garibaldi
+			}
+		}
+		random_scope_character = {
+			limit = {
+				has_trait = ita_grande_generale
+			}
+			save_scope_as = garibaldi
+		}
+		
+	}
+
+	option = {
+		name = sic_tyrone.25.a
+		default_option = yes
+		add_technology_progress = { progress = 6000 technology = nationalism }
+		activate_law = law_type:law_universal_suffrage
+		activate_law = law_type:law_presidential_republic
+		add_journal_entry = { type = garibaldi_presidency_JE }
+		random_scope_character = {
+					limit = { has_trait = ita_grande_generale }
+					set_character_as_ruler = yes
+				}
+		add_modifier = { 
+			name = garibaldi_coup 
+			days = normal_modifier_time
+			is_decaying = yes
+			}
+	}
+
+	option = {
+		name = sic_tyrone.25.b
+		# placeholder — resist the coup
+		add_modifier = { 
+			name = garibaldi_counter_coup 
+			days = normal_modifier_time
+			is_decaying = yes
+		}
+		add_radicals = {
+			value = 0.15
+			strata = lower
+		}
+		custom_tooltip = {
+			text = sic_bourbon_bar_progress_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = 25 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+}
+
+sic_tyrone.26 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.26.t
+	desc = sic_tyrone.26.d
+	flavor = sic_tyrone.26.f
+
+	event_image = {
+		video = "votp_agitator_speaking"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	duration = 3
+
+	trigger = {
+	}
+
+	cooldown = { days = long_modifier_time }
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_italian_national }
+			save_scope_as = ita_movement
+		}
+	}
+
+	option = {
+		name = sic_tyrone.26.a
+		default_option = yes
+		add_radicals = {
+			value = 0.10
+			strata = lower
+		}
+		trigger_event = { id = sic_tyrone.27 popup = yes }
+	}
+
+	option = {
+		name = sic_tyrone.26.b
+	}
+}
+
+sic_tyrone.27 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.27.t
+	desc = sic_tyrone.27.d
+	flavor = sic_tyrone.27.f
+
+	event_image = {
+		video = "votp_barricade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	duration = 3
+
+	trigger = {
+		any_political_movement = {
+			is_political_movement_type = movement_italian_national
+		}
+	}
+
+	immediate = {
+		random_political_movement = {
+			limit = { is_political_movement_type = movement_italian_national }
+			save_scope_as = ita_movement
+		}
+	}
+
+	option = {
+		name = sic_tyrone.27.a
+		default_option = yes
+		scope:ita_movement = {
+			add_modifier = {
+				name = sic_ita_movement_surge
+				days = long_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = sic_tyrone.27.b
+	}
+}
+
+sic_tyrone.28 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.28.t
+	desc = sic_tyrone.28.d
+	flavor = sic_tyrone.28.f
+
+	event_image = { video = "votp_conspiring" }
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/garibaldi_republic.dds"
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		NOT = { has_variable = sic_barracks_done }
+		has_journal_entry = sic_bourbon_monarchy_main
+		je:sic_bourbon_monarchy_main = {
+			"scripted_bar_progress(bourbon_legitimacy_bar)" <= 60
+		}
+	}
+
+	option = {
+		name = sic_tyrone.28.a
+		default_option = yes
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_whispers_barracks_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_barracks_done
+	}
+
+	option = {
+		name = sic_tyrone.28.b
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_whispers_barracks_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_barracks_done
+		custom_tooltip = {
+			text = sic_bourbon_bar_loss_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = -10 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+}
+
+sic_tyrone.29 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.29.t
+	desc = sic_tyrone.29.d
+	flavor = sic_tyrone.29.f
+
+	event_image = { video = "votp_barricade" }
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/garibaldi_republic.dds"
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_variable = sic_barracks_done
+		NOT = { has_variable = sic_spark_done }
+		has_journal_entry = sic_bourbon_monarchy_main
+		je:sic_bourbon_monarchy_main = {
+			"scripted_bar_progress(bourbon_legitimacy_bar)" <= 50
+		}
+	}
+
+	option = {
+		name = sic_tyrone.29.a
+		default_option = yes
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_sicilian_spark_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_spark_done
+	}
+
+	option = {
+		name = sic_tyrone.29.b
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_sicilian_spark_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_spark_done
+		custom_tooltip = {
+			text = sic_bourbon_bar_loss_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = -10 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+}
+
+sic_tyrone.30 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.30.t
+	desc = sic_tyrone.30.d
+	flavor = sic_tyrone.30.f
+
+	event_image = { video = "votp_agitators_sneaking" }
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/garibaldi_republic.dds"
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_variable = sic_spark_done
+		NOT = { has_variable = sic_redshirts_done }
+		has_journal_entry = sic_bourbon_monarchy_main
+		je:sic_bourbon_monarchy_main = {
+			"scripted_bar_progress(bourbon_legitimacy_bar)" <= 40
+		}
+	}
+
+	option = {
+		name = sic_tyrone.30.a
+		default_option = yes
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_red_shirts_gather_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_redshirts_done
+	}
+
+	option = {
+		name = sic_tyrone.30.b
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_red_shirts_gather_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_redshirts_done
+		custom_tooltip = {
+			text = sic_bourbon_bar_loss_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = -10 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+}
+
+sic_tyrone.31 = {
+	type = country_event
+	placement = root
+
+	title = sic_tyrone.31.t
+	desc = sic_tyrone.31.d
+	flavor = sic_tyrone.31.f
+
+	event_image = { video = "votp_hostile_court" }
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/garibaldi_republic.dds"
+	duration = 3
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_variable = sic_redshirts_done
+		NOT = { has_variable = sic_court_done }
+		has_journal_entry = sic_bourbon_monarchy_main
+		je:sic_bourbon_monarchy_main = {
+			"scripted_bar_progress(bourbon_legitimacy_bar)" <= 30
+		}
+	}
+
+	option = {
+		name = sic_tyrone.31.a
+		default_option = yes
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_court_in_panic_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_court_done
+	}
+
+	option = {
+		name = sic_tyrone.31.b
+		custom_tooltip = sic_garibaldi_approaching_tt
+		add_modifier = {
+			name = sic_court_in_panic_mod
+			days = short_modifier_time
+		}
+		add_radicals = { value = 0.02 }
+		set_variable = sic_court_done
+		custom_tooltip = {
+			text = sic_bourbon_bar_loss_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = -10 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+}

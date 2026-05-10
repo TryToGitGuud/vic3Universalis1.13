@@ -1,0 +1,146 @@
+# Garibaldi special trait: Primo Cittadino della Repubblica Italiana
+# Granted when Garibaldi forms the republic (south/Naples). Uses vanilla icon special_character_el_excelentisimo.dds
+# Effects apply as country leader/ruler: -20% decree cost, 25% party (IG) popularity, 15% authority, 75 popularity
+
+ita_primo_cittadino_repubblica = {
+	type = personality
+	texture = "gfx/interface/icons/character_trait_icons/special_character_traits/special_character_el_excelentisimo.dds"
+
+	character_modifier = {
+		character_popularity_add = 75
+	}
+
+	command_modifier = {
+
+	}
+
+	country_modifier = {
+		state_decree_cost_mult = -0.2
+		country_authority_mult = 0.15
+		interest_group_pop_attraction_mult = 0.25
+	}
+
+	agitator_modifier = {
+
+	}
+
+	executive_modifier = {
+
+	}
+
+	possible = {
+
+	}
+
+	interest_group_modifier = {
+		interest_group_pop_attraction_mult = 0.50
+	}
+
+	weight = 0
+}
+
+# Re di Tutta Italia – granted to ruler on formation of Italy (event 16) if monarchy/theocracy and ruler does not have Garibaldi trait
+# -50 popularity, -10% decree cost
+ita_re_di_tutta_italia = {
+	type = personality
+	texture = "gfx/interface/icons/character_trait_icons/special_character_traits/special_character_el_excelentisimo.dds"
+
+	character_modifier = {
+		character_popularity_add = 50
+	}
+
+	country_modifier = {
+		state_decree_cost_mult = -0.10
+	}
+
+	possible = { }
+	weight = 0
+}
+
+ita_unificatore_italia = {
+	type = personality
+	texture = "gfx/interface/icons/character_trait_icons/special_character_traits/special_character_el_excelentisimo.dds"
+
+	character_modifier = {
+		character_popularity_add = 80
+	}
+
+	country_modifier = {
+		state_radicals_and_loyalists_from_sol_change_mult = 0.10
+	}
+
+	possible = { }
+	weight = 0
+}
+
+ita_conqueror_of_italy_military = {
+	type = personality
+	texture = "gfx/interface/icons/character_trait_icons/special_character_traits/special_character_el_excelentisimo.dds"
+
+	character_modifier = {
+		character_popularity_add = 50
+	}
+
+	country_modifier = {
+		unit_offense_mult = 0.10
+		unit_defense_mult = 0.10
+	}
+
+	possible = { }
+	weight = 0
+}
+
+ita_conqueror_of_italy_authority = {
+	type = personality
+	texture = "gfx/interface/icons/character_trait_icons/special_character_traits/special_character_el_excelentisimo.dds"
+
+	character_modifier = {
+		character_popularity_add = 50
+	}
+
+	country_modifier = {
+		country_authority_mult = 0.15
+		state_decree_cost_mult = -0.10
+	}
+
+	possible = { }
+	weight = 0
+}
+
+ita_conqueror_of_italy_innovation = {
+	type = personality
+	texture = "gfx/interface/icons/character_trait_icons/special_character_traits/special_character_el_excelentisimo.dds"
+
+	character_modifier = {
+		character_popularity_add = 50
+	}
+
+	country_modifier = {
+		building_university_throughput_add = 0.15
+		country_tech_research_speed_mult = 0.15
+	}
+
+	possible = { }
+	weight = 0
+}
+
+ita_grande_generale = {
+	type = personality
+	texture = "gfx/interface/icons/character_trait_icons/special_character_traits/special_character_el_excelentisimo.dds"
+
+	character_modifier = {
+		character_popularity_add = 100
+	}
+
+	country_modifier = {
+		country_legitimacy_headofstate_add = 50
+	}
+
+	command_modifier = {
+		unit_offense_mult = 0.1
+		character_battle_condition_aggressive_maneuver_mult = 1
+	}
+
+	possible = { }
+	weight = 0
+}

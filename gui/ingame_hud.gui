@@ -233,14 +233,14 @@ widget = {
 
 				# Has navy
 				topbar = {
-					visible = "[Or(GreaterThan_int32(Country.GetNumConvoys, '(int32)0'), GreaterThan_int32(Country.GetRequiredConvoys, '(int32)0'))]"
+					visible = "[Not(Country.IsLandlocked)]"
 				}
 
 				# Landlocked
 				topbar = {
-					visible = "[Not(Or(GreaterThan_int32(Country.GetNumConvoys, '(int32)0'), GreaterThan_int32(Country.GetRequiredConvoys, '(int32)0')))]"
+					visible = "[Country.IsLandlocked]"
 
-					blockoverride "convoys_info" {}
+					blockoverride "supply_ships_info" {}
 
 					blockoverride "spacing" {
 						spacing = 37

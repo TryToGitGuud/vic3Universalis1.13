@@ -1,0 +1,59 @@
+﻿COUNTRIES = {
+	c:SIC ?= {
+		effect_starting_technology_tier_3_tech = yes
+		
+		effect_starting_politics_reactionary = yes
+		
+		# --- Buffs ---
+		add_technology_researched = empiricism		
+		add_technology_researched = mass_communication
+		add_technology_researched = lathe
+		add_technology_researched = stock_exchange
+		add_technology_researched = banking	
+		add_technology_researched = atmospheric_engine
+		add_technology_researched = dialectics
+		add_technology_progress = {
+			progress = 5000
+			technology = intensive_agriculture
+		}
+		add_technology_researched = mechanical_tools
+		add_technology_researched = railways
+		add_technology_researched = central_archives
+		add_technology_researched = egalitarianism
+		create_political_movement = { type = movement_modernizer }
+		# -------------	
+
+		activate_law = law_type:law_traditionalism
+		activate_law = law_type:law_land_based_taxation
+		activate_law = law_type:law_latifundias
+
+		add_taxed_goods = g:wine
+		add_taxed_goods = g:liquor
+		set_variable = cant_form_italy_var
+
+		set_export_tariff_level = { 
+			goods = g:sulfur
+			level = no_tariffs_or_subventions
+		}
+		
+		set_import_tariff_level = { 
+			goods = g:artillery
+			level = high_subventions
+		}		
+		
+		add_journal_entry = { type = ita_metternich_system }
+		add_journal_entry = { type = ita_stop_emigration }
+
+		trigger_event = { id = sic_tyrone.26 popup = yes }
+
+		ig:ig_industrialists = { leader = { set_ideology = ideology:ideology_protectionist } }
+		ig:ig_intelligentsia = { leader = { set_ideology = ideology:ideology_radical } }
+		ig:ig_devout = { leader = { set_ideology = ideology:ideology_theocrat } }
+		ig:ig_rural_folk = { leader = { set_ideology = ideology:ideology_luddite } }
+
+		ig:ig_landowners ?= {
+			add_ruling_interest_group = yes
+			leader = { set_ideology = ideology:ideology_traditionalist } 
+			}
+	}
+}

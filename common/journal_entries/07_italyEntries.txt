@@ -1,0 +1,3154 @@
+# GUI in italy_journal_entry.gui shows quote + Mazzini portrait when this JE has list com_risorgimento_mazzini. When adding this JE, add the Mazzini character to that list so the portrait appears.
+# GUI bar "Italian unification sentiment" (italian_sentiment_var 0–100) in italy_journal_entry.gui under the Italian countries block.
+italy_risorgimento_stage = {
+	icon = "gfx/interface/icons/invention_icons/nationalism.dds"
+	group = je_group_italy_tyrone
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = italy_risorgimento_stage_status_60_90
+				trigger = {
+					var:italian_sentiment_var >= 60
+					var:italian_sentiment_var < 90
+				}
+			}
+			triggered_desc = {
+				desc = italy_risorgimento_stage_status_40_60
+				trigger = {
+					var:italian_sentiment_var >= 40
+					var:italian_sentiment_var < 60
+				}
+			}
+			triggered_desc = {
+				desc = italy_risorgimento_stage_status_25_40
+				trigger = {
+					var:italian_sentiment_var >= 25
+					var:italian_sentiment_var < 40
+				}
+			}
+			triggered_desc = {
+				desc = italy_risorgimento_stage_status_fallback
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	scripted_button = ita_north_italian_manifesto_button
+	scripted_button = ita_talks_with_the_pope_button
+	scripted_button = ita_italian_concordat_button
+	scripted_button = ita_annex_romagna_only_button
+	scripted_button = ita_declare_north_italian_federation_button
+	scripted_button = ita_invite_pope_sphere_button
+	scripted_button = ita_request_italian_recognition_button
+	scripted_button = ita_occupy_abruzzi_button
+	scripted_button = ita_annex_pope_war_goal_button
+	scripted_button = ita_form_italy_button
+	scripted_button = ita_form_italy_garibaldi_button
+
+	on_weekly_pulse = {
+		random_events = {
+			50 = 0
+			50 = italyEventsTyrone.5
+		}
+		effect = {
+			remove_modifier = italy_tension_modifier
+			add_modifier = {
+				name = italy_tension_modifier
+				months = 1
+				multiplier = {
+					value = var:italian_sentiment_var
+				}
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			change_variable = {
+				name = italian_sentiment_var
+				add = 2
+			}
+			if = {
+				limit = {
+					has_technology_researched = nationalism
+				}
+				change_variable = {
+					name = italian_sentiment_var
+					add = 1
+				}
+			}
+			if = {
+				limit = {
+					var:italian_sentiment_var > 100
+				}
+				set_variable = {
+					name = italian_sentiment_var
+					value = 100
+				}
+			}
+		}
+	}
+
+	possible = {
+	}
+
+	immediate = {
+		set_variable = {
+			name = italian_sentiment_var
+			value = 10
+		}
+		add_modifier = {
+			name = italy_tension_modifier
+			days = 8
+			multiplier = {
+				value = var:italian_sentiment_var
+			}
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = ita_italy_exists_complete_tt
+			exists ?= c:ITA
+		}
+	}
+
+	on_complete = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+italy_diplo_stance = {
+	icon = "gfx/interface/icons/invention_icons/international_diplomacy.dds"
+	group = je_group_italy_tyrone
+	scripted_progress_bar = italy_aus_fra_stance_bar
+
+	scripted_button = ita_join_france_bloc_button
+	scripted_button = ita_join_austria_bloc_button
+	scripted_button = ita_treaty_turin_button
+	scripted_button = ita_lombardy_cession_button
+
+	modifiers_while_active = {
+		italy_diplo_stance_leverage_resistance
+	}
+
+	immediate = {
+		c:SAR ?= {
+			create_bidirectional_truce = {
+				country = c:PAP
+				years = 30
+			}
+		}
+	}
+
+	# Refresh com_journal_characters so only the current monarch is shown (Cavour is no longer in the list).
+	on_monthly_pulse = {
+		effect = {
+			random_scope_character = {
+					limit = {
+						has_variable = italy_cavour
+					}
+					save_scope_as = cavour_scope
+				}
+			ruler = { save_scope_as = current_monarch_scope }
+			je:italy_diplo_stance = {
+				clear_variable_list = com_journal_characters
+				add_to_variable_list = {
+					name = com_journal_characters
+					target = scope:current_monarch_scope
+				}
+				add_to_variable_list = {
+					name = com_journal_characters
+					target = scope:cavour_scope
+				}
+			}
+		}
+	}
+
+	possible = {
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = ita_italy_exists_complete_tt
+			exists ?= c:ITA
+		}
+	}
+
+	invalid = {
+		exists ?= c:ITA
+	}
+
+	on_complete = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Spenna la gallina austriaca (skeleton – Italian Formation army path, bloc leader) ==========
+Spenna_la_gallina_austriaca = {
+	icon = "gfx/interface/icons/event_icons/Lombardy-Venetia.dds"
+	group = je_group_italy_tyrone
+
+	timeout = 1460 
+
+	is_shown_when_inactive = {
+		c:ITA ?= root
+	}
+	possible = {
+		custom_tooltip = {
+			text = ita_spenna_gallina_not_italy_tt
+			exists ?= c:ITA 
+		}
+		OR = {
+			NOT = { country_or_subject_owns_entire_state_region = STATE_LOMBARDY }
+			NOT = { country_or_subject_owns_entire_state_region = STATE_VENETIA }
+		}
+	}
+
+	modifiers_while_active = {
+		spenna_gallina_offense
+	}
+
+	immediate = {
+		s:STATE_LOMBARDY = {
+			add_claim = root
+		}
+		s:STATE_VENETIA = {
+			add_claim = root
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = Spenna_la_gallina_austriaca_status_austria_owns
+				trigger = {
+					c:AUS = { country_or_subject_owns_entire_state_region = STATE_LOMBARDY }
+					c:AUS = { country_or_subject_owns_entire_state_region = STATE_VENETIA }
+				}
+			}
+			triggered_desc = {
+				desc = Spenna_la_gallina_austriaca_status_escape
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_LOMBARDY
+		country_or_subject_owns_entire_state_region = STATE_VENETIA
+	}
+
+	on_complete = {
+		add_loyalists = {
+			value = 0.10
+			culture = cu:north_italian
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Patti lateranensi – progress bar 3 yrs then annex Papal State with incorporation ==========
+Patti_lateranensi = {
+	icon = "gfx/interface/icons/law_icons/state_religion.dds"
+	group = je_group_italy_tyrone
+
+	progressbar = yes
+
+	goal_add_value = {
+		value = 36
+	}
+
+	immediate = {
+		set_variable = { name = patti_lateranensi_months value = 0 }
+	}
+
+	on_monthly_pulse = {
+		change_variable = { name = patti_lateranensi_months add = 1 }
+	}
+
+	is_shown_when_inactive = {
+		custom_tooltip = {
+			text = ita_patti_lateranensi_visible_tt
+			exists = c:PAP
+		}
+		exists ?= c:ITA
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ita_patti_lateranensi_pap_exists_tt
+			exists = c:PAP
+		}
+		custom_tooltip = {
+			text = ita_patti_lateranensi_italy_tt
+			c:ITA ?= root 
+		}
+		has_technology_researched = pan-nationalism
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = ita_patti_lateranensi_complete_tt
+			var:patti_lateranensi_months >= 36
+		}
+		has_law_or_variant = law_type:law_state_religion
+	}
+
+	on_complete = {
+		if = {
+			limit = { c:PAP = { exists = yes } }
+			annex_with_incorporation = c:PAP
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Italian Irredentism ==========
+Italian_Irredentism_main = {
+	# Unique icon so GUI can show illustration block only for this JE
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	scripted_button = ita_proclaim_italian_empire_button
+
+	immediate = {
+		trigger_event = { id = italyEventsTyrone.18 popup = no }
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = italian_empire_irredentism_status_desc
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	is_shown_when_inactive = {
+		c:ITA ?= root
+	}
+
+	possible = {
+		has_technology_researched = pan-nationalism	
+		country_or_subject_owns_entire_state_region = STATE_VENETIA
+		country_or_subject_owns_entire_state_region = STATE_LOMBARDY
+		country_or_subject_owns_entire_state_region = STATE_LAZIO
+		is_power_bloc_leader = yes
+		}
+
+	complete = {
+		custom_tooltip = {
+			text = italian_empire_irredentism_complete_tt
+			has_variable = italian_empire_has_formed
+		}
+	}
+
+	on_complete = {
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+Italian_Irredentism_lybia = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+		s:STATE_TRIPOLI = {
+			add_claim = root
+		}
+		s:STATE_LIBYA = {
+			add_claim = root
+		}
+		s:STATE_LIBYAN_DESERT = {
+			add_claim = root
+		}
+	}
+
+	possible = {
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_TRIPOLI
+		country_or_subject_owns_entire_state_region = STATE_LIBYA
+		country_or_subject_owns_entire_state_region = STATE_LIBYAN_DESERT
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = italyEventsTyrone.30
+			popup = yes
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+Italian_Irredentism_egypt = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+		s:STATE_LOWER_EGYPT = {
+			add_claim = root
+		}
+		s:STATE_MIDDLE_EGYPT = {
+			add_claim = root
+		}
+		s:STATE_UPPER_EGYPT = {
+			add_claim = root
+		}
+		s:STATE_MATRUH = {
+			add_claim = root
+		}
+		s:STATE_EGYPTIAN_DESERT = {
+			add_claim = root
+		}
+	}
+
+	possible = {
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_LOWER_EGYPT
+		country_or_subject_owns_entire_state_region = STATE_MIDDLE_EGYPT
+		country_or_subject_owns_entire_state_region = STATE_UPPER_EGYPT
+		country_or_subject_owns_entire_state_region = STATE_MATRUH
+		country_or_subject_owns_entire_state_region = STATE_EGYPTIAN_DESERT
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = italyEventsTyrone.31
+			popup = yes
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+Italian_Irredentism_mediterranean_islands = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+		s:STATE_CRETE = {
+			add_claim = root
+		}
+		s:STATE_CYPRUS = {
+			add_claim = root
+		}
+		s:STATE_EAST_AEGEAN_ISLANDS = {
+			add_claim = root
+		}
+		s:STATE_WEST_AEGEAN_ISLANDS = {
+			add_claim = root
+		}
+	}
+
+	possible = {
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_CRETE
+		country_or_subject_owns_entire_state_region = STATE_CYPRUS
+		country_or_subject_owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
+		country_or_subject_owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = italyEventsTyrone.32
+			popup = yes
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+Italian_Irredentism_holy_city = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+		s:STATE_PALESTINE = {
+			add_claim = root
+		}
+	}
+
+	possible = {
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_PALESTINE
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = italyEventsTyrone.33
+			popup = yes
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+Italian_Irredentism_jewel_colony = {
+	icon = "gfx/interface/icons/invention_icons/navigation.dds"
+	group = je_group_italy_tyrone
+
+	scripted_button = ita_jewel_colony_morocco_button
+	scripted_button = ita_jewel_colony_madagascar_button
+	scripted_button = ita_jewel_colony_ethiopia_button
+	scripted_button = ita_jewel_colony_zanzibar_button
+	scripted_button = ita_jewel_colony_yemen_button
+	scripted_button = ita_jewel_colony_lybia_button
+
+	is_shown_when_inactive = {
+		c:ITA ?= root
+	}
+
+	immediate = {
+	}
+
+	possible = {
+		has_technology_researched = civilizing_mission
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = italian_jewel_colony_complete_tt
+			has_variable = italy_jewel_colony_var
+		}
+	}
+
+	on_complete = {
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+Italian_Irredentism_balkans = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_ALBANIA
+		country_or_subject_owns_entire_state_region = STATE_MONTENEGRO
+		country_or_subject_owns_entire_state_region = STATE_DALMATIA
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = italyEventsTyrone.34
+			popup = yes
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+Italian_Irredentism_italian_land = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		country_or_subject_owns_entire_state_region = STATE_ISTRIA
+		country_or_subject_owns_entire_state_region = STATE_SOUTH_TYROL
+	}
+
+	on_complete = {
+		trigger_event = {
+			id = italyEventsTyrone.35
+			popup = yes
+		}
+	}
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== French path journal entries (military, economy, laws) ==========
+# French military JE: hard way = 100 battalions with ≥40% artillery; easy way = button with 30 battalions + all barracks fully employed, no shortages
+ITA_French_militaryJE = {
+	icon = "gfx/interface/icons/invention_icons/shell_gun.dds"
+	group = je_group_italy_tyrone
+
+	scripted_button = ita_french_military_complete_button
+
+	possible = {
+	}
+
+	complete = {
+		OR = {
+			country_army_unit_type_fraction = {
+				target = unit_type:combat_unit_type_mobile_artillery
+				value >= 0.4
+			}
+			country_army_unit_type_fraction = {
+				target = unit_type:combat_unit_type_shrapnel_artillery
+				value >= 0.4
+			}
+		}
+		OR = {
+			# Hard way: 100 troops, at least 40% artillery (cannon or mobile)
+			AND = {
+				army_size >= 100
+				any_scope_building = {
+					filter = {
+						is_building_type = building_barrack
+					}
+					NOT = { building_has_goods_shortage = yes }
+					occupancy >= 0.9
+					percent = 1
+				}
+			}
+			
+
+			# Easy way: click button + 30 units + all barracks fully employed, no shortages
+			AND = {
+				army_size >= 30
+				any_scope_building = {
+					filter = {
+						is_building_type = building_barrack
+					}
+					NOT = { building_has_goods_shortage = yes }
+					occupancy >= 0.9
+					percent = 1
+				}
+				custom_tooltip = {
+					text = ita_french_military_barracks_ok_tt
+					has_variable = ita_french_military_complete_clicked
+				}
+			}
+		}
+	}
+
+	invalid = {
+		exists ?= c:ITA
+	}
+
+	on_complete = {
+		set_variable = ita_french_military_done
+		if = {
+			limit = { has_variable = ita_french_military_complete_clicked }
+			ita_stance_france_20_effect = yes
+			add_modifier = {
+				name = french_military_complete_easy_reward
+				days = long_modifier_time
+			}
+		}
+		else = {
+			ita_stance_france_5_effect = yes
+			add_modifier = {
+				name = french_military_complete_artillery_reward
+				days = long_modifier_time				
+			}
+		}
+	}
+
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Austria path journal entry (military): bar moves toward Austria ==========
+# Easy way: button + 30 battalions + all barracks fully employed, no shortages. Hard way: National Guard law + Home Affairs institution level 2. Rewards placeholder (stance only).
+ITA_Austria_militaryJE = {
+	icon = "gfx/interface/icons/invention_icons/shell_gun.dds"
+	group = je_group_italy_tyrone
+
+	scripted_button = ita_austria_military_complete_button
+
+	possible = {
+	}
+
+	complete = {
+		OR = {
+			# Hard way: National Guard and Home Affairs (internal ministry) level 2
+			AND = {
+				has_law_or_variant = law_type:law_national_guard
+				institution_investment_level = {
+					institution = institution_home_affairs
+					value >= 2
+				}
+				army_size >= 100
+				any_scope_building = {
+					filter = {
+						is_building_type = building_barrack
+					}
+					NOT = { building_has_goods_shortage = yes }
+					occupancy >= 0.9
+					percent = 1
+				}
+			}
+
+			# Easy way: click button + 30 units + all barracks fully employed, no shortages
+			AND = {
+				army_size >= 30
+				any_scope_building = {
+					filter = {
+						is_building_type = building_barrack
+					}
+					NOT = { building_has_goods_shortage = yes }
+					occupancy >= 0.9
+					percent = 1
+				}
+				custom_tooltip = {
+					text = ita_austria_military_barracks_ok_tt
+					has_variable = ita_austria_military_complete_clicked
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		set_variable = ita_austria_military_done
+		if = {
+			limit = { has_variable = ita_austria_military_complete_clicked }
+			ita_stance_austria_20_effect = yes
+			add_modifier = {
+				name = french_military_complete_easy_reward
+				years = 5
+			}
+		}
+		else = {
+			ita_stance_austria_5_effect = yes
+			# Current law of the same type (internal security) gets the amendment.
+			active_law:lawgroup_internal_security ?= {
+				add_amendment = {
+					type = amendment_italian_gendarme
+					sponsor = PREV.ig:ig_armed_forces
+					cooldown = 240
+				}
+			}
+		}
+	}
+
+	invalid = {
+		exists ?= c:ITA
+	}
+
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# French economy JE: Sardinia GDP must grow 5% every 6 months for 5 periods in a row (Gründerzeit-style).
+# Progress 0–5; miss one deadline = -1 progress. Variables on owner: baseline + 6‑month counter.
+ITA_French_economyJE = {
+	icon = "gfx/interface/icons/event_icons/ita_dev_JEs.png"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = ita_french_economy_progress_bar
+	scripted_button = ita_french_economy_complete_button
+
+	possible = {
+	}
+
+	immediate = {
+		# Baseline = Sardinia’s GDP at start; counter = first month of 6‑month window
+		set_variable = {
+			name = ita_french_economy_sar_baseline
+			value = ita_sar_gdp
+		}
+		set_variable = {
+			name = ita_french_economy_sar_goal
+			value = {
+				value = var:ita_french_economy_sar_baseline
+				multiply = 1.05
+			}
+		}
+		set_variable = ita_french_economy_month_1
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			60 = 0
+			15 = italyEventsTyrone.7
+			30 = italyEventsTyrone.8
+		}
+		effect = {
+			# Advance 6‑month counter (month_1 -> … -> month_6 -> check then back to month_1)
+			if = {
+				limit = { has_variable = ita_french_economy_month_1 }
+				remove_variable = ita_french_economy_month_1
+				set_variable = ita_french_economy_month_2
+			}
+			else_if = {
+				limit = { has_variable = ita_french_economy_month_2 }
+				remove_variable = ita_french_economy_month_2
+				set_variable = ita_french_economy_month_3
+			}
+			else_if = {
+				limit = { has_variable = ita_french_economy_month_3 }
+				remove_variable = ita_french_economy_month_3
+				set_variable = ita_french_economy_month_4
+			}
+			else_if = {
+				limit = { has_variable = ita_french_economy_month_4 }
+				remove_variable = ita_french_economy_month_4
+				set_variable = ita_french_economy_month_5
+			}
+			else_if = {
+				limit = { has_variable = ita_french_economy_month_5 }
+				remove_variable = ita_french_economy_month_5
+				set_variable = ita_french_economy_month_6
+			}
+			else_if = {
+				limit = { has_variable = ita_french_economy_month_6 }
+				remove_variable = ita_french_economy_month_6
+				set_variable = ita_french_economy_month_1
+
+				# Goal = baseline × 1.05
+				set_variable = {
+					name = ita_french_economy_sar_goal
+					value = {
+						value = var:ita_french_economy_sar_baseline
+						multiply = 1.05
+					}
+				}
+				# Check: Sardinia GDP >= goal -> +1 progress (max 5); else -1 (min 0)
+				if = {
+					limit = {
+						ita_sar_gdp >= var:ita_french_economy_sar_goal
+						scope:journal_entry = {
+							"scripted_bar_progress(ita_french_economy_progress_bar)" < 5
+						}
+					}
+					scope:journal_entry = {
+						add_progress = {
+							value = 1
+							name = ita_french_economy_progress_bar
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						ita_sar_gdp < var:ita_french_economy_sar_goal
+						scope:journal_entry = {
+							"scripted_bar_progress(ita_french_economy_progress_bar)" > 0
+						}
+					}
+					scope:journal_entry = {
+						add_progress = {
+							value = -1
+							name = ita_french_economy_progress_bar
+						}
+					}
+				}
+				# Update baseline for next 6‑month window
+				set_variable = {
+					name = ita_french_economy_sar_baseline
+					value = ita_sar_gdp
+				}
+				# Update goal for next period so the JE reason displays the correct target
+				set_variable = {
+					name = ita_french_economy_sar_goal
+					value = {
+						value = var:ita_french_economy_sar_baseline
+						multiply = 1.05
+					}
+				}
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			AND = {
+				gdp > 5000000
+				custom_tooltip = {
+					text = ita_french_economy_complete_progress_tt
+					scope:journal_entry = {
+						"scripted_bar_progress(ita_french_economy_progress_bar)" >= 5
+					}
+				}
+			}
+			AND = {
+				custom_tooltip = {
+					text = ita_french_economy_complete_button_tt
+					has_variable = ita_french_economy_complete_clicked
+				}
+				has_law = law_type:law_laissez_faire
+			}
+			
+		}
+	}
+
+	fail = {
+	}
+
+	on_complete = {
+		set_variable = ita_french_economy_done
+		if = {
+			limit = { has_variable = ita_french_economy_complete_clicked }
+			ita_stance_france_20_effect = yes
+			add_modifier = {
+				name = french_economy_complete_button_reward
+				days = long_modifier_time
+			}
+		}
+		else = {
+			ita_stance_france_5_effect = yes
+			add_modifier = {
+				name = french_economy_complete_gdp_reward
+				days = long_modifier_time
+			}
+		}
+		show_as_tooltip = {
+			if = {
+				limit = { has_variable = ita_french_economy_complete_clicked }
+				custom_tooltip = ita_french_economy_complete_effects_button_tt
+			}
+			else = {
+				custom_tooltip = ita_french_economy_complete_effects_gdp_tt
+			}
+		}
+	}
+
+	invalid = {
+		exists ?= c:ITA
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# Austria economy JE: same as French (5% GDP growth every 6 months, 5 periods). Bar moves toward Austria; treaty with Austria; easy path requires Interventionism.
+ITA_Austria_economyJE = {
+	icon = "gfx/interface/icons/event_icons/ita_dev_JEs.png"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = ita_austria_economy_progress_bar
+	scripted_button = ita_austria_economy_complete_button
+
+	possible = {
+	}
+
+	immediate = {
+		set_variable = {
+			name = ita_austria_economy_sar_baseline
+			value = ita_sar_gdp
+		}
+		set_variable = {
+			name = ita_austria_economy_sar_goal
+			value = {
+				value = var:ita_austria_economy_sar_baseline
+				multiply = 1.05
+			}
+		}
+		set_variable = ita_austria_economy_month_1
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			100 = 0
+		}
+		effect = {
+			if = {
+				limit = { has_variable = ita_austria_economy_month_1 }
+				remove_variable = ita_austria_economy_month_1
+				set_variable = ita_austria_economy_month_2
+			}
+			else_if = {
+				limit = { has_variable = ita_austria_economy_month_2 }
+				remove_variable = ita_austria_economy_month_2
+				set_variable = ita_austria_economy_month_3
+			}
+			else_if = {
+				limit = { has_variable = ita_austria_economy_month_3 }
+				remove_variable = ita_austria_economy_month_3
+				set_variable = ita_austria_economy_month_4
+			}
+			else_if = {
+				limit = { has_variable = ita_austria_economy_month_4 }
+				remove_variable = ita_austria_economy_month_4
+				set_variable = ita_austria_economy_month_5
+			}
+			else_if = {
+				limit = { has_variable = ita_austria_economy_month_5 }
+				remove_variable = ita_austria_economy_month_5
+				set_variable = ita_austria_economy_month_6
+			}
+			else_if = {
+				limit = { has_variable = ita_austria_economy_month_6 }
+				remove_variable = ita_austria_economy_month_6
+				set_variable = ita_austria_economy_month_1
+
+				set_variable = {
+					name = ita_austria_economy_sar_goal
+					value = {
+						value = var:ita_austria_economy_sar_baseline
+						multiply = 1.05
+					}
+				}
+				if = {
+					limit = {
+						ita_sar_gdp >= var:ita_austria_economy_sar_goal
+						scope:journal_entry = {
+							"scripted_bar_progress(ita_austria_economy_progress_bar)" < 5
+						}
+					}
+					scope:journal_entry = {
+						add_progress = {
+							value = 1
+							name = ita_austria_economy_progress_bar
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						ita_sar_gdp < var:ita_austria_economy_sar_goal
+						scope:journal_entry = {
+							"scripted_bar_progress(ita_austria_economy_progress_bar)" > 0
+						}
+					}
+					scope:journal_entry = {
+						add_progress = {
+							value = -1
+							name = ita_austria_economy_progress_bar
+						}
+					}
+				}
+				set_variable = {
+					name = ita_austria_economy_sar_baseline
+					value = ita_sar_gdp
+				}
+				set_variable = {
+					name = ita_austria_economy_sar_goal
+					value = {
+						value = var:ita_austria_economy_sar_baseline
+						multiply = 1.05
+					}
+				}
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			AND = {
+				gdp > 5000000
+				custom_tooltip = {
+					text = ita_austria_economy_complete_progress_tt
+					scope:journal_entry = {
+						"scripted_bar_progress(ita_austria_economy_progress_bar)" >= 5
+					}
+				}
+			}
+			AND = {
+				custom_tooltip = {
+					text = ita_austria_economy_complete_button_tt
+					has_variable = ita_austria_economy_complete_clicked
+				}
+				has_law = law_type:law_interventionism
+			}
+		}
+	}
+
+	fail = {
+	}
+
+	on_complete = {
+		set_variable = ita_austria_economy_done
+		if = {
+			limit = { has_variable = ita_austria_economy_complete_clicked }
+			ita_stance_austria_20_effect = yes
+			# reward placeholder (easy path)
+		}
+		else = {
+			ita_stance_austria_5_effect = yes
+			add_modifier = {
+				name = austria_economy_complete_gdp_reward
+				days = long_modifier_time
+			}
+		}
+		show_as_tooltip = {
+			if = {
+				limit = { has_variable = ita_austria_economy_complete_clicked }
+				custom_tooltip = ita_austria_economy_complete_effects_button_tt
+			}
+			else = {
+				custom_tooltip = ita_austria_economy_complete_effects_gdp_tt
+			}
+		}
+	}
+
+	invalid = {
+		exists ?= c:ITA
+	}
+
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# French laws JE: constitutional tension 0–5 (autocratic → Statuto by king → by the people). Events push the bar; trade-off: democracy = buffs, autocratic = debuff + radicals + Italian unification sentiment.
+ITA_French_lawsJE = {
+	icon = "gfx/interface/icons/map_mode_icons/radicals.dds"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = constitutional_ita_tension_bar
+	scripted_button = ita_french_laws_complete_button
+
+	timeout = 1460
+
+	possible = {
+	}
+
+	immediate = {
+		set_variable = { name = constitutional_ita_tension_var value = 0 }
+		set_variable = { name = constitutional_ita_tension_bar_sync value = 0 }
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			set_variable = {
+				name = constitutional_ita_tension_bar_sync
+				value = var:constitutional_ita_tension_var
+			}
+		}
+		random_events = {
+			1 = 0
+			6 = ItalyStatutoAlbertino.1
+			6 = ItalyStatutoAlbertino.2
+			6 = ItalyStatutoAlbertino.3
+			6 = ItalyStatutoAlbertino.4
+			6 = ItalyStatutoAlbertino.5
+			1000 = ItalyStatutoAlbertino.6
+			6 = ItalyStatutoAlbertino.7
+			6 = ItalyStatutoAlbertino.8
+			6 = ItalyStatutoAlbertino.9
+			6 = ItalyStatutoAlbertino.10
+		}
+	}
+
+	complete = {
+		OR = {
+			has_law_or_variant = law_type:law_census_voting
+			custom_tooltip = {
+				text = ita_has_granted_voting_tt
+				has_law_or_variant = law_type:law_wealth_voting
+			}
+		}
+	}
+
+	on_timeout = {
+		set_variable = ita_french_laws_done	
+	}
+
+	on_complete = {
+		set_variable = ita_french_laws_done
+	}
+
+	invalid = {
+		exists ?= c:ITA
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# Austrian laws JE: same constitutional tension bar and Statuto events; complete via census/wealth voting OR button that grants Oligarchy + Concessione Albertina amendment.
+ITA_Austria_lawsJE = {
+	icon = "gfx/interface/icons/map_mode_icons/radicals.dds"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = constitutional_ita_tension_bar
+	scripted_button = ita_austria_laws_complete_button
+
+	timeout = 1460
+
+	possible = {
+	}
+
+	immediate = {
+		set_variable = { name = constitutional_ita_tension_var value = 0 }
+		set_variable = { name = constitutional_ita_tension_bar_sync value = 0 }
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			set_variable = {
+				name = constitutional_ita_tension_bar_sync
+				value = var:constitutional_ita_tension_var
+			}
+		}
+		random_events = {
+			1 = 0
+			6 = ItalyStatutoAlbertino.1
+			6 = ItalyStatutoAlbertino.2
+			6 = ItalyStatutoAlbertino.3
+			6 = ItalyStatutoAlbertino.4
+			6 = ItalyStatutoAlbertino.5
+			1000 = ItalyStatutoAlbertino.6
+			6 = ItalyStatutoAlbertino.7
+			6 = ItalyStatutoAlbertino.8
+			6 = ItalyStatutoAlbertino.9
+			6 = ItalyStatutoAlbertino.10
+		}
+	}
+
+	complete = {
+		OR = {
+			has_law_or_variant = law_type:law_census_voting
+			custom_tooltip = {
+				text = ita_has_granted_voting_tt
+				has_variable = ita_austria_laws_complete_clicked
+			}
+			
+		}
+	}
+
+	on_complete = {
+		set_variable = ita_austria_laws_done
+	}
+
+	on_timeout = {
+		set_variable = ita_austria_laws_done
+	}
+
+	invalid = {
+		exists ?= c:ITA
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Garibaldi's Thousand Expedition ==========
+# Activates when Great Power OR North Italian Federation formed (NIF_formed).
+# Creates Garibaldi (garibaldi_char_var), inits garibaldi_taking_sic_var = 0 for progress bar (1–5).
+# Button "Prepare the Expedition" fires garibaldi_expedition.1.
+ita_garibaldi_thousand_expedition_JE = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_italy_tyrone
+
+	progressbar = yes
+	current_value = {
+		value = root.var:garibaldi_taking_sic_var
+	}
+	goal_add_value = {
+		value = 5
+	}
+
+	scripted_button = ita_garibaldi_prepare_expedition_button
+
+	is_shown_when_inactive = {
+		c:SAR ?= this
+	}
+
+	possible = {
+		has_technology_researched = nationalism
+		OR = {
+			is_great_power = yes
+			custom_tooltip = {
+				text = is_nif_tt
+				has_variable = NIF_formed
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = garibaldi_taking_sic_var
+			value = 0
+		}
+		create_character = {
+			template = garibaldi_character_template
+			is_general = yes
+			on_created = {
+				set_variable = garibaldi_char_var
+				set_character_immortal = yes
+			}
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = ita_italy_exists_complete_tt
+			exists ?= c:ITA
+		}
+	}
+
+	on_complete = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Consolidating the South ==========
+# Shown when Sardinia owns more than 3 South Italian homeland states. Progress bar ticks +1 each month while the south is held; goal 24 months.
+ita_consolidating_south_JE = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_italy_tyrone
+
+	progressbar = yes
+	current_value = {
+		value = root.var:consolidating_south_months
+	}
+	goal_add_value = {
+		value = 24
+	}
+
+	is_shown_when_inactive = {
+		OR = {
+			c:SAR ?= root 
+			c:ITA ?= root
+		}
+		
+	}
+
+	possible = {
+		NOT = { country_has_primary_culture = cu:south_italian }
+		any_scope_state = {
+			state_region = {
+					is_homeland = cu:south_italian
+				}
+			count >= 4
+			owner = root
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = consolidating_south_months
+			value = 0
+		}
+		trigger_event = {
+			id = italyEventsTyrone.14
+			popup = yes
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					any_scope_state = {
+						state_region = {
+							is_homeland = cu:south_italian
+						}
+						count >= 4
+						owner = root
+					}
+					var:consolidating_south_months < 24
+				}
+				change_variable = {
+					name = consolidating_south_months
+					add = 1
+				}
+			}
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = placating_south_ita_tt
+			c:ITA ?= root
+			var:consolidating_south_months >= 24
+		}
+		
+	}
+
+	on_complete = {
+		add_loyalists = {
+				value = 0.25
+				culture = cu:south_italian
+			}
+		# Remove the consolidating_south debuff from every state in the world
+		every_state = {
+			limit = {
+				has_modifier = ita_consolidating_south_debuff
+			}
+			remove_modifier = ita_consolidating_south_debuff
+			set_state_type = incorporated
+		}
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Papal Recognition for Italy ==========
+# Progress bar: concession_to_pope_var 0–3; player selects 3 of 4 concessions via scripted buttons.
+Pap_recognition_for_italy = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_italy_tyrone
+
+	progressbar = yes
+	current_value = {
+		value = root.var:concession_to_pope_var
+	}
+	goal_add_value = {
+		value = 3
+	}
+
+	scripted_button = ita_pap_rec_concession_1_button
+	scripted_button = ita_pap_rec_concession_2_button
+	scripted_button = ita_pap_rec_concession_3_button
+	scripted_button = ita_pap_rec_concession_4_button
+
+	immediate = {
+		set_variable = {
+			name = concession_to_pope_var
+			value = 0
+		}
+	}
+
+	complete = {
+		var:concession_to_pope_var >= 3
+	}
+
+	on_complete = {
+		annex_with_incorporation = c:PAP
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+italy_developing_industry = {
+	icon = "gfx/interface/icons/invention_icons/investment_banks.dds"
+	group = je_group_italy_tyrone
+
+	is_shown_when_inactive = {
+		c:ITA ?= root
+	}
+
+	modifiers_while_active = {
+		industrial_dev_moreallocation_modifier
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	timeout = 4015
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ita_dev_status_noentry_desc
+				trigger = {
+					NOT = { has_journal_entry = italy_developing_industry }
+				}
+			}
+			triggered_desc = {
+				desc = ita_dev_status_desc
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	possible = {
+		OR = {
+		has_technology_researched = steel_frame_buildings
+		gdp > 50000000
+		}
+	}
+
+
+	immediate = {
+		set_variable = {
+			name = investment_in_north_ita_var
+			value = 0
+		}
+		set_variable = {
+			name = investment_in_padana_ita_var
+			value = 0
+		}
+		set_variable = {
+			name = investment_in_south_ita_var
+			value = 0
+		}
+		set_variable = { #debuff/buff counter
+			name = sluggish_south_ita_var
+			value = -5
+		}
+		set_variable = { #debuff/buff counter
+			name = industrious_north_ita_var
+			value = 5
+		}
+		set_variable = { #agripadana dev, goes to 50 and then gives a modifier
+			name = agri_padana_ita_var
+			value = 0
+		}
+		set_variable = { #assign investment counter
+			name = ita_investment_power_var
+			value = 0
+		}
+		set_variable = {
+			name = north_gdp_ita_var
+			value = ita_north_states_gdp
+		}
+		set_variable = {
+			name = south_gdp_ita_var
+			value = ita_south_states_gdp
+		}
+
+		set_variable = {
+			name = north_gdp_objective_ita_var
+			value = var:north_gdp_ita_var
+		}
+		set_variable = {
+			name = south_gdp_objective_ita_var
+			value = var:south_gdp_ita_var
+		}
+		set_variable = {
+			name = north_gdp_dev_ita_var
+			value = 0
+		}
+		set_variable = {
+			name = south_gdp_dev_ita_var
+			value = 0
+		}
+		set_variable = {
+			name = north_gdp_ita_updated_var
+			value = ita_north_states_gdp
+			}
+		set_variable = {
+			name = south_gdp_ita_updated_var
+			value = ita_south_states_gdp
+		}
+	}
+
+	on_yearly_pulse = {
+		effect = {
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ita_Population_refresh_effect = yes
+			set_variable = {
+				name = north_gdp_ita_updated_var
+				value = ita_north_states_gdp
+			}
+			set_variable = {
+				name = south_gdp_ita_updated_var
+				value = ita_south_states_gdp
+			}
+			if = {
+				limit = {
+					var:sluggish_south_ita_var >= 10
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state_region = s:STATE_SICILY
+							state_region = s:STATE_CALABRIA
+							state_region = s:STATE_CAMPANIA
+							state_region = s:STATE_APULIA
+							state_region = s:STATE_ABRUZZO
+						}
+					}
+					state_region = { remove_state_trait = state_trait_sluggish_south }
+				}
+			}
+		}
+	}
+	
+	on_weekly_pulse = {
+		random_events = {
+			1 = 0
+			500 = italian_development.1
+		}
+	}
+
+	complete = {
+	}
+
+	on_complete = {
+	}
+
+	on_timeout = {
+		custom_tooltip = {
+			text = ita_last_dev_industry_tt
+			ita_last_industry_proc_effect = yes
+		}
+		
+	}
+
+}
+
+#------------------ Lombardo Venezia Entries here ----------------------
+
+italy_LV_startingout = {
+	icon = "gfx/interface/icons/event_icons/Lombardy-Venetia.dds"
+	group = je_group_italy_tyrone
+
+	is_shown_when_inactive = {
+		c:LMV ?= this
+		hidden_trigger = {
+			is_player = yes
+		}
+	}
+
+	possible = {
+		is_player = yes
+	}
+
+	immediate = {
+	}
+
+	scripted_button = LV_fix_economy_button
+	scripted_button = LV_fix_burocrazia_button
+	scripted_button = LV_fix_railways_button
+	scripted_button = LV_fix_legittimacy_button
+
+	modifiers_while_active = {
+		LV_weak_burocrazia 
+		LV_weak_economy
+		LV_weak_legittimacy
+		LV_weak_railways
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = italy_LV_startingouty_desc_tt
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	possible = {
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = LV_fully_reformed
+			has_variable = LV_fixed_legittimacy
+			has_variable = LV_fixed_railways
+			has_variable = LV_fixed_burocrazia
+			has_variable = LV_fixed_economy
+		}
+	}
+
+	event_outcome_completed_desc = {
+        first_valid = {
+            triggered_desc = {
+                desc = italyEventsTyroneLV.1_tt
+            }
+        }
+    }
+
+	on_complete = {
+		trigger_event = { id = italyEventsTyroneLV.1 popup = yes }
+		add_journal_entry = {
+			type = italy_LV_federationPo
+		}
+	}
+	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+italy_LV_ageofliberty = {
+	icon = "gfx/interface/icons/law_icons/guaranteed_liberties.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+	}
+
+	modifiers_while_active = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		root.average_sol >= 12
+		has_law_or_variant = law_type:law_guaranteed_liberties
+		has_law_or_variant = law_type:law_protected_speech
+		has_law_or_variant = law_type:law_total_separation
+		OR = {
+			has_law_or_variant = law_type:law_cultural_exclusion
+			has_law_or_variant = law_type:law_multicultural
+		}
+		custom_tooltip = {
+			text = is_democratic_tt
+			country_has_voting_franchise = yes
+		}	
+		
+	}
+
+	fail = {
+		any_political_movement = {
+			is_insurrectionary = yes
+		}
+		OR = {
+			any_civil_war = {
+				is_civil_war_type = revolution
+				civil_war_progress >= 0.90
+			}
+			capital = {
+				is_in_revolt = yes
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = italyEventsTyroneLV.2 popup = yes }
+	}
+	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+italy_LV_neoautocracy = {
+	icon = "gfx/interface/icons/law_icons/ethnostate.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+	}
+
+	modifiers_while_active = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		has_law_or_variant = law_type:law_state_religion
+		has_law_or_variant = law_type:law_ethnostate
+		OR = {
+			has_law_or_variant = law_type:law_autocracy
+			has_law_or_variant = law_type:law_oligarchy
+			has_law_or_variant = law_type:law_technocracy
+		}
+		OR = {
+			has_law_or_variant = law_type:law_secret_police
+			has_law_or_variant = law_type:law_national_guard
+		}
+		NOT = {
+			any_civil_war = {
+				civil_war_progress >= 0.90
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = italyEventsTyroneLV.3 popup = yes }
+	}
+
+	fail = {
+		any_political_movement = {
+			OR = {
+				movement_is_liberal = yes
+				movement_is_socialist = yes
+			}
+			is_insurrectionary = yes
+		}
+		OR = {
+			any_civil_war = {
+				is_civil_war_type = revolution
+				civil_war_progress >= 0.75
+			}
+			capital = {
+				is_in_revolt = yes
+			}
+		}
+	}
+	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+italy_LV_federationPo = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = ita_LV_confPO_main
+	scripted_progress_bar = ita_LV_confPO_sardinia
+	scripted_progress_bar = ita_LV_confPO_papal
+
+	scripted_button = italy_LV_federationPo_monarchy_button
+	scripted_button = italy_LV_federationPo_republic_button
+	scripted_button = italy_LV_federationPo_AUSenvoy_button
+	scripted_button = italy_LV_federationPo_AUSinvestment_button
+	scripted_button = italy_LV_federationPo_PAPenvoy_button
+	scripted_button = italy_LV_federationPo_PAPinvestment_button
+	scripted_button = italy_LV_federationPo_SARenvoy_button
+	scripted_button = italy_LV_federationPo_SARinvestment_button
+
+	immediate = {
+		c:SAR = { save_scope_as = sarpied_scope }
+		c:PAP = { save_scope_as = papal_scope }
+		c:AUS = { save_scope_as = austria_scope }
+	}
+
+	modifiers_while_active = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		custom_tooltip = { #All 3 bars up to 100
+			text = LV_fedPO_complete_tt
+			je:italy_LV_federationPo ?= {
+				"scripted_bar_progress(ita_LV_confPO_papal)" >= 100
+				"scripted_bar_progress(ita_LV_confPO_sardinia)" >= 100
+				"scripted_bar_progress(ita_LV_confPO_main)" >= 100
+			}
+			OR = {
+				has_variable = LV_accepted_republic 
+				has_variable = LV_accepted_monarchy 
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = italyEventsTyroneLV.4 popup = yes }
+	}
+
+	event_outcome_completed_desc = {
+        first_valid = {
+            triggered_desc = {
+                desc = italyEventsTyroneLV.4_tt
+            }
+        }
+    }
+
+	fail = {
+	}
+	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+italy_LV_federationItaly = { #Slow but better way of forming
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	scripted_button = italy_LV_itafed_piedmont_button
+	scripted_button = italy_LV_itafed_rome_button
+	scripted_button = italy_LV_itafed_tuscany_button
+	scripted_button = italy_LV_itafed_sardinia_button
+	scripted_button = italy_LV_itafed_sicily_button
+	scripted_button = italy_LV_itafed_sicily_button
+	scripted_button = italy_LV_itafed_naples_button
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = italy_LV_federationItaly_desc_tt
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = { name = italian_fed_var value = 0 }
+	}
+
+	modifiers_while_active = {
+		LV_italian_federation_political
+		LV_italian_federation_investment
+	}
+
+	possible = {
+	}
+
+	complete = {
+		has_technology_researched = pan-nationalism
+		any_country = {
+			filter = {
+				capital = { is_in_geographic_region = geographic_region_italy }
+				NOT = { this = ROOT }
+			}
+			percent = 1
+			is_subject_of = ROOT
+			relations:ROOT >= relations_threshold:cordial
+		}
+		custom_tooltip = {
+			text = italyFederalized_tt
+			var:italian_fed_var >= 3 #at least 3 subjects
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = italyEventsTyroneLV.6 popup = yes }
+		add_primary_culture = cu:south_italian
+	}
+
+	fail = {
+		custom_tooltip = {
+			text = is_italy_tt
+			c:ITA ?= root
+		}
+	}
+	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+italy_LV_centralizedItaly = { #Faster way
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+
+	scripted_button = italy_LV_itacentr_sicily_button
+	scripted_button = italy_LV_itacentr_sway_sicily_button
+
+	immediate = {
+	}
+
+	possible = {
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = italy_LV_centralizedItaly_desc_tt
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = is_italy_tt
+			c:ITA ?= root
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = italyEventsTyrone.16 popup = yes }
+	}
+
+	fail = {
+		
+	}
+	
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+# ========== Two Sicilies: The Fate of the Kingdom ==========
+sic_fate_of_kingdom = {
+	icon = "gfx/interface/icons/event_icons/two_sic_flag.dds"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = sic_political_balance_bar
+
+	scripted_button = sic_fate_support_absolutist_button
+	scripted_button = sic_fate_support_nationalist_button
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+	}
+
+	possible = {
+		OR = {
+			has_journal_entry = je_springtime_of_the_peoples
+			has_technology_researched = nationalism
+		}
+		
+		is_player = yes
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_fate_status_noentry
+				trigger = { NOT = { has_journal_entry = sic_fate_of_kingdom } }
+			}
+			triggered_desc = {
+				desc = sic_fate_absolutist_dominant_desc
+				trigger = {
+					scope:journal_entry = {
+						"scripted_bar_progress(sic_political_balance_bar)" <= 25
+					}
+				}
+			}
+			triggered_desc = {
+				desc = sic_fate_nationalist_dominant_desc
+				trigger = {
+					scope:journal_entry = {
+						"scripted_bar_progress(sic_political_balance_bar)" >= 75
+					}
+				}
+			}
+			triggered_desc = {
+				desc = sic_fate_balanced_desc
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = { name = sic_fate_stance_var value = 0 }
+	}
+
+	on_monthly_pulse = {
+	}
+
+	complete = {
+		has_technology_researched = nationalism
+		custom_tooltip = {
+			text = fate_sic_Complete_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(sic_political_balance_bar)" >= 200
+			}
+		}
+	}
+
+	fail = {
+		has_technology_researched = nationalism
+		custom_tooltip = {
+			text = fate_sic_fail_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(sic_political_balance_bar)" <= 0
+			} 
+			has_journal_entry = sic_fate_of_kingdom
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = sic_tyrone.102 popup = yes }
+	}
+
+	on_fail = {
+		
+		trigger_event = { id = sic_tyrone.101 popup = yes }
+	}
+
+	event_outcome_completed_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_fate_nationalist_outcome_tt
+			}
+		}
+	}
+
+	event_outcome_failed_desc = {
+		
+
+		first_valid = {
+			triggered_desc = {
+				desc = sic_fate_absolutist_outcome_tt
+			}
+		}
+	}
+
+	invalid = {
+		NOT = { c:SIC ?= root }
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Two Sicilies: Conqueror of Italy (Absolutist path) ==========
+sic_conqueror_of_italy = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	group = je_group_italy_tyrone
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+		has_technology_researched = nationalism
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sic_conqueror_of_italy_unlock_tt
+			has_variable = sic_conqueror_of_italy_var
+		}
+	}
+
+	complete = {
+		any_state = {
+				OR = {
+					state_region = { is_homeland = cu:north_italian }
+					state_region = { is_homeland = cu:south_italian }
+				}
+			owner = root
+			count >= 12
+		}
+	}
+
+	immediate = {
+		every_country = {
+			limit = {
+				capital = {
+					is_in_geographic_region = geographic_region_italy
+				}
+			}
+			change_relations = { country = ROOT value = -100 }
+		}
+		trigger_event = { id = sic_tyrone.13 popup = yes }
+	}
+
+	on_complete = {
+		trigger_event = { id = sic_tyrone.14 popup = yes }
+	}
+
+	event_outcome_completed_desc = {
+		desc = sic_conqueror_of_italy_completed_desc
+	}
+
+	invalid = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Two Sicilies: Ruler of Italy (Nationalist path) ==========
+sic_ruler_of_italy = {
+	icon = "gfx/interface/icons/event_icons/italyFlag.dds"
+	group = je_group_italy_tyrone
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+		has_technology_researched = nationalism
+	}
+
+	immediate = {
+		remove_variable = cant_form_italy_var
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sic_ruler_of_italy_unlock_tt
+			has_variable = sic_ruler_of_italy_var
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = is_italy_tt
+			c:ITA ?= root
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = sic_tyrone.21 popup = yes }
+	}
+
+	event_outcome_completed_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_ruler_of_italy_outcome_tt
+			}
+		}
+	}
+
+	invalid = {
+	}
+
+	scripted_button = sic_request_lmv_cession_button
+
+	on_monthly_pulse = {
+			random_events = {
+				50 = 0
+				25 = sic_tyrone.15
+				25 = sic_tyrone.16
+				10 = sic_tyrone.17
+				10 = sic_tyrone.18
+				25 = sic_tyrone.19
+			}
+		
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Stop Italian Emigration ==========
+ita_stop_emigration = {
+	icon = "gfx/interface/icons/decree/decree_greener_grass_campaign.dds"
+	group = je_group_italy_tyrone
+
+	scripted_button = ita_stop_emigration_ai_button
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ita_stop_emigration_status_inactive_desc
+				trigger = { NOT = { has_journal_entry = ita_stop_emigration } }
+			}
+			triggered_desc = {
+				desc = ita_stop_emigration_status_desc
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			has_law = law_type:law_closed_borders
+			average_sol >= 12
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = sic_tyrone.10 popup = yes }
+	}
+
+	event_outcome_completed_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ita_stop_emigration_outcome_both_tt
+			}
+		}
+	}
+
+	invalid = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Two Sicilies: Reform the Latifundia (main chain JE) ==========
+sic_latifundia_reform = {
+	icon = "gfx/interface/icons/invention_icons/enclosure.dds"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = sic_latifundia_reform_bar
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+	}
+
+	possible = {
+		is_player = yes
+	}
+
+	immediate = {
+		set_variable = sic_latifundia_reform_started
+		ig:ig_landowners ?= {
+			save_scope_as = latifundia_landowners
+		}
+		ig:ig_intelligentsia ?= {
+			save_scope_as = latifundia_intelligentsia
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_latifundia_reform_base_desc
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	on_monthly_pulse = {
+			random_events = {
+				80 = 0
+				5 = sic_tyrone.3
+				5 = sic_tyrone.4
+				5 = sic_tyrone.5
+				5 = sic_tyrone.6
+				20 = sic_tyrone.7
+				40 = sic_tyrone.11
+			}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = sic_latifundia_agri_tt
+			sic_latifundia_agri_levels >= 150
+		}
+		custom_tooltip = {
+			text = sic_latifundia_reform_bar_complete_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(sic_latifundia_reform_bar)" >= 100
+			}
+		}
+		OR = {
+			custom_tooltip = {
+				text = sic_latifundia_modernizer_complete_tt
+				OR = {
+					has_journal_entry = sic_modernizer_king
+					has_variable = sic_modernizer_king_done
+				}
+			}
+			custom_tooltip = {
+				text = sic_latifundia_slavery_complete_tt
+				OR = {
+					has_journal_entry = sic_slavery_path
+					has_variable = sic_slavery_je_done
+				}
+			}
+		}
+		custom_tooltip = {
+			text = sic_latifundia_exports_complete_tt
+			total_country_exports > sic_latifundia_export_target
+		}
+	}
+
+	on_complete = {
+		set_variable = sic_latifundia_reform_done
+		add_modifier = { 
+			name = sic_latifundia_dismantled 
+			days = long_modifier_time
+		}
+	}
+
+	invalid = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	transferable = yes
+}
+
+# ========== Two Sicilies: Slavery Path ==========
+sic_slavery_path = {
+	icon = "gfx/interface/icons/law_icons/legacy_slavery.dds"
+	group = je_group_italy_tyrone
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sic_slavery_path_unlock_tt
+			has_variable = sic_chose_slavery
+		}
+	}
+
+	modifiers_while_active = {
+		sic_slavery_path_active
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_slavery_path_noentry_desc
+				trigger = { NOT = { has_journal_entry = sic_slavery_path } }
+			}
+			triggered_desc = {
+				desc = sic_slavery_path_enacted_desc
+				trigger = { has_law = law_type:law_sic_serfdom }
+			}
+			triggered_desc = {
+				desc = sic_slavery_path_pending_desc
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	complete = {
+		has_law = law_type:law_sic_serfdom
+	}
+
+	on_complete = {
+		set_variable = sic_slavery_je_done
+		activate_law = law_type:law_sic_slave_trade
+		add_journal_entry = {
+			type = sic_slavery_system_je
+		}
+		trigger_event = { id = sic_tyrone.12 popup = yes }
+		custom_tooltip = {
+			text = sic_dismantle_latifundia_bar_progress_tt
+			je:sic_latifundia_reform = {
+				add_progress = { value = 25 name = sic_latifundia_reform_bar }
+			}
+		}
+	}
+
+	event_outcome_completed_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_slavery_outcome_tt
+			}
+		}
+	}
+
+	fail = {
+		NOT = { is_enacting_law = law_type:law_sic_serfdom }
+	}
+
+	on_fail = {
+		set_variable = sic_slavery_je_failed
+	}
+
+	invalid = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	transferable = yes
+}
+
+# ========== Two Sicilies: The Modernizer King ==========
+sic_modernizer_king = {
+	icon = "gfx/interface/icons/law_icons/monarchy.dds"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = sic_modernizer_king_bar
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sic_modernizer_king_unlock_tt
+			has_variable = sic_chose_modernizer
+		}
+	}
+
+	modifiers_while_active = {
+		sic_modernizer_king_active
+	}
+
+	immediate = {
+		ig:ig_landowners = { leader = { set_ideology = ideology:ideology_modernizer_leader } }
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_modernizer_king_status_noentry_desc
+				trigger = {
+					NOT = { has_journal_entry = sic_modernizer_king }
+				}
+			}
+			triggered_desc = {
+				desc = sic_modernizer_king_status_desc
+				trigger = {
+					has_journal_entry = sic_modernizer_king
+				}
+			}
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = sic_modernizer_king_bar_complete_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(sic_modernizer_king_bar)" >= 100
+			}
+		}
+	}
+
+	on_complete = {
+		set_variable = sic_modernizer_king_done
+		trigger_event = { id = sic_tyrone.9 popup = yes }
+		custom_tooltip = {
+			text = sic_dismantle_latifundia_bar_progress_tt
+			je:sic_latifundia_reform = {
+				add_progress = { value = 25 name = sic_latifundia_reform_bar }
+			}
+		}
+	}
+
+	event_outcome_completed_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_modernizer_king_outcome_tt
+			}
+		}
+	}
+
+	invalid = {
+		NOT = { has_law_or_variant = law_type:law_monarchy }
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	transferable = yes
+}
+
+# ========== Two Sicilies: Dismantle Latifundia ==========
+sic_dismantle_latifundia = {
+	icon = "gfx/interface/icons/invention_icons/improved_fertilizer.dds"
+	group = je_group_italy_tyrone
+
+	immediate = {
+		set_variable = {
+				name = sic_latifundia_fertilizer_var
+				value = 0
+			}
+	}
+
+	progressbar = yes
+	
+
+	current_value = {
+		value = root.var:sic_latifundia_fertilizer_var
+	}
+
+	goal_add_value = {
+		value = 24
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+                    limit = {
+                        any_scope_building = {
+                            filter = {
+                                is_building_group = bg_staple_crops
+                                state = {
+                                    state_region = {
+                                        is_homeland = cu:south_italian
+                                    }
+                                }
+                            }
+                            OR = {
+                                has_active_production_method = pm_soil_enriching_farming
+                            }
+                            percent >= 0.8
+                        }
+                        any_scope_building = {
+                            filter = {
+                                is_building_group = bg_staple_crops
+                                state = {
+                                    state_region = {
+                                        is_homeland = cu:south_italian
+                                    }
+                                }
+                            }
+                            OR = {
+                                has_active_production_method = pm_tools
+                            }
+                            percent >= 0.8
+                        }
+                    }
+                    change_variable = { name = sic_latifundia_fertilizer_var add = 1 }
+                }
+		}
+	}
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = sic_dismantle_latifundia_unlock_tt
+			has_variable = sic_dismantle_latifundia_started
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_dismantle_latifundia_active_status_desc
+				trigger = { has_journal_entry = sic_dismantle_latifundia }
+			}
+			triggered_desc = {
+				desc = sic_dismantle_latifundia_status_desc
+				trigger = { always = yes }
+			}
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = sic_latfundia_fer_complete_tt
+			scope:journal_entry = { is_goal_complete = yes }
+		}
+		any_scope_building = {
+                filter = {
+                    is_building_group = bg_staple_crops
+                    state = {
+                        state_region = {
+                            is_homeland = cu:south_italian
+                        }
+                    }
+                }
+                OR = {
+                    has_active_production_method = pm_soil_enriching_farming
+                }
+                percent >= 0.8
+            }
+            any_scope_building = {
+                filter = {
+                    is_building_group = bg_staple_crops
+                    state = {
+                        state_region = {
+                            is_homeland = cu:south_italian
+                        }
+                    }
+                }
+                OR = {
+                    has_active_production_method = pm_tools
+                }
+                percent >= 0.8
+            }
+	}
+
+	on_complete = {
+		set_variable = sic_dismantle_latifundia_done
+		trigger_event = { id = sic_tyrone.8 popup = yes }
+		custom_tooltip = {
+			text = sic_dismantle_latifundia_bar_progress_tt
+			je:sic_latifundia_reform = {
+				add_progress = { value = 25 name = sic_latifundia_reform_bar }
+			}
+		}
+		every_scope_state = {
+			limit = {
+				state_region = { is_homeland = cu:south_italian }
+			}
+			add_state_trait = state_trait_blessed_soils_south
+		}
+	}
+
+	event_outcome_completed_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = sic_dismantle_latifundia_outcome_tt
+			}
+		}
+	}
+
+	invalid = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	transferable = yes
+}
+
+# ========== Sicilian Sulphur Monopoly — given by sic_sulphur_company_decision ==========
+sic_sulphur_monopoly_je = {
+	icon = "gfx/interface/icons/invention_icons/navigation.dds"
+	group = je_group_italy_tyrone
+
+	modifiers_while_active = {
+		sic_sulphur_company_slot
+	}
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+	}
+
+	invalid = {
+		NOT = { has_company = company_type:company_anglo_sicilian_sulphur_company }
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Sicilian Slave System — if one law is removed the other one dies too ==========
+sic_slavery_system_je = {
+	icon = "gfx/interface/icons/law_icons/serfdom.dds"
+	group = je_group_italy_tyrone
+
+	modifiers_while_active = {
+	}
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		NOT = { has_law = law_type:law_sic_slave_trade }
+	}
+
+	on_complete = {
+		activate_law = law_type:law_expanded_latifundias
+	}
+
+	invalid = {
+		NOT = { has_law = law_type:law_sic_serfdom }
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+# ========== Italy: The Metternich System ==========
+ita_metternich_system = {
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+	group = je_group_italy_tyrone
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = is_italy_tt
+			c:ITA ?= root
+		}
+		is_in_power_bloc = yes
+		c:AUS ?= { is_in_power_bloc = yes }
+		power_bloc = c:AUS.power_bloc
+	}
+
+	on_complete = {
+		custom_tooltip = {
+			text = ita_metternich_complete_tt
+			power_bloc = {
+				add_modifier = { name = ita_metternich_mandate_boost years = 5 }
+			}
+		}
+	}
+
+	fail = {
+		custom_tooltip = {
+			text = is_italy_tt
+			c:ITA ?= root
+		}
+		is_in_power_bloc = yes
+		NOT = { power_bloc = c:AUS.power_bloc }
+	}
+
+	on_fail = {
+		if = {
+			limit = { is_power_bloc_leader = yes }
+			custom_tooltip = {
+				text = ita_metternich_fail_leader_bloc_tt
+				power_bloc = {
+					add_modifier = { name = ita_metternich_defiance_mandate years = 5 }
+				}
+			}
+			custom_tooltip = {
+				text = ita_metternich_fail_leader_country_tt
+				add_modifier = { name = ita_metternich_independence_bonus years = 5 }
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = ita_metternich_fail_member_tt
+				power_bloc = {
+					every_power_bloc_member = {
+						add_modifier = { name = ita_metternich_liberal_spread years = 5 }
+					}
+				}
+			}
+		}
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+sic_bourbon_monarchy_main = {
+	icon = "gfx/interface/icons/event_icons/bourbon_two_sic.png"
+	group = je_group_italy_tyrone
+
+	scripted_progress_bar = bourbon_legitimacy_bar
+
+	modifiers_while_active = {
+		sic_bourbon_legittimacy
+	}
+
+	is_shown_when_inactive = {
+		c:SIC ?= this
+	}
+
+	possible = {
+		hidden_trigger = { is_player = yes }
+	}
+	
+	immediate = {
+		add_journal_entry = {
+			type = sic_bourbon_monarchy_bureaucracy
+		}
+		add_journal_entry = {
+			type = sic_bourbon_monarchy_economy
+		}
+		add_journal_entry = {
+			type = sic_bourbon_monarchy_police
+		}
+		add_journal_entry = {
+			type = sic_bourbon_monarchy_constitution
+		}
+	}
+
+
+	complete = {
+		OR = {
+			custom_tooltip = {
+				text = sic_bourbon_monarchy_main_complete_tt
+				has_variable = sic_fix_police
+				has_variable = sic_fix_constitution
+				has_variable = sic_fix_economy
+				has_variable = sic_fix_bureaucracy
+			}
+			custom_tooltip = {
+				text = is_italy_tt
+				c:ITA ?= root
+			}
+		}
+		
+	}
+
+	on_complete = {
+		add_modifier = {
+				name = sic_bourbon_legittimacy
+				multiplier = {
+					je:sic_bourbon_monarchy_main = { add = "scripted_bar_progress(bourbon_legitimacy_bar)" }
+				}
+				days = long_modifier_time
+			}
+		custom_tooltip = {
+			text = sic_fate_kingdom_instabourbon_tt
+			je:sic_fate_of_kingdom = {
+				add_progress = { value = -200 name = sic_political_balance_bar }
+			}
+		}
+	}
+
+	fail = {
+		OR = {
+			custom_tooltip = {
+				text = sic_bourbon_fail_tt
+				scope:journal_entry = {
+					"scripted_bar_progress(bourbon_legitimacy_bar)" <= 0
+					}
+			}
+			custom_tooltip = {
+				text = sic_bourbongaribaldi_fail_tt
+				#fail anyway cuz Garibaldi enstablishes the Republic
+				always = no
+			}
+			NOT = { has_law_or_variant = law_type:law_monarchy }
+		}
+		
+	}
+
+	on_fail = {
+		custom_tooltip = {
+			text = sic_fate_kingdom_instanationalist_tt
+			je:sic_fate_of_kingdom = {
+				add_progress = { value = 200 name = sic_political_balance_bar }
+			}
+		}
+	}
+
+	on_weekly_pulse = {
+		random_events = {
+			10 = sic_tyrone.25
+			10 = sic_tyrone.28
+			10 = sic_tyrone.29
+			10 = sic_tyrone.30
+			10 = sic_tyrone.31
+		}
+		effect = {
+			je:sic_bourbon_monarchy_main = {
+				remove_modifier = sic_bourbon_legittimacy
+			}
+			je:sic_bourbon_monarchy_main = {
+				add_modifier = {
+					name = sic_bourbon_legittimacy
+					multiplier = {
+						je:sic_bourbon_monarchy_main = { add = "scripted_bar_progress(bourbon_legitimacy_bar)" }
+					}
+				}
+			}
+			
+		}
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			100 = 0
+			10 = sic_tyrone.22
+			10 = sic_tyrone.23
+			10 = sic_tyrone.24
+		}
+	}
+
+	invalid = {
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+sic_bourbon_monarchy_bureaucracy = {
+	icon = "gfx/interface/icons/law_icons/hereditary_bureaucrats.dds"
+	group = je_group_italy_tyrone
+
+	modifiers_while_active = {
+		bourbon_monarchy_bur_mod
+	}
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		any_scope_state = {
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_government_administration
+				level >= 5
+			}
+			percent >= 0.75
+		}
+		NOT = { has_law_or_variant = law_type:law_hereditary_bureaucrats }
+	}
+
+	invalid = {
+		NOT = { has_journal_entry = sic_bourbon_monarchy_main }
+	}
+
+	on_complete = {
+		set_variable = sic_fix_bureaucracy
+		custom_tooltip = {
+			text = sic_bourbon_bar_progress_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = 25 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+sic_bourbon_monarchy_police = {
+	icon = "gfx/interface/icons/law_icons/dedicated_police.dds"
+	group = je_group_italy_tyrone
+
+	modifiers_while_active = {
+		bourbon_monarchy_police_mod
+	}
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		institution_investment_level = {
+			institution = institution_police
+			value = 2
+		}
+	}
+
+	invalid = {
+		NOT = { has_journal_entry = sic_bourbon_monarchy_main }
+	}
+
+	on_complete = {
+		set_variable = sic_fix_police
+		custom_tooltip = {
+			text = sic_bourbon_bar_progress_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = 25 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+sic_bourbon_monarchy_constitution = {
+	icon = "gfx/interface/icons/event_icons/sic_constitution.dds"
+	group = je_group_italy_tyrone
+
+	modifiers_while_active = {
+		bourbon_monarchy_constitution_mod
+	}
+
+	scripted_button = sic_bourbon_offer_census_suffrage_button
+	scripted_button = sic_bourbon_offer_right_of_assembly_button
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		OR = {
+			has_law_or_variant = law_type:law_wealth_voting
+			has_law_or_variant = law_type:law_census_voting
+			has_law_or_variant = law_type:law_universal_suffrage
+		}
+		OR = {
+			has_law_or_variant = law_type:law_right_of_assembly
+			has_law_or_variant = law_type:law_protected_speech
+		}
+	}
+
+	invalid = {
+		NOT = { has_journal_entry = sic_bourbon_monarchy_main }
+	}
+
+	on_complete = {
+		set_variable = sic_fix_constitution
+		custom_tooltip = {
+			text = sic_bourbon_bar_progress_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = 25 name = bourbon_legitimacy_bar }
+			}
+		}
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+sic_bourbon_monarchy_economy = {
+	icon = "gfx/interface/icons/law_icons/laissez_faire.dds"
+	group = je_group_italy_tyrone
+
+	modifiers_while_active = {
+		bourbon_monarchy_eco_mod
+	}
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+		OR = {
+			any_scope_state = {
+                OR = {
+                    state_has_building_group_levels = {
+                        type = bg_light_industry
+                        value >= 10
+                    }
+                    state_has_building_group_levels = {
+                        type = bg_heavy_industry
+                        value >= 5
+                    }
+                }
+				market_access = 1
+                count >= 3
+            }
+
+			any_scope_state = {
+                OR = {
+                    state_has_building_group_levels = {
+                        type = bg_light_industry
+                        value >= 20
+                    }
+                    state_has_building_group_levels = {
+                        type = bg_heavy_industry
+                        value >= 15
+                    }
+                }
+				market_access = 1
+                count >= 1
+            }
+		}
+		
+            any_company = {
+                company_is_prosperous = yes
+                count >= 1
+            }
+	}
+
+	scripted_button = sic_bourbon_economy_skip_button
+
+	invalid = {
+		OR = {
+			NOT = { has_journal_entry = sic_bourbon_monarchy_main }
+			has_variable = sic_bourbon_economy_skipped
+		}
+	}
+
+	on_complete = {
+		set_variable = sic_fix_economy
+		custom_tooltip = {
+			text = sic_bourbon_bar_progress_tt
+			je:sic_bourbon_monarchy_main = {
+				add_progress = { value = 25 name = bourbon_legitimacy_bar }
+			}
+		}
+		hidden_effect = {
+			every_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_SICILY
+					state_region = s:STATE_CALABRIA
+					state_region = s:STATE_CAMPANIA
+					state_region = s:STATE_APULIA
+					state_region = s:STATE_ABRUZZO
+					}
+				}
+				state_region = { remove_state_trait = state_trait_sluggish_south }
+				add_modifier = {
+					name = bourbon_fix_sluggish_mod
+					days = long_modifier_time
+					is_decaying = yes
+				}
+			}
+		}
+	}
+
+	event_outcome_completed_desc = {
+        first_valid = {
+            triggered_desc = {
+                desc = sic_bourbon_monarchy_economy_outcome_tt
+            }
+        }
+    }
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+garibaldi_presidency_JE = {
+	icon = "gfx/interface/icons/event_icons/garibaldi_republic.dds"
+	group = je_group_italy_tyrone
+
+	timeout = 9125
+
+	is_shown_when_inactive = {
+	}
+
+	possible = {
+	}
+
+	complete = {
+	}
+
+	scripted_button = garibaldi_steps_down_button
+
+	invalid = {
+		OR = {
+			NOT = { any_scope_character = { has_trait = ita_grande_generale } }
+			has_variable = garibaldi_stepped_down_var
+		}
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = { has_trait = ita_grande_generale }
+			save_scope_as = garibaldi_president
+		}
+		scope:garibaldi_president = {
+			set_character_as_ruler = yes
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					any_scope_character = { 
+						has_trait = ita_grande_generale 
+						is_ruler_of_own_country = no
+					}
+				}
+				random_scope_character = {
+					limit = { has_trait = ita_grande_generale }
+					set_character_as_ruler = yes
+				}
+			}
+		}
+	}
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

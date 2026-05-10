@@ -1,0 +1,14 @@
+# Italy Tyrone – map colors for NIF (SAR) and for Italy (ITA) by government type.
+
+colors = {
+	north_italian_federation_green = hsv360 { 42 59 100 }
+
+	# Italy (ITA) empire dynamic map colors by government type
+	ita_empire_monarchy_color    = hsv360 { 143 79 47 }
+	ita_empire_theocracy_color   = hsv360 { 124 45 63 }
+	ita_empire_corporate_color   = hsv360 { 125 73 49 }
+	ita_empire_republic_color    = hsv360 { 143 79 47 }
+	ita_empire_dictator_color    = hsv360 { 132 70 54 }
+	ita_empire_commie_rep_color  = hsv360 { 128 56 69 }
+	ita_empire_commie_dict_color = hsv360 { 102 54 61 }
+}

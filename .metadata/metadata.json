@@ -1,12 +1,13 @@
 {
-  "name": "Victoria Universalis IV",
-  "id": "",
-  "version": "1",
-  "supported_game_version": "1.13.*",
-  "short_description": "",
-  "tags": [],
-  "relationships": [],
-  "game_custom_data": {
-    "multiplayer_synchronized": true
+  "name" : "Tyrone MP Official",
+  "id" : "",
+  "version" : "",
+  "supported_game_version" : "",
+  "short_description" : "",
+  "thumbnail" : "thumbnail.png",
+  "tags" : [],
+  "relationships" : [],
+  "game_custom_data" : {
+    "multiplayer_synchronized" : true
   }
 }

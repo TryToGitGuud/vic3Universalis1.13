@@ -12,607 +12,602 @@ template hud_visibility {
 types topbar_components
 {
 	### SECONDARY ICONS
-	type topbar_secondary_icons = container {
-		position = { 130 40 }
+	type topbar_secondary_row_two = container {
 		flowcontainer = {
-			direction = vertical
-			spacing = 1
-		
-			###VANILLA
+			spacing = 2
+			maximumsize = { 775 34 }
+			minimumsize = { 775 34 }
+			using = clickthrough_blocker
+
+			background = {
+				using = dark_area_rounded
+				margin_top = -2
+				margin_bottom = -6
+				margin_left = 5
+				margin_right = 0
+			}
+
 			flowcontainer = {
-				visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
-				layoutpolicy_vertical = expanding
+			minimumsize = { 58 30 }
+			maximumsize = { 58 30 }
+			spacing = 2
+			tooltip = "[Country.GetRankTooltip]"
+			using = tooltip_below
+			alwaystransparent = no
+
+			icon = {
+				texture = "gfx/interface/icons/generic_icons/prestige.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetPrestige|1v]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+
+		button = {
+			size = { 55 30 }
+			datacontext = "[Country.GetGovernmentLegitimacyLevel]"
+			tooltip = "LEGITIMACY_LEVEL_ACTIVE_ANY_COUNTRY_TOOLTIP"
+			using = tooltip_below
+			onclick = "[InformationPanelBar.OpenPanelTab('politics', 'interest_groups')]"
+			enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+			effectname = "NoHighlight"
+			alwaystransparent = no
+
+			hbox = {
+				size = { 100% 100% }
+				spacing = -5
+
+				icon = {
+					texture = "gfx/interface/icons/generic_icons/legitimacy.dds"
+					size = { 22 22 }
+				}
+
+				textbox = {
+					raw_text = "#variable [Country.GetGovernmentLegitimacy]#!"
+					autoresize = yes
+					align = left|nobaseline
+					elide = right
+					fontsize_min = 12
+				}
+			}
+		}
+
+		flowcontainer = {
+			name = "tutorial_highlight_gdp"
+			minimumsize = { 75 30 }
+			maximumsize = { 75 30 }
+			spacing = 2
+			using = GDP_tooltip_with_graph
+			using = tooltip_below
+
+			onmousehierarchyenter = "[SetTempMapModeByKey('mm_gdp')]"
+			onmousehierarchyleave = "[RemoveTempMapMode]"
+			alwaystransparent = no
+
+			icon = {
+				texture = "gfx/interface/icons/generic_icons/gdp.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetGDP|1*]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+
+		flowcontainer = {
+			minimumsize = { 70 30 }
+			maximumsize = { 70 30 }
+			spacing = 2
+			using = literacy_tooltip_with_graph
+			using = tooltip_below
+			onmousehierarchyenter = "[SetTempMapModeByKey('mm_literacy')]"
+			onmousehierarchyleave = "[RemoveTempMapMode]"
+			alwaystransparent = no
+
+			icon = {
+				texture = "gfx/interface/icons/generic_icons/literacy.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetIncorporatedLiteracyRate|%1]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+		flowcontainer = {
+			minimumsize = { 60 30 }
+			maximumsize = { 60 30 }
+			spacing = 2
+			using = average_standard_of_living_tooltip_with_graph
+			using = tooltip_below
+			onmousehierarchyenter = "[SetTempMapModeByKey('mm_standard_of_living')]"
+			onmousehierarchyleave = "[RemoveTempMapMode]"
+			alwaystransparent = no
+
+			textbox = {
+				parentanchor = vcenter
+				text = "[LabelingHelper.GetIconForStandardOfLivingCFixedPoint(Country.GetAverageSoLByPopulation)|v]"
+				autoresize = yes
+				align = left|nobaseline
+				fontsize = 21
+			}
+
+			textbox = {
+				parentanchor = vcenter
+				text = "[Country.GetFormattedStandardOfLivingAll|v]"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+				margin_right = 3
+			}
+		}
+		flowcontainer = {
+			minimumsize = { 78 30 }
+			maximumsize = { 78 30 }
+			spacing = 2
+			using = population_tooltip_with_graph
+			using = tooltip_below
+			onmousehierarchyenter = "[SetTempMapModeByKey('mm_population')]"
+			onmousehierarchyleave = "[RemoveTempMapMode]"
+			alwaystransparent = no
+
+			icon = {
+				texture = "gfx/interface/icons/generic_icons/population.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetTotalPopulation|D]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+				margin_right = 3
+			}
+		}
+		flowcontainer = {
+			minimumsize = { 76 30 }
+			maximumsize = { 76 30 }
+			spacing = 2
+			datacontext = "[GetPopType('peasants')]"
+			using = tooltip_below
+			alwaystransparent = no
+			tooltip = "POP_TYPE_PIECHART"
+
+			icon = {
+				texture = "gfx/interface/icons/pops_icons/peasants.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetSubsistingWorkingAdults|Kv]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+		flowcontainer = {
+			minimumsize = { 76 30 }
+			maximumsize = { 76 30 }
+			spacing = 2
+			datacontext = "[GetPlayer]"
+			using = tooltip_below
+			alwaystransparent = no
+			tooltip = TTW_UNEMPLOYED_TOOLTIP
+
+			icon = {
+				texture = "gfx/interface/icons/pops_icons/unemployed.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetUnemployedWorkingAdults|Kv]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+		flowcontainer = {
+			minimumsize = { 76 30 }
+			maximumsize = { 76 30 }
+			spacing = 2
+			using = radicals_tooltip_with_graph
+			using = tooltip_below
+			onmousehierarchyenter = "[SetTempMapModeByKey('mm_radicals')]"
+			onmousehierarchyleave = "[RemoveTempMapMode]"
+			alpha = "[TransparentIfZero_int64(Country.GetNumRadicals)]"
+			alwaystransparent = no
+
+			icon = {
+				texture = "gfx/interface/icons/generic_icons/population_radical.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetNumRadicals|D]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+		flowcontainer = {
+			minimumsize = { 76 30 }
+			maximumsize = { 76 30 }
+			spacing = 2
+			using = loyalists_tooltip_with_graph
+			using = tooltip_below
+			onmousehierarchyenter = "[SetTempMapModeByKey('mm_loyalists')]"
+			onmousehierarchyleave = "[RemoveTempMapMode]"
+			alpha = "[TransparentIfZero_int64(Country.GetNumLoyalists)]"
+			alwaystransparent = no
+
+			icon = {
+				texture = "gfx/interface/icons/generic_icons/population_loyalist.dds"
+				size = { 22 22 }
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetNumLoyalists|D]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+		flowcontainer = {
+			minimumsize = { 66 30 }
+			maximumsize = { 66 30 }
+			spacing = 2
+			tooltip = "[Country.GetInfamyDesc]"
+			using = tooltip_below
+			onmousehierarchyenter = "[SetTempMapModeByKey('mm_infamy')]"
+			onmousehierarchyleave = "[RemoveTempMapMode]"
+			alpha = "[TransparentIfZero(Country.GetInfamy)]"
+			alwaystransparent = no
+
+			icon = {
+				size = { 22 22 }
+				texture = "[Country.GetInfamyIconTexture]"
+				parentanchor = vcenter
+			}
+			textbox = {
+				parentanchor = vcenter
+				raw_text = "#variable [Country.GetInfamy|0]#!"
+				autoresize = yes
+				align = left|nobaseline
+				elide = right
+				fontsize_min = 12
+			}
+		}
+		}
+	}
+
+	type topbar_secondary_row_three = container {
+		using = fullscreen_hide
+		visible = "[And(Not(InformationPanelBar.IsAnyPanelOpen), Not(GetLensToolbar.IsAnyLensOpen))]"
+		flowcontainer = {
+			spacing = 2
+			maximumsize = { 760 34 }
+			minimumsize = { 760 34 }
+			using = clickthrough_blocker
+
+			background = {
+				visible = "[And(Not(InformationPanelBar.IsAnyPanelOpen), Not(GetLensToolbar.IsAnyLensOpen))]"
+				using = dark_area_rounded
+				margin_top = -2
+				margin_bottom = -4
+				margin_left = 5
+				margin_right = 0
+			}
+
+			button = {
+				size = { 105 30 }
+				using = tooltip_below
+				datacontext = "[GetPlayer]"
+				tooltip = PANEL_MILITARY_ARMY_OVERVIEW_TOOLTIP
+				onclick = "[InformationPanelBar.OpenPanelTab('military', 'army')]"
+				enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+				effectname = "NoHighlight"
 				alwaystransparent = no
-				block "animation" {
-					position = { 0 0 }
-					alpha = 0
-					
-					state = {
-						name = show_topbar_secondary_stats
-						alpha = 1
-						position_y = 0
-						duration = 0.15
-						using = Animation_Curve_Default
-					}
-					state = {
-						name = hide_topbar_secondary_stats
-						alpha = 0
-						position_y = 0
-						duration = 0.15
-						using = Animation_Curve_Default
-					}
-				}
-				
-				background = {
-					using = dark_area_rounded
-					margin = { 0 -5 }
-					margin_left = 5
-				}
-				
-				flowcontainer = {
-					name = "tutorial_highlight_gdp"
-					minimumsize = { 88 30 }
-					maximumsize = { 88 30 }
-					spacing = 2
-					using = GDP_tooltip_with_graph
-					using = tooltip_below
 
-					onmousehierarchyenter = "[SetTempMapModeByKey('mm_gdp')]"
-					onmousehierarchyleave = "[RemoveTempMapMode]"
-					alwaystransparent = no
+				hbox = {
+					size = { 100% 100% }
+					spacing = -10
+					position = { -3 0 }
 
 					icon = {
-						texture = "gfx/interface/icons/generic_icons/gdp.dds"
-						size = { @secondary_icon_size @secondary_icon_size }
-						parentanchor = vcenter
+						texture = "gfx/interface/icons/generic_icons/battalions.dds"
+						size = { 22 22 }
 					}
+
 					textbox = {
-						parentanchor = vcenter
-						raw_text = "#variable [Country.GetGDP|1*]#!"
+						raw_text = "#variable [GetPlayer.GetRegularBattalions|v] + [GetPlayer.CalcConscriptableBattalions|v]#!"
 						autoresize = yes
 						align = left|nobaseline
 						elide = right
 						fontsize_min = 12
-					}
-				}
-				
-				flowcontainer = {
-					minimumsize = { 84 30 }
-					maximumsize = { 84 30 }
-					spacing = 2
-					using = literacy_tooltip_with_graph
-					using = tooltip_below
-					onmousehierarchyenter = "[SetTempMapModeByKey('mm_literacy')]"
-					onmousehierarchyleave = "[RemoveTempMapMode]"
-					alwaystransparent = no
-
-					icon = {
-						texture = "gfx/interface/icons/generic_icons/literacy.dds"
-						size = { @secondary_icon_size @secondary_icon_size }
-						parentanchor = vcenter
-					}
-					textbox = {
-						parentanchor = vcenter
-						raw_text = "#variable [Country.GetIncorporatedLiteracyRate|%1]#!"
-						autoresize = yes
-						align = left|nobaseline
-						elide = right
-						fontsize_min = 12
-					}
-				}
-				flowcontainer = {
-					minimumsize = { 68 30 }
-					maximumsize = { 68 30 }
-					spacing = 2
-					using = average_standard_of_living_tooltip_with_graph
-					using = tooltip_below
-					onmousehierarchyenter = "[SetTempMapModeByKey('mm_standard_of_living')]"
-					onmousehierarchyleave = "[RemoveTempMapMode]"
-					alwaystransparent = no
-
-					textbox = {
-						parentanchor = vcenter
-						text = "[LabelingHelper.GetIconForStandardOfLivingCFixedPoint(Country.GetAverageSoLByPopulation)|v]"
-						autoresize = yes
-						align = left|nobaseline
-						fontsize = 21 #hack to get the same size on the text icon as the rest in the top bar
-					}
-
-					textbox = {
-						parentanchor = vcenter
-						text = "[Country.GetFormattedStandardOfLivingAll|v]"
-						autoresize = yes
-						align = left|nobaseline
-						elide = right
-						fontsize_min = 12
-						margin_right = 3
-					}
-				}
-				flowcontainer = {
-					minimumsize = { 78 30 }
-					maximumsize = { 78 30 }
-					spacing = 2
-					using = population_tooltip_with_graph
-					using = tooltip_below
-					onmousehierarchyenter = "[SetTempMapModeByKey('mm_population')]"
-					onmousehierarchyleave = "[RemoveTempMapMode]"
-					alwaystransparent = no
-
-					icon = {
-						texture = "gfx/interface/icons/generic_icons/population.dds"
-						size = { @secondary_icon_size @secondary_icon_size }
-						parentanchor = vcenter
-					}
-					textbox = {
-						parentanchor = vcenter
-						raw_text = "#variable [Country.GetTotalPopulation|D]#!"
-						autoresize = yes
-						align = left|nobaseline
-						elide = right
-						fontsize_min = 12
-						margin_right = 3
-					}
-				}
-				flowcontainer = {
-					minimumsize = { 76 30 }
-					maximumsize = { 76 30 }
-					spacing = 2
-					using = radicals_tooltip_with_graph
-					using = tooltip_below
-					onmousehierarchyenter = "[SetTempMapModeByKey('mm_radicals')]"
-					onmousehierarchyleave = "[RemoveTempMapMode]"
-					alpha = "[TransparentIfZero_int64(Country.GetNumRadicals)]"
-					alwaystransparent = no
-
-					icon = {
-						texture = "gfx/interface/icons/generic_icons/population_radical.dds"
-						size = { @secondary_icon_size @secondary_icon_size }
-						parentanchor = vcenter
-					}
-					textbox = {
-						parentanchor = vcenter
-						raw_text = "#variable [Country.GetNumRadicals|D]#!"
-						autoresize = yes
-						align = left|nobaseline
-						elide = right
-						fontsize_min = 12
-					}
-				}
-				flowcontainer = {
-					minimumsize = { 76 30 }
-					maximumsize = { 76 30 }
-					spacing = 2
-					using = loyalists_tooltip_with_graph
-					using = tooltip_below
-					onmousehierarchyenter = "[SetTempMapModeByKey('mm_loyalists')]"
-					onmousehierarchyleave = "[RemoveTempMapMode]"
-					alpha = "[TransparentIfZero_int64(Country.GetNumLoyalists)]"
-					alwaystransparent = no
-
-					icon = {
-						texture = "gfx/interface/icons/generic_icons/population_loyalist.dds"
-						size = { @secondary_icon_size @secondary_icon_size }
-						parentanchor = vcenter
-					}
-					textbox = {
-						parentanchor = vcenter
-						raw_text = "#variable [Country.GetNumLoyalists|D]#!"
-						autoresize = yes
-						align = left|nobaseline
-						elide = right
-						fontsize_min = 12
-					}
-				}
-				flowcontainer = {
-					minimumsize = { 28 28 }
-					maximumsize = { 28 28 }
-					tooltip = "ve_topbar"
-					using = tooltip_below
-					button_icon_round_toggle = {
-						using = glow_button
-						size = { 28 28 }
-						blockoverride "on_click" {
-							onclick = "[GetScriptedGui('ve_top_bar').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						}
-						icon = {
-							size = { 25 25 }
-							name = inflation_icon
-							texture = "gfx/interface/buttons/button_icons/reset.dds"
-							position = { 2 2 }
-						}
 					}
 				}
 			}
-			### EXTRA INFO
-			flowcontainer = {
-				name = "extra_info"
-				layoutpolicy_vertical = expanding
-				# using = hide_ve_mod_topbar
-				visible = "[GetScriptedGui('ve_top_bar').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
 
-				background = {
-					using = dark_area_rounded
-					margin = { 0 -5 }
-					margin_left = 5
-				}
-				
-				# Prestige
-				button = {
-					name = "prestige_button"
-					size = { 90 28 }
-					onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
-					
-					flowcontainer = {
-						name = "prestige"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						tooltip = "COUNTRY_PRESTIGE_BREAKDOWN"
-						using = tooltip_below
-	
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							name = prestige_icon
-							texture = "gfx/interface/icons/generic_icons/prestige.dds"
-							parentanchor = vcenter
-						}
-	
-						textbox = {
-							parentanchor = vcenter
-							text = "[Country.GetPrestige|1v]"
-							alpha = "[TransparentIfZero_int32(Country.GetPrestige)]"
-							autoresize = yes
-							align = left|nobaseline
-						}
-					}
-				}
-				# Infamy
-				button = {
-					name = "infamy_button"
-					size = { 90 28 }
-					onclick = "[InformationPanelBar.OpenCountryPanel(Country.Self)]"
-					
-					flowcontainer = {
-						name = "infamy"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						tooltip = "[Country.GetInfamyDesc]"
-						using = tooltip_below
-						onmousehierarchyenter = "[SetTempMapModeByKey('mm_infamy')]"
-						onmousehierarchyleave = "[RemoveTempMapMode]"
-						alpha = "[TransparentIfZero(Country.GetInfamy)]"
-						alwaystransparent = no
-			
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							name = infamy_icon
-							texture = "[Country.GetInfamyIconTexture]"
-							parentanchor = vcenter
-						}
-	
-						textbox = {
-							parentanchor = vcenter
-							raw_text = "#variable [Country.GetInfamy|0]#!"
-							autoresize = yes
-							align = left|nobaseline
-							elide = right
-							fontsize_min = 12
-						}
-					}
-				}
-
-				# Legitimacy
-				button = {
-					name = "legitimacy_button"
-					size = { 90 28 }
-					onclick = "[InformationPanelBar.OpenPanelTab('politics', 'interest_groups')]"
-
-					flowcontainer = {
-						name = "legitimacy"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						datacontext = "[Country.GetGovernmentLegitimacyLevel]"
-						tooltip = "SULIUS_LEGITIMACY_LEVEL_ACTIVE_TOOLTIP"
-						using = tooltip_below
-	
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							name = legitimacy_icon
-							texture = "gfx/interface/icons/generic_icons/legitimacy.dds"
-							parentanchor = vcenter
-						}
-	
-						textbox = {
-							parentanchor = vcenter
-							text = "[Country.GetGovernmentLegitimacy|1v]"
-							alpha = "[TransparentIfZero_int32(Country.GetPrestige)]"
-							autoresize = yes
-							align = left|nobaseline
-						}
-					}
-				}
-
-
-				# Convoys
-				button = {
-					name = "convoys_button"
-					size = { 90 28 }
-					onclick = "[InformationPanelBar.OpenMarketPanel(AccessPlayer.AccessFirstMarket.Self)]"
-					
-					flowcontainer = {
-						name = "convoys"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						tooltip = "NUM_CONVOYS_TOOLTIP_EXTENDED"
-						using = tooltip_below
-	
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							name = infamy_icon
-							texture = "gfx/interface/icons/generic_icons/convoys.dds"
-							parentanchor = vcenter
-						}
-	
-						textbox = {
-							parentanchor = vcenter
-							text = "[AccessPlayer.GetNumAvailableConvoys|1v]" #This is total convoys minus required convoys
-							alpha = "[TransparentIfZero_int32(AccessPlayer.GetNumAvailableConvoys)]"
-							autoresize = yes
-							align = left|nobaseline
-						}
-					}
-				}
-				
-				# Flotillas
-				button = {
-					name = "flotillas_button"
-					size = { 90 28 }
-					onclick = "[InformationPanelBar.OpenPanelTab('military', 'navy')]"
-
-					flowcontainer = {
-						name = "Flotillas"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						tooltip = "PANEL_MILITARY_NAVY_CURRENT_FLOTILLAS_TOOLTIP"
-						using = tooltip_below
-						margin_left = 3
-	
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							name = flotillas_icon
-							texture = "gfx/interface/icons/generic_icons/flotillas.dds"
-							parentanchor = vcenter
-						}
-	
-						textbox = {
-							parentanchor = vcenter
-							text = "#variable [Country.GetWarships|0]#!"
-							alpha = "[TransparentIfZero_int32(Country.GetWarships)]"
-							autoresize = yes
-							align = left|nobaseline
-							margin_left = 2
-						}
-					}
-				}
-
-				# Battalions
-				button = {
-					name = "battalions_button"
-					size = { 90 28 }
-					onclick = "[InformationPanelBar.OpenPanelTab('military', 'army')]"
-
-					flowcontainer = {
-						name = "battalions"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						tooltip = "PANEL_MILITARY_ARMY_OVERVIEW_TOOLTIP"
-						using = tooltip_below
-
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							name = battalions_icon
-							texture = "gfx/interface/icons/generic_icons/battalions.dds"
-							parentanchor = vcenter
-						}
-
-						textbox = {
-							parentanchor = vcenter
-							text = "[Country.GetBattalions|v]+[Country.CalcConscriptableBattalions|v]"
-							alpha = "[TransparentIfZero_int32(Country.GetBattalions)]"
-							autoresize = yes
-							align = left|nobaseline
-							margin_left = -1
-						}
-					}
-				}
-
-				flowcontainer = {
-					using = zz_colonization_colonial_capacity
-				}
-			}
-			###VICTORIA UNIVERSALIS
-			flowcontainer = {
-				name = "victoria_universalis_topbar"
-				visible = "[Not(GetScriptedGui('ve_top_bar').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-				layoutpolicy_vertical = expanding
-				#using = hide_ve_mod_topbar
+			button = {
+				size = { 62 30 }
+				using = tooltip_below
+				datacontext = "[GetPlayer]"
+				tooltip = PANEL_MILITARY_NAVY_CURRENT_SHIPS_TOOLTIP
+				onclick = "[InformationPanelBar.OpenPanelTab('military', 'navy')]"
+				enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+				effectname = "NoHighlight"
 				alwaystransparent = no
-				# position = { 130 40 }
-				block "animation" {
-					position = { 0 0 }
-					alpha = 0
-					
-					state = {
-						name = show_topbar_secondary_stats
-						alpha = 1
-						position_y = 31
-						duration = 0.15
-						using = Animation_Curve_Default
+
+				hbox = {
+					size = { 100% 100% }
+					spacing = -3
+					position = { -10 0 }
+
+					icon = {
+						texture = "gfx/interface/icons/generic_icons/flotillas.dds"
+						size = { 22 22 }
 					}
-					state = {
-						name = hide_topbar_secondary_stats
-						alpha = 0
-						position_y = 0
-						duration = 0.15
-						using = Animation_Curve_Default
+
+					textbox = {
+						raw_text = "#variable [GetPlayer.GetNumShips|0v]#!"
+						autoresize = yes
+						align = left|nobaseline
+						elide = right
+						fontsize_min = 12
 					}
-				}
-				background = {
-					using = dark_area_rounded
-					margin = { 0 -5 }
-					margin_left = 5
-				}
-				#Missionary
-				flowcontainer = {
-						visible = "[GetScriptedGui('ve_hide_missionary_topbar').IsShown(GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 5
-						tooltip = "ve_missionary_tt"
-						using = tooltip_below
-						onclick = "[GetVariableSystem.SetOrToggle('ve_tab_var', GetVariableSystem.Get('ve_last_tab'))]"
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							texture = "gfx/interface/icon_envoy_missionary.dds"
-							parentanchor = vcenter
-						}
-
-						textbox = {
-							parentanchor = vcenter
-							text = "missionary_topbar"
-							default_format = "#tooltip_header"
-							autoresize = yes
-							align = left|nobaseline
-						}
-				}
-						
-				#Cultural Missionary
-				flowcontainer = {
-						visible = "[GetScriptedGui('ve_hide_culture_missionary_topbar').IsShown(GuiScope.SetRoot( GetPlayer.MakeScope ).End )]"
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 5
-						using = tooltip_below
-						tooltip = "ve_cultural_missionary_tt"
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							texture = "gfx/interface/icon2_diffusionist.dds"
-							parentanchor = vcenter
-						}
-
-						textbox = {
-							parentanchor = vcenter
-							text = "cultural_missionary_topbar"
-							default_format = "#tooltip_header"
-							autoresize = yes
-							align = left|nobaseline
-						}
-				}
-
-				#Idea Point
-				flowcontainer = {
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						using = tooltip_below
-						margin_left = 3
-						tooltip = "[GetPlayer.GetCustom('idea_points_cus_loc')]"
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							texture = "gfx/interface/icon_ideas.dds"
-							parentanchor = vcenter
-						}
-
-						textbox = {
-							parentanchor = vcenter
-							text = "idea_point_topbar"
-							default_format = "#tooltip_header"
-							autoresize = yes
-							align = left|nobaseline
-							margin_left = 2
-						}
-				}
-
-				#Piety
-				flowcontainer = {
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						datacontext = "[Country.GetGovernmentLegitimacyLevel]"
-						using = tooltip_below
-						tooltip = "ve_piety_tt"
-
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							texture = "gfx/interface/catholic.dds"
-							parentanchor = vcenter
-						}
-
-						textbox = {
-							parentanchor = vcenter
-							text = "piety_topbar"
-							default_format = "#tooltip_header"
-							autoresize = yes
-							align = left|nobaseline
-						}
-				}
-
-				#Cultural Reform
-				flowcontainer = {
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						using = tooltip_below
-						visible = "[GetScriptedGui('hide_reform_point').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-						tooltip = "ve_culture_reform_point_tt"
-
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							texture = "gfx/interface/monarch_cultures_icon.dds"
-							parentanchor = vcenter
-						}
-
-						textbox = {
-							parentanchor = vcenter
-							text = "cultural_reform_topbar"
-							default_format = "#tooltip_header"
-							autoresize = yes
-							align = left|nobaseline
-						}
-				}			
-				
-
-				#Splendor
-				flowcontainer = {
-						minimumsize = { 90 28 }
-						maximumsize = { 90 28 }
-						spacing = 2
-						using = tooltip_below
-						tooltip = "ve_age_splendor_tt"
-
-						icon = {
-							size = { @secondary_icon_size @secondary_icon_size }
-							texture = "gfx/interface/icon_splendor_tiny.dds"
-							parentanchor = vcenter
-						}
-
-						textbox = {
-							parentanchor = vcenter
-							text = "splendor_topbar"
-							default_format = "#tooltip_header"
-							autoresize = yes
-							align = left|nobaseline
-							margin_left = -1
-						}
 				}
 			}
 
-			
+			button = {
+				size = { 65 30 }
+				using = tooltip_below
+				tooltip = TTW_INTERESTS_TOOLTIP
+				onclick = "[InformationPanelBar.OpenPanelTab('diplomatic_overview', 'default')]"
+				enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+				effectname = "NoHighlight"
+				alwaystransparent = no
+
+				hbox = {
+					size = { 100% 100% }
+					spacing = -3
+					position = { -5 0 }
+
+					icon = {
+						texture = "gfx/interface/icons/lens_toolbar_icons/declare_interest.dds"
+						size = { 22 22 }
+					}
+
+					textbox = {
+						raw_text = "#variable [GetDataModelSize(AccessPlayer.AccessInterests)|v]#!"
+						autoresize = yes
+						align = left|nobaseline
+						elide = right
+						fontsize_min = 12
+					}
+				}
+			}
+
+			flowcontainer = {
+				minimumsize = { 72 30 }
+				maximumsize = { 72 30 }
+				spacing = 2
+				using = tooltip_below
+				tooltip = TTW_COMPANIES_TOOLTIP
+				alwaystransparent = no
+
+				icon = {
+					texture = "gfx/interface/main_hud/companies_btn.dds"
+					size = { 22 22 }
+					parentanchor = vcenter
+				}
+
+				textbox = {
+					parentanchor = vcenter
+					raw_text = "#variable [GetPlayer.GetNumCompanies|v] / [GetPlayer.GetMaxNumCompanies|v]#!"
+					autoresize = yes
+					align = left|nobaseline
+					elide = right
+					fontsize_min = 12
+				}
+			}
+
+			flowcontainer = {
+				minimumsize = { 72 30 }
+				maximumsize = { 72 30 }
+				spacing = 2
+				using = tooltip_below
+				tooltip = TTW_AGITATORS_TOOLTIP
+				alwaystransparent = no
+
+				icon = {
+					texture = "gfx/interface/icons/political_movement_icons/political_activism.dds"
+					size = { 22 22 }
+					parentanchor = vcenter
+				}
+
+				textbox = {
+					parentanchor = vcenter
+					raw_text = "#variable [GetPlayer.GetUsedAgitatorSlots|v] / [GetPlayer.GetTotalAgitatorSlots|v]#!"
+					autoresize = yes
+					align = left|nobaseline
+					elide = right
+					fontsize_min = 12
+				}
+			}
+
+			flowcontainer = {
+				minimumsize = { 115 30 }
+				maximumsize = { 115 30 }
+                    datacontext = "[AccessPlayer.AccessFirstMarket]"
+				spacing = 2
+				using = tooltip_below
+                    tooltip = "[Market.GetCountryTradeCapacityDesc(Country.Self)]"
+				alwaystransparent = no
+
+				widget = {
+					size = { 26 26 }
+					parentanchor = vcenter
+					position = { 0 -2 }
+
+					icon = {
+						texture = "gfx/interface/main_hud/trade_overview_btn.dds"
+						size = { 33 33 }
+						parentanchor = center
+					}
+				}
+				textbox = {
+                        datacontext = "[GetMetaPlayer.GetPlayedOrObservedCountry]"
+                        raw_text = "#variable [Market.GetCountryTradeCapacityBalance(Country.Self)|+=]#! ([Market.GetCountryTradeCapacityUsage(Country.Self)|v]/[Market.GetCountryTradeCapacity(Country.Self)|v])"
+					maximumsize = { 113 -1 }
+					autoresize = yes
+					align = left|nobaseline
+					elide = right
+					fontsize_min = 12
+					parentanchor = vcenter
+					position = { 0 1 }
+				}
+			}
+
+			flowcontainer = {
+				minimumsize = { 240 37 }
+				maximumsize = { 240 37 }
+                    datacontext = "[AccessPlayer.AccessFirstMarket]"
+				spacing = 3
+				margin_left = 30
+				alwaystransparent = no
+
+				widget = {
+					size = { 219 30 }
+					parentanchor = vcenter
+					position = { 6 2 }
+
+					widget = {
+						size = { 138 24 }
+						parentanchor = left|vcenter
+						position = { 0 -2 }
+
+						flowcontainer = {
+							maximumsize = { 138 24 }
+							minimumsize = { 138 24 }
+							scissor = yes
+							datamodel = "[Market.GetTopGoodsByLowestBalance('(int32)6')]"
+
+							item = {
+								button = {
+									visible = "[Not(Goods.IsLocal)]"
+									size = { 23 23 }
+									texture = "[Goods.GetTexture]"
+									onclick = "[InformationPanelBar.OpenGoodsPanel( Market.Self, Goods.Self )]"
+									onrightclick = "[RightClickMenuManager.ShowForGoods( Goods.AccessSelf )]"
+									tooltipwidget = {
+										FancyTooltip_Goods = {}
+									}
+								}
+							}
+						}
+					}
+
+					widget = {
+						size = { 6 24 }
+						parentanchor = left|vcenter
+						position = { 143 -2 }
+
+						vertical_divider = {}
+					}
+
+					widget = {
+						size = { 69 24 }
+						parentanchor = left|vcenter
+						position = { 150 -2 }
+
+						flowcontainer = {
+							maximumsize = { 69 24 }
+							minimumsize = { 69 24 }
+							scissor = yes
+							datamodel = "[Market.GetTopGoodsByHighestBalance('(int32)3')]"
+
+							item = {
+								button = {
+									visible = "[Not(Goods.IsLocal)]"
+									size = { 23 23 }
+									texture = "[Goods.GetTexture]"
+									onclick = "[InformationPanelBar.OpenGoodsPanel( Market.Self, Goods.Self )]"
+									onrightclick = "[RightClickMenuManager.ShowForGoods( Goods.AccessSelf )]"
+									tooltipwidget = {
+										FancyTooltip_Goods = {}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type topbar_secondary_icons = container {
+		position = { 120 0 }
+
+		flowcontainer = {
+			visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+			block "animation" {
+				position = { 0 0 }
+				alpha = 0
+
+				state = {
+					name = show_topbar_secondary_stats
+					alpha = 1
+					position_y = 44
+					duration = 0.15
+					using = Animation_Curve_Default
+				}
+				state = {
+					name = hide_topbar_secondary_stats
+					alpha = 0
+					position_y = 0
+					duration = 0.15
+					using = Animation_Curve_Default
+				}
+			}
+
+			container = {
+				flowcontainer = {
+					direction = vertical
+					spacing = 2
+
+					topbar_secondary_row_two = {}
+
+					topbar_secondary_row_three = {}
+				}
+			}
 		}
 	}
 
@@ -623,7 +618,7 @@ types topbar_components
 			using = hud_visibility
 			datacontext = "[AccessMetaPlayer.AccessPlayedOrObservedCountry]"
 			using = clickthrough_blocker
-			size = { 725 100 }
+			size = { 1120 114 }
 			allow_outside = yes
 			resizeparent = yes
 
@@ -654,20 +649,7 @@ types topbar_components
 				#when you open/close any fullscreen (did not know where else to put it)
 				widget = {
 					using = fullscreen_hide
-					size = { 100% 100% }
-
-					state = {
-						name = _show
-						alpha = 1
-						duration = 0
-						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('notifications_minimize','notifications_maximize')]"
-					}
-					state = {
-						name = _hide
-						alpha = 0
-						duration = 0.2
-						on_start = "[PdxGuiInterruptThenTriggerAllAnimations('notifications_maximize','notifications_minimize')]"
-					}
+					size = { 920 100% }
 
 					background = {
 						texture = "gfx/interface/main_hud/topbar_bg.dds"
@@ -855,71 +837,56 @@ types topbar_components
 								}
 							}
 
-						##### EXTRA INFO #####
-						### RESEARCH
-						container = {
-							name = "research"
-							layoutpolicy_vertical = expanding
-							
-							button = {
-								using = glow_button					
-								size = { 100 40 }
-								tooltip = "SULIUS_RESEARCH"
-								using = tooltip_below
-								onclick = "[InformationPanelBar.OpenPanelCycleTabs('tech_tree', 'production|military|society')]"
-							
-								icon = {
-									size = { 36 36 }
-									name = research_icon
-									texture = "gfx/interface/icons/generic_icons/innovation.dds"
-									parentanchor = vcenter
-								}
-							
-								textbox = {
-									position = { 35 -2 }
-									name = capital_value
-									text = "[Country.GetWeeklyInnovation|+]" #"[AccessPlayer.GetCurrentlyResearchedTechnology.GetProgressPercentage(GetPlayer.Self)]"
-									align = left|nobaseline
-									using = fontsize_large
-									autoresize = yes
-									parentanchor = vcenter
-								}
+							block "supply_ships_info" {
+								button = {
+									name = "tutorial_highlight_supply_ships"
+									using = glow_button
+									size = { 100 40 }
+									tooltip = "SUPPLY_SHIPS_TOPBAR_TOOLTIP"
+									using = tooltip_below
+									onclick = "[InformationPanelBar.OpenMarketPanel(AccessPlayer.AccessFirstMarket.Self)]"
+									enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
 
-								widget = {
-									size = { 60 12 }
-									position = { 40 0 }
-									parentanchor = bottom
-									visible = "[AccessPlayer.GetCurrentlyResearchedTechnology.IsValid]" # Only Visible if researching
-									default_progressbar_horizontal = {
+									widget = {
+										size = { 32 32 }
+										name = merchant_marine_icon
 										parentanchor = vcenter
-										name = "tech_progressbar"
-										size = { 60 6 }
-										blockoverride "values" {
-											max = "[FixedPointToFloat(AccessPlayer.GetCurrentlyResearchedTechnology.GetCost(GetPlayer.Self))]"
-											value = "[FixedPointToFloat(AccessPlayer.GetCurrentlyResearchedTechnology.GetProgress(GetPlayer.Self))]"
+										position = { 0 2 }
+
+										icon = {
+											parentanchor = center
+											size = { 28 28 }
+											texture = "gfx/interface/icons/topbar/convoys.dds"
 										}
-									}
-								}
 
-								widget = {
-									size = { 60 12 }
-									position = { 40 0 }
-									parentanchor = bottom
-									visible = "[Not(AccessPlayer.GetCurrentlyResearchedTechnology.IsValid)]" # Only Visible if not researching
-									default_progressbar_horizontal = {
+									}
+									textbox = {
+										position = { 35 -3 }
+										name = capital_value
+										raw_text = "#bold [GetPlayer.GetNumAvailableSupplyShips|+D]#!"
+										align = left|nobaseline
+										using = fontsize_large
+										autoresize = yes
 										parentanchor = vcenter
-										name = "tech_progressbar"
+									}
+
+									double_direction_progressbar = {
 										size = { 60 6 }
-										blockoverride "values" {
-											value = 0
+										position = { 40 -3 }
+										parentanchor = bottom
+
+										blockoverride "value_left" {
+											value = "[Negate_float(FixedPointToFloat(GetPlayer.GetDeficitSupplyShipRatioForProgressBar))]"
+										}
+										blockoverride "value_right" {
+											value = "[FixedPointToFloat(GetPlayer.GetExcessSupplyShipRatioForProgressBar)]"
 										}
 									}
 								}
 							}
-						}
-							
+
 							### MONEY
-						container = {
+							container = {
 								name = "tutorial_highlight_treasury"
 								layoutpolicy_vertical = expanding
 
@@ -987,6 +954,134 @@ types topbar_components
 								}
 							}
 
+							### TTW INVESTMENT POOL
+							container = {
+								name = "ttw_investment_pool_widget"
+								layoutpolicy_vertical = expanding
+
+								button = {
+									using = glow_button
+									size = { 88 40 }
+									using = tooltip_below
+									using = investment_pool_tooltip_with_graph
+									onclick = "[InformationPanelBar.OpenPanelTab('budget', 'default')]"
+									enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+
+									icon = {
+										size = { 32 32 }
+										position = { 0 2 }
+										name = ttw_investment_pool_icon
+										texture = "gfx/interface/icons/invention_icons/international_exchange_standards.dds"
+										parentanchor = vcenter
+									}
+
+									textbox = {
+										position = { 40 -3 }
+										name = ttw_investment_pool_value
+										raw_text = "#bold [GetPlayer.GetInvestmentPool|D+]#!"
+										align = left|nobaseline
+										using = fontsize_large
+										autoresize = yes
+										parentanchor = vcenter
+									}
+
+									textbox = {
+										position = { 40 1 }
+										name = ttw_investment_pool_change
+										raw_text = "[GetPlayer.GetInvestmentPoolChange|D+=]"
+										align = left|nobaseline
+										using = fontsize_medium
+										autoresize = yes
+										parentanchor = bottom
+									}
+								}
+							}
+
+							container = {
+								name = "ttw_research_widget"
+								layoutpolicy_vertical = expanding
+								position = { 0 2 }
+
+								button = {
+									name = "ttw_research_active"
+									using = glow_button
+									size = { 118 40 }
+									visible = "[GetPlayer.HasCurrentlyResearchedTechnology]"
+									datacontext = "[AccessPlayer.AccessCurrentlyResearchedTechnology]"
+									onclick = "[InformationPanelBar.OpenPanelCycleTabs('tech_tree', 'production|military|society')]"
+									enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+
+									tooltipwidget = {
+										FancyTooltip_Technology = {}
+									}
+
+									icon = {
+										size = { 36 36 }
+										position = { -2 2 }
+										texture = "[Technology.GetTexture]"
+										alwaystransparent = yes
+									}
+
+									textbox = {
+										name = "ttw_research_progress_top"
+										position = { 36 5 }
+										align = left|nobaseline
+										autoresize = yes
+										using = fontsize_small
+										text = TTW_RESEARCH_PROGRESS_LINE
+									}
+
+									gold_progressbar_horizontal = {
+										name = "ttw_research_progressbar"
+										position = { 39 24 }
+										size = { 64 4 }
+										blockoverride "values" {
+											min = 0
+											max = 1
+											value = "[Technology.GetProgressPercentage(GetPlayer.Self)]"
+										}
+										blockoverride "glow_visible" {}
+									}
+
+									textbox = {
+										name = "ttw_research_progress_bottom"
+										position = { 36 30 }
+										align = left|nobaseline
+										autoresize = yes
+										using = fontsize_small
+										text = TTW_RESEARCH_INNOVATION_LINE
+									}
+								}
+
+								button = {
+									name = "ttw_research_idle"
+									using = glow_button
+									size = { 118 40 }
+									visible = "[Not(GetPlayer.HasCurrentlyResearchedTechnology)]"
+									datacontext = "[GetPlayer]"
+									using = tooltip_below
+									tooltip = "INNOVATION_TOOLTIP"
+									onclick = "[InformationPanelBar.OpenPanelCycleTabs('tech_tree', 'production|military|society')]"
+									enabled = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+
+									icon = {
+										size = { 36 36 }
+										position = { -2 2 }
+										texture = "gfx/interface/icons/generic_icons/innovation.dds"
+										alwaystransparent = yes
+									}
+
+									textbox = {
+										name = "ttw_research_idle_bottom"
+										position = { 36 21 }
+										align = left|nobaseline
+										autoresize = yes
+										using = fontsize_small
+										text = TTW_RESEARCH_INNOVATION_LINE
+									}
+								}
+							}
+
 						}
 
 						#shows only on hover
@@ -994,7 +1089,6 @@ types topbar_components
 							visible = "[GetVariableSystem.Exists('more_topbar_info')]"
 						}
 
-						#locked
 						topbar_secondary_icons = {
 							visible = "[Not(GetVariableSystem.Exists('more_topbar_info'))]"
 
@@ -1007,51 +1101,51 @@ types topbar_components
 			}
 
 			### LOCK TOGGLE FOR SECONDARY ROW OF ICONS
-			# button_icon_round_toggle = {
-			# 	visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
-			# 	size = { 24 24 }
-			# 	parentanchor = bottom|right
-			# 	position = { -30 -9 }
-				
-			# 	alpha = 0
-				
-			# 	state = {
-			# 		name = show_topbar_secondary_stats
-			# 		delay = 0.15
-			# 		alpha = 1
-			# 		duration = 0.15
-			# 		using = Animation_Curve_Default
-			# 	}
-			# 	state = {
-			# 		name = hide_topbar_secondary_stats
-			# 		alpha = 0
-			# 		duration = 0
-			# 		using = Animation_Curve_Default
-			# 	}
-				
-			# 	blockoverride "on_click" {
-			# 		onclick = "[GetVariableSystem.Toggle('more_topbar_info')]"
-			# 	}
-			# 	blockoverride "view_1" {
-			# 		visible = "[GetVariableSystem.Exists('more_topbar_info')]"
-			# 	}
-			# 	blockoverride "view_2" {
-			# 		visible = "[Not(GetVariableSystem.Exists('more_topbar_info'))]"
-			# 	}
-			# 	blockoverride "icon_1" {
-			# 		texture = "gfx/interface/buttons/button_icons/unlock.dds"
-			# 	}
-			# 	blockoverride "icon_2" {
-			# 		texture = "gfx/interface/buttons/button_icons/lock.dds"
-			# 	}
-			# 	blockoverride "tooltip_1" {
-			# 		tooltip = "LOCK_TOPBAR"
-			# 	}
-			# 	blockoverride "tooltip_2" {
-			# 		tooltip = "UNLOCK_TOPBAR"
-			# 	}
-			# }
-			
+			button_icon_round_toggle = {
+				visible = "[GetMetaPlayer.GetPlayedOrObservedCountry.IsValid]"
+				size = { 24 24 }
+				parentanchor = top|left
+				position = { 895 47 }
+
+				alpha = 0
+
+				state = {
+					name = show_topbar_secondary_stats
+					delay = 0.15
+					alpha = 1
+					duration = 0.15
+					using = Animation_Curve_Default
+				}
+				state = {
+					name = hide_topbar_secondary_stats
+					alpha = 0
+					duration = 0
+					using = Animation_Curve_Default
+				}
+
+				blockoverride "on_click" {
+					onclick = "[GetVariableSystem.Toggle('more_topbar_info')]"
+				}
+				blockoverride "view_1" {
+					visible = "[GetVariableSystem.Exists('more_topbar_info')]"
+				}
+				blockoverride "view_2" {
+					visible = "[Not(GetVariableSystem.Exists('more_topbar_info'))]"
+				}
+				blockoverride "icon_1" {
+					texture = "gfx/interface/buttons/button_icons/unlock.dds"
+				}
+				blockoverride "icon_2" {
+					texture = "gfx/interface/buttons/button_icons/lock.dds"
+				}
+				blockoverride "tooltip_1" {
+					tooltip = "LOCK_TOPBAR"
+				}
+				blockoverride "tooltip_2" {
+					tooltip = "UNLOCK_TOPBAR"
+				}
+			}
+
 			### FLAG
 			fancy_flag = {
 				blockoverride "rank_badge_block" {} # Show rank badge seperately from flag with topbar_rank
@@ -1091,3 +1185,10 @@ types topbar_components
 		}
 	}
 }
+
+
+
+
+
+
+

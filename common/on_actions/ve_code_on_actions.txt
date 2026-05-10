@@ -18,3 +18,35 @@ on_yearly_pulse_country = {
 		dev.6
 	}
 }
+
+on_game_started = {
+	on_actions = {
+		ve_rebuild_idea_state_regions
+	}
+}
+
+ve_rebuild_idea_state_regions = {
+	effect = {
+		clear_global_variable_list = adm_ideas
+		clear_global_variable_list = dip_ideas
+		clear_global_variable_list = mil_ideas
+
+		s:STATE_MINSK = { add_to_global_variable_list = { name = adm_ideas target = this } set_variable = { name = idea_group value = flag:innovative_idea } }
+		s:STATE_LOUISIANA = { add_to_global_variable_list = { name = adm_ideas target = this } set_variable = { name = idea_group value = flag:economic_idea } }
+		s:STATE_NEW_YORK = { add_to_global_variable_list = { name = adm_ideas target = this } set_variable = { name = idea_group value = flag:administrative_idea } }
+		s:STATE_VIRGINIA = { add_to_global_variable_list = { name = adm_ideas target = this } set_variable = { name = idea_group value = flag:ethnocentrism_idea } }
+		s:STATE_LOWER_EGYPT = { add_to_global_variable_list = { name = adm_ideas target = this } set_variable = { name = idea_group value = flag:politics_idea } }
+
+		s:STATE_HOME_COUNTIES = { add_to_global_variable_list = { name = dip_ideas target = this } set_variable = { name = idea_group value = flag:diplomatic_idea } }
+		s:STATE_LANCASHIRE = { add_to_global_variable_list = { name = dip_ideas target = this } set_variable = { name = idea_group value = flag:trade_idea } }
+		s:STATE_PROVENCE = { add_to_global_variable_list = { name = dip_ideas target = this } set_variable = { name = idea_group value = flag:qualification_idea } }
+		s:STATE_NORMANDY = { add_to_global_variable_list = { name = dip_ideas target = this } set_variable = { name = idea_group value = flag:humanist_idea } }
+		s:STATE_LOWER_ANDALUSIA = { add_to_global_variable_list = { name = dip_ideas target = this } set_variable = { name = idea_group value = flag:syndicalism_idea } }
+
+		s:STATE_HOLLAND = { add_to_global_variable_list = { name = mil_ideas target = this } set_variable = { name = idea_group value = flag:offensive_idea } }
+		s:STATE_BALUCHISTAN = { add_to_global_variable_list = { name = mil_ideas target = this } set_variable = { name = idea_group value = flag:defensive_idea } }
+		s:STATE_EAST_BENGAL = { add_to_global_variable_list = { name = mil_ideas target = this } set_variable = { name = idea_group value = flag:naval_idea } }
+		s:STATE_DOBRUDJA = { add_to_global_variable_list = { name = mil_ideas target = this } set_variable = { name = idea_group value = flag:militarization_idea } }
+		s:STATE_BASRA = { add_to_global_variable_list = { name = mil_ideas target = this } set_variable = { name = idea_group value = flag:imperialist_idea } }
+	}
+}

@@ -1,0 +1,1051 @@
+﻿cavour_society_research = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_society_tech_research_speed_mult = 0.10
+}
+
+# Applied while Italian Diplomatic Stance journal entry is active
+italy_diplo_stance_leverage_resistance = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_leverage_resistance_mult = 5
+}
+
+
+italy_tension_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_radicals_from_political_movements_mult = 0.02
+	interest_group_ig_intelligentsia_pol_str_mult = 0.01
+}
+
+# Industrialists disregarded: -5 approval (event option)
+industrialists_disregarded = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	interest_group_ig_industrialists_approval_add = -5
+}
+
+# Enactment modifier: +20% success chance when accepting industrialist laissez-faire push
+industrialists_laissez_faire_push = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.2
+}
+
+# Enactment modifier: -20% stall chance (option 2 – keep partial control)
+laissez_faire_partial_control_stall = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_stall_add = -0.20
+}
+
+# Option 3 – seized investment: +50 construction, -10% capitalist invest pool efficiency (4 years)
+state_seized_investment = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_construction_add = 50
+	state_capitalists_investment_pool_efficiency_mult = -0.10
+}
+
+# French economy JE complete via button + Laissez-Faire: 15% construction efficiency (6 years)
+french_economy_complete_button_reward = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_construction_mult = 0.10
+}
+
+# French economy JE complete via GDP growth: 5k income, 15% construction, 15% capitalist & shopkeeper invest pool (6 years)
+french_economy_complete_gdp_reward = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_minting_mult = 0.10
+	state_construction_mult = 0.10
+	state_capitalists_investment_pool_efficiency_mult = 0.10
+	state_shopkeepers_investment_pool_efficiency_mult = 0.10
+}
+
+austria_economy_complete_gdp_reward = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_minting_mult = 0.10
+	state_construction_mult = 0.10
+	state_capitalists_investment_pool_efficiency_mult = 0.10
+	state_shopkeepers_investment_pool_efficiency_mult = 0.10
+}
+
+# French military JE complete via 100 troops + 40% artillery: 50% training rate, +15% offense Shrapnel/Mobile Artillery, 15% military research speed, +5 stance France (6 years)
+french_military_complete_artillery_reward = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_training_rate_mult = 0.25
+	unit_combat_unit_type_shrapnel_artillery_offense_mult = 0.10
+	unit_combat_unit_type_mobile_artillery_offense_mult = 0.10
+	country_military_tech_research_speed_mult = 0.10
+}
+
+# French military JE complete via button (30 units + barracks): 25% military tech spread, +20 stance France (6 years)
+french_military_complete_easy_reward = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_military_tech_spread_mult = 0.15
+}
+
+# Austria military JE complete via button (30 units + barracks): 10% home defense, 15% mil tech spread, +20 stance Austria (5 years)
+austria_military_complete_easy_reward = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	battle_defense_owned_province_mult = 0.10
+	country_military_tech_spread_mult = 0.10
+}
+
+# ItalyStatutoAlbertino: repressing constitutional demands (autocratic path) – debuff but fuels unification sentiment
+constitutional_autocratic_pressure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	country_legitimacy_add = -0.05
+	interest_group_ig_intelligentsia_approval_add = -5
+	country_society_tech_spread_mult = -0.10
+}
+
+# ItalyStatutoAlbertino: moving toward constitutional/democratic reform – buff
+constitutional_reform_momentum = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_add = 0.05
+	country_society_tech_spread_mult = 0.10
+}
+
+# ItalyStatutoAlbertino: Force momentum for Right of Assembly – faster enactment, Landowners angry
+constitutional_right_of_assembly_push = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_time_mult = -0.40
+	interest_group_ig_landowners_approval_add = -15
+}
+
+# ItalyStatutoAlbertino: Intelligentsia gain political clout
+constitutional_intelligentsia_power = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_academics_pol_str_mult = 0.2
+	country_tech_research_speed_mult = 0.10
+}
+
+# ItalyStatutoAlbertino: Petty Bourgeoisie gain political clout
+constitutional_petty_bourgeoisie_power = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_petty_bourgeoisie_approval_add = 8
+}
+
+# ItalyStatutoAlbertino: Refused constitutional demands – laws blocked without popular movement (2 years)
+constitutional_law_blockade = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	country_law_enactment_time_mult = 1.5
+	country_law_enactment_stall_add = 0.25
+}
+
+# --- ItalyStatutoAlbertino ---
+statuto_petition_concession = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_suppression_attraction_factor = -0.2
+	state_pop_support_movement_italian_national_mult = 0.5
+
+}
+statuto_petition_repression = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	state_pop_support_movement_italian_national_mult = 1.5
+	country_tech_spread_mult = -0.25
+}
+
+statuto_salotto_reform = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_society_tech_spread_mult = 0.10
+	country_fervor_target_north_italian_add = 10
+}
+statuto_salotto_silence = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	country_authority_mult = -0.2
+	country_authority_add = -150
+}
+
+statuto_carbonari_concession = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = 15
+	interest_group_ig_intelligentsia_pol_str_mult = 0.30
+
+}
+statuto_carbonari_crackdown = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	country_legitimacy_base_add = -25
+	political_movement_radicalism_add = 0.15
+}
+
+statuto_pamphlets_debate = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_time_mult = -0.20
+	state_pop_support_movement_italian_national_mult = 1
+}
+statuto_pamphlets_purge = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	country_legitimacy_base_add = -50
+	country_suppression_cost_mult = -0.5
+	political_movement_radicalism_add = 0.25
+	political_movement_radicalism_from_enactment_approval_mult = 0.50
+}
+
+statuto_landowners_anger_assembly = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	interest_group_ig_landowners_approval_add = -20
+}
+statuto_assembly_refused = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	building_paper_mill_throughput_add = -0.2
+}
+
+statuto_ultimatum_concession = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = 10
+	country_electoral_confidence_impact_mult = -0.5
+}
+
+statuto_intelligentsia_snub = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	building_university_throughput_add = -0.40
+	country_academics_pol_str_mult = -0.1
+}
+
+peasant_liberties_ita_accept = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	building_group_bg_agriculture_throughput_add = 0.25
+	interest_group_ig_landowners_approval_add = -20
+	state_construction_mult = 0.10
+}
+peasant_liberties_ita_deny = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	building_group_bg_agriculture_throughput_add = -0.15
+	interest_group_ig_rural_folk_approval_add = -20
+	interest_group_ig_landowners_pol_str_mult = 0.3
+}
+
+statuto_anticlerical_spirit = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	interest_group_ig_devout_approval_add = -10
+	country_clergymen_pol_str_mult = -0.2
+}
+statuto_devout_favored = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	country_clergymen_pol_str_mult = 0.2
+}
+
+# NIF: In French bloc – prepare to strike Austria (5 years)
+prepare_to_strike_austrian = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.10
+}
+
+# NIF: Leader or no bloc – Italian states owned by Sardinia (state modifier, permanent)
+nif_independent_bonus = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_birth_rate_mult = 0.025
+	state_construction_mult = 0.05
+}
+
+nif_dependent_bonus = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_birth_rate_mult = 0.025
+}
+
+no_papal_recognition = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_ig_devout_pol_str_mult = -10.0
+	country_clergymen_voting_power_add = -300
+	state_birth_rate_mult = -0.01
+}
+
+# ========== Papal Recognition concessions (JE Pap_recognition_for_italy) ==========
+papal_recognition_concession_clergy_power = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_clergymen_voting_power_add = 50
+	interest_group_ig_devout_pol_str_mult = 0.25
+}
+
+papal_recognition_concession_clergy_tax_cuts = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_clergymen_investment_pool_efficiency_mult = -0.25
+}
+
+papal_recognition_concession_papal_subsidies = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 7500
+}
+
+papal_recognition_concession_church_authority = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_authority_mult = -0.10
+}
+
+# Consolidating the South JE: debuff on South Italian states while the journal entry is active (removed on completion)
+ita_consolidating_south_debuff = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	state_radicals_from_political_movements_mult = 0.5
+	state_radicals_and_loyalists_from_sol_change_mult = 0.5
+	state_market_access_price_impact = -0.05 
+	state_construction_mult = -0.20
+}
+
+# ========== Spenna la gallina austriaca JE – modifier while active ==========
+spenna_gallina_offense = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	unit_offense_mult = 0.10
+}
+
+# ========== Italian Formation (event 16) – bloc leader "Bella Italia" ==========
+bella_italia_economy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_capitalists_investment_pool_efficiency_mult = 0.10
+	state_shopkeepers_investment_pool_efficiency_mult = 0.10
+	state_construction_mult = 0.10
+}
+bella_italia_army = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.10
+}
+bella_italia_tech = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_production_tech_spread_mult = 0.15
+	country_society_tech_spread_mult = 0.15
+	country_production_tech_research_speed_mult = 0.10
+	country_society_tech_research_speed_mult = 0.10
+}
+
+# ========== Italian Formation – Austrian bloc "Italia Asburgica" ==========
+italia_asburgica_economy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_clergymen_investment_pool_efficiency_mult = 0.10
+	state_shopkeepers_investment_pool_efficiency_mult = 0.10
+}
+italia_asburgica_army = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	battle_offense_owned_province_mult = 0.10
+	battle_defense_owned_province_mult = 0.10
+	building_training_rate_mult = 0.10
+}
+italia_asburgica_tech = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_production_tech_spread_mult = 0.10
+	country_society_tech_spread_mult = 0.10
+	building_university_throughput_add = 0.10
+}
+
+# ========== Italian Formation – France bloc "Italia Napoleonica" ==========
+italia_napoleonica_economy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_capitalists_investment_pool_efficiency_mult = 0.10
+}
+italia_napoleonica_army = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	battle_offense_owned_province_mult = 0.20
+	building_training_rate_mult = 0.10
+}
+italia_napoleonica_tech = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_production_tech_spread_mult = 0.15
+	building_university_throughput_add = 0.10
+}
+
+italia_colony_incorporation_irredentism = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_incorporation_speed_mult = 5
+	state_migration_pull_mult = 0.25
+	state_assimilation_mult = 1
+	state_allow_assimilation_in_homeland_bool = yes
+	state_radicalism_increases_violent_hostility_mult = 0.5
+	state_radicalism_increases_cultural_erasure_mult = 0.4
+	state_radicalism_increases_open_prejudice_mult = 0.3
+}
+
+italia_colony_state_bonuses_irredentism = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_incorporation_speed_mult = 3
+	state_radicalism_increases_violent_hostility_mult = 0.7
+	state_radicalism_increases_cultural_erasure_mult = 0.6
+	state_radicalism_increases_open_prejudice_mult = 0.5
+	building_group_bg_agriculture_throughput_add = 0.2
+	building_group_bg_plantations_throughput_add = 0.2
+	building_group_bg_mining_throughput_add = 0.2
+	building_group_bg_logging_throughput_add = 0.2
+}
+
+
+italia_colony_migration_irredentism = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_incorporation_speed_mult = 5
+	state_migration_pull_mult = 0.5
+	state_radicalism_increases_violent_hostility_mult = 0.5
+	state_radicalism_increases_cultural_erasure_mult = 0.4
+	state_radicalism_increases_open_prejudice_mult = 0.2
+}
+
+italian_empire_modifier = {
+	icon = gfx/interface/icons/event_icons/casaSavoia2.dds
+	state_birth_rate_mult = 0.005
+	state_construction_mult = 0.010
+	building_training_rate_mult = 0.020
+	country_authority_mult = 0.01
+}
+
+italian_jewel_colony_modifier = {
+	icon = gfx/interface/icons/invention_icons/colonization.dds
+	building_group_bg_agriculture_throughput_add = 0.2
+	building_group_bg_plantations_throughput_add = 0.2
+	building_group_bg_mining_throughput_add = 0.2
+	building_group_bg_logging_throughput_add = 0.2
+	state_education_access_add = 0.25
+	state_mortality_mult = -0.1
+}
+
+ita_industrial_dev_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_group_bg_manufacturing_throughput_add = 0.005
+	state_construction_mult = 0.005
+	state_migration_pull_mult = 0.0125
+	state_education_access_add = 0.005
+
+}
+
+ita_industrial_investment_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_construction_mult = 0.05
+}
+
+industrial_investment_padana_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_construction_mult = 0.05
+	building_group_bg_agriculture_throughput_add = 0.05
+	building_group_bg_plantations_throughput_add = 0.05
+}
+
+industrial_dev_padana_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_construction_mult = 0.005
+	state_migration_pull_mult = 0.015
+	building_group_bg_agriculture_throughput_add = 0.005
+	building_group_bg_plantations_throughput_add = 0.005
+}
+
+industrial_dev_moreallocation_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	state_aristocrats_investment_pool_efficiency_mult = 0.25
+	state_capitalists_investment_pool_efficiency_mult = 0.25
+}
+
+
+ita_industrial_dev_investment_costs = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	country_tax_income_add = -25000
+}
+
+LV_weak_economy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	country_minting_mult = -0.10
+	state_capitalists_investment_pool_efficiency_mult = -0.15
+	state_shopkeepers_investment_pool_efficiency_mult = -0.15
+}
+
+LV_weak_burocrazia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	state_tax_waste_add = 0.25
+	country_bureaucracy_investment_cost_factor_mult = 0.2
+}
+
+LV_weak_legittimacy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	country_radicals_from_legitimacy_mult = 0.40
+	country_legitimacy_base_add = -10
+}
+
+LV_weak_railways = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_negative.dds
+	state_construction_mult = -0.10
+	building_railway_throughput_add = -0.20
+	state_peasants_education_access_add = -0.12
+}
+
+ita_LV_fixing_smt = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_negative.dds
+	country_bureaucracy_mult = -0.25
+	country_cannot_enact_laws_bool = yes
+}
+
+ita_LV_reformed = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_construction_add = 50
+	country_minting_mult = 0.10
+	state_birth_rate_mult = 0.02
+}
+
+italy_LV_neoautBUFF = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	country_authority_mult = 0.2
+	country_authority_add = 150
+	country_law_enactment_time_mult = -0.25
+}
+
+italy_LV_republic_formed = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_decree_cost_mult = -0.25
+	country_authority_mult = 0.1
+}
+
+LV_send_envoy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = -0.5 
+}
+
+LV_send_investment = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	state_capitalists_investment_pool_efficiency_mult = -0.25
+	state_shopkeepers_investment_pool_efficiency_mult = -0.25
+}
+
+LV_get_investment = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_construction_add = 100
+	state_construction_mult = 0.10
+}
+
+LV_italian_federation_political = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_allow_enacting_decrees_in_subject_bool = yes
+	country_authority_mult = 0.02
+	state_birth_rate_mult = 0.01 #u dont own the land so kinda needed
+	country_disallow_aggressive_plays_bool = yes
+	country_liberty_desire_of_subjects_add = -0.15
+}
+
+LV_italian_federation_investment = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_construction_add = 10
+	state_construction_mult = 0.02
+}
+
+LV_italian_federation_centralized1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_decree_cost_mult = -0.10
+	state_infrastructure_mult = 0.15
+	building_group_bg_infrastructure_construction_efficiency_add = 0.10
+}
+
+LV_italian_federation_centralized2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_market_access_price_impact = 0.03
+	state_infrastructure_mult = 0.20
+	building_group_bg_infrastructure_construction_efficiency_add = 0.20
+}
+
+LV_italian_federation_centralized3 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_education_access_wealth_add = 0.0075
+	state_pop_qualifications_mult = 0.15
+	state_infrastructure_mult = 0.15
+	building_group_bg_infrastructure_construction_efficiency_add = 0.10
+}
+
+# Two Sicilies political balance modifiers
+sic_absolutist_dominance = {
+	icon = gfx/interface/icons/law_icons/autocracy.dds
+	state_decree_cost_mult = -0.10
+	country_authority_mult = 0.15
+	interest_group_ig_landowners_pol_str_mult = 0.25
+	interest_group_ig_devout_pol_str_mult = 0.25
+}
+
+sic_absolutist_dominance2 = {
+	icon = gfx/interface/icons/law_icons/autocracy.dds
+	country_suppression_attraction_factor = -0.60
+	country_suppression_cost_mult = -0.50
+	interest_group_ig_landowners_pol_str_mult = 0.25
+	interest_group_ig_devout_pol_str_mult = 0.25
+}
+
+sic_landowners_powerful = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = 2
+}
+
+sic_nationalist_surge = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_society_tech_research_speed_mult = 0.10
+	state_birth_rate_mult = 0.025
+}
+
+sic_intelligentsia_powerful = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 2
+}
+
+# Stop Italian Emigration — outcome modifiers (60 months / 5 years)
+# Path 1: Close Borders — migration quota locked for 10 years
+ita_emigration_closed_borders = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_migration_quota_mult = -2.0
+}
+
+# Path 2: Prosperity — birth rate boost for 5 years
+ita_emigration_prosperity = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	state_birth_rate_mult = 0.025
+}
+
+# Small temporary modifiers for SIC flavor events
+sic_ig_approved = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 5
+	interest_group_pol_str_mult = 0.2
+}
+
+sic_ig_disapproved = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_negative.dds
+	interest_group_approval_add = -15
+	interest_group_pol_str_mult = -0.25
+}
+
+sic_bourbon_authority = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_scales_negative.dds
+	country_authority_add = 15
+}
+
+sic_reform_momentum = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_law_enactment_speed_mult = 0.25
+}
+
+# ─── Latifundia Reform – event modifiers ───────────────────────────────────
+
+# sic_tyrone.3 Option A – export advantage
+sic_export_boom_domestic = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_export_advantage_mult = 0.20
+}
+
+# sic_tyrone.3 Option A – landowners approval decaying
+sic_landowners_approval_boost = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 10
+}
+
+# sic_tyrone.3 Option B – Naples trade hub
+sic_naples_trade_hub = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_trade_capacity_mult = 0.25
+	state_trade_quantity_mult = 0.25
+	state_trade_advantage_mult = -0.10
+}
+
+# sic_tyrone.3 Option B – industrialists approval decaying
+sic_industrialists_approval_boost = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 10
+}
+
+# sic_tyrone.4 Option 1 – peasant aid (decaying)
+sic_peasant_aid = {
+	icon = gfx/interface/icons/law_icons/serfdom_banned.dds
+	state_tax_collection_mult = -0.20
+	building_group_bg_agriculture_throughput_add = -0.10
+	building_group_bg_agriculture_farmers_mortality_mult = -0.20
+}
+
+# sic_tyrone.4 Option 2 – agricultural investment
+sic_agricultural_investment = {
+	icon = gfx/interface/icons/invention_icons/improved_fertilizer.dds
+	building_group_bg_agriculture_construction_efficiency_add = 0.25
+	building_farmers_standard_of_living_add = 1
+}
+
+# sic_tyrone.4 Option 3 – neglected peasants (decaying)
+sic_neglected_peasants = {
+	icon = gfx/interface/icons/law_icons/serfdom.dds
+	building_farmers_standard_of_living_add = -1
+	building_group_bg_agriculture_throughput_add = -0.10
+}
+
+# sic_tyrone.5 Option A – preserve estates (Landowner approval)
+sic_estates_preserved = {
+	icon = gfx/interface/icons/law_icons/landed_voting.dds
+	interest_group_approval_add = 5
+}
+
+# sic_tyrone.5 Option B – begin land reform (law enactment speed)
+sic_land_reform_begun = {
+	icon = gfx/interface/icons/law_icons/tenant_farmers.dds
+	country_law_enactment_speed_mult = 0.15
+}
+
+# sic_tyrone.6 Option A – rapid mechanization (burst throughput, short)
+sic_rapid_mechanization = {
+	icon = gfx/interface/icons/invention_icons/mechanized_farming.dds
+	building_group_bg_agriculture_throughput_add = 0.25
+	building_group_bg_agriculture_construction_efficiency_add = 0.15
+	building_group_bg_plantations_throughput_add = 0.25
+	building_group_bg_plantations_construction_efficiency_add = 0.15
+	building_group_bg_ranching_throughput_add = 0.25
+	building_group_bg_ranching_construction_efficiency_add = 0.15
+}
+
+# sic_tyrone.6 Option B – gradual modernization (smaller, longer)
+sic_gradual_modernization = {
+	icon = gfx/interface/icons/invention_icons/enclosure.dds
+	building_group_bg_agriculture_throughput_add = 0.10
+	building_group_bg_agriculture_construction_efficiency_add = 0.05
+}
+
+# sic_tyrone.7 Option A – slavery path economic costs
+sic_slavery_economic_costs = {
+	icon = gfx/interface/icons/law_icons/slave_trade.dds
+	building_group_bg_plantations_throughput_add = -0.10
+	building_group_bg_agriculture_throughput_add = -0.10
+	state_mortality_mult = 0.05
+}
+
+# Modernizer King JE active
+sic_modernizer_king_active = {
+	icon = gfx/interface/icons/law_icons/monarchy.dds
+	country_law_enactment_time_mult = -0.20
+	interest_group_ig_intelligentsia_pol_str_mult = 0.5
+}
+
+# Modernizer King programme complete – decaying legacy modifier
+sic_modernizer_legacy = {
+	icon = gfx/interface/icons/law_icons/monarchy.dds
+	country_law_enactment_stall_mult = -0.20
+	country_law_enactment_time_mult = -0.20
+	interest_group_ig_intelligentsia_pol_str_mult = 1.0
+	country_prestige_mult = 0.10
+}
+
+sic_reactionary_legacy = {
+	icon = gfx/interface/icons/law_icons/traditionalism.dds
+	country_legitimacy_base_add = 25
+	country_legitimacy_headofstate_add = 30
+	country_prestige_mult = 0.10
+}
+
+# Slavery path JE active
+sic_slavery_path_active = {
+	icon = gfx/interface/icons/law_icons/slave_trade.dds
+	country_law_enactment_time_mult = 0.10
+	country_law_enactment_success_add = 0.25
+	country_law_enactment_stall_mult = -1.0
+}
+
+# Slavery path – option A: increased slave imports per state
+sic_slavery_import_boost = {
+	icon = gfx/interface/icons/law_icons/slave_trade.dds
+	state_slave_import_mult = 0.5
+}
+
+# Slavery path – option B: slave import closed after mass importation (decaying)
+sic_slavery_import_closed = {
+	icon = gfx/interface/icons/law_icons/slavery_banned.dds
+	state_slave_import_mult = -1.0
+}
+
+# On completion of Dismantle Latifundia – permanent country modifier
+sic_latifundia_dismantled = {
+	icon = gfx/interface/icons/invention_icons/improved_fertilizer.dds
+	building_group_bg_agriculture_throughput_add = 0.15
+	building_group_bg_agriculture_construction_efficiency_add = 0.10
+	building_group_bg_plantations_throughput_add = 0.15
+	building_group_bg_plantations_construction_efficiency_add = 0.10
+	building_group_bg_ranching_throughput_add = 0.15
+	building_group_bg_ranching_construction_efficiency_add = 0.10
+}
+
+# Path A reward: industrial transition
+sic_industrial_transition = {
+	icon = gfx/interface/icons/law_icons/interventionism.dds
+	building_group_bg_manufacturing_construction_efficiency_add = 0.15
+}
+
+# Path B reward: agrarian export economy
+sic_agrarian_export_economy = {
+	icon = gfx/interface/icons/law_icons/agrarianism.dds
+	building_group_bg_agriculture_construction_efficiency_add = 0.15
+	building_group_bg_extraction_construction_efficiency_add = 0.10
+}
+
+# sic_tyrone.19 – The Question of Rome: option A – Rome declared capital of Italy
+sic_rome_declared_capital = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_prestige_mult = 0.10
+	country_legitimacy_base_add = 20
+}
+
+# sic_tyrone.19 – The Question of Rome: option B – concordat with the Papal States
+sic_papal_concordat = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_legitimacy_base_add = 10
+	country_authority_mult = 0.05
+}
+
+# sic_tyrone.17 – Artisans' Pilgrimage: craftsmen from across the peninsula settle in the Kingdom
+sic_artisans_pilgrimage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_migration_pull_mult = 0.10
+	state_shopkeepers_investment_pool_efficiency_mult = 0.10
+	state_capitalists_investment_pool_efficiency_mult = 0.05
+}
+
+# sic_tyrone.18 – Young Men of Italy: nationalist volunteers cross the border to enlist
+sic_italian_volunteers = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	state_conscription_rate_mult = 0.25
+	unit_morale_recovery_mult = 0.10
+}
+
+sic_italian_conqueror = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_army_offense_mult = 0.20
+	unit_army_defense_mult = 0.20
+	country_infamy_generation_mult = -0.25
+	country_military_goods_cost_mult = -0.40
+	country_initiator_war_goal_maneuver_cost_mult = -0.40
+}
+
+sic_italian_debuff_conqueror = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	unit_army_offense_mult = -0.30
+	unit_army_defense_mult = -0.30
+}
+
+# ========== Ruler of Italy JE completion – bonus selection (sic_tyrone.21) ==========
+sic_founding_italy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_birth_rate_mult = 0.05
+	state_mortality_mult = -0.05
+	country_tech_spread_mult = 0.25
+	country_tech_research_speed_mult = 0.25
+	country_prestige_mult = 0.2
+}
+sic_united_tradition = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_birth_rate_mult = 0.05
+	state_loyalists_from_political_movements_mult = 0.10
+	state_mortality_mult = -0.05
+}
+
+sic_towards_future = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_tech_spread_mult = 0.20
+	country_society_tech_research_speed_mult = 0.15
+}
+
+sic_united_invader = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_offense_mult = 0.10
+	unit_defense_mult = 0.10
+	state_conscription_rate_mult = 0.20
+}
+
+sic_construction_italy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_construction_add = 50
+	state_construction_mult = 0.075
+}
+
+# ========== Sicilian Sulphur Monopoly JE ==========
+sic_sulphur_company_slot = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_max_companies_add = 1
+}
+
+# ========== Italy Developing Industry — investment decisions ==========
+ita_invest_manufacturing = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_group_bg_light_industry_construction_efficiency_add = 0.10
+	building_group_bg_heavy_industry_construction_efficiency_add = 0.10
+}
+
+ita_invest_agriculture = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_group_bg_agriculture_construction_efficiency_add = 0.10
+	building_group_bg_plantations_construction_efficiency_add = 0.10
+}
+
+ita_leverage_public_loans = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_loan_interest_rate_mult = -0.10
+}
+
+ita_invest_education = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	building_university_throughput_add = 0.15
+	state_education_access_add = 0.15
+}
+
+ita_invest_institutions = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_institution_size_change_speed_mult = 0.35
+}
+
+# ========== Ministry of Industry ideologies ==========
+ita_ministry_market_liberal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_trade_center_throughput_add = 0.10
+	state_capitalists_investment_pool_efficiency_mult = 0.10
+	tax_dividends_add = -0.05
+}
+
+ita_ministry_protectionist = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_government_dividends_efficiency_add = 0.05
+	country_government_dividends_reinvestment_add = -0.10
+}
+
+ita_ministry_jingoist = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	building_group_bg_plantations_unincorporated_throughput_add = 0.05
+	building_group_bg_logging_unincorporated_throughput_add = 0.05
+	building_group_bg_mining_unincorporated_throughput_add = 0.05
+}
+
+ita_ministry_utilitarian = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_law_enactment_time_mult = -0.10
+	political_movement_radicalism_add = 0.10
+}
+
+# ========== Lateran Concordat (ita_lateran_concordat_decision) ==========
+ita_lateran_concordat = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	state_bureaucracy_population_base_cost_factor_mult = 0.10
+	state_clergymen_investment_pool_contribution_add = -1
+}
+
+ita_passing_slavery_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_law_enactment_success_add = 0.10
+}
+
+# ========== Metternich System JE ==========
+ita_metternich_mandate_boost = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	power_bloc_mandate_progress_mult = 0.25
+}
+
+ita_metternich_defiance_mandate = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	power_bloc_mandate_progress_mult = 0.50
+}
+
+ita_metternich_independence_bonus = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_influence_mult = 0.15
+	country_infamy_generation_mult = -0.10
+}
+
+ita_metternich_liberal_spread = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_society_tech_research_speed_mult = 0.10
+}
+
+sic_bourbon_legittimacy = {
+	icon = gfx/interface/icons/law_icons/monarchy.dds
+	country_prestige_add = 0.5
+	country_law_enactment_stall_mult = -0.0025
+	country_legitimacy_headofstate_add = 0.25
+}
+
+bourbon_monarchy_bur_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_bureaucracy_mult = -0.15
+}
+
+bourbon_monarchy_police_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	country_authority_mult = -0.05
+	state_radicals_from_political_movements_mult = 0.20
+}
+
+bourbon_monarchy_constitution_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	political_movement_radicalism_add = 0.10
+	country_legitimacy_base_add = -10
+	state_pop_support_movement_italian_national_mult = 0.4
+}
+
+bourbon_monarchy_eco_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_capitalists_investment_pool_efficiency_mult = -0.05
+	country_weekly_innovation_mult = -0.05
+}
+
+sic_ita_national_activism = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	political_movement_radicalism_add = 0.15
+	political_movement_pop_attraction_mult = 0.25
+}
+
+bourbon_monarchy_burfix_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_bureaucracy_population_base_cost_factor_mult = -0.25
+	country_institution_size_change_speed_mult = -0.5
+}
+
+bourbon_monarchy_policefix_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
+	state_turmoil_effects_mult = -0.25
+}
+
+bourbon_monarchy_constitutionfix_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	country_legitimacy_base_add = 10
+	country_legitimacy_ideological_incoherence_mult = 20
+	state_pop_support_movement_italian_national_mult = 0.5
+}
+
+sic_ita_movement_surge = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	political_movement_radicalism_add = 0.20
+	political_movement_pop_attraction_mult = 0.30
+}
+
+sic_ita_movement_suppressed = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	political_movement_radicalism_add = -0.40
+}
+
+sic_whispers_barracks_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	unit_morale_recovery_mult = -0.05
+}
+
+sic_sicilian_spark_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	country_authority_mult = -0.05
+}
+
+sic_red_shirts_gather_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	building_training_rate_mult = -0.10
+}
+
+sic_court_in_panic_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_law_enactment_time_mult = 0.10
+}
+
+bourbon_monarchy_ecofix_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_production_tech_research_speed_mult = 0.10
+}
+
+bourbon_fix_sluggish_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	building_group_bg_manufacturing_throughput_add = -0.05
+	state_migration_pull_mult = -0.5
+	state_construction_mult = -0.10
+	state_decree_cost_mult = 0.20
+}
+
+garibaldi_coup = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
+	country_coup_resistance_mult = 5
+	country_law_enactment_time_mult = 0.20
+	country_authority_mult = -0.10
+	country_society_tech_research_speed_mult = -0.15
+}
+
+garibaldi_counter_coup = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	country_coup_resistance_mult = 5
+	country_authority_mult = -0.50
+	country_legitimacy_base_add = -20
+}

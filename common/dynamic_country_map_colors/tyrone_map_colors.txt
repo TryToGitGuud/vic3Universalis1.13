@@ -1,0 +1,313 @@
+﻿japanese_supreme_shogunate = {
+	color = "supreme_shogunate"
+	possible = {
+		exists = c:JAP
+		c:JAP ?= THIS
+		country_has_monarchy_law = yes
+		OR = {
+		has_variable = shogunate_supreme
+		any_active_law = {
+			has_amendment = amendment_type:amendment_taikunate
+		}
+		}
+	}
+}
+
+REPLACE:japanese_shogunate = {
+	color = "tokugawa_green"
+	possible = {
+		exists = c:JAP
+		c:JAP ?= THIS
+		country_has_monarchy_law = yes
+		has_law = law_type:law_bakufu
+		NOT = {
+			has_variable = shogunate_supreme
+		}
+	}
+}
+
+REPLACE:united_states_of_greater_austria = {
+	color = "usga_grey"
+
+	possible = {
+		OR = {
+			AND = {
+				c:KUK ?= this
+				was_formed_from = AUS
+				has_law = law_type:law_monarchy
+				OR = {
+					has_law_or_variant = law_type:law_oligarchy
+					has_law_or_variant = law_type:law_autocracy
+					has_law_or_variant = law_type:law_single_party_state
+				}				
+			}
+			AND = {
+				has_variable = empire_of_austria_variable
+				has_law = law_type:law_monarchy
+				c:AUS ?= this
+			}
+		}
+	}
+}
+
+communist_slavia = {
+	color = "red_dark"
+
+	possible = {
+		exists = c:ki_PSV
+		c:ki_PSV ?= THIS
+		has_law_or_variant = law_type:law_council_republic
+	}
+}
+
+dual_monarchy = {
+	color = "dual_monarchy_color"
+
+	possible = {
+		c:AUS ?= this
+		has_law = law_type:law_monarchy
+		has_variable = federated_hungarians_var
+		NOT = {	has_variable = empire_of_austria_variable }
+	}
+}
+
+commie_usa = {
+	color = "red_dark"
+
+	possible = {
+		OR = {
+			AND = {
+				exists = c:USA
+				c:USA ?= THIS
+			}
+			AND = {
+				exists = c:GAC
+				c:GAC ?= THIS
+			}
+		}
+		has_law_or_variant = law_type:law_council_republic
+	}
+}
+
+triple_monarchy = {
+	color = "triple_monarchy_color"
+
+	possible = {
+		c:AUS ?= this
+		has_law = law_type:law_monarchy
+		has_variable = federated_three_crowns_var
+		NOT = {	has_variable = empire_of_austria_variable }
+	}
+}
+
+REPLACE:brazil_integralist = {
+	color = "integralist_brazil_blue"
+	possible = {
+		exists = c:BRZ
+		c:BRZ ?= THIS
+		OR = {
+			coa_fascist_trigger = yes
+			AND = {
+				NOT = { exists = c:POR }
+				owns_entire_state_region = STATE_ESTREMADURA
+				country_has_primary_culture = cu:portuguese
+			}
+		}
+	}
+}
+
+REPLACE:brazil_republican = {
+	color = "republican_brazil_green"
+
+	possible = {
+		exists = c:BRZ
+		c:BRZ ?= THIS
+		OR = {
+			has_law_or_variant = law_type:law_parliamentary_republic
+			has_law_or_variant = law_type:law_presidential_republic
+			has_law_or_variant = law_type:law_council_republic
+			AND = {
+				NOT = { exists = c:POR }
+				has_law_or_variant = law_type:law_monarchy
+				owns_entire_state_region = STATE_ESTREMADURA			
+			}
+		}
+		NOT = {
+			coa_fascist_trigger = yes
+		}
+	}
+}
+
+ita_empire_monarchy = {
+	color = "ita_empire_monarchy_color"
+	possible = {
+		exists = c:ITA
+		c:ITA ?= this
+		coa_monarchy_trigger = yes
+		NOT = { coa_theocracy_trigger = yes }
+		NOT = { coa_corporate_state_trigger = yes }
+	}
+}
+
+ita_empire_theocracy = {
+	color = "ita_empire_theocracy_color"
+	possible = {
+		exists = c:ITA
+		c:ITA ?= this
+		coa_theocracy_trigger = yes
+	}
+}
+
+ita_empire_corporate = {
+	color = "ita_empire_corporate_color"
+	possible = {
+		exists = c:ITA
+		c:ITA ?= this
+		coa_corporate_state_trigger = yes
+	}
+}
+
+ita_empire_republic = {
+	color = "ita_empire_republic_color"
+	possible = {
+		exists = c:ITA
+		c:ITA ?= this
+		OR = {
+			has_law_or_variant = law_type:law_presidential_republic
+			has_law_or_variant = law_type:law_parliamentary_republic
+		}
+		NOT = { coa_dictatorship_trigger = yes }
+	}
+}
+
+ita_empire_dictator = {
+	color = "ita_empire_dictator_color"
+	possible = {
+		exists = c:ITA
+		c:ITA ?= this
+		coa_dictatorship_trigger = yes
+		NOT = { coa_communist_trigger = yes }
+	}
+}
+
+ita_empire_commie_rep = {
+	color = "ita_empire_commie_rep_color"
+	possible = {
+		exists = c:ITA
+		c:ITA ?= this
+		coa_communist_trigger = yes
+		NOT = { coa_dictatorship_trigger = yes }
+	}
+}
+
+ita_empire_commie_dict = {
+	color = "ita_empire_commie_dict_color"
+	possible = {
+		exists = c:ITA
+		c:ITA ?= this
+		coa_communist_trigger = yes
+		coa_dictatorship_trigger = yes
+	}
+}
+
+REPLACE:kalmar_union = {
+	color = "kalmar_union_color"
+	possible = {
+		exists = c:SCA
+		c:SCA ?= THIS
+		has_law = law_type:law_monarchy
+		OR = {
+			has_variable = denmark_kalmar_union_reborn
+			was_formed_from = DEN
+			ruler = {
+				has_culture = cu:danish
+			}
+		}
+	}
+}
+
+papal_italy = {
+	color = "papal_italy_color"
+
+	possible = {
+		c:ITA ?= this
+		was_formed_from = PAP
+		has_law_or_variant = law_type:law_theocracy
+	}
+}
+
+sicily_italy = {
+	color = "sicily_italy_color"
+
+	possible = {
+		c:ITA ?= this
+		was_formed_from = SIC
+		has_law_or_variant = law_type:law_monarchy
+	}
+}
+
+red_britain = {
+	color = "red_britain_color"
+
+	possible = {
+		
+		c:GBR ?= this
+		NOT = {
+			has_global_variable = imperial_federation_var
+		}
+		OR = {
+			has_law_or_variant = law_type:law_monarchy
+			has_law_or_variant = law_type:law_parliamentary_republic
+		}
+	}
+}
+
+REPLACE:nihilist_russia = {
+	color = "nihilist_russia_color"
+
+	possible = {
+		exists = c:RUS
+		c:RUS ?= THIS
+		OR = {
+			AND = {
+				has_law_or_variant = law_type:law_state_atheism
+				OR = {
+					ruler = {
+						has_ideology = ideology:ideology_nihilist
+					}
+					has_variable = pure_nilist
+				}
+			}
+			has_law_or_variant = law_type:law_anarchy
+		}
+	}
+}
+
+REPLACE:soviet_red = {
+	color = "red_dark"
+
+	possible = {
+		exists = c:RUS
+		c:RUS ?= THIS
+		has_law_or_variant = law_type:law_council_republic
+		NOT = {
+			has_law_or_variant = law_type:law_anarchy			
+		}
+	}
+}
+
+REPLACE:nihilist_germany = {
+	color = "nihilist_germany_color"
+
+	possible = {
+		exists = c:GER
+		c:GER ?= THIS
+		has_law_or_variant = law_type:law_state_atheism
+		OR = {
+			ruler = {
+				has_ideology = ideology:ideology_nihilist
+			}
+			has_variable = pure_nilist
+		}
+	}
+}

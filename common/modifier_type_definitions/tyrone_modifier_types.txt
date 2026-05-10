@@ -1,0 +1,24 @@
+state_sell_orders_meat_add = {
+	decimals = 0
+	color = neutral
+	game_data = {
+		ai_value = 0
+	}
+}
+
+unit_combat_unit_type_irregular_infantry_defense_add = {
+	decimals = 0
+	color = good
+	game_data = {
+		ai_value = 100
+	}
+}
+
+building_group_bg_ranching_employee_mult = {
+	decimals = 1
+	color = bad
+	percent = yes
+	game_data = {
+		ai_value = 0
+	}
+}
