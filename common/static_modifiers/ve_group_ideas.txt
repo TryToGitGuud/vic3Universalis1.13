@@ -319,29 +319,31 @@ qualification_idea_7_mdf = {
 
 naval_idea_1_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_convoy_requirements_mult = -0.1
-	state_port_range_add = 20
+	country_ship_group_supply_ships_construction_efficiency_add = 0.25
 }
 
 naval_idea_2_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_navy_defense_mult = 0.1
+	ship_armor_mult = 0.2
 }
 
 naval_idea_3_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_convoy_raiding_mult = 0.25
+	country_ship_group_torpedo_craft_construction_efficiency_add = 0.1
+	country_ship_type_protected_cruiser_construction_efficiency_add = 0.1
+	country_ship_type_armored_cruiser_construction_efficiency_add = 0.1
+	country_ship_type_light_cruiser_construction_efficiency_add = 0.1
 }
 
 naval_idea_4_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_ignores_landing_craft_penalty_bool = yes
+		state_building_naval_administration_max_level_add = 2
+		country_admiral_rank_impact_mult = 0.25
 }
 
 naval_idea_5_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	building_naval_base_throughput_add = 0.1
-	building_port_throughput_add = 0.1
+	building_port_throughput_add = 0.2
 }
 
 naval_idea_6_mdf = {
@@ -351,7 +353,7 @@ naval_idea_6_mdf = {
 
 naval_idea_7_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_navy_offense_mult = 0.1
+	ship_hull_damage_mult = 0.2
 }
 
 ethnocentrism_idea_1_mdf = {

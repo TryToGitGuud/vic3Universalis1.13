@@ -52,7 +52,7 @@ catholic_aspect_8_mdf = {
 protestant_pasive_mdf = {
 	icon = gfx/interface/catholic.dds
 	state_tax_capacity_mult = 0.25
-	country_improve_relations_speed_mult = 0.1
+	state_trade_advantage_mult = 0.15
 }
 
 protestant_aspect_1_mdf = {

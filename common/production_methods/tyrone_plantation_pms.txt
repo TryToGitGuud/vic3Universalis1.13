@@ -94,3 +94,17 @@ slave_exploitation_tobacco = {
 	}
 }
 
+REPLACE:default_building_banana_plantation = {
+	texture = "gfx/interface/icons/production_method_icons/plantation_production.dds"
+
+	building_modifiers = {
+		workforce_scaled = {
+			goods_output_fruit_add = 55
+		}
+
+		level_scaled = {
+			building_employment_laborers_add = 5000
+			building_employment_farmers_add = 1000
+		}
+	}
+}
