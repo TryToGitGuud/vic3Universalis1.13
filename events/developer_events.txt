@@ -546,12 +546,6 @@ dev.5 = {
 			}
 			if = {
 				limit = {
-					has_modifier = age_1_bonus_8
-				}
-				remove_modifier = age_1_bonus_8
-			}
-			if = {
-				limit = {
 					has_modifier = age_1_bonus_9
 				}
 				remove_modifier = age_1_bonus_9

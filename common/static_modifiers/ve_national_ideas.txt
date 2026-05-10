@@ -771,7 +771,7 @@ swe_idea_7 = {
 
 brz_idea_tradition_1 = {
 	icon = gfx/interface/intelligensia.dds
-	building_group_bg_coffee_plantations_throughput_add = 0.20
+	building_coffee_plantation_throughput_add = 0.20
 }
 
 brz_idea_tradition_2 = {

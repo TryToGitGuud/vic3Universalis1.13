@@ -24,12 +24,12 @@ age_1_bonus_3 = {
 
 age_1_bonus_4 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_max_declared_interests_add = 2
+	state_birth_rate_mult = 0.05
 }
 
 age_1_bonus_5 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	state_urbanization_per_level_mult = -0.1
+	building_group_bg_government_construction_efficiency_add = 0.5
 }
 
 age_1_bonus_6 = {

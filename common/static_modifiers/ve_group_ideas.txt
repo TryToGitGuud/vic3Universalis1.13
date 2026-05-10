@@ -270,7 +270,7 @@ administrative_idea_7_mdf = {
 
 qualification_idea_1_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	state_pop_qualifications_mult = 0.35
+	state_turmoil_effects_mult = -0.25
 }
 
 qualification_idea_2_mdf = {
@@ -280,18 +280,17 @@ qualification_idea_2_mdf = {
 
 qualification_idea_3_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_society_tech_research_speed_mult = 0.075
+	country_society_tech_research_speed_mult = 0.1
 }
 
 qualification_idea_4_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	building_arts_academy_throughput_add = 0.3
-	building_university_throughput_add = 0.1
+	building_university_throughput_add = 0.25
 }
 
 qualification_idea_5_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	state_migration_push_mult = -0.25
+	building_economy_of_scale_level_cap_add = 15
 }
 
 qualification_idea_6_mdf = {
