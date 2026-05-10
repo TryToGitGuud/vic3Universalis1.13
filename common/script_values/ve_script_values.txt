@@ -1005,27 +1005,45 @@ monthly_idea_points = {
 	}
 	if = {
 		limit = {
-			literacy_rate <= 0.25
+			literacy_rate <= 0.2
 		}
 		add = 1
 	}
 	else_if = {
 		limit = {
-			literacy_rate <= 0.5
+			literacy_rate <= 0.3
 		}
 		add = 2
 	}
 	else_if = {
 		limit = {
-			literacy_rate <= 0.75
+			literacy_rate <= 0.45
 		}
 		add = 3
 	}
 	else_if = {
 		limit = {
-			literacy_rate <= 1
+			literacy_rate <= 0.6
 		}
 		add = 4
+	}
+	else_if = {
+		limit = {
+			literacy_rate <= 0.75
+		}
+		add = 5
+	}
+	else_if = {
+		limit = {
+			literacy_rate <= 0.9
+		}
+		add = 6
+	}
+	else_if = {
+		limit = {
+			literacy_rate <= 1
+		}
+		add = 7
 	}
 }
 
@@ -1061,6 +1079,12 @@ monthly_piety_points = {
 			has_law = law_type:law_theocracy
 		}
 		add = 2
+	}
+	if = {
+		limit = {
+			country_has_state_religion = rel:atheist
+		}
+		add = 5
 	}
 	if = {
 		limit = {
