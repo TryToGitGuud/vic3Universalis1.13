@@ -127,6 +127,96 @@ ve_national_idea_1 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_1
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_1
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_1
@@ -262,6 +352,96 @@ ve_national_idea_2 = {
 			}
 			add_modifier = {
 				name = usa_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_2
 				months = -1
 			}
 		}
@@ -403,6 +583,96 @@ ve_national_idea_3 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_3
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_3
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_3
@@ -538,6 +808,96 @@ ve_national_idea_4 = {
 			}
 			add_modifier = {
 				name = usa_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_4
 				months = -1
 			}
 		}
@@ -679,6 +1039,96 @@ ve_national_idea_5 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_5
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_5
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_5
@@ -817,6 +1267,96 @@ ve_national_idea_6 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_6
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_6
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_6
@@ -952,6 +1492,96 @@ ve_national_idea_7 = {
 			}
 			add_modifier = {
 				name = usa_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_7
 				months = -1
 			}
 		}
@@ -1135,6 +1765,132 @@ ve_national_idea_tradition = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = dutch_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = dutch_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = ita_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:ITA
+				this = c:ITA
+			}
+			add_modifier = {
+				name = ita_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = ita_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = spa_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = spa_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = swe_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = swe_idea_tradition_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = brz_idea_tradition_2
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_tradition_1
@@ -1268,6 +2024,96 @@ ve_national_idea_bonus = {
 			}
 			add_modifier = {
 				name = usa_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:NET
+				this = c:NET
+			}
+			add_modifier = {
+				name = dutch_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SAR
+				this = c:SAR
+			}
+			add_modifier = {
+				name = ita_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:UNL
+				this = c:UNL
+			}
+			add_modifier = {
+				name = dutch_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SPA
+				this = c:SPA
+			}
+			add_modifier = {
+				name = spa_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:IBE
+				this = c:IBE
+			}
+			add_modifier = {
+				name = spa_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SWE
+				this = c:SWE
+			}
+			add_modifier = {
+				name = swe_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:SCA
+				this = c:SCA
+			}
+			add_modifier = {
+				name = swe_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				exists = c:BRZ
+				this = c:BRZ
+			}
+			add_modifier = {
+				name = brz_idea_bonus
 				months = -1
 			}
 		}

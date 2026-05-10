@@ -10,7 +10,7 @@ cologne_hs_mdf = {
 
 santiago_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	state_trade_advantage_mult = 0.15
+	state_trade_capacity_mult = 0.15
 }
 
 notre_dame_hs_mdf = {
@@ -25,7 +25,7 @@ jerusalem_hs_mdf = {
 
 wittenberg_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	state_conversion_mult = 0.15
+	state_birth_rate_mult = 0.03
 }
 
 prag_hs_mdf = {
@@ -35,23 +35,24 @@ prag_hs_mdf = {
 
 canterbury_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	state_trade_advantage_from_capacity_add = 0.15
+	country_law_enactment_time_mult = -0.1
 }
 
 constantinople_hs_mdf = {
 	icon = gfx/interface/monument.dds
+	country_max_weekly_construction_progress_add = 10
 	country_loyalism_increases_second_rate_citizen_mult = 0.2
 	country_loyalism_increases_full_acceptance_mult = 0.2
 }
 
 alexandria_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	state_education_access_add = 0.015
+	state_education_access_add = 0.1
 }
 
 antioch_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	unit_army_defense_add = 10
+	unit_army_defense_mult = 0.1
 }
 
 yerevan_hs_mdf = {
@@ -71,7 +72,7 @@ medina_hs_mdf = {
 
 baghdad_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	state_education_access_add = 0.015
+	state_education_access_add = 0.1
 }
 
 damascus_hs_mdf = {
@@ -82,6 +83,7 @@ damascus_hs_mdf = {
 maidane_naqshe_jahan_hs_mdf = {
 	icon = gfx/interface/monument.dds
 	unit_morale_recovery_mult = 0.15
+	state_education_access_add = 0.1
 }
 
 sinai_hs_mdf = {
@@ -111,7 +113,7 @@ pagan_hs_mdf = {
 
 ise_grand_shrine_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	unit_morale_damage_mult = 0.1
+	country_construction_add = 45
 }
 
 lumbini_hs_mdf = {
@@ -126,7 +128,7 @@ mathura_hs_mdf = {
 
 varanasi_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	state_education_access_add = 0.015
+	state_education_access_add = 0.1
 }
 
 ayodhya_hs_mdf = {
@@ -146,7 +148,7 @@ dwarka_hs_mdf = {
 
 harmandir_sahib_hs_mdf = {
 	icon = gfx/interface/monument.dds
-	# TODO_1_13_REMAP: political_movement_radicalism_mult has no direct 1.13 modifier equivalent; old value was = -0.1
+	political_movement_radicalism_mult = -0.1
 }
 
 kashi_vishwanath_temple_hs_mdf = {

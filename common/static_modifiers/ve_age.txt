@@ -44,7 +44,7 @@ age_1_bonus_7 = {
 
 age_1_bonus_8 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_convoys_capacity_mult = 0.25
+	state_working_adult_ratio_add = 0.15
 }
 
 age_1_bonus_9 = {
@@ -54,22 +54,22 @@ age_1_bonus_9 = {
 
 age_1_bonus_10 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_radicals_from_conquest_mult = -0.25
+	country_radicals_from_conquest_mult = -0.75
 }
 
 age_1_bonus_11 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_infamy_decay_mult = 0.15
+	country_infamy_decay_mult = 0.25
 }
 
 age_2_bonus_1 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_law_enactment_max_setbacks_add = 1
+	country_law_enactment_time_mult = -0.15
 }
 
 age_2_bonus_2 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_resource_discovery_chance_mult = 0.2
+	country_resource_discovery_chance_mult = 0.25
 	country_institution_colonial_affairs_max_investment_add = 1
 }
 
@@ -80,9 +80,9 @@ age_2_bonus_3 = {
 
 age_2_bonus_4 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_radicalism_increases_violent_hostility_mult = -0.03
-	country_radicalism_increases_cultural_erasure_mult = -0.03
-	country_radicalism_increases_open_prejudice_mult = -0.03
+	country_radicalism_increases_violent_hostility_mult = -0.3
+	country_radicalism_increases_cultural_erasure_mult = -0.3
+	country_radicalism_increases_open_prejudice_mult = -0.3
 }
 
 age_2_bonus_5 = {
@@ -92,13 +92,13 @@ age_2_bonus_5 = {
 
 age_2_bonus_6 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	state_assimilation_mult = 0.2
-	state_conversion_mult = 0.2
+	state_assimilation_mult = 0.25
+	state_conversion_mult = 0.25
 }
 
 age_2_bonus_7 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	state_colony_growth_speed_mult = 0.2
+	state_colony_growth_speed_mult = 0.3
 }
 
 age_2_bonus_8 = {
@@ -108,19 +108,17 @@ age_2_bonus_8 = {
 
 age_2_bonus_9 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_resource_depletion_chance_mult = -0.25
+	state_working_adult_ratio_add = 0.03
 }
 
 age_2_bonus_10 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	country_radicalism_increases_violent_hostility_mult = -0.015
-	country_radicalism_increases_cultural_erasure_mult = -0.015
-	country_radicalism_increases_open_prejudice_mult = -0.015
+	building_group_bg_manufacturing_throughput_add = 0.1
 }
 
 age_2_bonus_11 = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	state_assimilation_mult = 0.35
+	building_training_rate_mult = 0.1
 }
 
 age_3_bonus_1 = {

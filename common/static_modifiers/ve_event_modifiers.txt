@@ -35,8 +35,8 @@ ve_weak_bureaucracy = {
 
 ve_support_new_model_bureaucracy = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	# TODO_1_13_REMAP: state_pop_support_law_appointed_bureaucrats_mult has no direct 1.13 modifier equivalent; old value was = 0.25
-	# TODO_1_13_REMAP: state_pop_support_law_elected_bureaucrats_mult has no direct 1.13 modifier equivalent; old value was = 0.25
+	state_pop_support_law_appointed_bureaucrats_mult = 0.25
+	state_pop_support_law_elected_bureaucrats_mult = 0.25
 }
 
 ve_military_theory = {
@@ -51,7 +51,7 @@ ve_economy_improvements = {
 
 ve_inefficient_production = {
 	icon = gfx/interface/icon_splendor_tiny.dds
-	# TODO_1_13_REMAP: building_production_mult has no direct 1.13 modifier equivalent; old value was = -0.2
+	building_production_mult = -0.2
 }
 
 ve_successful_bureaucracy = {
