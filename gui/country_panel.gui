@@ -594,8 +594,8 @@ types country_panel_types
 					textbox = {
 						autoresize = yes
 						visible = "[Not(CountryPanel.GetCountry.IsColonizable)]"
-						raw_text = "#variable @flotillas! [Country.GetWarships|0]#!"
-						tooltip = "PANEL_MILITARY_NAVY_CURRENT_FLOTILLAS_TOOLTIP"
+						raw_text = "#variable @ships! [Country.GetNumShips|0]#!"
+						tooltip = "PANEL_MILITARY_NAVY_CURRENT_SHIPS_TOOLTIP"
 						using = fontsize_mega
 						minimumsize = { 60 -1 }
 						align = right|nobaseline
@@ -870,24 +870,24 @@ types country_panel_types
 					}
 				}
 
-				#FLOTILLAS
+				#SHIPS
 				country_stats_entry = {
-					alpha = "[TransparentIfZero_int32(Country.GetWarships)]"
+					alpha = "[TransparentIfZero_int32(Country.GetNumShips)]"
 					blockoverride "stats_tooltip" {
-						tooltip = "PANEL_MILITARY_NAVY_CURRENT_FLOTILLAS_TOOLTIP"
+						tooltip = "PANEL_MILITARY_NAVY_CURRENT_SHIPS_TOOLTIP"
 					}
 					blockoverride "information_icon" {
 						texture = "gfx/interface/icons/generic_icons/flotillas.dds"
 					}
 					blockoverride "stats_label" {
-						text = "FLOTILLAS"
+						text = "SHIPS_CONCEPT"
 					}
 					blockoverride "stats_value" {
-						raw_text = "#variable [Country.GetWarships|0]#!"
+						raw_text = "#variable [Country.GetNumShips|0]#!"
 					}
 
 					blockoverride "stats_rank" {
-						text = "[Country.GetFlotillasRanking]"
+						text = "[Country.GetShipsRanking]"
 					}
 				}
 
@@ -4162,8 +4162,8 @@ types country_info
 			textbox = {
 				autoresize = yes
 				visible = "[Not(CountryPanel.GetCountry.IsColonizable)]"
-				raw_text = "#variable @flotillas![Country.GetWarships|0]#!"
-				tooltip = PANEL_MILITARY_NAVY_CURRENT_FLOTILLAS_TOOLTIP
+				raw_text = "#variable @ships![Country.GetNumShips|0]#!"
+				tooltip = PANEL_MILITARY_NAVY_CURRENT_SHIPS_TOOLTIP
 				using = fontsize_mega
 				minimumsize = { 60 -1 }
 				align = hcenter|nobaseline
