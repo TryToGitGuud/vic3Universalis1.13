@@ -3,27 +3,45 @@
 	random_valid = no
 	text = {
 		trigger = {
-			literacy_rate <= 0.25
+			literacy_rate <= 0.2
 		}
 		localization_key = idea_points_cus_loc_1
 	}
 	text = {
 		trigger = {
-			literacy_rate <= 0.5
+			literacy_rate <= 0.3
 		}
 		localization_key = idea_points_cus_loc_2
 	}
 	text = {
 		trigger = {
-			literacy_rate <= 0.75
+			literacy_rate <= 0.45
 		}
 		localization_key = idea_points_cus_loc_3
 	}
 	text = {
 		trigger = {
-			literacy_rate <= 1
+			literacy_rate <= 0.6
 		}
 		localization_key = idea_points_cus_loc_4
+	}
+	text = {
+		trigger = {
+			literacy_rate <= 0.75
+		}
+		localization_key = idea_points_cus_loc_5
+	}
+	text = {
+		trigger = {
+			literacy_rate <= 0.9
+		}
+		localization_key = idea_points_cus_loc_6
+	}
+	text = {
+		trigger = {
+			literacy_rate <= 1
+		}
+		localization_key = idea_points_cus_loc_7
 	}
 }
 
