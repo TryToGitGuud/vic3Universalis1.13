@@ -217,6 +217,24 @@ ve_national_idea_1 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_1
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_1
@@ -442,6 +460,24 @@ ve_national_idea_2 = {
 			}
 			add_modifier = {
 				name = brz_idea_2
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_2
 				months = -1
 			}
 		}
@@ -673,6 +709,24 @@ ve_national_idea_3 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_3
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_3
@@ -898,6 +952,24 @@ ve_national_idea_4 = {
 			}
 			add_modifier = {
 				name = brz_idea_4
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_4
 				months = -1
 			}
 		}
@@ -1129,6 +1201,24 @@ ve_national_idea_5 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_5
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_5
@@ -1357,6 +1447,24 @@ ve_national_idea_6 = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_6
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_6
@@ -1582,6 +1690,24 @@ ve_national_idea_7 = {
 			}
 			add_modifier = {
 				name = brz_idea_7
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_7
 				months = -1
 			}
 		}
@@ -1891,6 +2017,28 @@ ve_national_idea_tradition = {
 				months = -1
 			}
 		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = per_idea_tradition_2
+				months = -1
+			}
+		}
 		else = {
 			add_modifier = {
 				name = generic_idea_tradition_1
@@ -2114,6 +2262,24 @@ ve_national_idea_bonus = {
 			}
 			add_modifier = {
 				name = brz_idea_bonus
+				months = -1
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					AND = {
+						exists = c:PER
+						this = c:PER
+					}
+					AND = {
+						exists = c:ki_ANS
+						this = c:ki_ANS
+					}
+				}
+			}
+			add_modifier = {
+				name = per_idea_bonus
 				months = -1
 			}
 		}

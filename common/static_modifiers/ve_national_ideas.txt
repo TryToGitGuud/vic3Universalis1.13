@@ -820,3 +820,54 @@ brz_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
 	state_migration_pull_add = 10
 }
+
+per_idea_tradition_1 = {
+	icon = gfx/interface/intelligensia.dds
+	building_group_bg_plantations_employee_mult = -0.3
+}
+
+per_idea_tradition_2 = {
+	icon = gfx/interface/intelligensia.dds
+	state_construction_mult = 0.15
+}
+
+per_idea_bonus = {
+	icon = gfx/interface/intelligensia.dds
+	building_oil_rig_throughput_add = 0.2
+}
+
+per_idea_1 = {
+	icon = gfx/interface/intelligensia.dds
+	country_law_enactment_time_mult = -0.10
+}
+
+per_idea_2 = {
+	icon = gfx/interface/intelligensia.dds
+	state_infrastructure_from_population_add = 1
+	state_infrastructure_from_population_max_add = 40
+}
+
+per_idea_3 = {
+	icon = gfx/interface/intelligensia.dds
+	country_bureaucracy_investment_cost_factor_mult = -0.1
+}
+
+per_idea_4 = {
+	icon = gfx/interface/intelligensia.dds
+	state_mortality_mult = -0.1
+}
+
+per_idea_5 = {
+	icon = gfx/interface/intelligensia.dds
+	state_trade_advantage_mult = 0.15
+}
+
+per_idea_6 = {
+	icon = gfx/interface/intelligensia.dds
+	unit_army_offense_mult = 0.1
+}
+
+per_idea_7 = {
+	icon = gfx/interface/intelligensia.dds
+	building_group_bg_plantations_throughput_add = 0.15
+}

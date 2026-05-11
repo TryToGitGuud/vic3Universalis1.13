@@ -3914,3 +3914,291 @@ texticon = {
     fontsize = 45
   }
 }
+texticon = {
+  icon = PER_idea_icon_1_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_2_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/engineering_university.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_bonus
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_bonus_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_1
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/ab_allow_feudal_de_jure_law.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_1_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/ab_allow_feudal_de_jure_law_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_2
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/icon_transit_hub.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_2_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/icon_transit_hub_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_3
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/professional_bureaucrats.dds"
+    fontsize = 65
+  }
+}
+texticon = {
+  icon = PER_idea_icon_3_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/professional_bureaucrats_black.dds"
+    fontsize = 65
+  }
+}
+texticon = {
+  icon = PER_idea_icon_4
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/field_hospitals.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_4_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/field_hospitals_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_5
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/trade_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_5_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/trade_efficiency_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_6
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_6_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_7
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PER_idea_icon_7_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_1_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_2_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/engineering_university.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_bonus
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_bonus_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_1
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/ab_allow_feudal_de_jure_law.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_1_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/ab_allow_feudal_de_jure_law_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_2
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/icon_transit_hub.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_2_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/icon_transit_hub_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_3
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/professional_bureaucrats.dds"
+    fontsize = 65
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_3_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/professional_bureaucrats_black.dds"
+    fontsize = 65
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_4
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/field_hospitals.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_4_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/field_hospitals_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_5
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/trade_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_5_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/trade_efficiency_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_6
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_6_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_7
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = ki_ANS_idea_icon_7_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency_black.dds"
+    fontsize = 50
+  }
+}

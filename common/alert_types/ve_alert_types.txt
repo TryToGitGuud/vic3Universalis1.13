@@ -90,7 +90,7 @@ can_use_missionary = {
 		has_variable = avaible_missionaries
 		avaible_missionaries >= 1
 		NOT = {
-			has_law = law_type:law_total_separation
+			has_law_or_variant = law_type:law_total_separation
 		}
 	}
 	type = important_action
@@ -103,7 +103,7 @@ can_use_culture_missionary = {
 		has_variable = avaible_culture_missionaries
 		avaible_culture_missionaries >= 1
 		NOT = {
-			has_law = law_type:law_multicultural
+			has_law_or_variant = law_type:law_multicultural
 		}
 	}
 	type = important_action

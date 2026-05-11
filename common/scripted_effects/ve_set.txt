@@ -541,6 +541,8 @@ set_national_idea = {
 				this = c:CHI
 				this = c:JAP
 				this = c:USA
+				this = c:PER
+				this = c:ki_ANS
 			}
 		}
 		set_variable = generic_idea_country
@@ -925,6 +927,36 @@ national_idea_traditions = {
 			}
 			add_modifier = {
 				name = usa_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:PER
+					this = c:PER
+				}
+				AND = {
+					exists = c:ki_ANS
+					this = c:ki_ANS
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = per_idea_tradition_1
+					has_modifier = per_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = per_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = per_idea_tradition_2
 				months = -1
 			}
 		}

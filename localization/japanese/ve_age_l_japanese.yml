@@ -27,7 +27,7 @@
  ve_victorian_age_obj_title_6:0 "#tooltip_header From Village to City"
  ve_victorian_age_obj_desc_6:0 "Have less than 50% peasant rate"
  ve_victorian_age_obj_title_7:0 "#tooltip_header Global Diplomacy"
- ve_victorian_age_obj_desc_7:0 "Have at least 8 Declared interests"
+ ve_victorian_age_obj_desc_7:0 "Have at least 100 ships"
  ve_imperialism_age_obj_title_1:0 "#tooltip_header Colonialism"
  ve_imperialism_age_obj_desc_1:0 "Activate at least 1 colonial law"
  ve_imperialism_age_obj_title_2:0 "#tooltip_header Diplomatic Power"

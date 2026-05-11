@@ -2,9 +2,9 @@
 	AND = {
 		root.average_sol >= 10
 		AND = {
-			has_law = law_type:law_slavery_banned
+			has_law_or_variant = law_type:law_slavery_banned
 			NOT = {
-				has_law = law_type:law_serfdom
+				has_law_or_variant = law_type:law_serfdom
 			}
 		}
 		government_legitimacy >= 75
@@ -17,15 +17,15 @@
 			pop_type = peasants
 			percent < 0.5
 		}
-		num_declared_interests >= 8
+		navy_size >= 100
 	}
 }
 
 age_2_obj_triggers = {
 	AND = {
 		OR = {
-			has_law = law_type:law_colonial_resettlement
-			has_law = law_type:law_colonial_exploitation
+			has_law_or_variant = law_type:law_colonial_resettlement
+			has_law_or_variant = law_type:law_colonial_exploitation
 		}
 		any_subject_or_below = {
 			OR = {
@@ -55,7 +55,7 @@ age_2_obj_triggers = {
 age_3_obj_triggers = {
 	AND = {
 		NOT = {
-			has_law = law_type:law_monarchy
+			has_law_or_variant = law_type:law_monarchy
 		}
 		OR = {
 			institution_investment_level = {
@@ -124,9 +124,9 @@ golden_age_3_obj_trigger = {
 			amount >= 4
 			root.average_sol >= 10
 			AND = {
-				has_law = law_type:law_slavery_banned
+				has_law_or_variant = law_type:law_slavery_banned
 				NOT = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 			}
 			government_legitimacy >= 75
@@ -139,7 +139,7 @@ golden_age_3_obj_trigger = {
 				pop_type = peasants
 				percent < 0.5
 			}
-			num_declared_interests >= 8
+			navy_size >= 100
 		}
 	}
 	trigger_else_if = {
@@ -149,8 +149,8 @@ golden_age_3_obj_trigger = {
 		calc_true_if = {
 			amount >= 4
 			OR = {
-				has_law = law_type:law_colonial_resettlement
-				has_law = law_type:law_colonial_exploitation
+				has_law_or_variant = law_type:law_colonial_resettlement
+				has_law_or_variant = law_type:law_colonial_exploitation
 			}
 			any_subject_or_below = {
 				OR = {
@@ -183,7 +183,7 @@ golden_age_3_obj_trigger = {
 		calc_true_if = {
 			amount >= 4
 			NOT = {
-				has_law = law_type:law_monarchy
+				has_law_or_variant = law_type:law_monarchy
 			}
 			OR = {
 				institution_investment_level = {

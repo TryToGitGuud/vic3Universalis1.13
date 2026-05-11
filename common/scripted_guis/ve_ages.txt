@@ -66,8 +66,8 @@ ve_age_obj_1 = {
 			}
 			hidden_trigger = {
 				OR = {
-					has_law = law_type:law_colonial_resettlement
-					has_law = law_type:law_colonial_exploitation
+					has_law_or_variant = law_type:law_colonial_resettlement
+					has_law_or_variant = law_type:law_colonial_exploitation
 				}
 			}
 		}
@@ -77,7 +77,7 @@ ve_age_obj_1 = {
 			}
 			hidden_trigger = {
 				NOT = {
-					has_law = law_type:law_monarchy
+					has_law_or_variant = law_type:law_monarchy
 				}
 			}
 		}
@@ -97,9 +97,9 @@ ve_age_obj_2 = {
 				has_global_variable = ve_age_1_started
 			}
 			hidden_trigger = {
-				has_law = law_type:law_slavery_banned
+				has_law_or_variant = law_type:law_slavery_banned
 				NOT = {
-					has_law = law_type:law_serfdom
+					has_law_or_variant = law_type:law_serfdom
 				}
 			}
 		}
@@ -317,7 +317,7 @@ ve_age_obj_7 = {
 			limit = {
 				has_global_variable = ve_age_1_started
 			}
-			num_declared_interests >= 8
+			navy_size >= 100
 		}
 		trigger_else_if = {
 			limit = {

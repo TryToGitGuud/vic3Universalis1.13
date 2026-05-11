@@ -83,6 +83,20 @@
 		}
 		american_ideas = yes
 	}
+	else_if = {
+		limit = {
+			exists = c:PER
+			this = c:PER
+		}
+		persian_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:ki_ANS
+			this = c:ki_ANS
+		}
+		persian_ideas = yes
+	}
 	else = {
 		generic_ideas = yes
 	}
@@ -172,6 +186,20 @@ cancel_national_idea_mdf = {
 			this = c:USA
 		}
 		cancel_american_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:PER
+			this = c:PER
+		}
+		cancel_persian_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:ki_ANS
+			this = c:ki_ANS
+		}
+		cancel_persian_ideas = yes
 	}
 	else = {
 		cancel_generic_ideas = yes
@@ -675,7 +703,7 @@ ve_law_change_effects = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_state_religion
+				has_law_or_variant = law_type:law_state_religion
 				total_missionaries != 3
 			}
 			set_variable = {
@@ -686,7 +714,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_freedom_of_conscience
+				has_law_or_variant = law_type:law_freedom_of_conscience
 				total_missionaries != 1
 			}
 			set_variable = {
@@ -697,7 +725,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_state_atheism
+				has_law_or_variant = law_type:law_state_atheism
 				total_missionaries != 3
 			}
 			set_variable = {
@@ -708,7 +736,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_total_separation
+				has_law_or_variant = law_type:law_total_separation
 				total_missionaries != 0
 			}
 			set_variable = {
@@ -719,7 +747,7 @@ ve_law_change_effects = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_ethnostate
+				has_law_or_variant = law_type:law_ethnostate
 				total_culture_missionaries != 4
 			}
 			set_variable = {
@@ -730,7 +758,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_national_supremacy
+				has_law_or_variant = law_type:law_national_supremacy
 				total_culture_missionaries != 3
 			}
 			set_variable = {
@@ -741,7 +769,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_racial_segregation
+				has_law_or_variant = law_type:law_racial_segregation
 				total_culture_missionaries != 2
 			}
 			set_variable = {
@@ -752,7 +780,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_cultural_exclusion
 				total_culture_missionaries != 1
 			}
 			set_variable = {
@@ -763,7 +791,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_multicultural
+				has_law_or_variant = law_type:law_multicultural
 				total_culture_missionaries != 0
 			}
 			set_variable = {
@@ -779,7 +807,7 @@ ve_law_change_effects = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_state_religion
+				has_law_or_variant = law_type:law_state_religion
 				total_missionaries != 5
 			}
 			set_variable = {
@@ -790,7 +818,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_freedom_of_conscience
+				has_law_or_variant = law_type:law_freedom_of_conscience
 				total_missionaries != 3
 			}
 			set_variable = {
@@ -801,7 +829,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_state_atheism
+				has_law_or_variant = law_type:law_state_atheism
 				total_missionaries != 5
 			}
 			set_variable = {
@@ -812,7 +840,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_total_separation
+				has_law_or_variant = law_type:law_total_separation
 				total_missionaries != 0
 			}
 			set_variable = {
@@ -823,7 +851,7 @@ ve_law_change_effects = {
 		}
 		if = {
 			limit = {
-				has_law = law_type:law_ethnostate
+				has_law_or_variant = law_type:law_ethnostate
 				total_culture_missionaries != 6
 			}
 			set_variable = {
@@ -834,7 +862,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_national_supremacy
+				has_law_or_variant = law_type:law_national_supremacy
 				total_culture_missionaries != 5
 			}
 			set_variable = {
@@ -845,7 +873,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_racial_segregation
+				has_law_or_variant = law_type:law_racial_segregation
 				total_culture_missionaries != 4
 			}
 			set_variable = {
@@ -856,7 +884,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_cultural_exclusion
 				total_culture_missionaries != 3
 			}
 			set_variable = {
@@ -867,7 +895,7 @@ ve_law_change_effects = {
 		}
 		else_if = {
 			limit = {
-				has_law = law_type:law_multicultural
+				has_law_or_variant = law_type:law_multicultural
 				total_culture_missionaries != 0
 			}
 			set_variable = {
