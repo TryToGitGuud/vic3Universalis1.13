@@ -1252,6 +1252,12 @@ ve_change_religion_law_effects = {
 ve_change_citizenship_law_effects = {
 	if = {
 		limit = {
+			has_law_or_variant = law_type:law_subjecthood
+		}
+		add = 3
+	}
+	if = {
+		limit = {
 			has_law_or_variant = law_type:law_ethnostate
 		}
 		value = 4

@@ -433,13 +433,13 @@ jap_idea_4 = {
 
 jap_idea_5 = {
 	icon = gfx/interface/intelligensia.dds
-	country_radicals_from_conquest_mult = -0.25
+	country_radicals_from_conquest_mult = -0.50
 }
 
 jap_idea_6 = {
 	icon = gfx/interface/intelligensia.dds
 	building_training_rate_mult = 0.2
-	state_bureaucracy_population_base_cost_factor_mult = -0.25
+	state_bureaucracy_population_base_cost_factor_mult = -0.3
 }
 
 jap_idea_7 = {
@@ -833,7 +833,7 @@ per_idea_tradition_2 = {
 
 per_idea_bonus = {
 	icon = gfx/interface/intelligensia.dds
-	building_oil_rig_throughput_add = 0.2
+	building_group_bg_oil_extraction_throughput_add = 0.2
 }
 
 per_idea_1 = {
@@ -870,4 +870,55 @@ per_idea_6 = {
 per_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
 	building_group_bg_plantations_throughput_add = 0.15
+}
+
+ire_idea_tradition_1 = {
+	icon = gfx/interface/intelligensia.dds
+	country_government_dividends_efficiency_add = 0.15
+}
+
+ire_idea_tradition_2 = {
+	icon = gfx/interface/intelligensia.dds
+	state_infrastructure_from_population_add = 1
+	state_infrastructure_from_population_max_add = 40
+}
+
+ire_idea_bonus = {
+	icon = gfx/interface/intelligensia.dds
+	state_building_construction_sector_max_level_add = 50
+}
+
+ire_idea_1 = {
+	icon = gfx/interface/intelligensia.dds
+	country_society_tech_research_speed_mult = 0.15
+}
+
+ire_idea_2 = {
+	icon = gfx/interface/intelligensia.dds
+	state_education_access_add = 0.15
+}
+
+ire_idea_3 = {
+	icon = gfx/interface/intelligensia.dds
+	state_decree_cost_mult = -0.25
+}
+
+ire_idea_4 = {
+	icon = gfx/interface/intelligensia.dds
+	building_group_bg_government_throughput_add = 0.25
+}
+
+ire_idea_5 = {
+	icon = gfx/interface/intelligensia.dds
+	country_government_dividends_efficiency_add = 0.1
+}
+
+ire_idea_6 = {
+	icon = gfx/interface/intelligensia.dds
+	state_market_access_price_impact = 0.03
+}
+
+ire_idea_7 = {
+	icon = gfx/interface/intelligensia.dds
+	state_birth_rate_mult = 0.03
 }

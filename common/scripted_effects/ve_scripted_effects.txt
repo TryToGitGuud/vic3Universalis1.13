@@ -97,6 +97,20 @@
 		}
 		persian_ideas = yes
 	}
+	else_if = {
+		limit = {
+			exists = c:IRE
+			this = c:IRE
+		}
+		irish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:ki_CEL
+			this = c:ki_CEL
+		}
+		irish_ideas = yes
+	}
 	else = {
 		generic_ideas = yes
 	}
@@ -200,6 +214,20 @@ cancel_national_idea_mdf = {
 			this = c:ki_ANS
 		}
 		cancel_persian_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:IRE
+			this = c:IRE
+		}
+		cancel_irish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:ki_CEL
+			this = c:ki_CEL
+		}
+		cancel_irish_ideas = yes
 	}
 	else = {
 		cancel_generic_ideas = yes
@@ -747,6 +775,17 @@ ve_law_change_effects = {
 		}
 		if = {
 			limit = {
+				has_law_or_variant = law_type:law_subjecthood
+				total_culture_missionaries != 4
+			}
+			set_variable = {
+				name = total_culture_missionaries
+				value = 4
+			}
+			call_cultural_missionaries_effect = yes
+		}
+		else_if = {
+			limit = {
 				has_law_or_variant = law_type:law_ethnostate
 				total_culture_missionaries != 4
 			}
@@ -850,6 +889,17 @@ ve_law_change_effects = {
 			call_missionaries_effect = yes
 		}
 		if = {
+			limit = {
+				has_law_or_variant = law_type:law_subjecthood
+				total_culture_missionaries != 4
+			}
+			set_variable = {
+				name = total_culture_missionaries
+				value = 4
+			}
+			call_cultural_missionaries_effect = yes
+		}
+		else_if = {
 			limit = {
 				has_law_or_variant = law_type:law_ethnostate
 				total_culture_missionaries != 6
