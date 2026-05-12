@@ -57,7 +57,7 @@ REPLACE:pm_default_building_big_ben = {
 	state_modifiers = {
 		workforce_scaled = {
 			building_throughput_add = 0.01
-			building_group_bg_manufacturing_employee_mult = -0.10
+			building_group_bg_manufacturing_employee_mult = -0.25
 		}
 	}
 

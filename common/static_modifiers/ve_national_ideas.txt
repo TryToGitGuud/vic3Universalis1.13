@@ -895,7 +895,7 @@ ire_idea_1 = {
 
 ire_idea_2 = {
 	icon = gfx/interface/intelligensia.dds
-	state_education_access_add = 0.15
+	state_institution_impact_add = 0.2
 }
 
 ire_idea_3 = {
@@ -921,4 +921,71 @@ ire_idea_6 = {
 ire_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
 	state_birth_rate_mult = 0.03
+}
+
+pol_idea_tradition_1 = {
+	icon = gfx/interface/intelligensia.dds
+	battle_defense_owned_province_mult = 0.1
+}
+
+pol_idea_tradition_2 = {
+	icon = gfx/interface/intelligensia.dds
+	goods_output_liquor_mult = 0.25
+}
+
+pol_idea_bonus = {
+	icon = gfx/interface/intelligensia.dds
+	unit_army_defense_add = 5
+}
+
+pol_idea_1 = {
+	icon = gfx/interface/intelligensia.dds
+	state_aristocrats_investment_pool_contribution_add = 0.1
+}
+
+pol_idea_2 = {
+	icon = gfx/interface/intelligensia.dds
+	state_tax_collection_mult = 0.05
+}
+
+pol_idea_3 = {
+	icon = gfx/interface/intelligensia.dds
+	country_support_separatism_strength_mult = 0.5
+}
+
+pol_idea_4 = {
+	icon = gfx/interface/intelligensia.dds
+	country_legitimacy_ideological_incoherence_mult = -0.25
+}
+
+pol_idea_5 = {
+	icon = gfx/interface/intelligensia.dds
+	country_radicals_from_conquest_mult = -0.5
+}
+
+pol_idea_6 = {
+	icon = gfx/interface/intelligensia.dds
+	state_birth_rate_mult = 0.025
+}
+
+pol_idea_7 = {
+	icon = gfx/interface/intelligensia.dds
+	country_weekly_innovation_max_add = 10
+}
+
+plc_idea_1 = {
+	icon = gfx/interface/intelligensia.dds
+	state_aristocrats_investment_pool_contribution_add = 0.1
+	state_aristocrats_investment_pool_efficiency_mult = 0.25
+}
+
+plc_idea_6 = {
+	icon = gfx/interface/intelligensia.dds
+	state_birth_rate_mult = 0.05
+}
+
+plc_idea_bonus = {
+	icon = gfx/interface/intelligensia.dds
+	unit_army_defense_add = 5
+	battle_defense_owned_province_mult = 0.1
 }

@@ -4490,3 +4490,579 @@ texticon = {
     fontsize = 50
   }
 }
+texticon = {
+  icon = BRZ_idea_icon_1_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_2_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/engineering_university.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_bonus
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/tolerance_heathen.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_bonus_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/tolerance_heathen_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_1
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/engineering_university.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_1_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/engineering_university_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_2
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/trade_route.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_2_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/trade_route_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_3
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_3_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_4
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_4_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/local_production_efficiency_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_5
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/icon_transit_hub.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_5_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/icon_transit_hub_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_6
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_6_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_7
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = BRZ_idea_icon_7_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_1_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/province_warscore_cost.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_2_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_bonus
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_bonus_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_1
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_1_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_2
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_2_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_3
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/global_unrest.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_3_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/global_unrest_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_4
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/legitimacy.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_4_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/legitimacy_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_5
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/unrest_suppression_icon.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_5_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/unrest_suppression_icon_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_6
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_6_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_7
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/adm_tech_cost_modifier.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = POL_idea_icon_7_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/adm_tech_cost_modifier_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_1_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/province_warscore_cost.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_2_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_bonus
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_bonus_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_1
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_1_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_2
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_2_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_3
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/global_unrest.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_3_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/global_unrest_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_4
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/legitimacy.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_4_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/legitimacy_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_5
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/unrest_suppression_icon.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_5_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/unrest_suppression_icon_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_6
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_6_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_7
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/adm_tech_cost_modifier.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = KRA_idea_icon_7_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/adm_tech_cost_modifier_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_1_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/province_warscore_cost.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_2_trad
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_bonus
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_bonus_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/discipline_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_1
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_1_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/capitalists_15_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_2
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_2_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/privilege_gold_mint_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_3
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/global_unrest.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_3_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/global_unrest_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_4
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/legitimacy.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_4_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/legitimacy_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_5
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/unrest_suppression_icon.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_5_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/unrest_suppression_icon_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_6
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_6_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/no_migration_controls_black.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_7
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/adm_tech_cost_modifier.dds"
+    fontsize = 50
+  }
+}
+texticon = {
+  icon = PLC_idea_icon_7_black
+  iconsize = {
+    offset = { 0 15 }
+    texture = "gfx/interface/ve_national_ideas/adm_tech_cost_modifier_black.dds"
+    fontsize = 50
+  }
+}

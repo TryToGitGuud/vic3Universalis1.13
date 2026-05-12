@@ -77,7 +77,7 @@ diplomatic_idea_7_mdf = {
 
 offensive_idea_1_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_army_offense_mult = 0.05
+	unit_kill_rate_add = 0.1
 }
 
 offensive_idea_2_mdf = {
@@ -87,7 +87,7 @@ offensive_idea_2_mdf = {
 
 offensive_idea_3_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_provinces_captured_mult = 0.1
+	unit_morale_damage_mult = 0.1
 }
 
 offensive_idea_4_mdf = {
@@ -97,12 +97,12 @@ offensive_idea_4_mdf = {
 
 offensive_idea_5_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_experience_gain_mult = 0.5
+	state_building_barrack_max_level_add = 20
 }
 
 offensive_idea_6_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_offense_water_mult = 0.075
+	building_group_bg_military_industry_construction_efficiency_add = 0.2
 }
 
 offensive_idea_7_mdf = {
@@ -205,8 +205,7 @@ defensive_idea_2_mdf = {
 
 defensive_idea_3_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_war_exhaustion_casualties_mult = -0.1
-	country_military_wages_mult = -0.1
+	country_military_goods_cost_mult = -0.1
 }
 
 defensive_idea_4_mdf = {
@@ -216,17 +215,17 @@ defensive_idea_4_mdf = {
 
 defensive_idea_5_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_kill_rate_add = 0.08
+	character_battle_condition_dug_in_mult = 0.5
 }
 
 defensive_idea_6_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_army_defense_mult = 0.05
+	interest_group_ig_armed_forces_pol_str_mult = 1
 }
 
 defensive_idea_7_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_supply_consumption_mult = -0.15
+	state_building_barrack_max_level_add = 20
 }
 
 administrative_idea_1_mdf = {
@@ -442,6 +441,7 @@ militarization_idea_1_mdf = {
 	icon = gfx/interface/icon_ideas.dds
 	building_automotive_industry_throughput_add = 0.1
 	building_arms_industry_throughput_add = 0.1
+	building_arms_industry_throughput_add = 0.1
 	building_artillery_foundries_throughput_add = 0.1
 	building_military_shipyards_throughput_add = 0.1
 }
@@ -482,13 +482,14 @@ militarization_idea_7_mdf = {
 
 politics_idea_1_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_legitimacy_base_add = 10
+	country_legitimacy_base_add = 15
+	state_turmoil_effects_mult = -0.25
+	country_agitator_slots_add = 1
 }
 
 politics_idea_2_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	# country_revolution_secession_speed_add = -0.1
-	country_agitator_slots_add = 1
+	country_government_dividends_efficiency_add = 0.1
 }
 
 politics_idea_3_mdf = {
@@ -498,8 +499,7 @@ politics_idea_3_mdf = {
 
 politics_idea_4_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	political_movement_radicalism_mult = -0.05
-	state_turmoil_effects_mult = -0.15
+	country_institution_size_change_speed_mult = 0.4
 }
 
 politics_idea_5_mdf = {
@@ -509,13 +509,12 @@ politics_idea_5_mdf = {
 
 politics_idea_6_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	interest_group_approval_add = 2s
+	interest_group_approval_add = 5
 }
 
 politics_idea_7_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_authority_add = 200
-	country_promotion_ig_attraction_mult = 0.5
+	state_institution_impact_add = 0.2
 }
 
 syndicalism_idea_1_mdf = {

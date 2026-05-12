@@ -545,6 +545,10 @@ set_national_idea = {
 				this = c:ki_ANS
 				this = c:IRE
 				this = c:ki_CEL
+				this = c:BRZ
+				this = c:POL
+				this = c:KRA
+				this = c:PLC
 			}
 		}
 		set_variable = generic_idea_country
@@ -989,6 +993,62 @@ national_idea_traditions = {
 			}
 			add_modifier = {
 				name = ire_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			exists = c:BRZ
+			this = c:BRZ
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = brz_idea_tradition_1
+					has_modifier = brz_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = brz_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = brz_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:POL
+					this = c:POL
+				}
+				AND = {
+					exists = c:KRA
+					this = c:KRA
+				}
+				AND = {
+					exists = c:PLC
+					this = c:PLC
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = pol_idea_tradition_1
+					has_modifier = pol_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = pol_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = pol_idea_tradition_2
 				months = -1
 			}
 		}
