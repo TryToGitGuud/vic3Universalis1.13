@@ -2538,6 +2538,17 @@
 	s:STATE_ULSTER={
 		region_state:GBR={
 			create_building={
+				building="building_government_administration"
+				add_ownership={
+					country={
+						country="c:GBR"
+						levels=3
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_horizontal_drawer_cabinets" "pm_professional_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building={
 				building="building_livestock_ranch"
 				add_ownership={
 					building={
@@ -2592,6 +2603,17 @@
 	s:STATE_MUNSTER={
 		region_state:GBR={
 			create_building={
+				building="building_government_administration"
+				add_ownership={
+					country={
+						country="c:GBR"
+						levels=5
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_horizontal_drawer_cabinets" "pm_professional_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building={
 				building="building_rye_farm"
 				add_ownership={
 					building={
@@ -2620,11 +2642,22 @@
 	s:STATE_LEINSTER={
 		region_state:GBR={
 			create_building={
+				building="building_government_administration"
+				add_ownership={
+					country={
+						country="c:GBR"
+						levels=5
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_horizontal_drawer_cabinets" "pm_professional_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building={
 				building="building_university"
 				add_ownership={
 					country={
 						country="c:GBR"
-						levels=1
+						levels=5
 					}
 				}
 				reserves=1
@@ -2697,6 +2730,17 @@
 	}
 	s:STATE_CONNAUGHT={
 		region_state:GBR={
+			create_building={
+				building="building_government_administration"
+				add_ownership={
+					country={
+						country="c:GBR"
+						levels=5
+					}
+				}
+				reserves=1
+				activate_production_methods={ "pm_horizontal_drawer_cabinets" "pm_professional_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building={
 				building="building_rye_farm"
 				add_ownership={
