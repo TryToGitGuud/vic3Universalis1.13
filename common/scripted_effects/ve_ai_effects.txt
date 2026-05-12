@@ -189,8 +189,11 @@ ve_ai_choose_idea = {
 			6 = {
 				if = {
 					limit = {
-						NOT = {
+						var:idea_group_unlocked > 0
+						NOR = {
 							has_variable = can_go_offensive
+							has_variable = can_go_defensive
+							has_variable = can_go_naval
 						}
 					}
 					set_variable = can_go_offensive
@@ -207,8 +210,11 @@ ve_ai_choose_idea = {
 			6 = {
 				if = {
 					limit = {
-						NOT = {
+						var:idea_group_unlocked > 0
+						NOR = {
+							has_variable = can_go_offensive
 							has_variable = can_go_defensive
+							has_variable = can_go_naval
 						}
 					}
 					set_variable = can_go_defensive
@@ -225,7 +231,10 @@ ve_ai_choose_idea = {
 			6 = {
 				if = {
 					limit = {
-						NOT = {
+						var:idea_group_unlocked > 0
+						NOR = {
+							has_variable = can_go_offensive
+							has_variable = can_go_defensive
 							has_variable = can_go_naval
 						}
 					}

@@ -2131,6 +2131,92 @@ embrace_idea_group = {
 			}
 		}
 	}
+	is_valid = {
+		custom_tooltip = {
+			text = embrace_idea_slot_available_tt
+			NOT = {
+				var:idea_group_cap == var:idea_group_unlocked
+			}
+		}
+		switch = {
+			trigger = scope:idea_group
+			flag:innovative_idea = {
+				always = yes
+			}
+			flag:economic_idea = {
+				always = yes
+			}
+			flag:administrative_idea = {
+				always = yes
+			}
+			flag:ethnocentrism_idea = {
+				always = yes
+			}
+			flag:politics_idea = {
+				always = yes
+			}
+			flag:diplomatic_idea = {
+				always = yes
+			}
+			flag:trade_idea = {
+				always = yes
+			}
+			flag:qualification_idea = {
+				always = yes
+			}
+			flag:humanist_idea = {
+				always = yes
+			}
+			flag:syndicalism_idea = {
+				always = yes
+			}
+			flag:offensive_idea = {
+				custom_tooltip = {
+					text = military_idea_not_first_tt
+					var:idea_group_unlocked > 0
+				}
+				custom_tooltip = {
+					text = military_idea_mutually_exclusive_tt
+					NOR = {
+						has_variable = can_go_defensive
+						has_variable = can_go_naval
+					}
+				}
+			}
+			flag:defensive_idea = {
+				custom_tooltip = {
+					text = military_idea_not_first_tt
+					var:idea_group_unlocked > 0
+				}
+				custom_tooltip = {
+					text = military_idea_mutually_exclusive_tt
+					NOR = {
+						has_variable = can_go_offensive
+						has_variable = can_go_naval
+					}
+				}
+			}
+			flag:naval_idea = {
+				custom_tooltip = {
+					text = military_idea_not_first_tt
+					var:idea_group_unlocked > 0
+				}
+				custom_tooltip = {
+					text = military_idea_mutually_exclusive_tt
+					NOR = {
+						has_variable = can_go_offensive
+						has_variable = can_go_defensive
+					}
+				}
+			}
+			flag:militarization_idea = {
+				always = yes
+			}
+			flag:imperialist_idea = {
+				always = yes
+			}
+		}
+	}
 	effect = {
 		switch = {
 			trigger = scope:idea_group

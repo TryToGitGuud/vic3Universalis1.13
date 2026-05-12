@@ -37,3 +37,6 @@
  ethnocentrism_idea_5_tt:0 "#positive_value +0.7% Missionary and Bureaucrat Power"
  ethnocentrism_idea_7_tt:0 "#P +2 Missionary and +2 Bureaucrats"
  embrace_idea_tt:0 "#Y An idea group slot will be activated every 10 years. The maximum idea group limit is 8."
+ embrace_idea_slot_available_tt:0 "An idea group slot is available."
+ military_idea_not_first_tt:0 "Offensive, Defensive, and Naval Ideas cannot be selected as your first idea group."
+ military_idea_mutually_exclusive_tt:0 "Only one of Offensive, Defensive, and Naval Ideas may be selected at a time."

@@ -1332,9 +1332,9 @@ ve_gui_panel_types
 										size = { 100% 40 }
 										text = "ve_embrace"
 										visible = "[GetScriptedGui('embrace_idea_group').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
-										enabled = "[GreaterThan_CFixedPoint(GetPlayer.MakeScope.Var('idea_group_cap').GetValue,GetPlayer.MakeScope.Var('idea_group_unlocked').GetValue)]"
+										enabled = "[GetScriptedGui('embrace_idea_group').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
 										onclick = "[GetScriptedGui('embrace_idea_group').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
-										tooltip = "embrace_idea_tt"
+										tooltip = "[GetScriptedGui('embrace_idea_group').BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
 										using = tooltip_above
 										using = budget_resume_all_button_sound
 									}
@@ -1927,8 +1927,8 @@ ve_gui_panel_types
 										size = { 100% 40 }
 										text = "ve_embrace"
 										visible = "[GetScriptedGui('embrace_idea_group').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
-										enabled = "[GreaterThan_CFixedPoint(GetPlayer.MakeScope.Var('idea_group_cap').GetValue,GetPlayer.MakeScope.Var('idea_group_unlocked').GetValue)]"
-										tooltip = "embrace_idea_tt"
+										enabled = "[GetScriptedGui('embrace_idea_group').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
+										tooltip = "[GetScriptedGui('embrace_idea_group').BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
 										onclick = "[GetScriptedGui('embrace_idea_group').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
 										using = tooltip_above
 										using = budget_resume_all_button_sound
@@ -2522,8 +2522,8 @@ ve_gui_panel_types
 										size = { 100% 40 }
 										text = "ve_embrace"
 										visible = "[GetScriptedGui('embrace_idea_group').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
-										enabled = "[GreaterThan_CFixedPoint(GetPlayer.MakeScope.Var('idea_group_cap').GetValue,GetPlayer.MakeScope.Var('idea_group_unlocked').GetValue)]"
-										tooltip = "embrace_idea_tt"
+										enabled = "[GetScriptedGui('embrace_idea_group').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
+										tooltip = "[GetScriptedGui('embrace_idea_group').BuildTooltip(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
 										onclick = "[GetScriptedGui('embrace_idea_group').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('idea_group',MakeScopeFlag(StateRegion.MakeScope.Var('idea_group').GetFlagName)).End)]"
 										using = tooltip_above
 										using = budget_resume_all_button_sound
