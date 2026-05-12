@@ -271,6 +271,13 @@ types journal_entry_panel_types {
 				### Italy: Developing Industry – three investment bars (North, Padana, South) ###
 				italy_developing_industry_bars = {}
 
+				flowcontainer = {
+					name = "custom_widget_container_1"
+					visible = "[JournalEntry.HasCustomWidget('custom_widget_container_1')]"
+					parentanchor = hcenter
+					direction = vertical
+				}
+
 				# time out info
 				flowcontainer = {
 					visible = "[JournalEntry.CanTimeOut]"
@@ -308,6 +315,13 @@ types journal_entry_panel_types {
 						alpha = 0.5
 						using = entry_bg_fancy_dark
 					}
+				}
+
+				flowcontainer = {
+					name = "custom_widget_container_2"
+					visible = "[JournalEntry.HasCustomWidget('custom_widget_container_2')]"
+					parentanchor = hcenter
+					direction = vertical
 				}
 
 				dynamicgridbox = {

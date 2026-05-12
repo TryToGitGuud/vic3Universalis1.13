@@ -1,0 +1,265 @@
+intl_raise_motion_anarchist = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	potential = {
+		has_variable = bakunin_var
+		owner ?= {
+			OR = {
+				has_journal_entry = je_internationale
+				has_journal_entry = je_mp_faction_world
+			}
+		}
+	}
+
+	possible = {
+		scope:actor = {
+			custom_tooltip = {
+				text = intl_raise_motion_no_active_vote_tt
+				NOT = { intl_vote_is_active = yes }
+			}
+			custom_tooltip = {
+				text = intl_raise_motion_no_cooldown_tt
+				NOT = { has_variable = intl_motion_cooldown_months }
+			}
+		}
+		custom_tooltip = {
+			text = intl_raise_motion_anarchist_laws_tt
+			OR = {
+				AND = {
+					intl_law_permanently_enabled = { LAW = marxist_council_republic }
+					NOT = { intl_law_permanently_enabled = { LAW = anarchist_council_republic } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = marxist_economy }
+					NOT = { intl_law_permanently_enabled = { LAW = anarchist_economy } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = mutualist_economy }
+					NOT = { intl_law_permanently_enabled = { LAW = anarchist_economy } }
+				}
+			}
+		}
+	}
+
+	effect = {
+		scope:actor = {
+			trigger_event = { id = intl_vote_events.11 popup = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+intl_raise_motion_mutualist = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	potential = {
+		has_variable = proudhon_var
+		owner ?= {
+			OR = {
+				has_journal_entry = je_internationale
+				has_journal_entry = je_mp_faction_world
+			}
+		}
+	}
+
+	possible = {
+		scope:actor = {
+			custom_tooltip = {
+				text = intl_raise_motion_no_active_vote_tt
+				NOT = { intl_vote_is_active = yes }
+			}
+			custom_tooltip = {
+				text = intl_raise_motion_no_cooldown_tt
+				NOT = { has_variable = intl_motion_cooldown_months }
+			}
+		}
+		custom_tooltip = {
+			text = intl_raise_motion_mutualist_laws_tt
+			OR = {
+				AND = {
+					intl_law_permanently_enabled = { LAW = anarchist_council_republic }
+					NOT = { intl_law_permanently_enabled = { LAW = mutualist_council_republic } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = marxist_council_republic }
+					NOT = { intl_law_permanently_enabled = { LAW = mutualist_council_republic } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = marxist_economy }
+					NOT = { intl_law_permanently_enabled = { LAW = mutualist_economy } }
+				}
+			}
+		}
+	}
+
+	effect = {
+		scope:actor = {
+			trigger_event = { id = intl_vote_events.12 popup = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+intl_raise_motion_syndicalist = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	potential = {
+		has_variable = bel_de_paepe_var
+		owner ?= {
+			OR = {
+				has_journal_entry = je_internationale
+				has_journal_entry = je_mp_faction_world
+			}
+		}
+	}
+
+	possible = {
+		scope:actor = {
+			custom_tooltip = {
+				text = intl_raise_motion_no_active_vote_tt
+				NOT = { intl_vote_is_active = yes }
+			}
+			custom_tooltip = {
+				text = intl_raise_motion_no_cooldown_tt
+				NOT = { has_variable = intl_motion_cooldown_months }
+			}
+		}
+		custom_tooltip = {
+			text = intl_raise_motion_syndicalist_laws_tt
+			OR = {
+				AND = {
+					intl_law_permanently_enabled = { LAW = anarchist_council_republic }
+					NOT = { intl_law_permanently_enabled = { LAW = syndicalist_council_republic } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = marxist_council_republic }
+					NOT = { intl_law_permanently_enabled = { LAW = syndicalist_council_republic } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = mutualist_economy }
+					NOT = { intl_law_permanently_enabled = { LAW = syndicalist_economy } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = marxist_economy }
+					NOT = { intl_law_permanently_enabled = { LAW = syndicalist_economy } }
+				}
+			}
+		}
+	}
+
+	effect = {
+		scope:actor = {
+			trigger_event = { id = intl_vote_events.13 popup = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+intl_raise_motion_blanquist = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	potential = {
+		has_variable = blanqui_var
+		owner ?= {
+			OR = {
+				has_journal_entry = je_internationale
+				has_journal_entry = je_mp_faction_world
+			}
+		}
+	}
+
+	possible = {
+		scope:actor = {
+			custom_tooltip = {
+				text = intl_raise_motion_no_active_vote_tt
+				NOT = { intl_vote_is_active = yes }
+			}
+			custom_tooltip = {
+				text = intl_raise_motion_no_cooldown_tt
+				NOT = { has_variable = intl_motion_cooldown_months }
+			}
+		}
+		custom_tooltip = {
+			text = intl_raise_motion_blanquist_laws_tt
+			OR = {
+				AND = {
+					intl_law_permanently_enabled = { LAW = anarchist_council_republic }
+					NOT = { intl_law_permanently_enabled = { LAW = blanquist_presidential_republic } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = mutualist_economy }
+					NOT = { intl_law_permanently_enabled = { LAW = blanquist_economy } }
+				}
+			}
+		}
+	}
+
+	effect = {
+		scope:actor = {
+			trigger_event = { id = intl_vote_events.14 popup = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+intl_raise_motion_marxist = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	potential = {
+		has_variable = karl_marx_var
+		owner ?= {
+			OR = {
+				has_journal_entry = je_internationale
+				has_journal_entry = je_mp_faction_world
+			}
+		}
+	}
+
+	possible = {
+		scope:actor = {
+			custom_tooltip = {
+				text = intl_raise_motion_no_active_vote_tt
+				NOT = { intl_vote_is_active = yes }
+			}
+			custom_tooltip = {
+				text = intl_raise_motion_no_cooldown_tt
+				NOT = { has_variable = intl_motion_cooldown_months }
+			}
+		}
+		custom_tooltip = {
+			text = intl_raise_motion_marxist_laws_tt
+			OR = {
+				AND = {
+					intl_law_permanently_enabled = { LAW = anarchist_council_republic }
+					NOT = { intl_law_permanently_enabled = { LAW = marxist_council_republic } }
+				}
+				AND = {
+					intl_law_permanently_enabled = { LAW = mutualist_economy }
+					NOT = { intl_law_permanently_enabled = { LAW = marxist_economy } }
+				}
+			}
+		}
+	}
+
+	effect = {
+		scope:actor = {
+			trigger_event = { id = intl_vote_events.15 popup = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}

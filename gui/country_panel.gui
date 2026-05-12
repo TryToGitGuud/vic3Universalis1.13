@@ -3274,7 +3274,7 @@ types country_panel_treaties_types
 
 		### ARTICLE WITH NO INPUT
 		article_icon_item = {
-			visible = "[Not(Or6(Article.HasType('goods_transfer'), Article.HasType('money_transfer'), Article.HasType('acquire_monopoly_for_company'), Article.HasType('law_commitment'), Article.HasType('transfer_subject'), Article.RequiresInput('country')))]"
+			visible = "[Not(Or7(Article.HasType('goods_transfer'), Article.HasType('money_transfer'), Article.HasType('lump_sum_money_transfer'), Article.HasType('acquire_monopoly_for_company'), Article.HasType('law_commitment'), Article.HasType('transfer_subject'), Article.RequiresInput('country')))]"
 		}
 
 		### COUNTRY INPUT
@@ -3338,7 +3338,7 @@ types country_panel_treaties_types
 
 		### MONEY TRANSFER
 		article_icon_item = {
-			visible = "[Article.HasType('money_transfer')]"
+			visible = "[Or(Article.HasType('money_transfer'), Article.HasType('lump_sum_money_transfer'))]"
 
 			blockoverride "additional_properties" {
 				textbox = {
