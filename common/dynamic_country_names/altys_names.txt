@@ -1,0 +1,103 @@
+REPLACE:IRE = { # ireland
+	dynamic_country_name = {
+		name = dyn_c_high_kingdom_of_ireland
+		adjective = IRE_ADJ
+
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				OR = {
+					has_law_or_variant = law_type:law_monarchy
+					has_law_or_variant = law_type:law_social_monarchy
+				}
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_republic_of_magos
+		adjective = IRE_ADJ
+
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				has_law_or_variant = law_type:law_parliamentary_republic
+				has_law_or_variant = law_type:law_technocracy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_commonwealth_of_ireland
+		adjective = IRE_ADJ
+
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				OR = {
+					has_law_or_variant = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_council_republic
+				}
+			}
+		}
+	}
+}
+
+ki_CEL = { # celtica
+	dynamic_country_name = {
+		name = dyn_c_high_kingdom_of_celtica
+		adjective = CELTICA_ADJ
+
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				OR = {
+					has_law_or_variant = law_type:law_monarchy
+					has_law_or_variant = law_type:law_social_monarchy
+				}
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_republic_of_magos
+		adjective = CELTICA_ADJ
+
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				has_law_or_variant = law_type:law_parliamentary_republic
+				has_law_or_variant = law_type:law_technocracy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_commonwealth_of_celtica
+		adjective = CELTICA_ADJ
+
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor = {
+				OR = {
+					has_law_or_variant = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_council_republic
+				}
+			}
+		}
+	}
+}
