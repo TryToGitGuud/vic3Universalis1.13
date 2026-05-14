@@ -85,6 +85,34 @@
 	}
 	else_if = {
 		limit = {
+			exists = c:SAR
+			this = c:SAR
+		}
+		italian_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:ITA
+			this = c:ITA
+		}
+		italian_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:SPA
+			this = c:SPA
+		}
+		spanish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:IBE
+			this = c:IBE
+		}
+		spanish_ideas = yes
+	}
+	else_if = {
+		limit = {
 			exists = c:PER
 			this = c:PER
 		}
@@ -228,6 +256,34 @@ cancel_national_idea_mdf = {
 			this = c:USA
 		}
 		cancel_american_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:SAR
+			this = c:SAR
+		}
+		cancel_italian_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:ITA
+			this = c:ITA
+		}
+		cancel_italian_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:SPA
+			this = c:SPA
+		}
+		cancel_spanish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:IBE
+			this = c:IBE
+		}
+		cancel_spanish_ideas = yes
 	}
 	else_if = {
 		limit = {

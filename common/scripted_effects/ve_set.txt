@@ -541,6 +541,10 @@ set_national_idea = {
 				this = c:CHI
 				this = c:JAP
 				this = c:USA
+				this = c:SAR
+				this = c:ITA
+				this = c:SPA
+				this = c:IBE
 				this = c:PER
 				this = c:ki_ANS
 				this = c:IRE
@@ -933,6 +937,66 @@ national_idea_traditions = {
 			}
 			add_modifier = {
 				name = usa_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:SAR
+					this = c:SAR
+				}
+				AND = {
+					exists = c:ITA
+					this = c:ITA
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = ita_idea_tradition_1
+					has_modifier = ita_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = ita_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = ita_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:SPA
+					this = c:SPA
+				}
+				AND = {
+					exists = c:IBE
+					this = c:IBE
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = spa_idea_tradition_1
+					has_modifier = spa_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = spa_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = spa_idea_tradition_2
 				months = -1
 			}
 		}
