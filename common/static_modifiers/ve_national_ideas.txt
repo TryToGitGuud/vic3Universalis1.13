@@ -1,7 +1,8 @@
 gbr_idea_tradition_1 = {
 	icon = gfx/interface/intelligensia.dds
-	ship_armor_mult = 0.35
-	ship_hull_damage_mult = 0.35
+	unit_navy_defense_add = 4
+	unit_navy_offense_add = 4
+
 }
 
 gbr_idea_tradition_2 = {
@@ -117,6 +118,7 @@ ger_idea_tradition_1 = {
 
 ger_idea_tradition_2 = {
 	icon = gfx/interface/intelligensia.dds
+	state_construction_mult = 0.1
 	tax_dividends_add = 0.1
 }
 
@@ -134,7 +136,7 @@ ger_idea_1 = {
 ger_idea_2 = {
 	icon = gfx/interface/intelligensia.dds
 	country_tech_spread_mult = 0.1
-	building_university_throughput_add = 0.1
+	building_university_throughput_add = 0.25
 }
 
 ger_idea_3 = {
@@ -161,7 +163,7 @@ ger_idea_6 = {
 
 ger_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
-	state_birth_rate_mult = 0.04
+	state_birth_rate_mult = 0.07
 }
 
 aus_idea_tradition_1 = {
@@ -217,7 +219,6 @@ aus_idea_6 = {
 
 aus_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
-	country_migration_restrictiveness_add = 41
 	country_authority_mult = 0.1
 }
 
@@ -338,12 +339,14 @@ tur_idea_7 = {
 
 qng_idea_tradition_1 = {
 	icon = gfx/interface/intelligensia.dds
-	country_influence_mult = 0.15
+	unit_army_defense_add = -5
+	unit_army_offense_add = -5
 }
 
 qng_idea_tradition_2 = {
 	icon = gfx/interface/intelligensia.dds
 	state_trade_capacity_mult = 0.15
+	state_tax_capacity_mult = 0.25
 }
 
 qng_idea_bonus = {
@@ -403,7 +406,7 @@ jap_idea_tradition_2 = {
 jap_idea_bonus = {
 	icon = gfx/interface/intelligensia.dds
 	country_diplomatic_play_maneuvers_add = 50
-	state_birth_rate_mult = 0.03
+	state_birth_rate_mult = 0.05
 }
 
 jap_idea_1 = {
@@ -414,7 +417,7 @@ jap_idea_1 = {
 jap_idea_2 = {
 	icon = gfx/interface/intelligensia.dds
 	country_weekly_innovation_max_add = 10
-	state_education_access_add = 0.05
+	state_education_access_add = 0.15
 }
 
 jap_idea_3 = {
@@ -425,21 +428,21 @@ jap_idea_3 = {
 
 jap_idea_4 = {
 	icon = gfx/interface/intelligensia.dds
-	building_group_bg_mining_throughput_add = 0.1
-	building_group_bg_logging_throughput_add = 0.1
-	building_group_bg_fishing_throughput_add = 0.1
-	building_group_bg_whaling_throughput_add = 0.1
+	state_working_adult_ratio_add = 0.1
 }
 
 jap_idea_5 = {
 	icon = gfx/interface/intelligensia.dds
+	building_training_rate_mult = 0.2
 	country_radicals_from_conquest_mult = -0.50
 }
 
 jap_idea_6 = {
 	icon = gfx/interface/intelligensia.dds
-	building_training_rate_mult = 0.2
-	state_bureaucracy_population_base_cost_factor_mult = -0.3
+	building_group_bg_mining_throughput_add = 0.2
+	building_group_bg_logging_throughput_add = 0.2
+	building_group_bg_fishing_throughput_add = 0.2
+	building_group_bg_whaling_throughput_add = 0.2
 }
 
 jap_idea_7 = {
@@ -454,7 +457,7 @@ usa_idea_tradition_1 = {
 
 usa_idea_tradition_2 = {
 	icon = gfx/interface/intelligensia.dds
-	country_legitimacy_govt_total_votes_add = 8
+	country_legitimacy_govt_total_votes_add = 10
 }
 
 usa_idea_bonus = {
@@ -553,6 +556,22 @@ dutch_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
 	country_liberty_desire_of_subjects_add = -0.1
 	country_allow_enacting_decrees_in_subject_bool = yes
+}
+unl_idea_tradition_2 = { # replaces dutch_tradition_2
+	icon = gfx/interface/intelligensia.dds
+	building_economy_of_scale_level_cap_add = 20
+}
+
+unl_idea_4 = { # replaces dutch_idea_4
+	icon = gfx/interface/intelligensia.dds
+	state_mortality_wealth_mult = -0.007
+}
+
+unl_idea_7 = { # replaces dutch_idea_7
+	icon = gfx/interface/intelligensia.dds
+	country_liberty_desire_of_subjects_add = -0.1
+	country_allow_enacting_decrees_in_subject_bool = yes
+	state_incorporation_speed_mult = 1
 }
 
 generic_idea_tradition_1 = {
@@ -768,6 +787,21 @@ swe_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
 	goods_output_electricity_mult = 0.2
 }
+sca_idea_tradition_1 = { # replaces swe_idea_tradition_1
+	icon = gfx/interface/intelligensia.dds
+	state_working_adult_ratio_add = 0.1
+}
+
+sca_idea_5 = { # replaces swe_idea_5
+	icon = gfx/interface/intelligensia.dds
+	state_migration_pull_mult = 0.2
+}
+
+sca_idea_6 = { # replaces swe_idea_6
+	icon = gfx/interface/intelligensia.dds
+	state_birth_rate_mult = 0.05
+}
+
 
 brz_idea_tradition_1 = {
 	icon = gfx/interface/intelligensia.dds

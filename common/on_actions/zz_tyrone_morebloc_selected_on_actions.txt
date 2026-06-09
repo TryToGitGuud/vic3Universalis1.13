@@ -1,0 +1,11 @@
+on_monthly_pulse_country = {
+	on_actions = {
+		tyrone_morebloc_dynamic_modifier_on_action
+	}
+}
+
+tyrone_morebloc_dynamic_modifier_on_action = {
+	effect = {
+		tyrone_morebloc_dynamic_modifier_handler = yes
+	}
+}

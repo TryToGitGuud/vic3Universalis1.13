@@ -70,6 +70,7 @@
 
 	timeout = very_long_modifier_time
 
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }
 
@@ -82,12 +83,11 @@ je_hawaiian_interest = { #JE for GPs so that they can see the situation is ongoi
 	scripted_button = intervene_in_hawaii_button
 
 	is_shown_when_inactive = {
-		has_global_variable = gp_hawaii_interest
-		country_rank = rank_value:great_power
+		has_interest_marker_in_region = sr:region_oceania
 	}
 
 	possible = {
-		has_interest_marker_in_region = sr:region_oceania
+		has_technology_researched = civilizing_mission
 		country_rank = rank_value:great_power
 	}
 
@@ -146,25 +146,14 @@ je_hawaiian_interest = { #JE for GPs so that they can see the situation is ongoi
 	}
 
 	fail = {
-		OR = {
-			custom_tooltip = {
-				text = hawaii_coup_happened_tt
-				NOT = { has_global_variable = gp_hawaii_interest }
-				has_global_variable = hawaiian_coup
-			}
-			custom_tooltip = {
-				text = hawaii_government_secured_tt
-				NOT = { has_global_variable = gp_hawaii_interest }
-				has_global_variable = hawaiian_je_success
-			}
-		}
 	}
 
 	invalid = {
-		c:HAW ?= {
-			is_country_alive = no
+		NOT = {
+			c:HAW = exists
 		}
 	}
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 
 	timeout = very_long_modifier_time

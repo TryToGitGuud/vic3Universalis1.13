@@ -1,4 +1,4 @@
-#law_type:law_council_republic 
+﻿#law_type:law_council_republic 
 #law_type:law_monarchy
 #law_type:law_theocracy
 #law_type:law_presidential_republic

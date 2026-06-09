@@ -107,9 +107,18 @@ germany_rework.1 = {
 					on_created = {
 					}
 				}
+				trigger_event = { id = austria_events.4 popup = yes}
 			}
 		}
-		trigger_event = { id = austria_events.4 popup = yes}
+		if = {
+			limit = {
+				exists = c:HUN
+				c:HUN ?= {
+					is_subject_of = ROOT
+				}
+			}
+			trigger_event = { id = austria_events.4 popup = yes}
+		}
 		set_variable = established_austria_hungary_var
 	}
 	option = {
@@ -178,6 +187,9 @@ germany_rework.1 = {
 			if = {
 				limit = {
 					exists = c:HUN
+					c:HUN ?= {
+						is_subject_of = ROOT
+					}
 				}
 				trigger_event = {
 					id = austria_events.6
@@ -281,7 +293,7 @@ germany_rework.2 = {
 				limit = {
 					c:PRU ?= THIS
 				}
-				annex = c:HOH
+				annex_with_incorporation = c:HOH
 			}		
 				
 			change_tag = NGF
@@ -786,4 +798,40 @@ germany_rework.6 = {
 		set_variable = established_austria_hungary_var
 		add_loyalists = { value = 0.05 }
     }
+}
+
+germany_rework.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = germany_rework.7.t
+	desc = germany_rework.7.d
+	flavor = germany_rework.7.f
+
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+		exists = c:SGF
+		NOT = { has_variable = claimed_south_german_states }
+	}
+
+	option = {
+		name = germany_rework.7.a
+		default_option = yes
+
+		s:STATE_BAVARIA = { add_claim = ROOT }
+		s:STATE_WURTTEMBERG = { add_claim = ROOT }
+		s:STATE_BADEN = { add_claim = ROOT }
+		s:STATE_FRANCONIA = { add_claim = ROOT }
+		s:STATE_RHINELAND = { add_claim = ROOT }
+		set_variable = claimed_south_german_states
+	}
 }

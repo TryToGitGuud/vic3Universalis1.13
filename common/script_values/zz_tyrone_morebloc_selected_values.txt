@@ -1,0 +1,28 @@
+tyrone_morebloc_minting_per_bloc_member_multiplier = {
+	power_bloc = {
+		every_power_bloc_member = {
+			if = {
+				limit = {
+					is_subject = no
+				}
+				add = 1
+			}
+		}
+	}
+	multiply = modifier:country_minting_from_bloc_members_mult
+	max = modifier:country_minting_from_bloc_members_mult_max
+}
+
+tyrone_morebloc_legitimacy_per_bloc_member_multiplier = {
+	power_bloc = {
+		every_power_bloc_member = {
+			if = {
+				limit = {
+					is_subject = no
+				}
+				add = 1
+			}
+		}
+	}
+	multiply = modifier:country_legitimacy_per_power_bloc_member_add
+}

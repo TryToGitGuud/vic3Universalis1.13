@@ -85,6 +85,48 @@
 	}
 	else_if = {
 		limit = {
+			exists = c:NET
+			this = c:NET
+		}
+		dutch_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:BEL
+			this = c:BEL
+		}
+		dutch_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:UNL
+			this = c:UNL
+		}
+		united_netherlands_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:SWE
+			this = c:SWE
+		}
+		swedish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:DEN
+			this = c:DEN
+		}
+		swedish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:SCA
+			this = c:SCA
+		}
+		scandinavian_ideas = yes
+	}
+	else_if = {
+		limit = {
 			exists = c:SAR
 			this = c:SAR
 		}
@@ -256,6 +298,48 @@ cancel_national_idea_mdf = {
 			this = c:USA
 		}
 		cancel_american_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:NET
+			this = c:NET
+		}
+		cancel_dutch_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:BEL
+			this = c:BEL
+		}
+		cancel_dutch_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:UNL
+			this = c:UNL
+		}
+		cancel_united_netherlands_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:SWE
+			this = c:SWE
+		}
+		cancel_swedish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:DEN
+			this = c:DEN
+		}
+		cancel_swedish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:SCA
+			this = c:SCA
+		}
+		cancel_scandinavian_ideas = yes
 	}
 	else_if = {
 		limit = {
@@ -738,7 +822,7 @@ prevent_annex_foreign_missionary = {
 	}
 	else_if = {
 		limit = {
-			total_missionaries < my_script_value
+			total_missionaries < total_missionaries
 		}
 		call_missionaries_effect = yes
 	}
@@ -753,7 +837,7 @@ prevent_annex_foreign_missionary = {
 	}
 	else_if = {
 		limit = {
-			total_missionaries < my_script_value
+			total_missionaries < total_missionaries
 		}
 		call_missionaries_effect = yes
 	}
@@ -768,7 +852,7 @@ prevent_annex_foreign_missionary = {
 	}
 	else_if = {
 		limit = {
-			total_missionaries < my_script_value
+			total_missionaries < total_missionaries
 		}
 		call_missionaries_effect = yes
 	}
@@ -783,7 +867,7 @@ prevent_annex_foreign_missionary = {
 	}
 	else_if = {
 		limit = {
-			total_missionaries < my_script_value
+			total_missionaries < total_missionaries
 		}
 		call_missionaries_effect = yes
 	}
@@ -798,7 +882,7 @@ prevent_annex_foreign_missionary = {
 	}
 	else_if = {
 		limit = {
-			total_missionaries < my_script_value
+			total_missionaries < total_missionaries
 		}
 		call_missionaries_effect = yes
 	}

@@ -14,6 +14,8 @@ NPolitics = {
 }
 
 NEconomy = {
+	CREDIT_RATIO_MAX_OVERRUN = 100 	
+
 	MIN_CONSTRUCTION_EFFICIENCY = 0.15			# Vanilla = 0.05; Construction efficiency cannot go below this amount
 	
 	COUNTRY_GDP_MODIFIER_MAX_MULTIPLIER = 1000000
@@ -107,7 +109,7 @@ NPowerBlocs = {
 
 	JOIN_ACTION_NAME = "join_power_bloc"
 	MAX_MANDATE_PROGRESS = 2000			# When mandate progress reaches this value, the power bloc gains one mandate
-	MAX_MANDATES = 3					# This is the maximum number of mandates that can be accumulated at once
+	MAX_MANDATES = 18					# This is the maximum number of mandates that can be accumulated at once
 	PRINCIPLE_SELECTION_COOLDOWN_DAYS = 90	# Once a principle is selected, it cannot be changed for this many days. Upgrading is unaffected by the cooldown, but resets it.
 	POWER_BLOC_INFLUENCE_COST = 200 #500		# Cost in Influence to form / be the leader of a Power Bloc
 	MAX_LEVERAGE = 1000					# How much "raw" Leverage can be split between parties (the country itself + each Power Bloc)
@@ -119,14 +121,14 @@ NPops = {
 ### Pop Growth Constants
 ## Base Values per month
 @min_birthrate = 0.00055			# Minimum base birthrate per month (at POP_GROWTH_STABLE_SOL)
-@max_birthrate = 0.00450		# Maximum base birthrate per month (at SOL = 0 if not modified by malnourishment)
+@max_birthrate = 0.00700		# Maximum base birthrate per month (at SOL = 0 if not modified by malnourishment)
 @min_mortality = 0.00045			# Minimum base mortality per month (at POP_GROWTH_STABLE_SOL)
 @max_mortality = 0.00600		# 0.00600 #was 0.00600			# Maximum base mortality per month (at SOL = 0 if not modified by malnourishment)
 
 ## SoL Thresholds
 @pop_growth_equilibrium_sol = 5		# Equilibrium is pops stop starving and where growth first becomes positive
-@pop_growth_transition_sol = 11 	# 10     # Transition determines how long birthrate "lags" behind mortality before starting to drop. Setting to same as equilibrium leads to no "lag" (only matters for birthrate)
-@pop_growth_max_sol = 25			# 20			# Growth Max is where net growth generally is at it's highest (only matters for mortality)
+@pop_growth_transition_sol = 15 	# 10     # Transition determines how long birthrate "lags" behind mortality before starting to drop. Setting to same as equilibrium leads to no "lag" (only matters for birthrate)
+@pop_growth_max_sol = 30			# 20			# Growth Max is where net growth generally is at it's highest (only matters for mortality)
 @pop_growth_stable_sol = 35			# 30			# Stable is where birthrate and mortality stop changing and hit their minimum values
 
 ## Others
@@ -222,6 +224,7 @@ NWar = {
 	WAR_EXHAUSTION_PRO_WAR_LOBBY_CLOUT_FACTOR = -0.5	# -1.0 # At 100% lobby clout supporting to the war
 
 }
+
 
 
 

@@ -28,7 +28,6 @@ spanish_africa.1 = { # Initiation for Al Rif
 		NOT = {
 			has_variable = spanish_africa_1_fired
 		}
-		has_technology_researched = nationalism
 		s:STATE_AL_RIF = {
 			AND = {
 				any_scope_state = {
@@ -270,19 +269,19 @@ spanish_africa.3 = { # Western Sahara conquered, now Guinea
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
 	trigger = {
-		OR = {
-			c:SPA ?= this
-			c:IBE ?= this
+			OR = {
+				c:SPA ?= this
+				c:IBE ?= this
+			}
+			owns_entire_state_region = STATE_AL_RIF
+			owns_entire_state_region = STATE_WEST_SAHARA
+			NOR = {
+				has_law = law_type:law_no_colonial_affairs
+				has_variable = spanish_africa_3_fired
+			}
+			is_at_war = no
+			is_diplomatic_play_committed_participant = no
 		}
-		owns_entire_state_region = STATE_AL_RIF
-		owns_entire_state_region = STATE_WEST_SAHARA
-		NOR = {
-			has_law = law_type:law_no_colonial_affairs
-			has_variable = spanish_africa_3_fired
-		}
-		is_at_war = no
-		is_diplomatic_play_committed_participant = no
-	}
 
 	immediate = {
 		s:STATE_WEST_SAHARA = {
@@ -295,9 +294,6 @@ spanish_africa.3 = { # Western Sahara conquered, now Guinea
 		}
 		sr:region_west_africa = {
 			save_scope_as = senegal_region_scope
-		}
-		sr:region_west_africa = {
-			save_scope_as = niger_region_scope
 		}
 		sr:region_equatorial_africa = {
 			save_scope_as = congo_region_scope
@@ -379,17 +375,17 @@ spanish_africa.4 = { # Guinea conquered, now Morocco
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
 	trigger = {
-		OR = {
-			c:SPA ?= this
-			c:IBE ?= this
+			OR = {
+				c:SPA ?= this
+				c:IBE ?= this
+			}
+			owns_entire_state_region = STATE_AL_RIF
+			NOT = {
+				has_variable = spanish_africa_4_fired
+			}
+			is_at_war = no
+			is_diplomatic_play_committed_participant = no
 		}
-		owns_entire_state_region = STATE_AL_RIF
-		NOT = {
-			has_variable = spanish_africa_4_fired
-		}
-		is_at_war = no
-		is_diplomatic_play_committed_participant = no
-	}
 
 	immediate = {
 		s:STATE_WEST_SAHARA = {
@@ -557,7 +553,10 @@ spanish_africa.5 = { # Gibraltar owned completely, "The Pillars of Hercules"
 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
 
 	trigger = {
+		OR = {
 		c:SPA ?= this
+			c:IBE ?= this
+		}
 		owns_entire_state_region = STATE_AL_RIF
 		owns_entire_state_region = STATE_LOWER_ANDALUSIA
 		owns_entire_state_region = STATE_UPPER_ANDALUSIA

@@ -129,8 +129,16 @@ ve_national_idea_1 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_1
@@ -189,8 +197,16 @@ ve_national_idea_1 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_1
@@ -422,8 +438,16 @@ ve_national_idea_2 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_2
@@ -482,8 +506,16 @@ ve_national_idea_2 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_2
@@ -714,8 +746,16 @@ ve_national_idea_3 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_3
@@ -774,8 +814,16 @@ ve_national_idea_3 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_3
@@ -1006,8 +1054,16 @@ ve_national_idea_4 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_4
@@ -1019,8 +1075,9 @@ ve_national_idea_4 = {
 				exists = c:UNL
 				this = c:UNL
 			}
+			remove_modifier = dutch_idea_4
 			add_modifier = {
-				name = dutch_idea_4
+				name = unl_idea_4
 				months = -1
 			}
 		}
@@ -1066,8 +1123,16 @@ ve_national_idea_4 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_4
@@ -1298,8 +1363,16 @@ ve_national_idea_5 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_5
@@ -1358,8 +1431,16 @@ ve_national_idea_5 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_5
@@ -1371,8 +1452,9 @@ ve_national_idea_5 = {
 				exists = c:SCA
 				this = c:SCA
 			}
+			remove_modifier = swe_idea_5
 			add_modifier = {
-				name = swe_idea_5
+				name = sca_idea_5
 				months = -1
 			}
 		}
@@ -1590,8 +1672,16 @@ ve_national_idea_6 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_6
@@ -1650,8 +1740,16 @@ ve_national_idea_6 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_6
@@ -1663,8 +1761,9 @@ ve_national_idea_6 = {
 				exists = c:SCA
 				this = c:SCA
 			}
+			remove_modifier = swe_idea_6
 			add_modifier = {
-				name = swe_idea_6
+				name = sca_idea_6
 				months = -1
 			}
 		}
@@ -1883,8 +1982,16 @@ ve_national_idea_7 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_7
@@ -1896,8 +2003,9 @@ ve_national_idea_7 = {
 				exists = c:UNL
 				this = c:UNL
 			}
+			remove_modifier = dutch_idea_7
 			add_modifier = {
-				name = dutch_idea_7
+				name = unl_idea_7
 				months = -1
 			}
 		}
@@ -1943,8 +2051,16 @@ ve_national_idea_7 = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_7
@@ -2217,8 +2333,16 @@ ve_national_idea_tradition = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_tradition_1
@@ -2238,8 +2362,9 @@ ve_national_idea_tradition = {
 				name = dutch_idea_tradition_1
 				months = -1
 			}
+			remove_modifier = dutch_idea_tradition_2
 			add_modifier = {
-				name = dutch_idea_tradition_2
+				name = unl_idea_tradition_2
 				months = -1
 			}
 		}
@@ -2301,8 +2426,16 @@ ve_national_idea_tradition = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_tradition_1
@@ -2318,8 +2451,9 @@ ve_national_idea_tradition = {
 				exists = c:SCA
 				this = c:SCA
 			}
+			remove_modifier = swe_idea_tradition_1
 			add_modifier = {
-				name = swe_idea_tradition_1
+				name = sca_idea_tradition_1
 				months = -1
 			}
 			add_modifier = {
@@ -2559,8 +2693,16 @@ ve_national_idea_bonus = {
 		}
 		else_if = {
 			limit = {
-				exists = c:NET
-				this = c:NET
+				OR = {
+					AND = {
+						exists = c:NET
+						this = c:NET
+					}
+					AND = {
+						exists = c:BEL
+						this = c:BEL
+					}
+				}
 			}
 			add_modifier = {
 				name = dutch_idea_bonus
@@ -2619,8 +2761,16 @@ ve_national_idea_bonus = {
 		}
 		else_if = {
 			limit = {
-				exists = c:SWE
-				this = c:SWE
+				OR = {
+					AND = {
+						exists = c:SWE
+						this = c:SWE
+					}
+					AND = {
+						exists = c:DEN
+						this = c:DEN
+					}
+				}
 			}
 			add_modifier = {
 				name = swe_idea_bonus

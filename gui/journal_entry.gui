@@ -1,4 +1,4 @@
-@panel_width_minus_30 = 510
+﻿@panel_width_minus_30 = 510
 @panel_width_minus_20 = 520
 @panel_width_minus_10 = 530
 @panel_width = 540
@@ -208,7 +208,6 @@ types journal_entry_panel_types {
 						position = { 0 258 }
 						blockoverride "text" {}
 						parentanchor = hcenter
-						margin = { 10 10 }
 						textbox = {
 							text = "mr_emperor"
 							parentanchor = vcenter|hcenter
@@ -250,9 +249,6 @@ types journal_entry_panel_types {
 					}
 				}
 
-				### Denmark Scandinavia Ruler – current ruler portrait ###
-				je_denmark_ruler_portrait = {}
-
 				expand = {}
 				expand = {}
 
@@ -270,13 +266,6 @@ types journal_entry_panel_types {
 
 				### Italy: Developing Industry – three investment bars (North, Padana, South) ###
 				italy_developing_industry_bars = {}
-
-				flowcontainer = {
-					name = "custom_widget_container_1"
-					visible = "[JournalEntry.HasCustomWidget('custom_widget_container_1')]"
-					parentanchor = hcenter
-					direction = vertical
-				}
 
 				# time out info
 				flowcontainer = {
@@ -315,13 +304,6 @@ types journal_entry_panel_types {
 						alpha = 0.5
 						using = entry_bg_fancy_dark
 					}
-				}
-
-				flowcontainer = {
-					name = "custom_widget_container_2"
-					visible = "[JournalEntry.HasCustomWidget('custom_widget_container_2')]"
-					parentanchor = hcenter
-					direction = vertical
 				}
 
 				dynamicgridbox = {
@@ -1000,3 +982,4 @@ types journal_entry_panel_types {
 		}
 	}
 }
+

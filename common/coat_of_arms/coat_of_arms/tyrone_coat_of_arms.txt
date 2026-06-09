@@ -1,3 +1,16 @@
+﻿colonial_ethiopia = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "blue"
+
+	colored_emblem = {
+		texture = "ce_rhombus.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 1 0.5 } }
+	}
+}
+
 IMP = {
 	pattern = "pattern_solid.tga"
 
@@ -115,11 +128,6 @@ AUS_triple_monarchy = {
 
 	textured_emblem = {
 		texture = "au_cro_hun.dds"
-		color1 = "red"
-		color2 = "red"
-		color3 = "red"
-		color4 = "red"
-		color5 = "red"
 	}
 }
 
@@ -137,7 +145,6 @@ BRZ_POR = { # United Kingdom of Portugal and Brazil
 PER_theocracy = {
 	
 	pattern = "iran.dds"
-	color1 = "red"
 	color2 = "green"
 	color3 = "white"
 
@@ -150,8 +157,7 @@ PER_theocracy = {
 
 XNP = { #Naples
 	pattern = "pattern_solid.tga" 
-	color1 = "red"	
-	
+	color1 = "red"
 	colored_emblem = {
 		texture = "ce_stripes_09.dds"
 		color1 = "yellow"
@@ -181,10 +187,7 @@ ITA_napoleonic = {
 	# Flag of Napoleonic kingdom
 
 	pattern = "pattern_rhombus.dds"
-	color1 = "red"
 	color2 = "white"
-	color3 = "red"
-
 	colored_emblem = {
 		texture = "ce_solid.dds"
 		color1 = "green"
@@ -195,3 +198,4 @@ ITA_napoleonic = {
 		texture = "italy_napoleonic_eagle.dds"
 	}
 }
+

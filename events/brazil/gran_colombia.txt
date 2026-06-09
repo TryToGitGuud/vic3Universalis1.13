@@ -53,19 +53,16 @@ gran_colombia.1 = {
 				}
 			}
 		}
-		every_state = {
+		every_state_region_in_north_andes = {
 			limit = {
 				NOT = {
+					any_scope_state = {
 					owner = ROOT
 				}
-				state_region = {
-					is_homeland = cu:north_andean
 				}
 			}
-			state_region = {
 				add_claim = ROOT
 			}
-		}
 		s:STATE_PASTAZA = {
 			add_claim = ROOT
 		}
@@ -80,7 +77,7 @@ gran_colombia.1 = {
 			custom_tooltip = {
 				text = gain_large_caudillo_points
 				je:je_caudillo ?= {
-					add_progress = { value = -200 name = je_caudillo_progress_bar }
+					add_progress = { value = 200 name = je_caudillo_progress_bar }
 				}
 			}
 		}
@@ -269,31 +266,23 @@ andean_federation.1 = {
 		custom_tooltip = andean_major_formation_available_tt
 		if = {
 			limit = {
-				any_country = {
+				any_country_in_andean_federation = {
 					NOT = { THIS = ROOT }
-					OR = {
-						country_has_primary_culture = cu:north_andean
-						country_has_primary_culture = cu:venezuelan
-						country_has_primary_culture = cu:colombian
-						country_has_primary_culture = cu:ecuadorian
-					}
 				}
 			}
-			random_country = {
+			ordered_country_in_andean_federation = {
 				limit = {
 					NOT = { THIS = ROOT }
-					OR = {
-						country_has_primary_culture = cu:north_andean
-						country_has_primary_culture = cu:venezuelan
-						country_has_primary_culture = cu:colombian
-						country_has_primary_culture = cu:ecuadorian
-					}
 				}
+				order_by = prestige
+				position = 0
+				ROOT = {
 				create_incident = {
-					country = ROOT
+						country = PREV
 					value = 15
 				}
 			}
+		}
 		}
 		if = {
 			limit = {
@@ -307,19 +296,10 @@ andean_federation.1 = {
 			}
 		}
 		hidden_effect = {
-			every_country = {
+			every_country_in_andean_federation = {
 				limit = {
 					NOT = { THIS = ROOT }
-					OR = {
-						country_has_primary_culture = cu:north_andean
-						country_has_primary_culture = cu:south_andean
-						country_has_primary_culture = cu:venezuelan
-						country_has_primary_culture = cu:colombian
-						country_has_primary_culture = cu:ecuadorian
-						country_has_primary_culture = cu:chilean
-						country_has_primary_culture = cu:peruvian
-						country_has_primary_culture = cu:bolivian
-					}
+					is_in_geographic_region = geographic_region_andean_federation
 				}
 				post_notification = andean_federation_seeking_warning
 			}
@@ -328,19 +308,10 @@ andean_federation.1 = {
 
 	option = {
 		name = andean_federation.1.b
-		every_country = {
+		every_country_in_andean_federation = {
 			limit = {
 				NOT = { THIS = ROOT }
-				OR = {
-					country_has_primary_culture = cu:north_andean
-					country_has_primary_culture = cu:south_andean
-					country_has_primary_culture = cu:venezuelan
-					country_has_primary_culture = cu:colombian
-					country_has_primary_culture = cu:ecuadorian
-					country_has_primary_culture = cu:chilean
-					country_has_primary_culture = cu:peruvian
-					country_has_primary_culture = cu:bolivian
-				}
+				is_in_geographic_region = geographic_region_andean_federation
 			}
 			change_relations = { country = ROOT value = 10 }
 		}
@@ -632,7 +603,7 @@ la_plata.1 = {
 				}
 			}
 		}
-		every_state = {
+		every_state_in_la_plata = {
 			limit = {
 				NOR = {
 					owner = ROOT
@@ -874,3 +845,4 @@ la_plata.2 = {
 		}
 	}
 }
+

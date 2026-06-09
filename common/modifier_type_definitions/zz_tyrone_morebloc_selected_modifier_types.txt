@@ -1,0 +1,25 @@
+country_legitimacy_per_power_bloc_member_add = {
+	decimals = 0
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}
+
+country_minting_from_bloc_members_mult = {
+	decimals = 1
+	percent = yes
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}
+
+country_minting_from_bloc_members_mult_max = {
+	decimals = 1
+	percent = yes
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}

@@ -8,3 +8,25 @@
 	}
 
 }
+
+buff_ai = {
+	default = buff_ai_enabled
+
+	buff_ai_enabled = {
+	}
+
+	buff_ai_disabled = {
+	}
+
+}
+
+severe_malaria = {
+	default = severe_malaria_default
+
+	severe_malaria_default = {
+	}
+
+	severe_malaria_downgraded = {
+	}
+
+}

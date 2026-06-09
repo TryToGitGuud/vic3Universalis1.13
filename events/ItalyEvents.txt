@@ -1,4 +1,4 @@
-namespace = italy_tyrone_characters
+﻿namespace = italy_tyrone_characters
 namespace = italyEventsTyrone
 namespace = GaribaldiExpd
 namespace = garibaldi_expedition
@@ -142,15 +142,14 @@ italy_tyrone_characters.2 = {
 			}
 			save_scope_as = cavour_scope
 		}
+		add_journal_entry = {
+			type = italy_diplo_stance
+		}
 	}
 
 	option = {
 		name = italy_tyrone_characters.2.a
 		default_option = yes
-
-		add_journal_entry = {
-			type = italy_diplo_stance
-		}
 
 		je:italy_diplo_stance = {
 			add_to_variable_list = {
@@ -238,6 +237,7 @@ italyEventsTyrone.4 = {
 	option = {
 		name = italyEventsTyrone.4.a
 		# Whoever owns Lombardy (Austria or Austrian subject) cedes every Lombardy state to Sardinia
+		default_option = yes
 		any_country = {
 			limit = {
 				OR = {
@@ -615,7 +615,7 @@ italyEventsTyrone.16 = {
 		# Annex every subject whose capital is in Italy, with incorporation
 		every_subject_or_below = {
 			limit = {
-				capital = { is_in_geographic_region = geographic_region_italy }
+				capital = { region = sr:region_italy }
 			}
 			root = { annex_with_incorporation = PREV }
 		}
@@ -625,6 +625,7 @@ italyEventsTyrone.16 = {
 	# Bloc leader: Bella Italia – 10% birth, 15% clergy/shopkeeper invest, 25% construction (8 yrs)
 	option = {
 		name = italyEventsTyrone.16.economy
+		default_option = yes
 		trigger = {
 			OR = {
 				is_power_bloc_leader = yes
@@ -3741,7 +3742,7 @@ sic_tyrone.13 = {
 	immediate = {
 		every_state = {
 				limit = {
-					is_in_geographic_region = geographic_region_italy
+					is_in_geographic_region = geographic_region_italy_old
 					NOT = {
 						owner = ROOT
 						has_claim_by = ROOT
@@ -3864,7 +3865,7 @@ sic_tyrone.15 = {
             any_country = {
             NOT = { this = ROOT }
             is_subject = no
-            capital = { is_in_geographic_region = geographic_region_italy }
+            capital = { region = sr:region_italy }
                 OR = {
                     is_in_same_power_bloc = ROOT
                     relations:ROOT >= 40
@@ -3878,7 +3879,7 @@ sic_tyrone.15 = {
             limit = {
                 NOT = { this = ROOT }
                 is_subject = no
-                capital = { is_in_geographic_region = geographic_region_italy }
+                capital = { region = sr:region_italy }
                 OR = {
                     is_in_same_power_bloc = ROOT
                     relations:ROOT >= 40
@@ -3891,6 +3892,7 @@ sic_tyrone.15 = {
     option = {
         name = sic_tyrone.15.a
         # Accept: absorb into sphere as puppet
+		default_option = yes
         create_diplomatic_pact = {
             country = scope:puppet_target
             type = puppet
@@ -3903,7 +3905,7 @@ sic_tyrone.15 = {
     }
 }
 
-# Event: Voice of the Peninsula – nationalist pamphlet spreads to Italian minor
+# Event: Voice of the Peninsula â€“ nationalist pamphlet spreads to Italian minor
 sic_tyrone.16 = {
 	type = country_event
 
@@ -3926,7 +3928,7 @@ sic_tyrone.16 = {
 		any_country = {
 			NOT = { this = ROOT }
 			is_subject = no
-			capital = { is_in_geographic_region = geographic_region_italy }
+			capital = { region = sr:region_italy }
 			relations:ROOT >= 20
 			NOT = { has_technology_researched = nationalism }
 		}
@@ -3937,7 +3939,7 @@ sic_tyrone.16 = {
 			limit = {
 				NOT = { this = ROOT }
 				is_subject = no
-				capital = { is_in_geographic_region = geographic_region_italy }
+				capital = { region = sr:region_italy }
 				relations:ROOT >= 20
 			}
 			save_scope_as = pamphlet_country
@@ -3963,7 +3965,7 @@ sic_tyrone.16 = {
 	}
 }
 
-# Event: The Artisans' Pilgrimage – Italian craftsmen settle in the Kingdom
+# Event: The Artisans' Pilerimaee â€“ Italian craftsmen settle in the Kingdom
 sic_tyrone.17 = {
 	type = country_event
 
@@ -4005,7 +4007,7 @@ sic_tyrone.17 = {
 	}
 }
 
-# Event: Young Men of Italy – nationalist volunteers cross the border to enlist
+# Event: Youne Men of Italy â€“ nationalist volunteers cross the border to enlist
 sic_tyrone.18 = {
 	type = country_event
 
@@ -4042,7 +4044,7 @@ sic_tyrone.18 = {
 	}
 }
 
-# Event: The Question of Rome – annex the Papal States and move the capital to Rome
+# Event: The Question of Rome â€“ annex the Papal States and move the capital to Rome
 sic_tyrone.19 = {
 	type = country_event
 
@@ -4113,7 +4115,7 @@ sic_tyrone.19 = {
 	}
 }
 
-# Event: A Messenger from the South – Austria receives SIC's request to cede Lombardo-Venetia
+# Event: A Messeneer from the South â€“ Austria receives SIC's request to cede Lombardo-Venetia
 sic_tyrone.20 = {
 	type = country_event
 
@@ -4903,3 +4905,6 @@ sic_tyrone.31 = {
 		}
 	}
 }
+
+
+

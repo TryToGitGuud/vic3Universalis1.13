@@ -213,7 +213,7 @@ intl_try_start_great_proletarian_war = {
 			set_global_variable = { name = intl_great_proletarian_war_revolutionary_anchor value = this }
 			random_country = {
 				limit = {
-					country_rank = rank_value:great_power
+					country_rank >= rank_value:great_power
 					NOT = { intl_has_current_internationale_line = yes }
 					has_war_with = global_var:intl_great_proletarian_war_revolutionary_anchor
 				}
@@ -246,7 +246,7 @@ intl_join_great_proletarian_war_revolutionary_side = {
 			limit = {
 				any_scope_initiator_ally = {
 					count >= 2
-					country_rank = rank_value:great_power
+					country_rank >= rank_value:great_power
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -261,7 +261,7 @@ intl_join_great_proletarian_war_revolutionary_side = {
 			limit = {
 				any_scope_target_ally = {
 					count >= 2
-					country_rank = rank_value:great_power
+					country_rank >= rank_value:great_power
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -291,7 +291,7 @@ intl_join_great_proletarian_war_reactionary_side = {
 			limit = {
 				any_scope_initiator_ally = {
 					count >= 2
-					country_rank = rank_value:great_power
+					country_rank >= rank_value:great_power
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -306,7 +306,7 @@ intl_join_great_proletarian_war_reactionary_side = {
 			limit = {
 				any_scope_target_ally = {
 					count >= 2
-					country_rank = rank_value:great_power
+					country_rank >= rank_value:great_power
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}

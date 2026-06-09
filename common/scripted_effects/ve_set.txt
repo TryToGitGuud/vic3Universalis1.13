@@ -541,6 +541,12 @@ set_national_idea = {
 				this = c:CHI
 				this = c:JAP
 				this = c:USA
+				this = c:NET
+				this = c:BEL
+				this = c:UNL
+				this = c:SWE
+				this = c:DEN
+				this = c:SCA
 				this = c:SAR
 				this = c:ITA
 				this = c:SPA
@@ -937,6 +943,112 @@ national_idea_traditions = {
 			}
 			add_modifier = {
 				name = usa_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:NET
+					this = c:NET
+				}
+				AND = {
+					exists = c:BEL
+					this = c:BEL
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = dutch_idea_tradition_1
+					has_modifier = dutch_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = dutch_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = dutch_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			exists = c:UNL
+			this = c:UNL
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = dutch_idea_tradition_1
+					has_modifier = unl_idea_tradition_2
+				}
+			}
+			remove_modifier = dutch_idea_tradition_2
+			add_modifier = {
+				name = dutch_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = unl_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					exists = c:SWE
+					this = c:SWE
+				}
+				AND = {
+					exists = c:DEN
+					this = c:DEN
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = swe_idea_tradition_1
+					has_modifier = swe_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = swe_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = swe_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			exists = c:SCA
+			this = c:SCA
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = sca_idea_tradition_1
+					has_modifier = swe_idea_tradition_2
+				}
+			}
+			remove_modifier = swe_idea_tradition_1
+			add_modifier = {
+				name = sca_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = swe_idea_tradition_2
 				months = -1
 			}
 		}

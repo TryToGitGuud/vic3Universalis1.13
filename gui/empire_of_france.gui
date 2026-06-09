@@ -1,4 +1,4 @@
-# COPY-PASTED FOR NOW
+﻿# COPY-PASTED FOR NOW
 @panel_width_minus_40 = 500
 @panel_width_minus_30 = 510
 @panel_width_minus_20 = 520	
@@ -63,13 +63,14 @@ types empire_of_france_types {
 						parentanchor = hcenter
 						container = {
 							visible = "[GetVariableSystem.Exists( 'tie_tairo' )]"
-							widget = {
+							minimumsize = { 500 215 }
+							maximumsize = { 500 215 }
+							background = {
 								using = entry_bg
-								size = { 500 215 }
-								emperors_palace = {
-									parentanchor = center
-									datacontext = "[GetPlayer.GetRuler]"
-								}
+							}
+							emperors_palace = {
+								parentanchor = center
+								datacontext = "[GetPlayer.GetRuler]"
 							}
 						}
 					}
@@ -79,9 +80,10 @@ types empire_of_france_types {
 		}
 	}
 
-	type emperors_palace = container { #tairo
+type emperors_palace = container { #tairo
+	widget = {
+		size = { 500 215 }
 		hbox = {
-			margin = { 0 0 }
 			flowcontainer = {
 				direction = vertical
 				container = {
@@ -94,7 +96,6 @@ types empire_of_france_types {
 				}
 				default_header_clean_faded = {
 					parentanchor = hcenter
-					margin = { 10 0 }
 					size = { 200 30 }
 					blockoverride "text" {
 						text = "[Character.GetFullName]"
@@ -150,4 +151,6 @@ types empire_of_france_types {
 			}
 		}
 	}
+	}
 }
+

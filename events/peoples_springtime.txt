@@ -704,16 +704,20 @@ peoples_springtime.8 = {
 						is_political_movement_type = movement_italian_national
 						is_political_movement_type = movement_radical
 					}
-					political_movement_support <= 0.10
 					is_being_suppressed = yes
 				}
 				NOT = {
-					any_scope_character = {
-						OR = {
-							has_role_of_type = politician
-							has_role_of_type = agitator
+					OR = {
+						any_interest_group = {
+          					ig_counts_as_marginal = no
+							leader = {
+								has_ideology = ideology:ideology_radical
+							}
 						}
-						has_ideology = ideology:ideology_radical
+						any_scope_character = {
+							has_role_of_type = agitator
+							has_ideology = ideology:ideology_radical
+						}
 					}
 				}
 				NOT = {
@@ -813,15 +817,8 @@ peoples_springtime.9 = {
 	cooldown = { days = normal_modifier_time }
 
 	trigger = {
-		any_political_movement = {
-			OR = {
-				movement_is_liberal = yes
-				movement_is_socialist = yes
-			}
-			is_insurrectionary = yes
-		}
-		capital = {
-			is_in_revolt = yes
+		country_has_springtime_revolution = {
+			THRESHOLD = 0.25
 		}
 		NOT = {
 			has_variable = had_springtime_revolution
@@ -848,6 +845,9 @@ peoples_springtime.9 = {
 	option = {
 		name = peoples_springtime.9.a
 		default_option = yes
+		ai_chance = {
+			base = 4
+		}
 		set_variable = had_springtime_revolution
 		hidden_effect = {
 			set_immune_to_revolutions = yes
@@ -962,6 +962,9 @@ peoples_springtime.9 = {
 
 	option = {
 		name = peoples_springtime.9.b
+		ai_chance = {
+			base = 4
+		}
 		set_variable = had_springtime_revolution
 		hidden_effect = {
 			set_immune_to_revolutions = yes
@@ -1076,6 +1079,9 @@ peoples_springtime.9 = {
 
 	option = {
 		name = peoples_springtime.9.c
+		ai_chance = {
+			base = 2
+		}
 		random_civil_war = {
 			add_civil_war_progress = revolution_advance_large
 		}
@@ -1259,3 +1265,4 @@ peoples_springtime.10 = {
 		}
 	}
 }
+

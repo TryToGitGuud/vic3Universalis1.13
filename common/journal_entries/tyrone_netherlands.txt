@@ -1,4 +1,4 @@
-je_consolidate_east_indies = {
+﻿je_consolidate_east_indies = {
 
 	group = je_group_historical_content
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
@@ -8,15 +8,17 @@ je_consolidate_east_indies = {
 	weight = 10000
 
 	immediate = {
-		c:DEI = {
+		c:DEI ?= {
 			save_scope_as = east_indies_scope
 		}
-		c:NET = {
-			save_scope_as = netherlands_scope
+		ROOT = { save_scope_as = east_indies_overlord_scope }
 		}
+
+	possible = {
 	}
 
 	complete = {
+		exists = c:DEI
         any_state = {
             filter = {
 				region = sr:region_indonesia
@@ -26,36 +28,31 @@ je_consolidate_east_indies = {
 						state_region = s:STATE_LUZON
 						state_region = s:STATE_VISAYAS
 						state_region = s:STATE_MINDANAO		
+						AND = {
 						state_region = s:STATE_SUNDA_ISLANDS			
+						NOT = { owner = c:POR }
 					}			
 				}
             }
-			custom_tooltip = {
-				text = completely_owned_by_this_country_or_subjects_tt
-				OR = {
-					owner = ROOT
-					owner = {
-						is_subject_of = ROOT
 					}
+			OR = {
+				owner = c:DEI
 					owner = {
-						is_country_type = decentralized
+					is_subject_of = c:DEI
 					}
+				trigger_if = {
+					limit = {
+						exists = c:DEI.top_overlord
 				}
-				NOT = {
-					this.state_region = {
-						any_scope_state = {
+					OR = {
+						owner = c:DEI.top_overlord
 							owner = {
-								NOR = {
-									this = ROOT
-									is_subject_of = ROOT
-									is_country_type = decentralized
-								}
+							is_subject_of = c:DEI.top_overlord
 							}
 						}
 					}
 				}
-			}
-            percent = 1
+			percent >= 0.80
         }
 	}
 
@@ -66,6 +63,12 @@ je_consolidate_east_indies = {
 	}
 
 	fail = {
+		OR = {
+			NOT = { exists = c:DEI }
+			c:DEI ?= {
+				NOT = { is_subject_of = ROOT }
+			}
+		}
 	}
 
     event_outcome_completed_desc = {
@@ -99,10 +102,10 @@ je_path_of_east_indies = {
 
 	possible = {
 		OR = {
-			c:DEI = {
+			c:DEI ?= {
 				is_subject_of = ROOT
 			}
-			c:IDN = {
+			c:IDN ?= {
 				is_subject_of = ROOT
 			}
 		}
@@ -118,7 +121,7 @@ je_path_of_east_indies = {
 
 	immediate = {
 		c:NET = { save_scope_as = netherlands_scope }
-		c:DEI = { save_scope_as = dei_scope }
+		c:DEI ?= { save_scope_as = dei_scope }
 		trigger_event ={
 			id = dei_events.3
 		}
@@ -127,7 +130,7 @@ je_path_of_east_indies = {
 	complete = {
 		OR = {
 			AND = {
-				c:DEI = {
+				c:DEI ?= {
 					is_subject_of = ROOT
 					is_subject_type = subject_type_colony
 					liberty_desire < 25
@@ -135,7 +138,7 @@ je_path_of_east_indies = {
 				has_technology_researched = civilizing_mission
 			}
 			AND = {
-				c:DEI = {
+				c:DEI ?= {
 					is_subject_of = ROOT
 					is_subject_type = subject_type_chartered_company
 					liberty_desire < 25
@@ -143,7 +146,7 @@ je_path_of_east_indies = {
 				has_technology_researched = mutual_funds
 			}
 			AND = {
-				c:IDN = {
+				c:IDN ?= {
 					is_subject_of = ROOT
 					relations:root >= relations_threshold:amicable
 				}
@@ -189,7 +192,7 @@ REPLACE:je_reform_indies = {
 	should_be_pinned_by_default_involved = yes
 
 	immediate = {
-		c:DEI = {
+		c:DEI ?= {
 			save_scope_as = east_indies_scope
 		}
 		c:NET = {
@@ -215,15 +218,6 @@ REPLACE:je_reform_indies = {
 		}
 	}
 
-	is_shown_when_inactive = {
-		OR = {
-			c:DEI ?= THIS
-			any_subject_or_below = {
-				c:DEI ?= THIS
-			}
-		}
-	}
-
 	should_show_when_not_involved = {
 		OR = {
 			c:DEI ?= THIS
@@ -234,14 +228,6 @@ REPLACE:je_reform_indies = {
 	}
 
 	possible = {
-		c:DEI = {
-			OR = {
-				has_law_or_variant = law_type:law_free_trade
-				has_law_or_variant = law_type:law_mercantilism
-				NOT = { has_law_or_variant = law_type:law_land_based_taxation }
-				NOT = { has_law_or_variant = law_type:law_serfdom }
-			}
-		}
 	}
 
 	custom_completion_header = je_reform_indies_complete_header
@@ -249,9 +235,11 @@ REPLACE:je_reform_indies = {
 	complete = {
 		custom_tooltip = {
 			text = dei_gdp_reached_50_tt
-      	 	c:DEI.gdp > c:DEI.var:dei_gdp_goal
+			c:DEI ?= {
+				gdp > var:dei_gdp_goal
+			}
 		}
-		c:DEI = {
+		c:DEI ?= {
 			OR = {
 				has_law_or_variant = law_type:law_free_trade
 				has_law_or_variant = law_type:law_mercantilism
@@ -269,7 +257,7 @@ REPLACE:je_reform_indies = {
 	custom_on_completion_header = je_reform_indies_on_complete_header
 
 	on_complete = {
-		c:DEI = { trigger_event = { id = dei_events.5 } }
+		c:DEI ?= { trigger_event = { id = dei_events.5 } }
 	}
 
 	event_outcome_completed_desc = {
@@ -281,9 +269,11 @@ REPLACE:je_reform_indies = {
 	fail = {
 		custom_tooltip = {
 			text = dei_gdp_reached_50_tt
-      	 	c:DEI.gdp > c:DEI.var:dei_gdp_goal
+			c:DEI ?= {
+				gdp > var:dei_gdp_goal
+			}
 		}
-		c:DEI = {
+		c:DEI ?= {
 			OR = {
 				has_law_or_variant = law_type:law_free_trade
 				has_law_or_variant = law_type:law_mercantilism
@@ -304,13 +294,18 @@ REPLACE:je_reform_indies = {
 	custom_on_failure_header = je_reform_indies_on_fail_header
 
 	on_fail = {
-		c:DEI = { trigger_event = { id = dei_events.6 } }
+		c:DEI ?= { trigger_event = { id = dei_events.6 } }
 	}
 
 
 	invalid = {
-		c:DEI = {
-			is_subject = no
+		OR = {
+			c:DEI ?= {
+				is_subject = no
+			}
+			NOT = {
+				exists = c:DEI
+			}
 		}
 	}
 
@@ -325,3 +320,4 @@ REPLACE:je_ethical_policy = {
 
 	weight = 100
 }
+

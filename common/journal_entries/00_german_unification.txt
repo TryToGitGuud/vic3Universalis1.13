@@ -107,6 +107,7 @@
 	}
 
 	weight = 1000
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }
 
@@ -156,7 +157,7 @@ je_german_unification_idea = {
 		hidden_effect = {
 			if = {
 				limit = {
-					any_country = {
+					any_country_in_german_confederation = {
 						country_rank >= rank_value:great_power
 						OR = {
 							AND = {
@@ -170,7 +171,7 @@ je_german_unification_idea = {
 						}
 					}
 				}
-				random_country = {
+				random_country_in_german_confederation = {
 					limit = {
 						country_rank >= rank_value:great_power
 						OR = {
@@ -189,7 +190,7 @@ je_german_unification_idea = {
 			}
 			else_if = {
 				limit = {
-					any_country = {
+					any_country_in_german_confederation = {
 						country_rank >= rank_value:great_power
 						OR = {
 							country_has_primary_culture = cu:north_german
@@ -197,7 +198,7 @@ je_german_unification_idea = {
 						}
 					}
 				}
-				random_country = {
+				random_country_in_german_confederation = {
 					limit = {
 						country_rank >= rank_value:great_power
 						OR = {
@@ -210,7 +211,7 @@ je_german_unification_idea = {
 			}
 			else_if = {
 				limit = {
-					any_country = {
+					any_country_in_german_confederation = {
 						country_rank >= rank_value:major_power
 						OR = {
 							AND = {
@@ -224,7 +225,7 @@ je_german_unification_idea = {
 						}
 					}
 				}
-				random_country = {
+				random_country_in_german_confederation = {
 					limit = {
 						country_rank >= rank_value:major_power
 						OR = {
@@ -243,7 +244,7 @@ je_german_unification_idea = {
 			}
 			else_if = {
 				limit = {
-					any_country = {
+					any_country_in_german_confederation = {
 						country_rank >= rank_value:major_power
 						OR = {
 							country_has_primary_culture = cu:north_german
@@ -251,7 +252,7 @@ je_german_unification_idea = {
 						}
 					}
 				}
-				random_country = {
+				random_country_in_german_confederation = {
 					limit = {
 						country_rank >= rank_value:major_power
 						OR = {
@@ -277,6 +278,7 @@ je_german_unification_idea = {
 	}
 
 	weight = 1000
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }
 
@@ -295,12 +297,18 @@ je_north_german_unification = {
 		}
 		has_technology_researched = nationalism
 		is_unification_candidate = GER
-		custom_tooltip = {
-			text = je_german_unification_sole_candidate_trigger_desc
-			NOT = {
-				any_country = {
-					NOT = { this = root }
-					is_unification_candidate = GER
+		OR = {
+			custom_tooltip = {
+				text = south_germany_exists_tt
+				exists = c:SGF
+			}
+			custom_tooltip = {
+				text = je_german_unification_sole_candidate_trigger_desc
+				NOT = {
+					any_country_in_german_confederation = {
+						NOT = { this = root }
+						is_unification_candidate = GER
+					}
 				}
 			}
 		}
@@ -381,11 +389,11 @@ je_north_german_unification = {
 									country_has_primary_culture = cu:south_german
 								}
 								NOR = {
-									THIS = ROOT
-									THIS = c:AUS
-									THIS = c:LUX
-									THIS = c:TRS
-									THIS = c:BNT
+									this = root
+									c:AUS ?= this
+									c:LUX ?= this
+									c:TRS ?= this
+									c:BNT ?= this
 									is_subject_type = subject_type_colony
 									is_subject_type = subject_type_dominion
 									is_subject_type = subject_type_chartered_company
@@ -414,6 +422,7 @@ je_north_german_unification = {
 	}
 
 	weight = 1000
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }
 
@@ -432,12 +441,18 @@ je_south_german_unification = {
 		}
 		has_technology_researched = nationalism
 		is_unification_candidate = GER
-		custom_tooltip = {
-			text = je_german_unification_sole_candidate_trigger_desc
-			NOT = {
-				any_country = {
-					NOT = { this = root }
-					is_unification_candidate = GER
+		OR = {
+			custom_tooltip = {
+				text = south_germany_exists_tt
+				exists = c:SGF
+			}
+			custom_tooltip = {
+				text = je_german_unification_sole_candidate_trigger_desc
+				NOT = {
+					any_country_in_german_confederation = {
+						NOT = { this = root }
+						is_unification_candidate = GER
+					}
 				}
 			}
 		}
@@ -453,6 +468,7 @@ je_south_german_unification = {
 		OR = {
 			has_government_type = gov_dual_monarchy
 			has_government_type = gov_triple_monarchy
+			has_variable = established_austria_hungary_var
 		}
 	}
 
@@ -487,12 +503,6 @@ je_south_german_unification = {
 		remove_variable = je_unification_progress
 	}
 
-	invalid = {
-		OR = {
-			has_variable = established_austria_hungary_var
-		}
-	}
-
 	status_desc = {
 		first_valid = {
 			triggered_desc = {
@@ -505,11 +515,16 @@ je_south_german_unification = {
 	}
 
 	weight = 1000
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }
 
 je_german_unification = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	scripted_button = je_north_german_south_german_claims_button
+	scripted_button = je_north_german_finalize_unification_button
+
 
 	group = je_group_german_unification
 
@@ -528,6 +543,59 @@ je_german_unification = {
 		c:AUS ?= {
             save_scope_as = austria_scope
         }		
+		if = {			
+			limit = {
+				c:NGF ?= this
+				is_ai = yes
+				has_technology_researched = pan-nationalism
+			}
+			trigger_event = { id = german_unification.4 popup = yes }
+			hidden_effect = {
+				every_country = {
+					if = {
+						limit = {
+							NOT = {
+								c:GER ?= this
+							}
+						}
+						every_country = {
+							limit = {
+								country_rank < rank_value:great_power
+								OR = {
+									country_has_primary_culture = cu:north_german
+									country_has_primary_culture = cu:south_german
+								}
+								NOR = {
+									this = root
+									c:AUS ?= this
+									c:LUX ?= this
+									c:TRS ?= this
+									c:BNT ?= this
+									is_subject_type = subject_type_colony
+									is_subject_type = subject_type_dominion
+									is_subject_type = subject_type_chartered_company
+									is_subject_type = subject_type_crown_land
+								}
+							}
+
+							if = {
+								limit = {
+									is_ai = yes
+								}
+								root = { annex_with_incorporation = prev }
+							}
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:NGF ?= this
+				exists = c:SGF
+			}
+        	trigger_event = { id = germany_rework.2 } 
+		}		
 	}
 
 	possible = {
@@ -553,6 +621,10 @@ je_german_unification = {
 					}
 				}
 				OR = {
+					custom_tooltip = {
+						text = south_germany_not_exists_tt
+						NOT = { exists = c:SGF }
+					}
 					has_technology_researched = pan-nationalism
 					owns_entire_state_region = STATE_ALSACE_LORRAINE
 				}
@@ -583,11 +655,11 @@ je_german_unification = {
 								country_has_primary_culture = cu:south_german
 							}
 							NOR = {
-								THIS = ROOT
-								THIS = c:AUS
-								THIS = c:LUX
-								THIS = c:TRS
-								THIS = c:BNT
+								this = root
+								c:AUS ?= this
+								c:LUX ?= this
+								c:TRS ?= this
+								c:BNT ?= this
 								is_subject_type = subject_type_colony
 								is_subject_type = subject_type_dominion
 								is_subject_type = subject_type_chartered_company
@@ -732,6 +804,10 @@ je_crown_in_the_gutter = {
 			custom_tooltip = {
 				text = je_prussian_unification_fail_tt
 				has_variable = je_unification_fail
+			}
+			custom_tooltip = {
+				text = south_germany_exists_tt
+				exists = c:SGF
 			}
 		}
 	}

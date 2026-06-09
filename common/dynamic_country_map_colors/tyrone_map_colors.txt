@@ -1,4 +1,22 @@
-﻿japanese_supreme_shogunate = {
+﻿REPLACE:usa_technate = {
+	color = "usa_technate_grey"
+
+	possible = {
+		OR = {
+			AND = {
+				exists = c:USA
+				c:USA ?= THIS
+			}
+			AND = {
+				exists = c:GAC
+				c:GAC ?= THIS
+			}
+		}
+		has_law_or_variant = law_type:law_technocracy
+	}
+}
+
+japanese_supreme_shogunate = {
 	color = "supreme_shogunate"
 	possible = {
 		exists = c:JAP
@@ -138,17 +156,6 @@ REPLACE:brazil_republican = {
 	}
 }
 
-ita_empire_monarchy = {
-	color = "ita_empire_monarchy_color"
-	possible = {
-		exists = c:ITA
-		c:ITA ?= this
-		coa_monarchy_trigger = yes
-		NOT = { coa_theocracy_trigger = yes }
-		NOT = { coa_corporate_state_trigger = yes }
-	}
-}
-
 ita_empire_theocracy = {
 	color = "ita_empire_theocracy_color"
 	possible = {
@@ -223,6 +230,16 @@ REPLACE:kalmar_union = {
 				has_culture = cu:danish
 			}
 		}
+	}
+}
+
+alawite_empire = {
+	color = "alawite_empire_color"
+
+	possible = {
+		exists = c:TUR
+		c:TUR ?= THIS
+		country_has_primary_culture = cu:misri
 	}
 }
 

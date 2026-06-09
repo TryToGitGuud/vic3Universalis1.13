@@ -195,7 +195,7 @@ company_branobel = {
 	}
 
 	potential = {
-		has_interest_marker_in_region = sr:region_russia
+		has_interest_marker_in_region = sr:region_greater_persia
 	}
 
 	attainable = {

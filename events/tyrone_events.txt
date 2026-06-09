@@ -26,6 +26,7 @@ economic_reform.1 = {
 
 	option = {
 		name = economic_reform.1.a
+		default_option = yes
 		trigger = {
 			has_law_or_variant = law_type:law_laissez_faire
 		}
@@ -744,8 +745,8 @@ company_events.1 = {
 		}
 	    is_in_power_bloc = yes
 	    is_power_bloc_leader = yes
-		NOT = {
-			has_variable = company_mandate_on
+		root.power_bloc ?= {
+			NOT = { has_modifier = company_maison_worth_power_bloc_modifier }
 		}
 	}
 
@@ -755,7 +756,6 @@ company_events.1 = {
 				name = company_maison_worth_power_bloc_modifier
 			}
 		}
-		set_variable = company_mandate_on
 	}
 }
 
@@ -770,8 +770,8 @@ company_events.2 = {
 		}
 	    is_in_power_bloc = yes
 	    is_power_bloc_leader = yes
-		NOT = {
-			has_variable = company_mandate_on
+		root.power_bloc ?= {
+			NOT = { has_modifier = company_ludwig_moser_and_sons_power_bloc_modifier }
 		}
 	}
 
@@ -781,7 +781,6 @@ company_events.2 = {
 				name = company_ludwig_moser_and_sons_power_bloc_modifier
 			}
 		}
-		set_variable = company_mandate_on
 	}
 }
 
@@ -796,8 +795,8 @@ company_events.3 = {
 		}
 	    is_in_power_bloc = yes
 	    is_power_bloc_leader = yes
-		NOT = {
-			has_variable = company_mandate_on
+		root.power_bloc ?= {
+			NOT = { has_modifier = company_kinkozan_sobei_power_bloc_modifier }
 		}
 	}
 
@@ -807,7 +806,6 @@ company_events.3 = {
 				name = company_kinkozan_sobei_power_bloc_modifier
 			}
 		}
-		set_variable = company_mandate_on
 	}
 }
 
@@ -822,8 +820,8 @@ company_events.4 = {
 		}
 	    is_in_power_bloc = yes
 	    is_power_bloc_leader = yes
-		NOT = {
-			has_variable = company_mandate_on
+		root.power_bloc ?= {
+			NOT = { has_modifier = company_pedro_domecq_power_bloc_modifier }
 		}
 	}
 
@@ -833,7 +831,6 @@ company_events.4 = {
 				name = company_pedro_domecq_power_bloc_modifier
 			}
 		}
-		set_variable = company_mandate_on
 	}
 }
 
@@ -1048,5 +1045,65 @@ spain_guide.1 = {
 	option = {
 		name = spain_guide.1.b
 		play_as = scope:carlist_scope
+	}
+}
+
+namespace = belgian_consolidation
+
+belgian_consolidation.1 = {
+	type = country_event
+
+	title = belgian_consolidation.1.t
+	desc = belgian_consolidation.1.d
+	flavor = belgian_consolidation.1.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		exists = c:BEL
+		relations:c:BEL >= relations_threshold:amicable
+	}
+
+	option = {
+		name = belgian_consolidation.1.a
+		default_option = yes
+		ai_chance = { base = 100 }
+		change_relations = { country = c:BEL value = 20 }
+		c:BEL = {
+			remove_variable = bel_low_countries_consolidation_request_pending
+		}
+		s:STATE_FLANDERS = {
+			every_scope_state = {
+				limit = {
+					owner = ROOT
+				}
+				set_state_owner = c:BEL
+			}
+		}
+		s:STATE_WALLONIA = {
+			every_scope_state = {
+				limit = {
+					owner = ROOT
+				}
+				set_state_owner = c:BEL
+			}
+		}
+	}
+
+	option = {
+		name = belgian_consolidation.1.b
+		ai_chance = { base = 0 }
+		change_relations = { country = c:BEL value = -20 }
+		c:BEL = {
+			remove_variable = bel_low_countries_consolidation_request_pending
+		}
 	}
 }

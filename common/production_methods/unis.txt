@@ -17,10 +17,13 @@
 			building_employment_laborers_add = 250
 		}
 	}
-
 	state_modifiers = {
 		workforce_scaled = {
 			state_pop_qualifications_mult = 0.1
+		}
+		unscaled = {
+			state_literacy_growth_add = 0.0001
+			state_education_access_add = 0.025
 		}
 	}
 }
@@ -52,6 +55,10 @@ REPLACE:pm_philosophy_department = {
 	state_modifiers = {
 		workforce_scaled = {
 			state_pop_qualifications_mult = 0.15
+		}
+		unscaled = {
+			state_literacy_growth_add = 0.0002
+			state_education_access_add = 0.05
 		}
 	}
 }
@@ -85,6 +92,10 @@ REPLACE:pm_analytical_philosophy_department = {
 		workforce_scaled = {
 			state_pop_qualifications_mult = 0.2
 		}
+		unscaled = {
+			state_literacy_growth_add = 0.0003
+			state_education_access_add = 0.075
+		}
 	}
 }
 
@@ -117,4 +128,5 @@ REPLACE:pm_religious_academia = {
 		}
 	}
 }
+
 

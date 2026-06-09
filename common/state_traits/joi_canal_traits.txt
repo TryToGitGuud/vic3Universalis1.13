@@ -1,0 +1,489 @@
+﻿REPLACE_OR_CREATE:state_trait_grand_canal_of_china = {#京杭大运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 30
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_rhine_main_danube_canal = {#莱茵-美因-多瑙运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 30
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_venlo_mechelen_canal = {#芬洛-梅赫伦运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_amsterdam_canal = {#阿姆斯特丹运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 30
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_zeeland_canal = {#泽兰运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_du_nord_canal = {#北方运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_saint_martin_canal = {#圣马尔丹运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_de_berry_canal = {#布尔日运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bristol_chichester_canal = {#布里斯托尔-奇切斯特运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_belfast_shannon_canal = {#贝尔法斯特-肖农运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_liverpool_anchester_canal = {#利物浦-曼彻斯特运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_birmingham_canal = {#伯明翰运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_caledonian_canal = {#卡尔顿运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_regent_canal = {#罗宾湖运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_danube_canal = {#德尔塔运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bohemian_canal = {#波西米亚运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_karolyi_pecs_canal = {#托尔纳-佩斯运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_rhine_nau_canal = {#莱茵-瑙尔运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_oldenburg_hamburg_canal = {#奥尔登堡-汉堡运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_vistula_oder_canal = {#维斯瓦-奥得运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_fernofo_canal = {#费诺福运河（柏林）
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_lausanne_canal = {#洛桑运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_castilla_canal = {#卡斯蒂利亚运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_valencia_canal = {#瓦伦西亚运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_gijon_canal = {#吉洪运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_naviglio_grande = {#大运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 30
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_di_reno_canal = {#博洛尼亚运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_naviglio_di_canal = {#莱科运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_llangollen_canal = {#斯基比运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_copenhagen_canal = {#哥本哈根运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_gotakanal_canal = {#滑铁卢运河（瑞典）
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_brahestad_canal = {#布拉赫运河（芬兰）
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_moscow_canal = {#莫斯科运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+		state_building_construction_sector_max_level_add = 5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_peter_the_great_canal = {#彼得大帝运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 30
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_kherson_kursk_canal = {#赫尔松-库尔斯克运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_poznan_vistula_canal = {#波兹南-维斯瓦河运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_saint_lawrence_canal = {#圣劳伦斯运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_erie_canal = {#伊利运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_alabama_canal = {#阿拉巴马运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_habsburg_canal = {#下奥地利运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_hopewell_canal = {#霍普威尔运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_tigre_canal = {#老虎运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ciliwung_canal = {#雅加达运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bangka_strait_canal = {#伯南运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bangkok_canal = {#曼谷运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_hooghly_canal = {#加尔各答运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_red_river_canal = {#红河运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_osaka_canal = {#大阪运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_kyoto_canal = {#京都运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_nagasaki_canal = {#长崎运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 10
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_tokyo_canal = {#江户运河水道
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_canales_patagonicos = { #巴哥塔尼亚运河
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+	
+	modifier = {
+		goods_output_hardwood_mult = 0.15
+		building_port_throughput_add = 0.1	
+		state_market_access_price_impact = 0.025
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bosphorus_srait = {#博斯普鲁斯海峡
+	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
+
+	modifier = {
+		state_infrastructure_add = 30
+		state_market_access_price_impact = 0.05
+		battle_defense_owned_province_mult = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_oresund = {#厄勒海峡
+    icon = "gfx/interface/icons/state_trait_icons/river.dds"
+
+	modifier = {
+		state_infrastructure_add = 20
+		state_market_access_price_impact = 0.05
+		battle_defense_owned_province_mult = 0.1
+	}
+}

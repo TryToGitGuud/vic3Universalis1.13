@@ -1,4 +1,4 @@
-# Copied from base game common/diplomatic_plays/00_diplomatic_plays.txt - Unify Italy and Leadership Italy plays
+﻿# Copied from base game common/diplomatic_plays/00_diplomatic_plays.txt - Unify Italy and Leadership Italy plays
 
 dp_unify_italy = {
 	war_goal = unification

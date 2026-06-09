@@ -1,0 +1,67 @@
+je_china_open_borders = {
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	group = je_group_foreign_affairs
+
+	is_shown_when_inactive = {
+		OR = {
+			country_has_primary_culture = cu:manchu
+			country_has_primary_culture = cu:han
+			country_has_primary_culture = cu:yue
+		}
+		is_player = no
+	}
+
+	possible = {
+		OR = {
+			overlord = { has_law_or_variant = law_type:law_free_trade }
+			has_law_or_variant = law_type:law_free_trade
+			any_country = {
+				limit = { this ?= ROOT }
+				any_scope_state = {
+					is_treaty_port = yes
+					state_region = {
+						any_scope_state = {
+							owner = ROOT
+						}
+					}
+				}
+			}
+		}
+	}
+
+	complete = {
+	}
+
+	on_complete = {
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_law_or_variant = law_type:law_no_migration_controls }
+				}
+				activate_law = law_type:law_no_migration_controls
+			}
+		}
+	}
+
+	fail = {
+	}
+
+	invalid = {
+	}
+
+	on_invalid = {
+	}
+
+	on_fail = {
+	}
+
+	on_timeout = {
+	}
+
+	weight = 10000
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

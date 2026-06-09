@@ -1,4 +1,4 @@
-je_unification_of_three_crowns_progress_bar = {
+﻿je_unification_of_three_crowns_progress_bar = {
 	name = je_three_crowns_bar
 	desc = je_three_crowns_bar_desc
 
@@ -111,4 +111,5 @@ je_unification_of_three_crowns_progress_bar = {
 	min_value = 0
 	max_value = 32
 	}
+
 

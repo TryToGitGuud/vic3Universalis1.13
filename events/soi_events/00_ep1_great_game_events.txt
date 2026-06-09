@@ -40,6 +40,7 @@ gg_core.1 = { # Great Game victory
 			}
 		}
 	}
+
 	option = {
 		name = gg_core.1.a
 		default_option = yes
@@ -327,3 +328,4 @@ gg_core.4 = { # Great Game victory as Persia or Afghanistan
 		}
 	}
 }
+

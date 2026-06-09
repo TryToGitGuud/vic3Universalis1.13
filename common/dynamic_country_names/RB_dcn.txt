@@ -40,7 +40,7 @@
 			exists = scope:actor
 			scope:actor = { 
 				has_global_variable = imperial_federation_var
-				has_law_or_variant = law_council_republic
+				has_law_or_variant = law_type:law_council_republic
 			}
 		}
 	}
@@ -56,12 +56,34 @@
 			scope:actor = { 
 				has_global_variable = imperial_federation_var
 				OR = {
-					has_law_or_variant = law_parliamentary_republic
-					has_law_or_variant = law_presidential_republic
-					has_law_or_variant = law_corporate_state
+					has_law_or_variant = law_type:law_parliamentary_republic
+					has_law_or_variant = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_corporate_state
 				}
 			}
 		}
 	}
+	dynamic_country_name = {
+		name = dyn_c_intl_trades_union_commonwealth
+		adjective = GBR_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_british_council_commonwealth
+		adjective = GBR_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_marxist_council_republic }
+		}
+	}
 }
+
+
 

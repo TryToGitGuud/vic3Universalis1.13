@@ -30,6 +30,11 @@
 		
 		#THIS can reach the TARGET
 		OR = {
+
+			#THIS is defending their own subject
+			scope:target_country = {
+				is_subject_of = scope:actor
+			}
 		
 			#THIS has direct access to the TARGET
 			scope:target_country = {
@@ -68,7 +73,10 @@
 
 	possible = {
 		#THIS is interested in the TARGET
-		has_diplomatic_relevance = scope:target_country
+		OR = {
+			has_diplomatic_relevance = scope:target_country
+			scope:target_country = { is_subject_of = ROOT }
+		}
 		
 		# THIS can and wants to intervene
 		OR = { 
@@ -77,6 +85,10 @@
 			scope:target_country = { 
 				any_scope_state = { is_coastal = yes }
 			}
+		}
+		has_strategic_region_interest_tier = {
+			strategic_region = scope:target_country.capital.region
+			value >= 2
 		}
 	}
 	
@@ -131,21 +143,35 @@
 			}
 		
 		}
-		
 	}
 	
 	ai = {
 	
 		evaluation_chance = {
-			value = 0.0		
+			value = 0.0
+
+			if = {
+				limit = { 
+					scope:target_country ?= {
+						is_subject_of = scope:actor
+					}
+				 }
+				add = 1.0
+			}
 		}
 	
 		propose_score = {
-			value = 10
+			value = 1000
 		}
-		
+
 		will_propose = {
-			always = no		
+			scope:target_country ?= {
+				any_scope_war = {
+					any_war_participant = {
+						NOT = { this = root }
+					}
+				}
+			}
 		}
 	}
 }

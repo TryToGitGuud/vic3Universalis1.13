@@ -1511,6 +1511,7 @@ STATES = {
 		}
 
 		add_claim = c:SAS
+		add_claim = c:NSW
 
 		add_homeland = cu:australian
 		add_homeland = cu:aborigine
@@ -2744,6 +2745,8 @@ STATES = {
 
 		add_homeland = cu:platinean
 		add_homeland = cu:guarani
+		add_claim = c:PRG
+		add_claim = c:BOL
 	}
 	s:STATE_BAJO_PARAGUAY = {
 		create_state = {
@@ -2790,7 +2793,6 @@ STATES = {
 
 		add_homeland = cu:patagonian
 		add_claim = c:ARG
-		add_claim = c:CHL
 	}
 	s:STATE_RIO_NEGRO = {
 		create_state = {
@@ -2873,6 +2875,7 @@ STATES = {
 
 		add_homeland = cu:platinean
 		add_homeland = cu:guarani
+		add_claim = c:ARG
 	}
 	s:STATE_JUJUY = {
 		create_state = {
@@ -4612,6 +4615,7 @@ STATES = {
 		}
 
 		add_homeland = cu:melanesian
+		add_claim = c:DEI
 	}
 	s:STATE_MOLUCCAS = {
 		create_state = {
@@ -6090,6 +6094,7 @@ STATES = {
 
 		add_homeland = cu:sotho
 		add_homeland = cu:nguni
+		add_homeland = cu:griqua
 		add_homeland = cu:tswana
 		add_homeland = cu:zulu
 		add_homeland = cu:boer
@@ -9083,3 +9088,4 @@ STATES = {
 	    add_homeland = cu:tibetan
 	}
 }
+

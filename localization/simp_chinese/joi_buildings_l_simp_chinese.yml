@@ -1,0 +1,5 @@
+﻿l_simp_chinese:
+ building_coal_mine_discovered_resource:0 "煤矿"
+ building_iron_mine_discovered_resource:0 "铁矿"
+ building_sulfur_mine_discovered_resource:0 "硫矿"
+ building_lead_mine_discovered_resource:0 "铅矿"

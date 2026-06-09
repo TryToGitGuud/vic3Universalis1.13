@@ -1,0 +1,9 @@
+tyrone_morebloc_minting_per_bloc_member_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_minting_mult = 1
+}
+
+tyrone_morebloc_legitimacy_per_bloc_member_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_legitimacy_base_add = 1
+}

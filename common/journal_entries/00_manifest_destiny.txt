@@ -1,4 +1,4 @@
-je_manifest_destiny_mexico = {
+﻿je_manifest_destiny_mexico = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 
 	group = je_group_usa_manifest_destiny
@@ -49,6 +49,7 @@ je_manifest_destiny_mexico = {
 	}
 
 	weight = 100
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }
 
@@ -102,5 +103,6 @@ je_manifest_destiny_frontier_wars = {
 	weight = 100
 
 	transferable = no
+		
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }

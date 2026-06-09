@@ -1,4 +1,4 @@
-### American Exceptionalism
+﻿### American Exceptionalism
 
 je_american_exceptionalism = {
 	icon = "gfx/interface/icons/event_icons/event_scales.dds"
@@ -55,7 +55,6 @@ je_spanish_american_war = {
 	is_shown_when_inactive = {
 		exists = c:USA
 		exists = c:SPA
-		c:USA = { has_technology_researched = civilizing_mission }
 	}
 
 	is_shown_in_lobby = {
@@ -96,14 +95,16 @@ je_spanish_american_war = {
 		}
 	}
 
-	timeout = 5475
+	scripted_button = je_spanish_american_war_start_button
+
+	timeout = 7300
 
 	immediate = {
 		c:SPA = {
 			set_variable = { name = saw_spain_americas_subjects value = 0 }
 			every_subject_or_below = {
 				limit = {
-					capital_state = {
+					capital = {
 						OR = {
 							region = sr:region_central_america
 							region = sr:region_great_plains
@@ -121,11 +122,8 @@ je_spanish_american_war = {
 					change_variable = { name = saw_spain_americas_subjects add = 1 }
 				}
 			}
-			set_variable = {
-				name = saw_spain_americas_subjects_threshold
-				value = var:saw_spain_americas_subjects
-				multiply = 0.5
-			}
+			set_variable = { name = saw_spain_americas_subjects_threshold value = var:saw_spain_americas_subjects }
+			change_variable = { name = saw_spain_americas_subjects_threshold multiply = 0.5 }
 		}
 	}
 
@@ -142,10 +140,13 @@ je_spanish_american_war = {
 		custom_tooltip = {
 			text = je_saw_american_victory_subjects_tt
 			OR = {
+				c:USA = {
+					has_variable = saw_scripted_war_victory
+				}
 				NOT = {
 					c:SPA = {
 						any_subject_or_below = {
-							capital_state = {
+							capital = {
 								OR = {
 									region = sr:region_central_america
 									region = sr:region_great_plains
@@ -165,7 +166,7 @@ je_spanish_american_war = {
 					c:SPA = {
 						any_subject_or_below = {
 							count >= c:SPA.var:saw_spain_americas_subjects_threshold
-							capital_state = {
+							capital = {
 								OR = {
 									region = sr:region_central_america
 									region = sr:region_great_plains
@@ -188,6 +189,33 @@ je_spanish_american_war = {
 	on_complete = {
 		c:USA ?= {
 			add_modifier = { name = saw_american_victory years = 10 }
+			if = {
+				limit = { has_variable = saw_scripted_war_victory }
+				remove_variable = saw_scripted_war_victory
+			}
+			if = {
+				limit = {
+					exists = c:CUB
+					c:CUB = { is_subject_of = c:SPA }
+				}
+				c:CUB = {
+					make_independent = yes
+				}
+			}
+			if = {
+				limit = {
+					exists = c:PHI
+					c:PHI = { is_subject_of = c:SPA }
+				}
+				transfer_subject = c:PHI
+			}
+			if = {
+				limit = {
+					exists = c:PCO
+					c:PCO = { is_subject_of = c:SPA }
+				}
+				annex = c:PCO
+			}
 		}
 		c:SPA ?= {
 			add_modifier = { name = saw_spanish_defeat years = 10 }
@@ -203,6 +231,7 @@ je_spanish_american_war = {
 				has_modifier = country_humiliated
 				has_truce_with = c:SPA
 			}
+		}
 	}
 
 	on_fail = {
@@ -221,7 +250,7 @@ je_spanish_american_war = {
 	}
 
 	weight = 100
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default_involved = yes
 }
 
 ### Ostend Manifesto
@@ -235,7 +264,6 @@ je_ostend_manifesto = {
 		exists = c:USA
 		exists = c:SPA
 		exists = c:CUB
-		c:USA = { has_technology_researched = nationalism }
 	}
 
 	is_shown_in_lobby = {
@@ -406,5 +434,8 @@ je_ostend_manifesto = {
 	}
 
 	weight = 100
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default_involved = yes
 }
+
+
+

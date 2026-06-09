@@ -1,4 +1,4 @@
-namespace = gbr_path
+﻿namespace = gbr_path
 
 gbr_path.1 = {
 	type = country_event
@@ -19,18 +19,81 @@ gbr_path.1 = {
 		c:QUE ?= { save_scope_as = can_scope }
 		c:NSW ?= { save_scope_as = aus_scope }
 		c:BIC ?= { save_scope_as = raj_scope }
+		remove_variable = chose_fed_path
+		remove_variable = chose_commonwealth_path
 	}
 
 	option = {
 		name = gbr_path.1.a
 		default_option = yes
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					any_subject_or_below = {
+						is_player = yes
+						OR = {
+							c:SAF ?= this
+							c:CAN ?= this
+							c:HBC ?= this
+							c:QUE ?= this
+							c:BHT ?= this
+							c:ONT ?= this
+							c:NVS ?= this
+							c:NBS ?= this
+							c:ORG ?= this
+							c:WAS ?= this
+							c:KAU ?= this
+							c:SAS ?= this
+							c:TAS ?= this
+							c:NSW ?= this
+							c:AST ?= this
+							c:UNT ?= this
+						}
+					}
+				}
+				add = -100
+			}
+		}
 		set_variable = gbr_imperial_federation_path
+		set_variable = chose_fed_path
 		add_contextless_journal_entry = je_imperial_federation
 	}
 
 	option = {
 		name = gbr_path.1.b
+		ai_chance = {
+			base = 90
+			modifier = {
+				trigger = {
+					any_subject_or_below = {
+						is_player = yes
+						OR = {
+							c:SAF ?= this
+							c:CAN ?= this
+							c:HBC ?= this
+							c:QUE ?= this
+							c:BHT ?= this
+							c:ONT ?= this
+							c:NVS ?= this
+							c:NBS ?= this
+							c:ORG ?= this
+							c:WAS ?= this
+							c:KAU ?= this
+							c:SAS ?= this
+							c:TAS ?= this
+							c:NSW ?= this
+							c:AST ?= this
+							c:UNT ?= this
+						}
+					}
+				}
+				add = 100
+			}
+		}
 		set_variable = gbr_commonwealth_path
+		set_variable = chose_commonwealth_path
 		add_contextless_journal_entry = je_british_commonwealth
 	}
 }
+

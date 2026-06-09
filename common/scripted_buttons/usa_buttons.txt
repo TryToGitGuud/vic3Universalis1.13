@@ -61,7 +61,7 @@
 			if = {
 				limit = {
 					c:JAP ?= this
-					has_variable = meiji_restoration_complete
+					has_variable = japan_restoration_complete
 				}
 				add = 10
 			}
@@ -217,3 +217,4 @@ intervene_in_hawaii_button = { # je_hawaiian_interest
 		}
     }
 }
+

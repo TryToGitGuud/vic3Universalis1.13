@@ -96,18 +96,18 @@ intl_can_receive_spread_the_revolution = {
 }
 
 intl_is_great_proletarian_war_candidate = {
-	country_rank = rank_value:great_power
+	country_rank >= rank_value:great_power
 	intl_has_current_internationale_line = yes
 	is_at_war = yes
 	any_scope_war = {
 		any_war_participant = {
 			count >= 2
-			country_rank = rank_value:great_power
+			country_rank >= rank_value:great_power
 			intl_has_current_internationale_line = yes
 		}
 		any_war_participant = {
 			count >= 2
-			country_rank = rank_value:great_power
+			country_rank >= rank_value:great_power
 			NOT = { intl_has_current_internationale_line = yes }
 		}
 	}
@@ -124,24 +124,24 @@ intl_diplomatic_play_has_great_proletarian_war_shape = {
 		AND = {
 			any_scope_initiator_ally = {
 				count >= 2
-				country_rank = rank_value:great_power
+				country_rank >= rank_value:great_power
 				has_law_or_variant = law_type:law_council_republic
 			}
 			any_scope_target_ally = {
 				count >= 2
-				country_rank = rank_value:great_power
+				country_rank >= rank_value:great_power
 				NOT = { has_law_or_variant = law_type:law_council_republic }
 			}
 		}
 		AND = {
 			any_scope_target_ally = {
 				count >= 2
-				country_rank = rank_value:great_power
+				country_rank >= rank_value:great_power
 				has_law_or_variant = law_type:law_council_republic
 			}
 			any_scope_initiator_ally = {
 				count >= 2
-				country_rank = rank_value:great_power
+				country_rank >= rank_value:great_power
 				NOT = { has_law_or_variant = law_type:law_council_republic }
 			}
 		}

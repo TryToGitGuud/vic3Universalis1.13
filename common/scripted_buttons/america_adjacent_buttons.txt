@@ -1,4 +1,4 @@
-### American Exceptionalism
+﻿### American Exceptionalism
 
 je_american_exceptionalism_button = {
 	name = "je_american_exceptionalism_button"
@@ -33,6 +33,42 @@ je_american_exceptionalism_button = {
 			name = land_of_the_free_home_of_the_brave
 			years = 10
 			multiplier = american_exceptionalism_agenda_value
+		}
+	}
+
+	ai_chance = {
+		value = 100
+	}
+}
+
+### Spanish-American War
+
+je_spanish_american_war_start_button = {
+	name = "je_spanish_american_war_start_button"
+	desc = "je_spanish_american_war_start_button_desc"
+
+	visible = {
+		c:USA ?= THIS
+		is_involved_in_journal_entry = je_spanish_american_war
+	}
+
+	possible = {
+		hidden_trigger = {
+			exists = c:SPA
+		}
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		c:SPA = {
+			naval_power_projection < ROOT.naval_power_projection
+		}
+		NOT = { has_truce_with = c:SPA }
+	}
+
+	effect = {
+		create_diplomatic_play = {
+			name = spanish_american_war
+			type = dp_spanish_american_war
+			target_country = c:SPA
 		}
 	}
 
@@ -498,3 +534,4 @@ je_ostend_spa_conclude_negotiations_button = {
 		value = 1
 	}
 }
+

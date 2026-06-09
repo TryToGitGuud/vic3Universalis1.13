@@ -1,4 +1,4 @@
-# Sub-Saharan
+﻿# Sub-Saharan
 # Sub-Saharan
 berlin_conf_claim_west_africa = {
 	scope = country
@@ -1121,20 +1121,6 @@ berlin_conf_accept_conf = {
 			text = berlin_conf_not_ended_tt
 			NOT = { has_global_variable = berlin_conference_ended }
 		}
-		custom_tooltip = {
-			text = berlin_conf_treaty_locks_approval_tt
-			OR = {
-				NOT = { has_variable = accepted_conf_var }
-				NOT = {
-					any_scope_treaty = {
-						any_scope_article = {
-							has_type = berlin_approve_distribution
-							source_country = root
-						}
-					}
-				}
-			}
-		}
 	}
 	ai_is_valid = { always = no }
 	effect = {
@@ -1151,7 +1137,7 @@ berlin_conf_accept_conf = {
 	}
 }
 
-# Lock SGUIs — one per area. GP1/2/3 can lock/unlock; only the locker can unlock their own lock.
+# Lock SGUIs â€” one per area. GP1/2/3 can lock/unlock; only the locker can unlock their own lock.
 berlin_conf_lock_west_africa = {
 	scope = country
 	is_shown = {
@@ -1813,7 +1799,7 @@ berlin_conf_lock_mozambique = {
 	}
 }
 
-# Unlock SGUIs — visible to all when area is locked; only the locker can execute.
+# Unlock SGUIs â€” visible to all when area is locked; only the locker can execute.
 berlin_conf_unlock_west_africa = {
 	scope = country
 	is_shown = {
@@ -2175,30 +2161,6 @@ berlin_conf_unlock_mozambique = {
 	}
 }
 
-berlin_conf_enable_treaty_vis = {
-	scope = country
-	is_shown = {
-		is_involved_in_journal_entry = je_berlin_conference
-		NOT = { has_global_variable = berlin_conference_ended }
-		NOT = { has_variable = visible_berlin_conf_treaty_article }
-	}
-	effect = {
-		set_variable = visible_berlin_conf_treaty_article
-	}
-}
-
-berlin_conf_disable_treaty_vis = {
-	scope = country
-	is_shown = {
-		is_involved_in_journal_entry = je_berlin_conference
-		NOT = { has_global_variable = berlin_conference_ended }
-		has_variable = visible_berlin_conf_treaty_article
-	}
-	effect = {
-		remove_variable = visible_berlin_conf_treaty_article
-	}
-}
-
 berlin_conf_free_colonial_law = {
 	scope = country
 	is_shown = {
@@ -2216,3 +2178,4 @@ berlin_conf_free_colonial_law = {
 		trigger_event = { id = berlin_conference.4 days = 0 popup = yes }
 	}
 }
+

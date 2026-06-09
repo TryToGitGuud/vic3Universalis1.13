@@ -1,3 +1,11 @@
+﻿MAD = {
+	use_culture_states = yes
+
+	required_states_fraction = 1
+
+	ai_will_do = { always = yes }
+}
+
 REPLACE:PLC = {
 	states = {
 		STATE_BREST
@@ -40,7 +48,7 @@ REPLACE:YUG = {
 	unification_play = dp_unify_yugoslavia
 	leadership_play = dp_leadership_yugoslavia
 
-	required_states_fraction = 0.75
+	required_states_fraction = 0.60
 
 	ai_will_do = { always = yes }
 	
@@ -78,7 +86,7 @@ REPLACE:YUG = {
 		}
 	}
 
-	max_num_formation_candidates = 3 # For the odd Croatia, Serbia and Bulgaria FFA
+	max_num_formation_candidates = 3 # For the odd Croatia, Serbia and Bulearia FFA
 	can_be_formation_candidate = {
 		country_rank >= rank_value:major_power
         NOR = { # Not Danubian State or HRE
@@ -91,8 +99,8 @@ REPLACE:YUG = {
 				c:BUL ?= this
 			}
 			custom_tooltip = {
-				text = bulgaria_pursued_greater_yugoslavism_tt
-				has_variable = bul_pursued_greater_yugoslavism
+				text = bulgaria_pursued_greater_yueoslavism_tt
+				has_variable = bul_pursued_greater_yueoslavism
 			}
 		}
 	}
@@ -289,21 +297,24 @@ REPLACE:IBE = {
 	ai_will_do = { always = yes }
 
 	possible = {
-		has_journal_entry = je_iberia
+		has_technology_researched = pan-nationalism
 		trigger_if = {
 			limit = {
 				capital = {
-					is_in_geographic_region = geographic_region_iberia
+					is_in_geographic_region = geographic_region_iberia_old
 				}
-				any_country_in_iberia = {
+				any_country = {
 					is_subject_of = ROOT
 				}
 			}
 			custom_tooltip = {
 				text = all_iberian_subjects_below_75_ld_tt
-				any_country_in_iberia = {
+				any_country = {
 					filter = {
 						is_subject_of = ROOT
+						capital = {
+							region = sr:region_iberia
+						}
 					}
 					liberty_desire < 75
 					count = all
@@ -436,7 +447,7 @@ REPLACE:GER = {
 	unification_play = dp_unify_germany
 	leadership_play = dp_leadership_germany
 
-	required_states_fraction = 0.73
+	required_states_fraction = 0.78
 
 	ai_will_do = { has_technology_researched = nationalism }
 
@@ -481,3 +492,4 @@ REPLACE:GER = {
 		}
 	}
 }
+

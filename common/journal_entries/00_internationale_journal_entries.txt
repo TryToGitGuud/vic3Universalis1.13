@@ -111,7 +111,7 @@ REPLACE_OR_CREATE:je_communism_1 = {
 		custom_tooltip = communism_je_1_complete_tt
 	}
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 }
 
 REPLACE_OR_CREATE:je_communism_2 = {
@@ -168,7 +168,7 @@ REPLACE_OR_CREATE:je_anarchy = {
 
 	group = je_group_internal_affairs
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	status_desc = {
 		first_valid = {
@@ -251,20 +251,14 @@ je_internationale = {
 
 	group = je_group_global_international_situations
 
-	widget = {
-		gui = "gui/internationale_journal_button.gui"
-		name = "internationale_journal_button"
-		container = "custom_widget_container_1"
-	}
-
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	is_shown_when_inactive = {
 	}
 
 	possible = {
 		any_country = {
-			country_rank = rank_value:great_power
+			country_rank >= rank_value:great_power
 			has_law_or_variant = law_type:law_council_republic
 		}
 	}
@@ -322,14 +316,7 @@ je_the_internationale = {
 
 	group = je_group_global_international_situations
 
-	widget = {
-		gui = "gui/internationale_status_widget.gui"
-		name = "internationale_status_widget"
-		container = "custom_widget_container_1"
-	}
-
-
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	is_shown_when_inactive = {
 		has_global_variable = intl_internationale_claimed
@@ -386,7 +373,7 @@ je_the_internationale = {
 			triggered_desc = {
 				trigger = {
 					any_country = {
-						country_rank = rank_value:great_power
+						country_rank >= rank_value:great_power
 						NOT = { intl_has_current_internationale_line = yes }
 					}
 				}
@@ -415,7 +402,7 @@ je_the_internationale = {
 			text = je_the_internationale_all_gps_tt
 			NOT = {
 				any_country = {
-					country_rank = rank_value:great_power
+					country_rank >= rank_value:great_power
 					NOT = { intl_has_current_internationale_line = yes }
 				}
 			}
@@ -440,7 +427,7 @@ je_internationale_debug = {
 	scripted_button = je_internationale_debug_enactment_phase
 	scripted_button = je_internationale_debug_loyalists
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	is_shown_when_inactive = {
 	}
@@ -469,18 +456,12 @@ je_blanquism = {
 
 	group = je_group_internationalism
 
-	widget = {
-		gui = "gui/blanquist_journal_widgets.gui"
-		name = "blanquist_preparation_widget"
-		container = "custom_widget_container_1"
-	}
-
 	scripted_button = je_blanquism_prepare_cells
 	scripted_button = je_blanquism_infiltrate_state
 	scripted_button = je_blanquism_arm_cadres
 	scripted_button = je_blanquism_execute_coup
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	immediate = {
 		create_character = {
@@ -541,7 +522,7 @@ je_blanquist_consolidation = {
 	scripted_button = je_blanquist_reform_economy
 	scripted_button = je_blanquist_reform_state_police
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	immediate = {
 		set_variable = { name = blanquist_consolidation_timer value = 0 }
@@ -641,7 +622,7 @@ je_mutualist_worker_councils = {
 	scripted_button = je_mutualist_summon_intelligentsia_agitator
 	scripted_button = je_mutualist_install_petite_bourgeoisie_leader
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	status_desc = {
 		first_valid = {
@@ -692,7 +673,7 @@ je_mutualist_cooperative_mandate = {
 
 	group = je_group_internationalism
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	immediate = {
 		set_variable = { name = mutualist_cooperative_ownership_months value = 0 }
@@ -763,7 +744,7 @@ je_syndicalist_amendments = {
 
 	group = je_group_internal_affairs
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	scripted_progress_bar = syndicalist_general_strike_progress_bar
 
@@ -914,7 +895,7 @@ je_consolidate_the_syndacate = {
 
 	group = je_group_internal_affairs
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	scripted_button = je_syndacate_labour_fronts
 	scripted_button = je_syndacate_rural_parties
@@ -1001,7 +982,7 @@ je_marxist_proletarian_state = {
 
 	group = je_group_internal_affairs
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	immediate = {
 		ig:ig_trade_unions ?= {
@@ -1119,7 +1100,7 @@ je_marxist_workers_party = {
 
 	group = je_group_internal_affairs
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	immediate = {
 		set_variable = { name = marxist_consolidation_months value = 0 }
@@ -1253,7 +1234,7 @@ je_mp_faction_leader = {
 	group = je_group_mp_faction
 
 	weight = 100
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	status_desc = {
 		first_valid = {
@@ -1326,7 +1307,7 @@ je_mp_faction_world = {
 	group = je_group_mp_faction
 
 	weight = 100
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default = yes
 
 	status_desc = {
 		first_valid = {

@@ -817,6 +817,138 @@ american_ideas = {
 	}
 }
 
+dutch_ideas = {
+	if = {
+		limit = { var:national_idea_pool >= 3 NOT = { has_modifier = dutch_idea_1 } }
+		add_modifier = { name = dutch_idea_1 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 6 NOT = { has_modifier = dutch_idea_2 } }
+		add_modifier = { name = dutch_idea_2 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 9 NOT = { has_modifier = dutch_idea_3 } }
+		add_modifier = { name = dutch_idea_3 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 12 NOT = { has_modifier = dutch_idea_4 } }
+		add_modifier = { name = dutch_idea_4 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 15 NOT = { has_modifier = dutch_idea_5 } }
+		add_modifier = { name = dutch_idea_5 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 18 NOT = { has_modifier = dutch_idea_6 } }
+		add_modifier = { name = dutch_idea_6 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 21 NOT = { has_modifier = dutch_idea_7 } }
+		add_modifier = { name = dutch_idea_7 months = -1 }
+		add_modifier = { name = dutch_idea_bonus months = -1 }
+	}
+}
+
+united_netherlands_ideas = {
+	if = {
+		limit = { var:national_idea_pool >= 3 NOT = { has_modifier = dutch_idea_1 } }
+		add_modifier = { name = dutch_idea_1 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 6 NOT = { has_modifier = dutch_idea_2 } }
+		add_modifier = { name = dutch_idea_2 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 9 NOT = { has_modifier = dutch_idea_3 } }
+		add_modifier = { name = dutch_idea_3 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 12 NOT = { has_modifier = unl_idea_4 } }
+		remove_modifier = dutch_idea_4
+		add_modifier = { name = unl_idea_4 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 15 NOT = { has_modifier = dutch_idea_5 } }
+		add_modifier = { name = dutch_idea_5 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 18 NOT = { has_modifier = dutch_idea_6 } }
+		add_modifier = { name = dutch_idea_6 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 21 NOT = { has_modifier = unl_idea_7 } }
+		remove_modifier = dutch_idea_7
+		add_modifier = { name = unl_idea_7 months = -1 }
+		add_modifier = { name = dutch_idea_bonus months = -1 }
+	}
+}
+
+swedish_ideas = {
+	if = {
+		limit = { var:national_idea_pool >= 3 NOT = { has_modifier = swe_idea_1 } }
+		add_modifier = { name = swe_idea_1 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 6 NOT = { has_modifier = swe_idea_2 } }
+		add_modifier = { name = swe_idea_2 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 9 NOT = { has_modifier = swe_idea_3 } }
+		add_modifier = { name = swe_idea_3 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 12 NOT = { has_modifier = swe_idea_4 } }
+		add_modifier = { name = swe_idea_4 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 15 NOT = { has_modifier = swe_idea_5 } }
+		add_modifier = { name = swe_idea_5 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 18 NOT = { has_modifier = swe_idea_6 } }
+		add_modifier = { name = swe_idea_6 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 21 NOT = { has_modifier = swe_idea_7 } }
+		add_modifier = { name = swe_idea_7 months = -1 }
+		add_modifier = { name = swe_idea_bonus months = -1 }
+	}
+}
+
+scandinavian_ideas = {
+	if = {
+		limit = { var:national_idea_pool >= 3 NOT = { has_modifier = swe_idea_1 } }
+		add_modifier = { name = swe_idea_1 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 6 NOT = { has_modifier = swe_idea_2 } }
+		add_modifier = { name = swe_idea_2 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 9 NOT = { has_modifier = swe_idea_3 } }
+		add_modifier = { name = swe_idea_3 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 12 NOT = { has_modifier = swe_idea_4 } }
+		add_modifier = { name = swe_idea_4 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 15 NOT = { has_modifier = sca_idea_5 } }
+		remove_modifier = swe_idea_5
+		add_modifier = { name = sca_idea_5 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 18 NOT = { has_modifier = sca_idea_6 } }
+		remove_modifier = swe_idea_6
+		add_modifier = { name = sca_idea_6 months = -1 }
+	}
+	if = {
+		limit = { var:national_idea_pool >= 21 NOT = { has_modifier = swe_idea_7 } }
+		add_modifier = { name = swe_idea_7 months = -1 }
+		add_modifier = { name = swe_idea_bonus months = -1 }
+	}
+}
+
 italian_ideas = {
 	if = {
 		limit = {
@@ -2023,6 +2155,138 @@ cancel_american_ideas = {
 		}
 		remove_modifier = usa_idea_7
 		remove_modifier = usa_idea_bonus
+	}
+}
+
+cancel_dutch_ideas = {
+	if = {
+		limit = { var:national_idea_pool < 3 has_modifier = dutch_idea_1 }
+		remove_modifier = dutch_idea_1
+	}
+	if = {
+		limit = { var:national_idea_pool < 6 has_modifier = dutch_idea_2 }
+		remove_modifier = dutch_idea_2
+	}
+	if = {
+		limit = { var:national_idea_pool < 9 has_modifier = dutch_idea_3 }
+		remove_modifier = dutch_idea_3
+	}
+	if = {
+		limit = { var:national_idea_pool < 12 has_modifier = dutch_idea_4 }
+		remove_modifier = dutch_idea_4
+	}
+	if = {
+		limit = { var:national_idea_pool < 15 has_modifier = dutch_idea_5 }
+		remove_modifier = dutch_idea_5
+	}
+	if = {
+		limit = { var:national_idea_pool < 18 has_modifier = dutch_idea_6 }
+		remove_modifier = dutch_idea_6
+	}
+	if = {
+		limit = { var:national_idea_pool < 21 has_modifier = dutch_idea_7 }
+		remove_modifier = dutch_idea_7
+		remove_modifier = dutch_idea_bonus
+	}
+}
+
+cancel_united_netherlands_ideas = {
+	if = {
+		limit = { var:national_idea_pool < 3 has_modifier = dutch_idea_1 }
+		remove_modifier = dutch_idea_1
+	}
+	if = {
+		limit = { var:national_idea_pool < 6 has_modifier = dutch_idea_2 }
+		remove_modifier = dutch_idea_2
+	}
+	if = {
+		limit = { var:national_idea_pool < 9 has_modifier = dutch_idea_3 }
+		remove_modifier = dutch_idea_3
+	}
+	if = {
+		limit = { var:national_idea_pool < 12 OR = { has_modifier = unl_idea_4 has_modifier = dutch_idea_4 } }
+		remove_modifier = unl_idea_4
+		remove_modifier = dutch_idea_4
+	}
+	if = {
+		limit = { var:national_idea_pool < 15 has_modifier = dutch_idea_5 }
+		remove_modifier = dutch_idea_5
+	}
+	if = {
+		limit = { var:national_idea_pool < 18 has_modifier = dutch_idea_6 }
+		remove_modifier = dutch_idea_6
+	}
+	if = {
+		limit = { var:national_idea_pool < 21 OR = { has_modifier = unl_idea_7 has_modifier = dutch_idea_7 } }
+		remove_modifier = unl_idea_7
+		remove_modifier = dutch_idea_7
+		remove_modifier = dutch_idea_bonus
+	}
+}
+
+cancel_swedish_ideas = {
+	if = {
+		limit = { var:national_idea_pool < 3 has_modifier = swe_idea_1 }
+		remove_modifier = swe_idea_1
+	}
+	if = {
+		limit = { var:national_idea_pool < 6 has_modifier = swe_idea_2 }
+		remove_modifier = swe_idea_2
+	}
+	if = {
+		limit = { var:national_idea_pool < 9 has_modifier = swe_idea_3 }
+		remove_modifier = swe_idea_3
+	}
+	if = {
+		limit = { var:national_idea_pool < 12 has_modifier = swe_idea_4 }
+		remove_modifier = swe_idea_4
+	}
+	if = {
+		limit = { var:national_idea_pool < 15 has_modifier = swe_idea_5 }
+		remove_modifier = swe_idea_5
+	}
+	if = {
+		limit = { var:national_idea_pool < 18 has_modifier = swe_idea_6 }
+		remove_modifier = swe_idea_6
+	}
+	if = {
+		limit = { var:national_idea_pool < 21 has_modifier = swe_idea_7 }
+		remove_modifier = swe_idea_7
+		remove_modifier = swe_idea_bonus
+	}
+}
+
+cancel_scandinavian_ideas = {
+	if = {
+		limit = { var:national_idea_pool < 3 has_modifier = swe_idea_1 }
+		remove_modifier = swe_idea_1
+	}
+	if = {
+		limit = { var:national_idea_pool < 6 has_modifier = swe_idea_2 }
+		remove_modifier = swe_idea_2
+	}
+	if = {
+		limit = { var:national_idea_pool < 9 has_modifier = swe_idea_3 }
+		remove_modifier = swe_idea_3
+	}
+	if = {
+		limit = { var:national_idea_pool < 12 has_modifier = swe_idea_4 }
+		remove_modifier = swe_idea_4
+	}
+	if = {
+		limit = { var:national_idea_pool < 15 OR = { has_modifier = sca_idea_5 has_modifier = swe_idea_5 } }
+		remove_modifier = sca_idea_5
+		remove_modifier = swe_idea_5
+	}
+	if = {
+		limit = { var:national_idea_pool < 18 OR = { has_modifier = sca_idea_6 has_modifier = swe_idea_6 } }
+		remove_modifier = sca_idea_6
+		remove_modifier = swe_idea_6
+	}
+	if = {
+		limit = { var:national_idea_pool < 21 has_modifier = swe_idea_7 }
+		remove_modifier = swe_idea_7
+		remove_modifier = swe_idea_bonus
 	}
 }
 

@@ -1,7 +1,7 @@
-# Italy Tyrone – custom flag definitions for ITA.
+﻿# Italy Tyrone â€“ custom flag definitions for ITA.
 # Loads after vanilla and adds custom flags; ITA block overwrites vanilla ITA so we include vanilla + custom.
 # Empire variants use variable italian_empire_has_formed (set by Proclaim the Italian Empire in Irredentism).
-# Textures: convert gfx/interface/icons/event_icons/Italyflags/* to 768×512 .dds and put in gfx/coat_of_arms/textured_emblems/ as te_italy_*.dds.
+# Textures: convert gfx/interface/icons/event_icons/Italyflags/* to 768Ã—512 .dds and put in gfx/coat_of_arms/textured_emblems/ as te_italy_*.dds.
 
 REPLACE:ITA = { # Italy (vanilla definitions + Italy Tyrone custom flags)
 	flag_definition = {
@@ -202,14 +202,6 @@ REPLACE:ITA = { # Italy (vanilla definitions + Italy Tyrone custom flags)
 	### end of country-specific flags ###
 
 	flag_definition = {
-		coa = ITA_tyrone_republic
-		subject_canton = ITA_republic
-		priority = 10
-		trigger = {
-			coa_def_republic_flag_trigger = yes
-		}
-	}
-	flag_definition = {
 		coa = ITA_dictatorship
 		subject_canton = ITA_dictatorship
 		priority = 20
@@ -233,3 +225,4 @@ REPLACE:ITA = { # Italy (vanilla definitions + Italy Tyrone custom flags)
 		}
 	}
 }
+

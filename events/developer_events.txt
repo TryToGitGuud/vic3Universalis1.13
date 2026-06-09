@@ -566,8 +566,8 @@ dev.5 = {
 	}
 	trigger = {
 		is_ai = yes
-		year >= 1871
-		year < 1906
+		year >= 1850
+		year < 1865
 		NOT = {
 			has_global_variable = age_2_started_trigger
 		}
@@ -671,7 +671,7 @@ dev.6 = {
 	}
 	trigger = {
 		is_ai = yes
-		year >= 1906
+		year >= 1865
 		NOT = {
 			has_global_variable = age_3_started_trigger
 		}

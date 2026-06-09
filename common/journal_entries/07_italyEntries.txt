@@ -1,5 +1,4 @@
-# GUI in italy_journal_entry.gui shows quote + Mazzini portrait when this JE has list com_risorgimento_mazzini. When adding this JE, add the Mazzini character to that list so the portrait appears.
-# GUI bar "Italian unification sentiment" (italian_sentiment_var 0–100) in italy_journal_entry.gui under the Italian countries block.
+﻿# GUI in italy_journal_entry.eui shows quote + Mazzini portrait when this JE has list com_risorgimento_mazzini. When adding this JE, add the Mazzini character to that list so the portrait appears.
 italy_risorgimento_stage = {
 	icon = "gfx/interface/icons/invention_icons/nationalism.dds"
 	group = je_group_italy_tyrone
@@ -112,7 +111,7 @@ italy_risorgimento_stage = {
 	complete = {
 		custom_tooltip = {
 			text = ita_italy_exists_complete_tt
-			exists ?= c:ITA
+			exists = c:ITA
 		}
 	}
 
@@ -140,12 +139,12 @@ italy_diplo_stance = {
 		c:SAR ?= {
 			create_bidirectional_truce = {
 				country = c:PAP
-				years = 30
+				months = 360
 			}
 		}
 	}
 
-	# Refresh com_journal_characters so only the current monarch is shown (Cavour is no longer in the list).
+	# Refresh com_journal_characters so only the current monarch is shown (Cavour is no loneer in the list).
 	on_monthly_pulse = {
 		effect = {
 			random_scope_character = {
@@ -175,12 +174,12 @@ italy_diplo_stance = {
 	complete = {
 		custom_tooltip = {
 			text = ita_italy_exists_complete_tt
-			exists ?= c:ITA
+			exists = c:ITA
 		}
 	}
 
 	invalid = {
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 	on_complete = {
@@ -194,7 +193,7 @@ Spenna_la_gallina_austriaca = {
 	icon = "gfx/interface/icons/event_icons/Lombardy-Venetia.dds"
 	group = je_group_italy_tyrone
 
-	timeout = 1460 
+	timeout = 3650 
 
 	is_shown_when_inactive = {
 		c:ITA ?= root
@@ -202,7 +201,7 @@ Spenna_la_gallina_austriaca = {
 	possible = {
 		custom_tooltip = {
 			text = ita_spenna_gallina_not_italy_tt
-			exists ?= c:ITA 
+			exists = c:ITA 
 		}
 		OR = {
 			NOT = { country_or_subject_owns_entire_state_region = STATE_LOMBARDY }
@@ -279,7 +278,7 @@ Patti_lateranensi = {
 			text = ita_patti_lateranensi_visible_tt
 			exists = c:PAP
 		}
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 	possible = {
@@ -638,7 +637,7 @@ ITA_French_militaryJE = {
 	}
 
 	invalid = {
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 	on_complete = {
@@ -738,7 +737,7 @@ ITA_Austria_militaryJE = {
 	}
 
 	invalid = {
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 
@@ -919,7 +918,7 @@ ITA_French_economyJE = {
 	}
 
 	invalid = {
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 	should_be_pinned_by_default_uninvolved_or_context = yes
@@ -1086,7 +1085,7 @@ ITA_Austria_economyJE = {
 	}
 
 	invalid = {
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 
@@ -1152,7 +1151,7 @@ ITA_French_lawsJE = {
 	}
 
 	invalid = {
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 	should_be_pinned_by_default_uninvolved_or_context = yes
@@ -1218,7 +1217,7 @@ ITA_Austria_lawsJE = {
 	}
 
 	invalid = {
-		exists ?= c:ITA
+		exists = c:ITA
 	}
 
 	should_be_pinned_by_default_uninvolved_or_context = yes
@@ -1244,12 +1243,25 @@ ita_garibaldi_thousand_expedition_JE = {
 
 	is_shown_when_inactive = {
 		c:SAR ?= this
+		has_variable = italian_sentiment_var
 	}
 
 	possible = {
 		has_technology_researched = nationalism
+		custom_tooltip = {
+			text = ita_garibaldi_expedition_sentiment_60_tt
+			trigger_if = {
+				limit = {
+					has_variable = italian_sentiment_var
+				}
+				var:italian_sentiment_var >= 60
+			}
+			trigger_else = {
+				always = no
+			}
+		}
 		OR = {
-			is_great_power = yes
+			country_rank >= rank_value:great_power
 			custom_tooltip = {
 				text = is_nif_tt
 				has_variable = NIF_formed
@@ -1275,7 +1287,7 @@ ita_garibaldi_thousand_expedition_JE = {
 	complete = {
 		custom_tooltip = {
 			text = ita_italy_exists_complete_tt
-			exists ?= c:ITA
+			exists = c:ITA
 		}
 	}
 
@@ -1862,7 +1874,7 @@ italy_LV_federationItaly = { #Slow but better way of forming
 		has_technology_researched = pan-nationalism
 		any_country = {
 			filter = {
-				capital = { is_in_geographic_region = geographic_region_italy }
+				capital = { is_in_geographic_region = geographic_region_italy_old }
 				NOT = { this = ROOT }
 			}
 			percent = 1
@@ -2078,7 +2090,7 @@ sic_conqueror_of_italy = {
 		every_country = {
 			limit = {
 				capital = {
-					is_in_geographic_region = geographic_region_italy
+					is_in_geographic_region = geographic_region_italy_old
 				}
 			}
 			change_relations = { country = ROOT value = -100 }

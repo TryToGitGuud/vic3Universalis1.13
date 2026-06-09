@@ -11,6 +11,8 @@
  dyn_c_ita_republica_garibaldina_adj:0 "Garibaldino"
  dyn_c_ita_patria_imperiale:0 "Patria Imperiale Italica"
  dyn_c_ita_patria_imperiale_adj:0 "Roman"
+ dyn_c_ita_corporate: "National Republican State of Italy"
+ dyn_c_ita_communist: "Italian People's Republic"
  dyn_c_ita_empire_monarchy:0 "Italian Empire"
  dyn_c_ita_empire_theocracy:0 "Imperium Italicum"
  dyn_c_ita_empire_corporate:0 "Imperial State of Italy"
@@ -19,13 +21,13 @@
  dyn_c_ita_empire_vanguard:0 "People's Revolutionary Republic of Italy"
  dyn_c_ita_empire_people_republic:0 "People's Revolutionary Republic of Italy"
  dyn_c_ita_empire_dictatorship:0 "Imperial Republic of Italy"
+ dyn_c_ita_republic: "Italian Republic"
 
  # ========== Journal entry group ==========
  je_group_italy_tyrone:0 "Italian Nationalism"
  # ========== Character templates (last names) ==========
  ecchi_DAnnunzio:0 "D'Annunzio"
  ecchi_Mussolini:0 "Mussolini"
- Benso:0 "di Cavour"
 
  # ========== Scripted progress bar (Austria–France stance) ==========
  italy_aus_fra_stance_bar_name:0 "Diplomatic Stance"
@@ -59,6 +61,10 @@
  ita_treaty_turin_button_desc:0 "Request France cede Savoy and Provence. Only available while in France's power bloc. France may accept or decline."
  ita_lombardy_cession_button:0 "Request Lombardy from Austria"
  ita_lombardy_cession_button_desc:0 "Request Austria cede Lombardy. Only available while in Austria's power bloc. Austria may accept or decline."
+ ita_ai_return_lombardy_venetia_no_lmv:0 "Press Claims on Lombardy-Venetia"
+ ita_ai_return_lombardy_venetia_no_lmv_desc:0 "Begin a return state diplomatic play for Lombardy or Venetia if Lombardy-Venetia no longer exists and the current owner is weaker than Italy."
+ ita_return_dalmatia_decision:0 "Return Dalmatia"
+ ita_return_dalmatia_decision_desc:0 "Begin a return state diplomatic play against independent Dalmatia while Italy holds a claim on Dalmatia."
 
  # ========== Treaty events (France / Austria receive) ==========
  italyEventsTyrone.3.t:0 "The Treaty of Turin"
@@ -125,19 +131,11 @@
  ita_stance_toward_austria_tt:0 "#y Diplomatic stance shifts 10 toward Austria (Vienna).#!"
  ita_stance_toward_france_tt:0 "#c Diplomatic stance shifts 10 toward France (Paris).#!"
 
- # ========== Scripted progress bar (Italian unification sentiment) ==========
- italy_sentiment_bar_name:0 "Italian unification sentiment"
- italy_sentiment_bar_desc:0 "Italian unification sentiment"
- italy_sentiment_bar_from_var_tt:0 "Current Value: #variable [GetPlayer.MakeScope.Var('italian_sentiment_var').GetValue|v0]#! \nDriven by national sentiment for unification."
  ita_italy_exists_complete_tt:0 "Italy has been formed and exists."
 
  # ========== Invite the Pope to the Italian sphere ==========
  ita_invite_pope_sphere_button:0 "Invite the Pope to the Italian sphere"
  ita_invite_pope_sphere_button_desc:0 "Draw the Papal State into our orbit, placing it under Italian protection. Requires the North Italian Federation to be formed, relations with the Pope above 50, that we lead a power bloc, and a defensive pact with the Pope."
-
- # ========== Occupy Umbria ==========
- ita_occupy_abruzzi_button:0 "Occupy Umbria"
- ita_occupy_abruzzi_button_desc:0 "As the Pope's authority wanes, we may bring another portion of his lands into the Italian fold."
 
  # ========== Annex the Pope (war goal + No Papal Recognition) ==========
  ita_annex_pope_war_goal_button:0 "Annex the Papal State"
@@ -382,7 +380,6 @@
  ita_french_economy_progress_bar_desc:0 "#green #b Meet the GDP quota 5 times. #!#!"
  ita_french_economy_complete_progress_tt:0 "Sardinia has achieved five consecutive 6‑month periods of 5% GDP growth and kept the progress till 5M GDP."
  ita_french_economy_complete_button_tt:0 "Complete by pressing the button."
- ita_french_economy_complete_progress_tt:0 "Sardinia has achieved five consecutive 6‑month periods of 5% GDP growth and kept the progress till 5M GDP."
  ita_french_laws_complete_button:0 "Grant the Statuto Albertino"
  ita_french_laws_complete_button_desc:0 "We have Wealth Voting, legitimacy of at least 50, and the Intelligentsia or an IG with a liberal leader. Complete this objective."
  ita_french_laws_constitutional_pressure_3_tt:0 "Constitutional pressure (tension bar) is at least 3."
@@ -718,7 +715,6 @@
  ita_jewel_colony_lybia_button_desc:0 "Secure Libya as a jewel of the Italian crown."
  italian_jewel_colony_complete_tt:0 "Has selected a Jewel Colony"
  italian_jewel_colony_modifier:0 "Italian Jewel Colony"
- italy_developing_industry:0 "Developing Industry"
  industrial_dev_moreallocation_modifier:0 "Italian Investment Plan"
  ita_last_dev_industry_tt:0 "Developing Modifiers will become permanent. Having >=10 development in the South will integrate the culture and remove Sluggish South"
  italy_developing_industry_bar_title:0 "Investment by region"
@@ -769,13 +765,6 @@
  ita_consolidating_south_JE_reason:0 "Hold at least four South Italian homeland states for 24 months to consolidate control over the mezzogiorno. Progress advances each month while the south remains in our hands."
  ita_consolidating_south_debuff:0 "Unrest in the Mezzogiorno"
  ita_consolidating_south_debuff_desc:0 "Radicals from political movements +50%, radicals and loyalists from SOL change +50%, infrastructure -5% (South Italian states while Consolidating the South JE is active)."
-
-# Industry Develop 
-je_ita_industry_tt1:0 "Very Low Investments"
-je_ita_industry_tt2:0 "Low Investments"
-je_ita_industry_tt3:0 "Medium Investments"
-je_ita_industry_tt4:0 "High Investments"
-je_ita_industry_tt5:0 "Very High Investments"
 
 # ========== Developing Industry JE (North vs South GDP, yearly 8% growth) ==========
 italy_developing_industry:0 "Developing Industry"
@@ -1249,6 +1238,14 @@ ita_ministry_utilitarian:0 "Utilitarian Policy"
  lmv_request_protectorate_decision:0 "Petition Vienna for Autonomous Status"
  lmv_request_protectorate_decision_desc:0 "The Kingdom of Lombardy-Venetia has long chafed under direct Austrian rule. With Vienna weakened — whether by defeat in the Brothers' War, the constitutional compromises of the Dual Monarchy — the moment has come to press for a lighter grip. A formal petition to the Emperor may secure protectorate status: internal autonomy, a separate diet, and the end of crown land administration."
  lmv_request_protectorate_decision_tooltip:0 "Sends a petition to our Overlord. The Emperor will choose whether to grant or deny autonomous status."
+
+ ita_ai_transfer_lmv_from_austria:0 "Exploit Austria's Prussian War"
+ ita_ai_transfer_lmv_from_austria_desc:0 "With Austria locked in war against Prussia, Italy has an opening to force the transfer of Lombardy-Venetia."
+ ita_ai_transfer_lmv_from_austria_tooltip:0 "Starts a diplomatic play to transfer Lombardy-Venetia from Austria to Italy."
+
+ ita_annex_lmv_subject_decision:0 "Integrate Lombardy-Venetia"
+ ita_annex_lmv_subject_decision_desc:0 "Lombardy-Venetia now stands within Italy's sphere of authority. Its separate institutions can be dissolved and its lands brought directly into the kingdom."
+ ita_annex_lmv_subject_decision_tooltip:0 "Annexes Lombardy-Venetia with incorporation."
 
  # ========== italyEventsTyroneLV.8 — Austria receives the LMV petition ==========
  italyEventsTyroneLV.8.t:0 "A Petition from Lombardy-Venetia"
@@ -1726,3 +1723,31 @@ ita_ministry_utilitarian:0 "Utilitarian Policy"
  ita_grande_generale:0 "Il Condottiero della Nazione"
  ita_grande_generale_desc:0 "A commander of rare charisma and daring, this leader inspires volunteers and soldiers alike. His campaigns in Southern Italy have shaken old thrones and carried the banner of national unity across the peninsula." 
  garibaldi_coup:0 "Republica Garibaldina"
+ patti_lateranensi_bar_name:0 "Patti Lateranensi"
+ patti_lateranensi_bar_desc:0 "Tracks progress toward normalized relations with the Papacy."
+ patti_lateranensi_bar_monthly_tt:0 "Monthly progress"
+ sic_dismantle_latifundia_fertilizer_bar_name:0 "Fertilizer Adoption"
+ sic_dismantle_latifundia_fertilizer_bar_desc:0 "Tracks sustained fertilizer use in southern staple crop farms."
+ sic_dismantle_latifundia_fertilizer_bar_monthly_tt:0 "Fertilizer requirements are met"
+ LV_papal_envoy_tt:0 "Send an envoy to the Papacy."
+ LV_create_piedmont_tt:0 "Create Piedmont."
+ LV_create_sardinia_tt:0 "Create Sardinia."
+ LV_create_rome_tt:0 "Create Rome."
+ LV_create_tuscany_tt:0 "Create Tuscany."
+ LV_create_sicily_tt:0 "Create Sicily."
+
+ ita_eritrea_purchase_decision:0 "Purchase Eritrea"
+ ita_eritrea_purchase_decision_desc:0 "With the Berlin Conference concluded, Italy can make a formal offer to acquire Eritrea from its current owner."
+ italy_eritrea_purchase.1.t:0 "The Eritrea Purchase"
+ italy_eritrea_purchase.1.d:0 "[SCOPE.sCountry('italy_eritrea_buyer_scope').GetName] has approached us with an offer to purchase our holdings in Eritrea."
+ italy_eritrea_purchase.1.f:0 "Italian envoys arrive with contracts, maps, and a simple argument: Eritrea would be better administered from Rome, while compensation would spare both governments a costly dispute."
+ italy_eritrea_purchase.1.a:0 "Accept the Italian offer."
+ italy_eritrea_purchase.1.b:0 "Eritrea is not for sale."
+ italy_eritrea_purchase.2.t:0 "The Eritrea Purchase Accepted"
+ italy_eritrea_purchase.2.d:0 "[SCOPE.sCountry('italy_eritrea_owner_scope').GetName] has accepted our offer. Eritrea will pass into Italian administration."
+ italy_eritrea_purchase.2.f:0 "The signatures are dry before the maps are folded. A bargain has become a border."
+ italy_eritrea_purchase.2.a:0 "Excellent."
+ italy_eritrea_purchase.3.t:0 "The Eritrea Purchase Rejected"
+ italy_eritrea_purchase.3.d:0 "[SCOPE.sCountry('italy_eritrea_owner_scope').GetName] has rejected our offer to purchase Eritrea."
+ italy_eritrea_purchase.3.f:0 "The delegation returns with courteous words and empty hands. The matter of Eritrea remains unresolved."
+ italy_eritrea_purchase.3.a:0 "Then our claim remains."

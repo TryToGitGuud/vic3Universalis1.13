@@ -1,4 +1,260 @@
-﻿REPLACE:DEI = { # East Indies
+﻿
+INJECT:DEFAULT = {
+	dynamic_country_name = {
+		name = colonial_admin_ethiopia
+		adjective = colonial_admin_ethiopia_adj
+		use_overlord_prefix = yes
+
+		priority = 100
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				has_variable = ethiopia_subject_var
+			}
+		}
+	}
+}
+GOGU = { #Goguryeo
+	dynamic_country_name = {
+		name = GOGU-dynamic-name-monarchy
+		adjective = GOGU-dynamic-name-monarchy-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_monarchy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GOGU-dynamic-name-presidential
+		adjective = GOGU-dynamic-name-presidential-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_presidential_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GOGU-dynamic-name-parlement
+		adjective = GOGU-dynamic-name-parlement-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_parliamentary_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GOGU-dynamic-name-council
+		adjective = GOGU-dynamic-name-council-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_council_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GOGU-dynamic-name-theocracy
+		adjective = GOGU-dynamic-name-theocracy-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_theocracy
+			}
+		}
+	}
+}
+
+GAC = { #Greater America
+	dynamic_country_name = {
+		name = dyn_c_united_states
+		adjective = USA_ADJ
+
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			coa_def_republic_flag_trigger = yes
+			scope:actor ?= {
+				was_formed_from = USA
+			}
+			NOT = { coa_def_dictatorship_flag_trigger = yes }
+			NOT = { coa_def_communist_flag_trigger = yes }
+			NOT = {
+				scope:actor ?= {
+					has_law_or_variant = law_type:law_technocracy
+				}
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GAC-dynamic-name-technocracy
+		adjective = GAC-dynamic-name-technocracy-adj
+		
+		is_main_tag_only = yes
+		priority = 30
+		
+		trigger = {
+			coa_def_republic_flag_trigger = yes
+			scope:actor ?= {
+				has_law_or_variant = law_type:law_technocracy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GAC-dynamic-name-monarchy
+		adjective = GAC-dynamic-name-monarchy-adj
+		
+		is_main_tag_only = yes
+		priority = 20
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_monarchy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GAC-dynamic-name-presidential
+		adjective = GAC-dynamic-name-presidential-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_presidential_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GAC-dynamic-name-parlement
+		adjective = GAC-dynamic-name-parlement-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_parliamentary_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GAC-dynamic-name-council
+		adjective = GAC-dynamic-name-council-adj
+		
+		is_main_tag_only = yes
+		priority = 20
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_council_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = GAC-dynamic-name-theocracy
+		adjective = GAC-dynamic-name-theocracy-adj
+		
+		is_main_tag_only = yes
+		priority = 20
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_theocracy
+			}
+		}
+	}
+}
+
+UNSA = { #United South America
+	dynamic_country_name = {
+		name = UNSA-dynamic-name-monarchy
+		adjective = UNSA-dynamic-name-monarchy-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_monarchy
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = UNSA-dynamic-name-presidential
+		adjective = UNSA-dynamic-name-presidential-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_presidential_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = UNSA-dynamic-name-parlement
+		adjective = UNSA-dynamic-name-parlement-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_parliamentary_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = UNSA-dynamic-name-council
+		adjective = UNSA-dynamic-name-council-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_council_republic
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = UNSA-dynamic-name-theocracy
+		adjective = UNSA-dynamic-name-theocracy-adj
+		
+		is_main_tag_only = yes
+		priority = 0
+		
+		trigger = {
+			scope:actor = {
+				has_law = law_type:law_theocracy
+			}
+		}
+	}
+}
+
+REPLACE:DEI = { # East Indies
 	dynamic_country_name = {
 		name = dyn_c_east_indies
 		adjective = dyn_c_east_indies_adj
@@ -26,6 +282,64 @@
 				has_variable = VOC_reformed
 				is_subject_type = subject_type_chartered_company
 			}
+		}
+	}
+}
+
+REPLACE:TUR = { # Turkey
+	dynamic_country_name = {
+		name = dyn_c_ottoman_empire
+		adjective = dyn_c_ottoman_empire_adj
+
+		is_main_tag_only = yes
+		priority = 0
+
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_alawite_empire
+		adjective = dyn_c_alawite_empire_adj
+
+		is_main_tag_only = yes
+		priority = 100
+
+		trigger = {
+			coa_def_monarchy_flag_trigger = yes
+			scope:actor ?= {
+				has_variable = alawite_empire_variable
+			}			
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_red_sublime_porte
+		adjective = TUR_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_blanquist_presidential_republic }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_anatolian_workers_congress
+		adjective = TUR_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_anatolian_council_republic
+		adjective = TUR_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_marxist_council_republic }
 		}
 	}
 }
@@ -198,6 +512,51 @@ REPLACE:ITA = { # Italy
 		}
 	}
 	dynamic_country_name = {
+		name = dyn_c_ita_corporate
+		adjective = ITA_ADJ
+
+		is_main_tag_only = yes
+		priority = 50
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				coa_corporate_state_trigger = yes
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_ita_republic
+		adjective = ITA_ADJ
+
+		is_main_tag_only = yes
+		priority = 50
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				OR = {
+					has_law_or_variant = law_type:law_presidential_republic
+					has_law_or_variant = law_type:law_parliamentary_republic
+				}
+			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_ita_communist
+		adjective = ITA_ADJ
+
+		is_main_tag_only = yes
+		priority = 50
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				has_law_or_variant = law_type:law_council_republic
+			}
+		}
+	}
+	dynamic_country_name = {
 		name = dyn_c_ita_empire_dictatorship
 		adjective = dyn_c_ita_patria_imperiale_adj
 
@@ -277,6 +636,36 @@ REPLACE:ITA = { # Italy
 				has_variable = italian_empire_has_formed
 				coa_communist_trigger = yes
 			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_federazione_dei_comuni_liberi
+		adjective = ITA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_anarchist_anarchy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_repubblica_dei_sindacati_italiani
+		adjective = ITA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_direttorio_rivoluzionario_italiano
+		adjective = ITA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_blanquist_presidential_republic }
 		}
 	}
 }
@@ -415,6 +804,36 @@ REPLACE:KUK = {
 			}
 		}
 	}
+	dynamic_country_name = {
+		name = dyn_c_intl_internationale_raterepublik
+		adjective = KUK_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_marxist_council_republic }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_genossenschaftlicher_donaubund
+		adjective = KUK_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_mutualist_economy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_donau_arbeiterbund
+		adjective = KUK_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
+		}
+	}
 }
 
 #prussia
@@ -512,6 +931,36 @@ REPLACE:GER = { # Germany
 			coa_def_fascist_flag_trigger = yes
 		}
 	}	
+	dynamic_country_name = {
+		name = dyn_c_intl_deutsche_raterepublik
+		adjective = GER_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_marxist_council_republic }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_deutscher_arbeiterbund
+		adjective = GER_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_berliner_revolutionsdirektorium
+		adjective = GER_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_blanquist_presidential_republic }
+		}
+	}
 }
 
 #austrian empire
@@ -574,6 +1023,36 @@ REPLACE:AUS = {
 				has_variable = federated_three_crowns_var
 				has_government_type = gov_triple_monarchy
 			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_internationale_raterepublik
+		adjective = AUS_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_marxist_council_republic }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_genossenschaftlicher_donaubund
+		adjective = AUS_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_mutualist_economy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_donau_arbeiterbund
+		adjective = AUS_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
 		}
 	}
 }
@@ -762,6 +1241,26 @@ INJECT:FRA = {
 			}
 		}
 	}
+	dynamic_country_name = {
+		name = dyn_c_intl_federation_des_communes
+		adjective = FRA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_anarchist_anarchy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_comite_de_salut_public
+		adjective = FRA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_blanquist_presidential_republic }
+		}
+	}
 }
 
 #china
@@ -788,6 +1287,26 @@ INJECT:CHI = {
 					}
 				}
 			}
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_zhonghua_workers_republic
+		adjective = CHI_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_marxist_council_republic }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_chinese_mutual_aid_leagues
+		adjective = CHI_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_mutualist_economy }
 		}
 	}
 }
@@ -843,6 +1362,49 @@ REPLACE:SPA = {
 			}
 		}
 	}	
+	dynamic_country_name = {
+		name = dyn_c_intl_federacion_cantonal_iberica
+		adjective = SPA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_anarchist_anarchy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_republica_sindical_iberica
+		adjective = SPA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
+		}
+	}
+}
+
+INJECT:USA = {
+	dynamic_country_name = {
+		name = dyn_c_intl_industrial_union_of_america
+		adjective = USA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_syndicalist_economy }
+		}
+	}
+	dynamic_country_name = {
+		name = dyn_c_intl_free_territories_of_america
+		adjective = USA_ADJ
+		is_main_tag_only = yes
+		priority = 200
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law = law_type:law_anarchist_anarchy }
+		}
+	}
 }
 
 #russia
@@ -1065,3 +1627,4 @@ REPLACE_OR_CREATE:ki_PSV = { # Slavia
 	}
 
 }
+

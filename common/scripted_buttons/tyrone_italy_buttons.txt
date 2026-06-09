@@ -1,4 +1,4 @@
-# Italy Tyrone – all scripted buttons
+﻿# Italy Tyrone â€“ all scripted buttons
 # Join bloc, treaty (Turin / Lombardy), French path (military/economy/laws), French path complete buttons
 
 # ========== Join France's bloc / Join Austria's bloc ==========
@@ -135,7 +135,7 @@ ita_lombardy_cession_button = {
 	}
 }
 
-# ========== Annex Romagna only (unincorporated) – bar 40–60, not in bloc, bad relations with Pope ==========
+# ========== Annex Romagna only (unincorporated) â€“ bar 40â€“60, not in bloc, bad relations with Pope ==========
 # Event: Transfer Romagna from PAP to root, leave unincorporated, add 20% radicals in state.
 ita_annex_romagna_only_button = {
 	name = ita_annex_romagna_only_button
@@ -224,7 +224,7 @@ ita_occupy_abruzzi_button = {
 	}
 }
 
-# ========== Talks with the Pope – in French or Austrian bloc, sentiment >= 40 ==========
+# ========== Talks with the Pope â€“ in French or Austrian bloc, sentiment >= 40 ==========
 # Event: Italy gets Umbria and Romagna (claims + incorporate if PAP cedes) and passes Religious school, Charity hospitals, State religion.
 ita_talks_with_the_pope_button = {
 	name = ita_talks_with_the_pope_button
@@ -258,7 +258,7 @@ ita_talks_with_the_pope_button = {
 	}
 }
 
-# ========== Italian Concordat – sentiment >= 60, Pope has Umbria and Romagna ==========
+# ========== Italian Concordat â€“ sentiment >= 60, Pope has Umbria and Romagna ==========
 # Event: Pass Theocracy + Religious school, Charity hospitals, State religion; annex Papal State with incorporation; ruler and Devout leader become Theocrat.
 ita_italian_concordat_button = {
 	name = ita_italian_concordat_button
@@ -501,7 +501,7 @@ ita_annex_pope_war_goal_button = {
 	
 	possible = {
 		c:PAP ?= { exists = yes }
-		NOT = { is_at_war_with = c:PAP }
+		is_at_war = no
 	}
 
 	effect = {
@@ -554,6 +554,7 @@ ita_form_italy_button = {
 
 	effect = {
 		change_tag = ITA
+		add_primary_culture = cu:south_italian
 		trigger_event = { id = italyEventsTyrone.16 popup = yes }
 	}
 }
@@ -603,7 +604,6 @@ ita_form_italy_garibaldi_button = {
 				has_variable = garibaldi_exp_country
 				ruler = {
 					has_variable = garibaldi_char_var
-					has_trait = character_trait_garibaldi_republican
 				}
 			}
 			save_scope_as = garibaldi_republic
@@ -620,6 +620,7 @@ ita_form_italy_garibaldi_button = {
 		}
 		c:SAR = {
 			change_tag = ITA
+			add_primary_culture = cu:south_italian
 			activate_law = law_type:law_presidential_republic
 			trigger_event = { id = italyEventsTyrone.16 popup = yes }
 			trigger_event = { id = italyEventsTyrone.17 days = 1 popup = yes }
@@ -670,8 +671,8 @@ ita_declare_north_italian_federation_button = {
 	}
 }
 
-# ========== Garibaldi's Thousand Expedition – Prepare the Expedition ==========
-# Button on ita_garibaldi_thousand_expedition_JE. Requires naval and army projection >= 3× Sicily (c:SIC). Fires garibaldi_expedition.1.
+# ========== Garibaldi's Thousand Expedition â€“ Prepare the Expedition ==========
+# Button on ita_garibaldi_thousand_expedition_JE. Requires naval and army projection >= 3Ã— Sicily (c:SIC). Fires garibaldi_expedition.1.
 ita_garibaldi_prepare_expedition_button = {
 	name = ita_garibaldi_prepare_expedition_button
 	desc = ita_garibaldi_prepare_expedition_button_desc
@@ -687,7 +688,7 @@ ita_garibaldi_prepare_expedition_button = {
 	}
 
 	possible = {
-		exists ?= c:SIC
+		exists = c:SIC
 		c:SIC = { 
 			is_player = no
 			country_or_subject_owns_entire_state_region = STATE_SICILY
@@ -715,7 +716,7 @@ ita_garibaldi_prepare_expedition_button = {
 	}
 }
 
-# ========== North Italian Manifesto – annex PAR, MOD, LUC, TUS with incorporation ==========
+# ========== North Italian Manifesto â€“ annex PAR, MOD, LUC, TUS with incorporation ==========
 # Button on italy_risorgimento_stage. Requires Italian sentiment >= 30.
 ita_north_italian_manifesto_button = {
 	name = ita_north_italian_manifesto_button
@@ -769,7 +770,7 @@ ita_north_italian_manifesto_button = {
 	}
 }
 
-# ========== French path – start (military, economy, laws) ==========
+# ========== French path â€“ start (military, economy, laws) ==========
 ita_french_military_button = {
 	name = ita_french_military_button
 	desc = ita_french_military_button_desc
@@ -864,7 +865,7 @@ ita_french_laws_button = {
 	}
 }
 
-# Austria path – add Austrian laws JE (constitutional tension + Statuto events; complete via census/wealth or Grant the Statuto button).
+# Austria path â€“ add Austrian laws JE (constitutional tension + Statuto events; complete via census/wealth or Grant the Statuto button).
 ita_austria_laws_button = {
 	name = ita_austria_laws_button
 	desc = ita_austria_laws_button_desc
@@ -883,7 +884,7 @@ ita_austria_laws_button = {
 	}
 }
 
-# ========== French path – complete (in JE panel). Easy way: 30 units + all barracks fully employed, no shortages ==========
+# ========== French path â€“ complete (in JE panel). Easy way: 30 units + all barracks fully employed, no shortages ==========
 ita_french_military_complete_button = {
 	name = ita_french_military_complete_button
 	desc = ita_french_military_complete_button_desc
@@ -906,7 +907,7 @@ ita_french_military_complete_button = {
 	}
 }
 
-# ========== Austria path – complete (in JE panel). Easy: button + 30 + barracks. Hard: National Guard + Home Affairs lvl 2 ==========
+# ========== Austria path â€“ complete (in JE panel). Easy: button + 30 + barracks. Hard: National Guard + Home Affairs lvl 2 ==========
 ita_austria_military_complete_button = {
 	name = ita_austria_military_complete_button
 	desc = ita_austria_military_complete_button_desc
@@ -1032,7 +1033,7 @@ ita_french_laws_complete_button = {
 	}
 }
 
-# ========== Austria path – laws JE: button grants Oligarchy + Concessione Albertina amendment ==========
+# ========== Austria path â€“ laws JE: button grants Oligarchy + Concessione Albertina amendment ==========
 ita_austria_laws_complete_button = {
 	name = ita_austria_laws_complete_button
 	desc = ita_austria_laws_complete_button_desc
@@ -1069,7 +1070,7 @@ ita_austria_laws_complete_button = {
 	}
 }
 
-# ========== Italian Irredentism – Jewel Colony (only one choice; var hides all after use) ==========
+# ========== Italian Irredentism â€“ Jewel Colony (only one choice; var hides all after use) ==========
 ita_jewel_colony_morocco_button = {
 	name = ita_jewel_colony_morocco_button
 	desc = ita_jewel_colony_morocco_button_desc
@@ -1150,12 +1151,14 @@ ita_jewel_colony_ethiopia_button = {
 			name = italy_jewel_colony_var
 			value = 1
 		}
-		every_state = {
+		every_scope_state = {
 			limit = {
 				OR = {
 					state_region = s:STATE_AMHARA
 					state_region = s:STATE_GONDER
 					state_region = s:STATE_OROMIA
+					state_region = s:STATE_SOMALILAND
+					state_region = s:STATE_ERITREA
 				}
 			}
 			add_modifier = {
@@ -1257,7 +1260,7 @@ ita_jewel_colony_lybia_button = {
 	}
 }
 
-# ========== Italian Irredentism – Proclaim the Italian Empire ==========
+# ========== Italian Irredentism â€“ Proclaim the Italian Empire ==========
 # Clickable when at least 6 irredentism objectives are met. Uses script value (evaluated when checked, no monthly pulse).
 ita_proclaim_italian_empire_button = {
 	name = ita_proclaim_italian_empire_button
@@ -1510,7 +1513,7 @@ italy_LV_federationPo_PAPenvoy_button = {
 	desc = italy_LV_federationPo_PAPenvoy_button_desc
 
 	visible = {
-		exists ?= c:PAP
+		exists = c:PAP
 	}
 
 	possible = {
@@ -1540,7 +1543,7 @@ italy_LV_federationPo_SARenvoy_button = {
 	desc = italy_LV_federationPo_SARenvoy_button_desc
 
 	visible = {
-		exists ?= c:SAR
+		exists = c:SAR
 	}
 
 	possible = {
@@ -1570,7 +1573,7 @@ italy_LV_federationPo_SARinvestment_button = {
 	desc = italy_LV_federationPo_SARinvestment_button_desc
 
 	visible = {
-		exists ?= c:SAR
+		exists = c:SAR
 	}
 
 	possible = {
@@ -1606,7 +1609,7 @@ italy_LV_federationPo_PAPinvestment_button = {
 	desc = italy_LV_federationPo_PAPinvestment_button_desc
 
 	visible = {
-		exists ?= c:PAP
+		exists = c:PAP
 	}
 
 	possible = {
@@ -1642,7 +1645,7 @@ italy_LV_federationPo_AUSenvoy_button = {
 	desc = italy_LV_federationPo_AUSenvoy_button_desc
 
 	visible = {
-		exists ?= c:AUS
+		exists = c:AUS
 	}
 
 	possible = {
@@ -1673,7 +1676,7 @@ italy_LV_federationPo_AUSinvestment_button = {
 	desc = italy_LV_federationPo_AUSinvestment_button_desc
 
 	visible = {
-		exists ?= c:AUS
+		exists = c:AUS
 	}
 
 	possible = {
@@ -1710,7 +1713,7 @@ italy_LV_itafed_piedmont_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		NOT = { exists ?= c:SAR }
+		NOT = { exists = c:SAR }
 	}
 
 	possible = {
@@ -1768,7 +1771,7 @@ italy_LV_itafed_sardinia_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		NOT = { exists ?= c:ki_SRD }
+		NOT = { exists = c:ki_SRD }
 	}
 
 	possible = {
@@ -1824,7 +1827,7 @@ italy_LV_itafed_rome_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		NOT = { exists ?= c:PAP }
+		NOT = { exists = c:PAP }
 	}
 
 	possible = {
@@ -1880,7 +1883,7 @@ italy_LV_itafed_tuscany_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		NOT = { exists ?= c:TUS }
+		NOT = { exists = c:TUS }
 	}
 
 	possible = {
@@ -1936,7 +1939,7 @@ italy_LV_itafed_sicily_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		exists ?= c:SIC
+		exists = c:SIC
 		NOT = { c:SIC = { is_subject_of = c:LMV } }
 	}
 
@@ -1990,8 +1993,8 @@ italy_LV_itafed_naples_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		exists ?= c:SIC
-		NOT = { exists ?= c:XNP }
+		exists = c:SIC
+		NOT = { exists = c:XNP }
 		c:SIC = { is_subject_of = c:LMV }
 	}
 
@@ -2054,7 +2057,7 @@ italy_LV_itacentr_sicily_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		exists ?= c:SIC
+		exists = c:SIC
 		NOT = { c:SIC = { is_subject_of = c:LMV } }
 	}
 
@@ -2090,7 +2093,7 @@ italy_LV_itacentr_sway_sicily_button = {
 
 	visible = {
 		NOT = { c:ITA ?= root }
-		exists ?= c:SIC
+		exists = c:SIC
 	}
 
 	cooldown = { months = 12 }
@@ -2187,7 +2190,7 @@ sic_fate_support_nationalist_button = {
 	}
 }
 
-# ========== sic_bourbon_monarchy_constitution – Offer census suffrage / right of assembly ==========
+# ========== sic_bourbon_monarchy_constitution â€“ Offer census suffrage / right of assembly ==========
 sic_bourbon_offer_census_suffrage_button = {
 	name = sic_bourbon_offer_census_suffrage_button
 	desc = sic_bourbon_offer_census_suffrage_button_desc
@@ -2301,7 +2304,7 @@ sic_bourbon_offer_right_of_assembly_button = {
 	}
 }
 
-# ========== sic_bourbon_monarchy_economy – Skip entry, grant variable without on_complete ==========
+# ========== sic_bourbon_monarchy_economy â€“ Skip entry, grant variable without on_complete ==========
 sic_bourbon_economy_skip_button = {
 	name = sic_bourbon_economy_skip_button
 	desc = sic_bourbon_economy_skip_button_desc
@@ -2319,7 +2322,7 @@ sic_bourbon_economy_skip_button = {
 	}
 }
 
-# ========== garibaldi_presidency_JE – Step down: make Garibaldi general, call election ==========
+# ========== garibaldi_presidency_JE â€“ Step down: make Garibaldi general, call election ==========
 garibaldi_steps_down_button = {
 	name = garibaldi_steps_down_button
 	desc = garibaldi_steps_down_button_desc
@@ -2341,13 +2344,12 @@ garibaldi_steps_down_button = {
 		}
 		random_scope_character = {
 			limit = { has_trait = ita_grande_generale }
-			make_general = yes
 		}
 		call_election = { months = 6 }
 	}
 }
 
-# ========== ita_stop_emigration – AI only: instantly pass closed borders ==========
+# ========== ita_stop_emigration â€“ AI only: instantly pass closed borders ==========
 ita_stop_emigration_ai_button = {
 	name = ita_stop_emigration_ai_button
 	desc = ita_stop_emigration_ai_button_desc
@@ -2370,7 +2372,7 @@ ita_stop_emigration_ai_button = {
 	}
 }
 
-# ========== sic_ruler_of_italy – Request cession of Lombardo-Venetia from Austria ==========
+# ========== sic_ruler_of_italy â€“ Request cession of Lombardo-Venetia from Austria ==========
 sic_request_lmv_cession_button = {
 	name = sic_request_lmv_cession_button
 	desc = sic_request_lmv_cession_button_desc
@@ -2402,3 +2404,5 @@ sic_request_lmv_cession_button = {
 		}
 	}
 }
+
+

@@ -1,0 +1,96 @@
+# Selected principle groups ported from moreBloc.
+
+principle_group_deregulation = {
+
+	levels = {
+		principle_deregulation_1
+		principle_deregulation_2
+		principle_deregulation_3
+	}
+}
+
+principle_group_currency_union = {
+
+	levels = {
+		principle_currency_union_1
+		principle_currency_union_2
+		principle_currency_union_3
+	}
+}
+
+principle_group_economic_imperialism = {
+	levels = {
+		principle_economic_imperialism_1
+		principle_economic_imperialism_2
+		principle_economic_imperialism_3
+	}
+}
+
+principle_group_entrenched_elite = {
+	levels = {
+		principle_entrenched_elite_1
+		principle_entrenched_elite_2
+		principle_entrenched_elite_3
+	}
+}
+
+principle_group_status_quo = {
+	levels = {
+		principle_status_quo_1
+		principle_status_quo_2
+		principle_status_quo_3
+	}
+}
+
+principle_group_economic_consensus = {
+	levels = {
+		principle_economic_consensus_1
+		principle_economic_consensus_2
+		principle_economic_consensus_3
+	}
+}
+
+principle_group_direct_oversight = {
+	levels = {
+		principle_direct_oversight_1
+		principle_direct_oversight_2
+		principle_direct_oversight_3
+	}
+}
+
+principle_group_logistics_network = {
+	levels = {
+		principle_logistics_network_1
+		principle_logistics_network_2
+		principle_logistics_network_3
+	}
+}
+
+principle_group_holy_wars = {
+	primary_for_identity = identity_religious
+	unlocking_identity = identity_religious
+
+	levels = {
+		principle_holy_wars_1
+		principle_holy_wars_2
+		principle_holy_wars_3
+	}
+}
+
+principle_group_propaganda = {
+
+	levels = {
+		principle_propaganda_1
+		principle_propaganda_2
+		principle_propaganda_3
+	}
+}
+
+principle_group_sovereign_wealth_fund = {
+
+	levels = {
+		principle_sovereign_wealth_fund_1
+		principle_sovereign_wealth_fund_2
+		principle_sovereign_wealth_fund_3
+	}
+}

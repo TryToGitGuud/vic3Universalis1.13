@@ -1,0 +1,25 @@
+tyrone_morebloc_dynamic_modifier_update = {
+	remove_modifier = $modifier_name$
+	if = {
+		limit = {
+			modifier:$custom_modifier_type$ != 0
+		}
+		add_modifier = {
+			name = $modifier_name$
+			multiplier = $custom_multiplier$
+		}
+	}
+}
+
+tyrone_morebloc_dynamic_modifier_handler = {
+	tyrone_morebloc_dynamic_modifier_update = {
+		modifier_name = tyrone_morebloc_minting_per_bloc_member_modifier
+		custom_modifier_type = country_minting_from_bloc_members_mult
+		custom_multiplier = tyrone_morebloc_minting_per_bloc_member_multiplier
+	}
+	tyrone_morebloc_dynamic_modifier_update = {
+		modifier_name = tyrone_morebloc_legitimacy_per_bloc_member_modifier
+		custom_modifier_type = country_legitimacy_per_power_bloc_member_add
+		custom_multiplier = tyrone_morebloc_legitimacy_per_bloc_member_multiplier
+	}
+}

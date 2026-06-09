@@ -118,7 +118,7 @@ hawaii_events.2 = { #JE success
 					}
 				}
 				leader = {
-					kill_character = yes
+					retire_character = yes
 				}
 			}
 		}
@@ -134,7 +134,7 @@ hawaii_events.2 = { #JE success
 					}
 				}
 				leader = {
-					kill_character = yes
+					retire_character = yes
 				}
 			}
 		}
@@ -276,7 +276,7 @@ hawaii_events.3 = { #Failed JE
 		activate_law = law_type:law_presidential_republic
 		activate_law = law_type:law_oligarchy
 		ruler = {
-			kill_character = yes
+			retire_character = yes
 		}
 		if = {
 			limit = {
@@ -308,6 +308,9 @@ hawaii_events.4 = { #Great Power makes hawaii puppet or annex's them
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
 
 	duration = 4
+
+	cooldown = { days = never_fire_again_modifier_time }
+
 
 	trigger = {
 	}
@@ -384,13 +387,6 @@ hawaii_events.4 = { #Great Power makes hawaii puppet or annex's them
 		create_incident = {
 			country = c:HAW
 			value = 10
-		}
-		ai_chance = {
-			base = 25
-			modifier = {
-				add = 1000
-				c:USA = ROOT
-			}
 		}
 	}	
 }

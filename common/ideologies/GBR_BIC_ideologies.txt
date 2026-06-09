@@ -1,12 +1,12 @@
-ideology_john_company = {
+﻿ideology_john_company = {
 	icon = "gfx/interface/icons/ideology_icons//ideology_john_company.dds"
 
 	character_ideology = no
 
 	lawgroup_economic_system = {
-		law_agrarianism = neutral
 		law_laissez_faire = disapprove
 		law_interventionism = disapprove
+		law_agrarianism = disapprove
 		law_traditionalism = disapprove
 		law_cooperative_ownership = disapprove
 		law_command_economy = disapprove
@@ -38,7 +38,7 @@ ideology_john_company = {
 		law_collectivized_agriculture = strongly_disapprove
 		law_serfdom = disapprove
 		law_tenant_farmers = neutral
-		law_homesteading = disapprove
+		law_peasant_proprietorship = disapprove
 		law_commercialized_agriculture = approve
 	}
 }
@@ -82,14 +82,14 @@ ideology_zamindar_system = {
 	}
 
 	lawgroup_economic_system = {
-		law_agrarianism = strongly_approve
 		law_traditionalism = approve
-		law_laissez_faire = neutral
+		law_agrarianism = approve
 		law_interventionism = neutral
-		law_extraction_economy = neutral
 		law_industry_banned = disapprove
+		law_laissez_faire = disapprove
 		law_cooperative_ownership = strongly_disapprove
 		law_command_economy = strongly_disapprove
+		law_extraction_economy = strongly_approve
 	}
 
 	lawgroup_trade_policy = {

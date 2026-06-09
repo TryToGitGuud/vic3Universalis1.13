@@ -1,0 +1,1744 @@
+﻿REPLACE_OR_CREATE:state_trait_lorraine_ironfield = {#阿尔萨斯-洛林铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_great_lake_ironfield = {#五大湖铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pittsburgh_ironfield = {#匹兹堡铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_daye_ironfield = {#大冶铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pilbara_ironfield = {#皮尔巴拉铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_sishen_ironfield = {#席尔科普铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_itabira_ironfield = {#伊图比拉铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_alta_ironfield = {#阿尔塔米拉铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_val_daosta = {#瓦尔德奥斯塔
+	icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_upper_silesia_ironfield = {#上西里西亚铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bohemia_ironfield = {#波西米亚黄铜
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_lower_austria_ironfield = {#下奥地利铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_zonguldak_ironfield = {#扎福兰铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_singhbhum_ironfield = {#西姆德赫铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_keonjhar_ironfield = {#西姆德赫铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_anshan_ironfield = {#鞍山铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_maanshan_ironfield = {#马鞍山铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_svilengrad_ironfield = {#斯米利安铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_homs_ironfield = {#霍姆斯黄铜
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_elba_ironfield = {#伊尔瓦铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_kursk_ironfield = {#库尔斯克铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_saint_quentin_ironfield = {#苏蒙-圣康坦铁矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pingxiang_coalfield = {#萍乡煤矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_harrisburg_coalfield = {#哈里斯堡煤田
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_powder_river_coalfield = {#普拉图河煤田
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_jingzhon_coalfield = {#晋中煤田
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_brunn_coalfield = {#布尔诺煤田
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_serbia_coalfield = {#塞尔维亚煤田
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ternye_coalfield = {#特尔尼煤田
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_donbas_coalfield = {#顿巴斯煤田
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_kailuan_coalfield = {#开滦煤矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_fushun_coalfield = {#抚顺煤矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_tuscara_volcano_sulfurfield = {#图斯卡拉火山
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_sulfur_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_tengchon_sulfurfield = {#腾冲火山
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_sulfur_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_beppu_sulfurfield = {#别府硫矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_sulfur_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_cornwall_leadfield = {#康沃尔铅矿床
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_lead_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_lead_belt = {#密苏里铅带
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_lead_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_toluca_leadfield = {#托卢卡铅矿床
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_lead_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_newcastle_leadfield = {#纽卡斯尔矿床
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_lead_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_iglesiente_leadfield = {#伊格莱西亚斯
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_lead_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_la_carolina_linares_leadfield = {#拉卡罗利纳-利纳雷斯
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_lead_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_krasnoyarsk_leadfield = {#克拉斯诺亚尔斯克铅矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_lead_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_gulf_coast_oilfield = {#墨西哥湾油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_mojave_oilfield = {#莫哈维油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_cushing_oilfield = {#库欣油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_canada_great_plains_oilfield = {#加拿大大平原油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_sahara_oilfield = {#撒哈拉油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ghawar_oilfield = {#乔拜尔油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_desert_oilfield = {#沙漠油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.20
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_burgan_oilfield = {#伯哈油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_rumaila_kirkuk_oilfield = {#鲁迈拉-卡尔库克油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.20
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_masjed_soleyman_oilfield = {#马赫-沙赫尔油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.20
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_zukhrat_asahd_oilfield = {#祖尔法-阿斯哈德油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ahvaz_oilfield = {#阿赫瓦兹油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_daqing_oilfield = {#大庆油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_macksburg_oilfield = {#马克斯堡油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_baku_oilfield = {#巴库油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ploiesti_oilfield = {#普鲁日油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_orinoco_oilfield = {#乌尔图瓦油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_north_sea_oilfield = {#北海油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.05
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_au_red_soil = {#澳洲红土
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.15
+		building_coal_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ural_mine = {#乌拉尔山矿床
+	icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.2
+		building_coal_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_massif_central = {#中央山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_construction_mult = -0.1
+		building_coal_mine_throughput_add = 0.1
+		building_sulfur_mine_throughput_add = 0.05
+		building_lead_mine_throughput_add = 0.05
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_carpathian = {#喀尔巴阡山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		building_group_bg_agriculture_throughput_add = 0.05
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_yunnan_guizhou_plateau = {#云贵高原
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		building_group_bg_logging_throughput_add = 0.15
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_anatolia_plateau = {#安纳托利亚高原
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		building_group_bg_agriculture_throughput_add = -0.1
+		building_group_bg_plantations_throughput_add = -0.1
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+		unit_provinces_lost_mult = -0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_deccan_plateau = {#德干高原
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		unit_provinces_lost_mult = -0.25
+		building_group_bg_agriculture_throughput_add = 0.1
+		building_group_bg_plantations_throughput_add = 0.1
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pamir_plateau = {#帕米尔高原
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_construction_mult = -0.15
+		state_infrastructure_mult = -0.15
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.5
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_balkh_plateau = {#巴尔赫高原
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		state_construction_mult = -0.1
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_persia_plateau = {#波斯高原
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_hindu_kush_mountains = {#兴都库什山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_construction_mult = -0.2
+		state_infrastructure_mult = -0.2
+		battle_defense_owned_province_mult = 0.25
+		unit_provinces_lost_mult = -0.5
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_balochistan_mountains = {#俾路支山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_construction_mult = -0.15
+		state_infrastructure_mult = -0.15
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_altai_mountains = {#阿尔泰山
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		building_gold_mine_throughput_add = 0.25
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_val_trompia = {#瓦尔特隆皮亚
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_saxony_mine = {#萨克森矿床
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.15
+		building_iron_mine_throughput_add = 0.1
+		building_lead_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_caucasus_mine = {#高加索矿床
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_iron_mine_throughput_add = 0.1
+		building_lead_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_yakutia_goldmine = {#雅库茨克金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_witwatersrand = {#金山
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ashanti_goldmine = {#黄金海岸
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_sadiola_goldmine = {#卡比金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bulyanhulu_goldmine = {#巴盖特金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_kalgoorlie_goldmine = {#卡尔古利金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_carlin_trend_goldmine = {#卡尔顿金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_alaska_goldmine = {#阿拉斯加金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_yanacocha_goldmine = {#亚拉科查金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_bajo_cauca_goldmine = {#波尔巴金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_zhaoyuan_goldmine = {#招远金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_raja_goldmine = {#拉贾金矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_gold_mine_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_red_river_delta = {#红河三角洲
+    icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
+	
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.15
+		building_group_bg_plantations_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pearl_river_delta = {#珠江三角洲
+    icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
+	
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.15
+		building_group_bg_plantations_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_yangtze_river_delta = {#长江三角洲
+    icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
+	
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.25
+		building_group_bg_plantations_throughput_add = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ili_river_delta = {#伊犁河谷
+	icon = "gfx/interface/icons/state_trait_icons/river.dds"
+	
+	modifier = {
+		building_group_bg_plantations_throughput_add = 0.1
+		building_group_bg_agriculture_throughput_add = 0.1
+	}
+}
+
+#补充原版防御加成
+REPLACE_OR_CREATE:state_trait_scottish_highlands = {#苏格兰高地
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_infrastructure_mult = -0.1
+		state_construction_mult = -0.1
+		building_group_bg_agriculture_throughput_add = -0.1
+		building_group_bg_ranching_throughput_add = 0.1
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_rocky_mountains = {#洛基山脉
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.2
+		state_infrastructure_mult = -0.2
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_sierra_madre_occidental = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.10
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_sierra_madre_oriental = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_central_american_cordilleras = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.05
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_wasatch_range = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_infrastructure_mult = -0.20
+		state_construction_mult = -0.20
+		battle_defense_owned_province_mult = 0.05
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_gran_chaco = {#大查科
+	icon = "gfx/interface/icons/state_trait_icons/poor_soils.dds"
+
+	modifier = {
+		building_group_bg_logging_throughput_add = -0.1
+		building_group_bg_agriculture_throughput_add = -0.2
+		building_group_bg_ranching_throughput_add = 0.3		
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_amazon_rainforest = {#亚马逊雨林
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		goods_output_hardwood_mult = 0.25
+		state_construction_mult = -0.5
+		state_infrastructure_mult = -0.5
+		battle_defense_owned_province_mult = 0.3
+		unit_provinces_lost_mult = -0.75
+		state_building_construction_sector_max_level_add = -15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_amazon_rainforest_level_1 = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		goods_output_hardwood_mult = 0.25
+		state_construction_mult = -0.3
+		state_infrastructure_mult = -0.3
+		state_migration_pull_mult = 0.1
+		battle_defense_owned_province_mult = 0.25
+		unit_provinces_lost_mult = -0.5
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_amazon_rainforest_level_2 = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		goods_output_hardwood_mult = 0.25
+		building_group_bg_agriculture_throughput_add = 0.1
+		state_construction_mult = -0.2
+		state_infrastructure_mult = -0.2
+		state_migration_pull_mult = 0.2
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.4
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_alps_mountains = {#阿尔卑斯
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.15
+		state_infrastructure_mult = -0.15
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_himalayas_mountains = {#喜马拉雅
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.25
+		state_infrastructure_mult = -0.25
+		battle_defense_owned_province_mult = 0.3
+		unit_provinces_lost_mult = -0.75
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_caucasus_mountains = {#高加索山脉
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.2
+		state_infrastructure_mult = -0.2
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_sahara_desert = {#撒哈拉沙漠
+	icon = "gfx/interface/icons/state_trait_icons/dry_climate.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = -0.1
+		building_group_bg_agriculture_throughput_add = -0.2
+		building_group_bg_plantations_throughput_add = -0.2
+		state_construction_mult = -0.3
+		state_infrastructure_mult = -0.3
+		unit_army_offense_mult = -0.05
+		unit_army_defense_mult = -0.05
+		state_building_construction_sector_max_level_add = -15
+    }
+}
+
+REPLACE_OR_CREATE:state_trait_sahel = {#萨赫勒
+	icon = "gfx/interface/icons/state_trait_icons/poor_soils.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = 0.1
+		building_group_bg_agriculture_throughput_add = -0.1
+		building_group_bg_plantations_throughput_add = -0.1
+		unit_army_offense_mult = -0.05
+		unit_army_defense_mult = -0.05
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_atlas_mountains = {#阿斯特拉山脉
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_zagros_mountains = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_alborz_mountains = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.2
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_arabian_desert = {#阿拉伯沙漠
+	icon = "gfx/interface/icons/state_trait_icons/dry_climate.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = -0.1
+		building_group_bg_agriculture_throughput_add = -0.2
+		building_group_bg_plantations_throughput_add = -0.2
+		state_construction_mult = -0.25
+		state_infrastructure_mult = -0.25
+		unit_army_offense_mult = -0.05
+		unit_army_defense_mult = -0.05
+		state_building_construction_sector_max_level_add = -10
+    }
+}
+
+REPLACE_OR_CREATE:state_trait_burmese_teak = {#缅甸
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		goods_output_hardwood_mult = 0.25
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.10
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_indochinese_forest = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+		goods_output_hardwood_mult = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_borneo_rainforest = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		goods_output_hardwood_mult = 0.25
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_scandinavian_forests = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		building_group_bg_logging_throughput_add = 0.2
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+		goods_output_hardwood_mult = 0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_siberian_terrain = {#西伯利亚
+    icon = "gfx/interface/icons/state_trait_icons/cold_climate.dds"
+
+	modifier = {
+		building_group_bg_ranching_throughput_add = -0.1
+		state_construction_mult = -0.3
+		state_infrastructure_mult = -0.3
+		state_migration_pull_mult = -0.5
+		unit_provinces_lost_mult = -0.5
+		battle_defense_owned_province_mult = 0.2
+		state_building_construction_sector_max_level_add = -15
+		state_trade_capacity_mult = -0.75
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_australian_desert = {#澳大利亚沙漠
+    icon = "gfx/interface/icons/state_trait_icons/dry_climate.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = -0.1
+		building_group_bg_agriculture_throughput_add = -0.2
+		building_group_bg_plantations_throughput_add = -0.2
+		state_construction_mult = -0.25
+		state_infrastructure_mult = -0.25
+		battle_defense_owned_province_mult = 0.1
+		state_building_construction_sector_max_level_add = -5
+    }
+}
+
+REPLACE_OR_CREATE:state_trait_tasmanian_rainforest = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		goods_output_hardwood_mult = 0.2
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_eastern_steppe = {#东部草原
+	icon = "gfx/interface/icons/state_trait_icons/poor_soils.dds"
+
+	modifier = {
+		building_group_bg_ranching_throughput_add = 0.1
+		building_group_bg_agriculture_throughput_add = -0.1
+		building_group_bg_plantations_throughput_add = -0.1
+		unit_provinces_lost_mult = 0.25
+		battle_defense_owned_province_mult = -0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_the_great_plains = {#大平原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.2
+		building_group_bg_plantations_throughput_add = 0.2
+		state_infrastructure_mult = -0.1
+		unit_provinces_lost_mult = 0.15
+		battle_defense_owned_province_mult = -0.05
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_andes = {#安第斯山脉
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pampas = {#潘帕斯草原
+	icon = "gfx/interface/icons/state_trait_icons/resources_grazing.dds"
+
+	modifier = {
+		building_group_bg_ranching_throughput_add = 0.2
+		building_group_bg_agriculture_throughput_add = 0.15
+		building_group_bg_plantations_throughput_add = 0.15
+		unit_provinces_lost_mult = 0.25
+		battle_defense_owned_province_mult = -0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pannonian_plain = {#潘诺尼亚平原
+	icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.1
+        building_group_bg_ranching_throughput_add = 0.1
+        unit_provinces_lost_mult = 0.15
+        battle_defense_owned_province_mult = -0.05
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_mesopotamian_floodplain = {#美索不达米亚
+	icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.2
+		building_group_bg_plantations_throughput_add = 0.2
+        unit_provinces_lost_mult = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_northern_canadian_terrain = {#北加拿大地貌
+	icon = "gfx/interface/icons/state_trait_icons/cold_climate.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = -0.2
+		state_construction_mult = -0.3
+		state_infrastructure_mult = -0.3
+		state_migration_pull_mult = -0.5
+		unit_provinces_lost_mult = -0.5
+		battle_defense_owned_province_mult = 0.2
+		state_building_construction_sector_max_level_add = -15
+		state_trade_capacity_mult = -0.75
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_canadian_prairies = {#加拿大草原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.2
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = -0.05
+		unit_provinces_lost_mult = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_western_steppe = {#西部草原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = 0.1
+        unit_provinces_lost_mult = 0.15
+        battle_defense_owned_province_mult = -0.05
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_gobi_desert = {#戈壁沙漠
+	icon = "gfx/interface/icons/state_trait_icons/dry_climate.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = -0.1
+		building_group_bg_agriculture_throughput_add = -0.2
+		building_group_bg_plantations_throughput_add = -0.2
+		state_construction_mult = -0.25
+		state_infrastructure_mult = -0.25
+		unit_army_defense_mult = -0.05
+		unit_army_offense_mult = -0.05
+		state_building_construction_sector_max_level_add = -10
+    }
+}
+
+REPLACE_OR_CREATE:state_trait_taklamakan_desert = {#塔克拉玛干沙漠
+	icon = "gfx/interface/icons/state_trait_icons/dry_climate.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = -0.1
+		building_group_bg_agriculture_throughput_add = -0.2
+		building_group_bg_plantations_throughput_add = -0.2
+		state_construction_mult = -0.25
+		state_infrastructure_mult = -0.25
+		unit_army_defense_mult = -0.05
+		unit_army_offense_mult = -0.05
+		state_building_construction_sector_max_level_add = -10
+    }
+}
+
+REPLACE_OR_CREATE:state_trait_the_great_basin_desert = {#大盆地沙漠
+	icon = "gfx/interface/icons/state_trait_icons/dry_climate.dds"
+
+	modifier = {
+        building_group_bg_ranching_throughput_add = -0.1
+		building_group_bg_agriculture_throughput_add = -0.2
+		building_group_bg_plantations_throughput_add = -0.2
+		state_construction_mult = -0.25
+		state_infrastructure_mult = -0.25
+		unit_army_defense_mult = -0.05
+		unit_army_offense_mult = -0.05
+		state_building_construction_sector_max_level_add = -10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pyrenees_mountains = {#比利牛斯山脉
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.15
+		state_infrastructure_mult = -0.15
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_ural_mountains = {#乌拉尔山脉
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_northern_california_coastal_forests = {
+    icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		building_group_bg_logging_throughput_add = 0.2
+		state_construction_mult = -0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_black_forest = {
+    icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		building_group_bg_logging_throughput_add = 0.1
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_russian_forest = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		building_group_bg_logging_throughput_add = 0.2
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_american_chestnuts = {#美洲树林
+    icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		goods_output_hardwood_mult = 0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_cascades = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		state_building_construction_sector_max_level_add = -5
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_malaria = {#疟疾
+    icon = "gfx/interface/icons/state_trait_icons/malaria.dds"
+
+	disabling_technologies = { "quinine" }
+
+	modifier = {
+		state_non_homeland_colony_growth_speed_mult = -0.9
+		state_non_homeland_mortality_mult = 0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_severe_malaria = {#恶性疟疾
+    icon = "gfx/interface/icons/state_trait_icons/severe_malaria.dds"
+
+	required_techs_for_colonization = { "quinine" }
+	disabling_technologies = { "malaria_prevention" }
+
+	modifier = {
+		state_non_homeland_colony_growth_speed_mult = -0.95
+		state_non_homeland_mortality_mult = 0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_congo_forest = {
+	icon = "gfx/interface/icons/state_trait_icons/resources_lumber.dds"
+
+	modifier = {
+		state_construction_mult = -0.2
+		state_infrastructure_mult = -0.2
+		state_building_construction_sector_max_level_add = -5
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_great_dividing_range = {
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+
+	modifier = {
+		state_construction_mult = -0.1
+		state_infrastructure_mult = -0.1
+		state_building_construction_sector_max_level_add = -5
+		battle_defense_owned_province_mult = 0.05
+		unit_provinces_lost_mult = -0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_paektu_mountain = {#白头山
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_han_river_plain = {#汉江平原
+    icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
+	
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.15
+		building_group_bg_plantations_throughput_add = 0.15
+		state_infrastructure_add = 30
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_canadian_taiga = {#加拿大针叶林
+	icon = gfx/interface/icons/state_trait_icons/resources_lumber.dds
+	modifier = {
+		building_group_bg_logging_throughput_add = 0.2
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_mount_lebanon = {#黎巴嫩山区
+	icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	modifier = {
+		state_construction_mult = -0.05
+		state_infrastructure_mult = -0.05
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+		building_group_bg_silk_plantations_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_balkan_mountains = {#巴尔干山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_dinaric_alps = {#迪纳拉山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_rila_mountains = {#里拉山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_prokletije_mountains = {#诅咒山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		state_construction_mult = -0.1
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_shar_planina = {#什哈尔山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.05
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pindus_mountains = {#潘多斯山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.05
+		unit_provinces_lost_mult = -0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_olympus_mountains = {#奥林匹斯山
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_taygetus_mountains = {#塔伊格托斯山
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		state_construction_mult = -0.1
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_hengduan_mountains = {#横断山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		state_construction_mult = -0.1
+		battle_defense_owned_province_mult = 0.2
+		unit_provinces_lost_mult = -0.33
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_qinling_mountains = {#秦岭
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_wushan_mountains = {#巫山山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_taihang_mountains = {#太行山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.15
+		state_building_construction_sector_max_level_add = -5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_guanzhon_plains = {#关中平原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.1
+		building_group_bg_ranching_throughput_add = 0.1
+		state_infrastructure_add = 20
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_north_china_plains = {#华北平原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.05
+		building_group_bg_plantations_throughput_add = 0.05
+		state_infrastructure_add = 10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_jianghan_plains = {#江汉平原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.1
+		building_group_bg_plantations_throughput_add = 0.1
+		state_infrastructure_add = 20
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_north_german_plains = {#中欧平原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.05
+		building_group_bg_ranching_throughput_add = 0.05
+		state_infrastructure_add = 10
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_west_europe_plains = {#西欧平原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.05
+		building_group_bg_plantations_throughput_add = 0.05
+		state_infrastructure_add = 20
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_east_europe_plains = {#东欧大平原
+	icon = "gfx/interface/icons/state_trait_icons/great_plains.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.1
+		building_group_bg_ranching_throughput_add = 0.1
+		state_infrastructure_add = 5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_wuyi_mountains = {#武夷山脉
+    icon = "gfx/interface/icons/state_trait_icons/mountain.dds"
+	
+	modifier = {
+		state_infrastructure_mult = -0.1
+		state_construction_mult = -0.1
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+		state_building_construction_sector_max_level_add = -5
+		building_tea_plantation_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_west_siberian_oilfield = {#西西伯利亚盆地油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_california_oilfield = {#加利福尼亚油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_romashkino_oilfield = {#罗马什基诺油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.2
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_volga_oilfield = {#伏尔加河油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pennsylvania_oilfield = {#宾夕法尼亚油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_sumatra_oilfield = {#苏门答腊油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_zagros_ftb_oilfield = {#扎格罗斯断裂带油田
+    icon = "gfx/interface/icons/state_trait_icons/tropical_climate.dds"
+	
+	modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_pontus = {#本都
+	icon = "gfx/interface/icons/state_trait_icons/resources_exotic.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.1
+		building_group_bg_plantations_throughput_add = 0.1
+		building_tea_plantation_throughput_add = 0.1 # For a total of 0.2 tea throughput
+		battle_defense_owned_province_mult = 0.15
+		unit_provinces_lost_mult = -0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_spice_islands = {#香料群岛
+    icon = "gfx/interface/icons/state_trait_icons/good_soils.dds"
+	
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.15
+		building_group_bg_plantations_throughput_add = 0.15
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_maginot_line = {#马奇诺防线
+    icon = "gfx/interface/icons/invention_icons/concrete_fortifications.dds"
+	
+	modifier = {
+		battle_defense_owned_province_mult = 0.25
+		unit_provinces_lost_mult = -0.5
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_foothills_alps = {#阿尔卑斯山麓
+	icon = "gfx/interface/icons/state_trait_icons/resources_exotic.dds"
+
+	modifier = {
+		building_group_bg_agriculture_throughput_add = 0.1
+		building_group_bg_plantations_throughput_add = 0.1
+		battle_defense_owned_province_mult = 0.1
+		unit_provinces_lost_mult = -0.25
+	}
+}
+
+REPLACE_OR_CREATE:state_trait_quangninh_coalfield = {#广宁煤矿
+    icon = "gfx/interface/icons/state_trait_icons/resources_ore.dds"
+	
+	modifier = {
+		building_coal_mine_throughput_add = 0.1
+	}
+}
