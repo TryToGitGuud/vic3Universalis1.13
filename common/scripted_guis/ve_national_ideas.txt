@@ -2711,11 +2711,11 @@ ve_national_idea_bonus = {
 		}
 		else_if = {
 			limit = {
-				exists = c:UNL
-				this = c:UNL
+				exists = c:ITA
+				this = c:ITA
 			}
 			add_modifier = {
-				name = dutch_idea_bonus
+				name = ita_idea_bonus
 				months = -1
 			}
 		}

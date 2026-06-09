@@ -518,7 +518,7 @@ dutch_idea_tradition_2 = {
 dutch_idea_bonus = {
 	icon = gfx/interface/intelligensia.dds
 	state_trade_advantage_from_capacity_add = 0.1
-	country_convoys_capacity_mult = 0.2
+	country_company_construction_efficiency_bonus_add = 0.1
 }
 
 dutch_idea_1 = {
@@ -643,19 +643,18 @@ ita_idea_bonus = {
 
 ita_idea_1 = {
 	icon = gfx/interface/intelligensia.dds
-	country_tech_spread_mult = 0.1
-	building_university_throughput_add = 0.1
+	country_tech_spread_mult = 0.2
+	building_university_throughput_add = 0.25
 }
 
 ita_idea_2 = {
 	icon = gfx/interface/intelligensia.dds
-	state_conscription_rate_mult = 0.2
-	country_legitimacy_headofstate_add = 10
+	state_birth_rate_mult = 0.05
 }
 
 ita_idea_3 = {
 	icon = gfx/interface/intelligensia.dds
-	country_radicals_from_conquest_mult = -0.15
+	state_construction_mult = 0.1
 }
 
 ita_idea_4 = {
@@ -666,17 +665,19 @@ ita_idea_4 = {
 ita_idea_5 = {
 	icon = gfx/interface/intelligensia.dds
 	state_infrastructure_mult = 0.2
-	country_convoys_capacity_mult = 0.2
+	country_max_weekly_construction_progress_add = 15
 }
 
 ita_idea_6 = {
 	icon = gfx/interface/intelligensia.dds
 	building_group_bg_agriculture_throughput_add = 0.3
+	building_group_bg_plantations_throughput_add = 0.3
 }
 
 ita_idea_7 = {
 	icon = gfx/interface/intelligensia.dds
-	state_birth_rate_mult = 0.03
+	state_conscription_rate_mult = 0.25
+	country_legitimacy_headofstate_add = 20
 }
 
 
