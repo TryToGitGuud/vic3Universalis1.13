@@ -53,7 +53,7 @@ GGGG_mo_firearms = {
                 text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
                 add_organization = {
                     value = organization
-                    multiply = -0.5
+                    multiply = -0.1
                 }
             }
         }
@@ -64,7 +64,7 @@ GGGG_mo_firearms = {
             text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
             add_organization = {
                 value = organization
-                multiply = -0.5
+                multiply = -0.1
             }
         }
     }
@@ -130,7 +130,7 @@ GGGG_mo_percussion_caps = {
                 text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
                 add_organization = {
                     value = organization
-                    multiply = -0.5
+                    multiply = -0.1
                 }
             }
         }
@@ -141,7 +141,7 @@ GGGG_mo_percussion_caps = {
             text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
             add_organization = {
                 value = organization
-                multiply = -0.5
+                multiply = -0.1
             }
         }
     }
@@ -196,7 +196,7 @@ GGGG_mo_rifling = {
                 text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
                 add_organization = {
                     value = organization
-                    multiply = -0.5
+                    multiply = -0.1
                 }
             }
         }
@@ -207,7 +207,7 @@ GGGG_mo_rifling = {
             text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
             add_organization = {
                 value = organization
-                multiply = -0.5
+                multiply = -0.1
             }
         }
     }
@@ -223,7 +223,7 @@ GGGG_mo_rifling = {
     unit_modifier = {
         # unit_offense_add   = 5
         # unit_defense_add   = 5
-		unit_offense_mult = 0.10
+		unit_offense_mult = 0.05
 		unit_defense_mult = 0.05
         unit_kill_rate_add = 0.03
     }
@@ -270,7 +270,7 @@ GGGG_mo_breechblocks = {
                 text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
                 add_organization = {
                     value = organization
-                    multiply = -0.5
+                    multiply = -0.1
                 }
             }
         }
@@ -281,7 +281,7 @@ GGGG_mo_breechblocks = {
             text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
             add_organization = {
                 value = organization
-                multiply = -0.5
+                multiply = -0.1
             }
         }
     }
@@ -298,7 +298,7 @@ GGGG_mo_breechblocks = {
     unit_modifier = {
         # unit_offense_add   = 10
         # unit_defense_add   = 10
-		unit_offense_mult = 0.2
+		unit_offense_mult = 0.1
 		unit_defense_mult = 0.1
         unit_kill_rate_add = 0.05
     }
@@ -348,7 +348,7 @@ GGGG_mo_bolt_actions = {
                 text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
                 add_organization = {
                     value = organization
-                    multiply = -0.5
+                    multiply = -0.1
                 }
             }
         }
@@ -359,7 +359,7 @@ GGGG_mo_bolt_actions = {
             text = mobilization_option_it_hurts_organization_when_you_adjust_equipment_tt
             add_organization = {
                 value = organization
-                multiply = -0.5
+                multiply = -0.1
             }
         }
     }

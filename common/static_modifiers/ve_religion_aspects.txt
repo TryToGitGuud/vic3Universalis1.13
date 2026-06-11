@@ -13,6 +13,7 @@ catholic_aspect_1_mdf = {
 catholic_aspect_2_mdf = {
 	icon = gfx/interface/catholic.dds
 	country_prestige_mult = 0.1
+	state_mortality_mult = -0.025
 }
 
 catholic_aspect_3_mdf = {
@@ -28,7 +29,7 @@ catholic_aspect_4_mdf = {
 catholic_aspect_5_mdf = {
 	icon = gfx/interface/catholic.dds
 	country_influence_mult = 0.3
-	country_max_declared_interests_add = 10
+	state_trade_advantage_mult = 0.2
 }
 
 catholic_aspect_6_mdf = {
@@ -53,6 +54,7 @@ protestant_pasive_mdf = {
 	icon = gfx/interface/catholic.dds
 	state_tax_capacity_mult = 0.25
 	state_trade_advantage_mult = 0.15
+	state_birth_rate_mult = 0.03
 }
 
 protestant_aspect_1_mdf = {
@@ -86,11 +88,12 @@ protestant_aspect_5_mdf = {
 protestant_aspect_6_mdf = {
 	icon = gfx/interface/catholic.dds
 	state_education_access_add = 0.05
+	country_production_tech_research_speed_mult = 0.1
 }
 
 protestant_aspect_7_mdf = {
 	icon = gfx/interface/catholic.dds
-	country_tech_spread_mult = 0.1
+	country_tech_spread_mult = 0.2
 }
 
 protestant_aspect_8_mdf = {
@@ -100,7 +103,7 @@ protestant_aspect_8_mdf = {
 
 orthodox_pasive_mdf = {
 	icon = gfx/interface/catholic.dds
-	country_construction_add = 10
+	building_university_throughput_add = 0.2
 	country_authority_mult = 0.1
 }
 
@@ -116,7 +119,7 @@ orthodox_aspect_2_mdf = {
 
 orthodox_aspect_3_mdf = {
 	icon = gfx/interface/catholic.dds
-	building_university_throughput_add = 0.1
+	state_education_access_add = 0.1
 }
 
 orthodox_aspect_4_mdf = {
@@ -582,8 +585,8 @@ ve_diffusionist_mdf = {
 
 atheist_pasive_mdf = {
 	icon = gfx/interface/catholic.dds
-	country_agitator_slots_add = 2
-	country_tech_spread_mult = 0.25
+	country_agitator_slots_add = 1
+	state_education_access_add = 0.2
 }
 
 atheist_aspect_1_mdf = {
@@ -594,12 +597,12 @@ atheist_aspect_1_mdf = {
 atheist_aspect_2_mdf = {
 	icon = gfx/interface/catholic.dds
 	interest_group_ig_intelligentsia_pol_str_mult = 0.1
-	state_education_access_add = 0.2
+	country_tech_spread_mult = 0.20
 }
 
 atheist_aspect_3_mdf = {
 	icon = gfx/interface/catholic.dds
-	state_birth_rate_mult = 0.075
+	state_birth_rate_mult = 0.06
 }
 
 atheist_aspect_4_mdf = {
@@ -618,10 +621,9 @@ atheist_aspect_5_mdf = {
 
 atheist_aspect_6_mdf = {
 	icon = gfx/interface/catholic.dds
-	country_weekly_innovation_max_add = 5
-	country_production_tech_research_speed_mult = 0.15
-	country_military_tech_research_speed_mult = 0.15
-	country_society_tech_research_speed_mult = 0.15
+	country_weekly_innovation_max_add = 10
+	country_production_tech_research_speed_mult = 0.05
+	country_society_tech_research_speed_mult = 0.05
 }
 
 atheist_aspect_7_mdf = {
@@ -632,5 +634,6 @@ atheist_aspect_7_mdf = {
 
 atheist_aspect_8_mdf = {
 	icon = gfx/interface/catholic.dds
-	state_migration_pull_mult = 0.3
+	state_migration_pull_mult = 0.25
+	country_acceptance_no_shared_religious_trait_add = 15
 }

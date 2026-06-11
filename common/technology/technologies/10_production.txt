@@ -464,6 +464,10 @@ steam_donkey = {
 	texture = "gfx/interface/icons/invention_icons/steam_donkey.dds"
 	category = production
 
+	modifier = {
+		building_group_bg_mining_employee_mult = -0.025
+	}
+
 	unlocking_technologies = {
 		intensive_agriculture
 	}
@@ -494,6 +498,7 @@ dynamite = {
 
 	modifier = {
 		country_resource_discovery_chance_mult = 0.25
+		building_group_bg_mining_employee_mult = -0.025
 	}
 
 	unlocking_technologies = {
@@ -554,6 +559,7 @@ reinforced_concrete = {
 
 	modifier = {
 		building_construction_sector_throughput_add = 0.15
+		state_building_barrack_max_level_add = 15
 	}
 
 	unlocking_technologies = {
@@ -604,6 +610,10 @@ pumpjacks = {
 	texture = "gfx/interface/icons/invention_icons/pumpjacks.dds"
 	category = production
 
+	modifier = {
+		building_group_bg_mining_employee_mult = -0.025
+	}
+
 	unlocking_technologies = {
 		steam_donkey
 		dynamite
@@ -644,6 +654,10 @@ open_hearth_process = {
 	era = era_3
 	texture = "gfx/interface/icons/invention_icons/open_hearth_process.dds"
 	category = production
+
+	modifier = {
+		building_group_bg_heavy_industry_employee_mult = -0.05
+	}
 
 	unlocking_technologies = {
 		bessemer_process
@@ -691,6 +705,7 @@ shift_work = {
 
 	modifier = {
 		building_economy_of_scale_level_cap_add = 20
+		building_group_bg_light_industry_employee_mult = -0.025
 	}
 
 	unlocking_technologies = {
@@ -730,6 +745,11 @@ electrical_generation = {
 	era = era_3
 	texture = "gfx/interface/icons/invention_icons/electrical_generation.dds"
 	category = production
+
+	modifier = {
+		state_building_barrack_max_level_add = 20
+		building_group_bg_light_industry_employee_mult = -0.025
+	}
 
 	unlocking_technologies = {
 		rotary_valve_engine
@@ -805,6 +825,10 @@ automatic_bottle_blowers = {
 	texture = "gfx/interface/icons/invention_icons/automatic_bottle_blowers.dds"
 	category = production
 
+	modifier = {
+		building_group_bg_light_industry_employee_mult = -0.025
+	}
+
 	unlocking_technologies = {
 		vulcanization
 	}
@@ -822,6 +846,7 @@ conveyors = {
 
 	modifier = {
 		building_economy_of_scale_level_cap_add = 10
+		building_group_bg_light_industry_employee_mult = -0.025
 	}
 
 	unlocking_technologies = {
@@ -919,6 +944,8 @@ pneumatic_tools = {
 		building_construction_sector_throughput_add = 0.1
 		goods_output_hardwood_mult = 0.25
 		country_resource_discovery_chance_mult = 0.25
+		state_building_barrack_max_level_add = 25
+		building_group_bg_mining_employee_mult = -0.025
 	}
 
 	unlocking_technologies = {
@@ -953,6 +980,10 @@ electric_arc_process = {
 	texture = "gfx/interface/icons/invention_icons/electric_arc_process.dds"
 	category = production
 
+	modifier = {
+		building_group_bg_heavy_industry_employee_mult = -0.05
+	}
+
 	unlocking_technologies = {
 		open_hearth_process
 	}
@@ -968,6 +999,10 @@ steam_turbine = {
 	texture = "gfx/interface/icons/invention_icons/steam_turbines.dds"
 	category = production
 
+	modifier = {
+		building_group_bg_heavy_industry_employee_mult = -0.05
+	}
+
 	unlocking_technologies = {
 		electrical_generation
 	}
@@ -982,6 +1017,10 @@ plastics = {
 	era = era_4
 	texture = "gfx/interface/icons/invention_icons/plastics.dds"
 	category = production
+
+	modifier = {
+		building_group_bg_light_industry_employee_mult = -0.025
+	}
 
 	unlocking_technologies = {
 		reinforced_concrete
@@ -1039,6 +1078,10 @@ telephone = {
 	era = era_4
 	texture = "gfx/interface/icons/invention_icons/telephone.dds"
 	category = production
+
+	modifier = {
+		building_group_bg_light_industry_employee_mult = -0.025
+	}
 
 	unlocking_technologies = {
 		shift_work
