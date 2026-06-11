@@ -114,6 +114,7 @@ law_wage_subsidies = {
 	institution = institution_social_security
 	institution_modifier = {
 		building_minimum_wage_mult = 0.1
+		state_working_adult_ratio_add = 0.015
 		state_mortality_mult = -0.03
 		state_lower_strata_standard_of_living_add = 0.5 
 		building_economy_of_scale_level_cap_add = 1

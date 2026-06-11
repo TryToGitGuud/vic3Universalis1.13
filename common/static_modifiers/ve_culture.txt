@@ -22,17 +22,17 @@ national_supremacy_mdf_4 = {
 
 national_supremacy_mdf_5 = {
 	icon = gfx/interface/monarch_cultures_icon.dds
-	country_infamy_generation_mult = -0.1
+	country_infamy_generation_mult = -0.25
 }
 
 national_supremacy_mdf_6 = {
 	icon = gfx/interface/monarch_cultures_icon.dds
-	interest_group_approval_add = 1
+	country_legitimacy_headofstate_add = 15
 }
 
 national_supremacy_mdf_7 = {
 	icon = gfx/interface/monarch_cultures_icon.dds
-	country_prestige_from_army_power_projection_mult = 0.05
+	unit_army_offense_mult = 0.025
 }
 
 intellectual_nation_mdf_1 = {
@@ -47,7 +47,7 @@ intellectual_nation_mdf_2 = {
 
 intellectual_nation_mdf_3 = {
 	icon = gfx/interface/monarch_cultures_icon.dds
-	state_colony_growth_creation_factor = 0.1
+	building_university_throughput_add = 0.2
 }
 
 intellectual_nation_mdf_4 = {
@@ -57,17 +57,17 @@ intellectual_nation_mdf_4 = {
 
 intellectual_nation_mdf_5 = {
 	icon = gfx/interface/monarch_cultures_icon.dds
-	country_infamy_decay_mult = 0.25
+	country_infamy_generation_mult = -0.25
 }
 
 intellectual_nation_mdf_6 = {
 	icon = gfx/interface/monarch_cultures_icon.dds
-	interest_group_in_opposition_approval_add = 2
+	interest_group_amenability_add = 15
 }
 
 intellectual_nation_mdf_7 = {
 	icon = gfx/interface/monarch_cultures_icon.dds
-	country_prestige_mult = 0.05
+	country_mass_migration_attraction_mult = 0.05
 }
 
 #Bar modifier
@@ -75,6 +75,7 @@ bar_supremacy_mdf_7 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
 	state_assimilation_mult = 0.25
 	state_conversion_mult = 0.25
+	state_birth_rate_mult = 0.05
 	state_pop_support_law_ethnostate_mult = 0.25
 	state_pop_support_law_national_supremacy_mult = 0.25
 	interest_group_ig_armed_forces_pol_str_mult = 0.2
@@ -85,6 +86,7 @@ bar_supremacy_mdf_6 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
 	state_assimilation_mult = 0.214
 	state_conversion_mult = 0.214
+	state_birth_rate_mult = 0.0428
 	state_pop_support_law_ethnostate_mult = 0.214
 	state_pop_support_law_national_supremacy_mult = 0.214
 	interest_group_ig_armed_forces_pol_str_mult = 0.171
@@ -95,6 +97,7 @@ bar_supremacy_mdf_5 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
 	state_assimilation_mult = 0.179
 	state_conversion_mult = 0.179
+	state_birth_rate_mult = 0.0357
 	state_pop_support_law_ethnostate_mult = 0.179
 	state_pop_support_law_national_supremacy_mult = 0.179
 	interest_group_ig_armed_forces_pol_str_mult = 0.143
@@ -105,6 +108,7 @@ bar_supremacy_mdf_4 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
 	state_assimilation_mult = 0.143
 	state_conversion_mult = 0.143
+	state_birth_rate_mult = 0.0285
 	state_pop_support_law_ethnostate_mult = 0.143
 	state_pop_support_law_national_supremacy_mult = 0.143
 	interest_group_ig_armed_forces_pol_str_mult = 0.114
@@ -115,6 +119,7 @@ bar_supremacy_mdf_3 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
 	state_assimilation_mult = 0.107
 	state_conversion_mult = 0.107
+	state_birth_rate_mult = 0.0214
 	state_pop_support_law_ethnostate_mult = 0.107
 	state_pop_support_law_national_supremacy_mult = 0.107
 	interest_group_ig_armed_forces_pol_str_mult = 0.086
@@ -125,6 +130,7 @@ bar_supremacy_mdf_2 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
 	state_assimilation_mult = 0.071
 	state_conversion_mult = 0.071
+	state_birth_rate_mult = 0.0142
 	state_pop_support_law_ethnostate_mult = 0.071
 	state_pop_support_law_national_supremacy_mult = 0.071
 	interest_group_ig_armed_forces_pol_str_mult = 0.057
@@ -135,6 +141,7 @@ bar_supremacy_mdf_1 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
 	state_assimilation_mult = 0.036
 	state_conversion_mult = 0.036
+	state_birth_rate_mult = 0.007
 	state_pop_support_law_ethnostate_mult = 0.036
 	state_pop_support_law_national_supremacy_mult = 0.036
 	interest_group_ig_armed_forces_pol_str_mult = 0.029
@@ -143,77 +150,78 @@ bar_supremacy_mdf_1 = {
 
 bar_intellectual_mdf_7 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
-	state_migration_pull_mult = 0.25
+	state_migration_pull_mult = 0.50
+	country_mass_migration_attraction_mult = 0.1
 	country_tech_spread_mult = 0.25
 	political_movement_radicalism_mult = 0.25
 	state_pop_support_law_multicultural_mult = 0.25
 	state_pop_support_law_cultural_exclusion_mult = 0.25
 	interest_group_ig_intelligentsia_pol_str_mult = 0.2
-	country_bureaucracy_add = 300
+	country_authority_add = 300
 }
 
 bar_intellectual_mdf_6 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
-	state_migration_pull_mult = 0.214
+	state_migration_pull_mult = 0.428
 	country_tech_spread_mult = 0.214
 	political_movement_radicalism_mult = 0.214
 	state_pop_support_law_multicultural_mult = 0.214
 	state_pop_support_law_cultural_exclusion_mult = 0.214
 	interest_group_ig_intelligentsia_pol_str_mult = 0.171
-	country_bureaucracy_add = 257
+	country_authority_add = 257
 }
 
 bar_intellectual_mdf_5 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
-	state_migration_pull_mult = 0.179
+	state_migration_pull_mult = 0.358
 	country_tech_spread_mult = 0.179
 	political_movement_radicalism_mult = 0.179
 	state_pop_support_law_multicultural_mult = 0.179
 	state_pop_support_law_cultural_exclusion_mult = 0.179
 	interest_group_ig_intelligentsia_pol_str_mult = 0.143
-	country_bureaucracy_add = 214
+	country_authority_add = 214
 }
 
 bar_intellectual_mdf_4 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
-	state_migration_pull_mult = 0.143
+	state_migration_pull_mult = 0.286
 	country_tech_spread_mult = 0.143
 	political_movement_radicalism_mult = 0.143
 	state_pop_support_law_multicultural_mult = 0.143
 	state_pop_support_law_cultural_exclusion_mult = 0.143
 	interest_group_ig_intelligentsia_pol_str_mult = 0.114
-	country_bureaucracy_add = 171
+	country_authority_add = 171
 }
 
 bar_intellectual_mdf_3 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
-	state_migration_pull_mult = 0.107
+	state_migration_pull_mult = 0.214
 	country_tech_spread_mult = 0.107
 	political_movement_radicalism_mult = 0.107
 	state_pop_support_law_multicultural_mult = 0.107
 	state_pop_support_law_cultural_exclusion_mult = 0.107
 	interest_group_ig_intelligentsia_pol_str_mult = 0.086
-	country_bureaucracy_add = 128
+	country_authority_add = 128
 }
 
 bar_intellectual_mdf_2 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
-	state_migration_pull_mult = 0.071
+	state_migration_pull_mult = 0.142
 	country_tech_spread_mult = 0.071
 	political_movement_radicalism_mult = 0.071
 	state_pop_support_law_multicultural_mult = 0.071
 	state_pop_support_law_cultural_exclusion_mult = 0.071
 	interest_group_ig_intelligentsia_pol_str_mult = 0.057
-	country_bureaucracy_add = 85
+	country_authority_add = 85
 }
 
 bar_intellectual_mdf_1 = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
-	state_migration_pull_mult = 0.036
+	state_migration_pull_mult = 0.072
 	country_tech_spread_mult = 0.036
 	political_movement_radicalism_mult = 0.036
 	state_pop_support_law_multicultural_mult = 0.036
 	state_pop_support_law_cultural_exclusion_mult = 0.036
 	interest_group_ig_intelligentsia_pol_str_mult = 0.029
-	country_bureaucracy_add = 42
+	country_authority_add = 42
 }
