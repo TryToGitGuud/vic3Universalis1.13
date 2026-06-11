@@ -64,12 +64,12 @@ diplomatic_idea_3_mdf = {
 
 diplomatic_idea_4_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_no_advantage_loss_from_lack_of_interest_bool = yes
+	country_company_construction_efficiency_bonus_add = 0.2
 }
 
 diplomatic_idea_5_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_company_construction_efficiency_bonus_add = 0.2
+	country_no_advantage_loss_from_lack_of_interest_bool = yes
 }
 
 diplomatic_idea_6_mdf = {
@@ -332,22 +332,26 @@ qualification_idea_7_mdf = {
 
 naval_idea_1_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_supply_consumption_mult = -0.15
+	country_ship_group_supply_ships_construction_efficiency_add = 0.25
 }
 
 naval_idea_2_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_navy_defense_mult = 0.05
+	ship_armor_mult = 0.2
 }
 
 naval_idea_3_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_convoy_raiding_mult = 0.25
+	country_ship_group_torpedo_craft_construction_efficiency_add = 0.1
+	country_ship_type_protected_cruiser_construction_efficiency_add = 0.1
+	country_ship_type_armored_cruiser_construction_efficiency_add = 0.1
+	country_ship_type_light_cruiser_construction_efficiency_add = 0.1
 }
 
 naval_idea_4_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	country_convoys_capacity_mult = 0.3
+		state_building_naval_administration_max_level_add = 2
+		country_admiral_rank_impact_mult = 0.25
 }
 
 naval_idea_5_mdf = {
@@ -362,7 +366,7 @@ naval_idea_6_mdf = {
 
 naval_idea_7_mdf = {
 	icon = gfx/interface/icon_ideas.dds
-	unit_navy_offense_mult = 0.05
+	ship_hull_damage_mult = 0.2
 }
 
 ethnocentrism_idea_1_mdf = {
