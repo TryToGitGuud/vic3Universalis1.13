@@ -1,0 +1,75 @@
+﻿# ============================================================
+# GREAT WAR MOD - Great Power Alignment Progress Bars
+# ============================================================
+
+gw_alignment_allied_probability_bar = {
+	name = "gw_alignment_allied_probability_bar"
+	desc = "gw_alignment_allied_probability_bar_desc"
+
+	default_green = yes
+
+	weekly_progress = {
+		if = {
+			limit = {
+				owner = { has_variable = gw_alignment_allied_bar_current }
+			}
+			add = {
+				desc = "gw_alignment_allied_progress_sync"
+				value = owner.gw_hybrid_alignment_allied_probability
+				subtract = owner.var:gw_alignment_allied_bar_current
+			}
+		}
+	}
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+}
+
+gw_alignment_central_probability_bar = {
+	name = "gw_alignment_central_probability_bar"
+	desc = "gw_alignment_central_probability_bar_desc"
+
+	default_bad = yes
+
+	weekly_progress = {
+		if = {
+			limit = {
+				owner = { has_variable = gw_alignment_central_bar_current }
+			}
+			add = {
+				desc = "gw_alignment_central_progress_sync"
+				value = owner.gw_hybrid_alignment_central_probability
+				subtract = owner.var:gw_alignment_central_bar_current
+			}
+		}
+	}
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+}
+
+gw_alignment_neutral_probability_bar = {
+	name = "gw_alignment_neutral_probability_bar"
+	desc = "gw_alignment_neutral_probability_bar_desc"
+
+	default = yes
+
+	weekly_progress = {
+		if = {
+			limit = {
+				owner = { has_variable = gw_alignment_neutral_bar_current }
+			}
+			add = {
+				desc = "gw_alignment_neutral_progress_sync"
+				value = owner.gw_hybrid_alignment_neutral_probability
+				subtract = owner.var:gw_alignment_neutral_bar_current
+			}
+		}
+	}
+
+	start_value = 0
+	min_value = 0
+	max_value = 100
+}

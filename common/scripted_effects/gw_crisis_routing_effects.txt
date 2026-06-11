@@ -1,0 +1,61 @@
+﻿# ============================================================
+# GREAT WAR MOD - Crisis Routing Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_process_crisis_threshold_events = {
+	# AI safety: if an older/stale final-crisis state left the Central leader
+	# marked as seen without a cooldown, let the crisis be reconsidered.
+	if = {
+		limit = {
+			is_ai = yes
+			country_rank >= rank_value:major_power
+			has_modifier = gw_central_powers_leader
+			global_var:gw_world_tension >= 90
+			has_variable = gw_crisis_peak_seen
+			NOT = { has_variable = gw_crisis_peak_cooldown }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+		}
+		remove_variable = gw_crisis_peak_seen
+	}
+
+	# Crisis peak should feel immediate once the world has crossed the point of no return.
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			has_modifier = gw_central_powers_leader
+			global_var:gw_world_tension >= 80
+			NOT = { has_variable = gw_crisis_peak_seen }
+			NOT = { has_variable = gw_crisis_peak_cooldown }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+		}
+		trigger_event = { id = gw_crisis.3001 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			has_modifier = gw_allied_powers_leader
+			global_var:gw_world_tension >= 80
+			NOT = { has_variable = gw_crisis_peak_seen }
+			NOT = { has_variable = gw_crisis_peak_cooldown }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+		}
+		trigger_event = { id = gw_crisis.3002 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			NOT = { gw_is_great_war_bloc_leader = yes }
+			global_var:gw_world_tension >= 80
+			NOT = { has_variable = gw_crisis_peak_seen }
+			NOT = { has_variable = gw_crisis_peak_cooldown }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+		}
+		trigger_event = { id = gw_crisis.3003 days = 0 }
+	}
+}
+

@@ -1,0 +1,60 @@
+﻿# ============================================================
+# GREAT WAR MOD - Tension Contributor Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_refresh_top_tension_contributors = {
+	# Find top 3 tension contributors
+	if = {
+		limit = { exists = global_var:gw_top_tension_1 }
+		remove_global_variable = gw_top_tension_1
+	}
+	if = {
+		limit = { exists = global_var:gw_top_tension_2 }
+		remove_global_variable = gw_top_tension_2
+	}
+	if = {
+		limit = { exists = global_var:gw_top_tension_3 }
+		remove_global_variable = gw_top_tension_3
+	}
+	ordered_country = {
+		limit = {
+			country_rank >= rank_value:major_power
+			var:gw_country_tension_val > 0
+		}
+		order_by = var:gw_country_tension_val
+		position = 0
+		set_global_variable = { name = gw_top_tension_1 value = this }
+	}
+	ordered_country = {
+		limit = {
+			country_rank >= rank_value:major_power
+			var:gw_country_tension_val > 0
+			trigger_if = {
+				limit = { exists = global_var:gw_top_tension_1 }
+				NOT = { this = global_var:gw_top_tension_1 }
+			}
+		}
+		order_by = var:gw_country_tension_val
+		position = 0
+		set_global_variable = { name = gw_top_tension_2 value = this }
+	}
+	ordered_country = {
+		limit = {
+			country_rank >= rank_value:major_power
+			var:gw_country_tension_val > 0
+			trigger_if = {
+				limit = { exists = global_var:gw_top_tension_1 }
+				NOT = { this = global_var:gw_top_tension_1 }
+			}
+			trigger_if = {
+				limit = { exists = global_var:gw_top_tension_2 }
+				NOT = { this = global_var:gw_top_tension_2 }
+			}
+		}
+		order_by = var:gw_country_tension_val
+		position = 0
+		set_global_variable = { name = gw_top_tension_3 value = this }
+	}
+}
+

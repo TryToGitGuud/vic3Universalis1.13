@@ -262,7 +262,7 @@ principle_economic_imperialism_3 = {
 	}
 
 	leader_modifier = {
-		country_mass_migration_attraction_mult = 0.15
+		state_migration_pull_add = 20
 	}
 	
 	ai_weight = {

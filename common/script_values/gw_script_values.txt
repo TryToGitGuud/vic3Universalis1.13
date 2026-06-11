@@ -1,0 +1,380 @@
+﻿# ============================================================
+# GREAT WAR MOD - Script Values
+# ============================================================
+
+# --- World Tension & Great Power Dynamics ---
+
+gw_great_power_total = {
+	every_country = {
+		limit = {
+			country_rank >= rank_value:great_power
+		}
+		add = 1
+	}
+	min = 1
+}
+
+gw_great_power_dissatisfied_count = {
+	every_country = {
+		limit = {
+			country_rank >= rank_value:great_power
+			has_variable = gw_dissatisfied_with_order
+		}
+		add = 1
+	}
+}
+
+gw_great_power_dissatisfied_percent = {
+	value = gw_great_power_dissatisfied_count
+	divide = gw_great_power_total
+}
+
+gw_order_dominant_count = {
+	every_country = {
+		limit = {
+			country_rank >= rank_value:great_power
+			has_modifier = gw_dominating_world_order
+		}
+		add = 1
+	}
+}
+
+# Structural dissatisfaction score - country position in the world order.
+# Higher = more dissatisfied = Central Powers leaning.
+# This value intentionally ignores current bloc alignment so the AI cannot
+# create an Allied/Central feedback loop from its own previous stance.
+gw_structural_dissatisfaction_score = {
+	value = 0
+	# Base dissatisfaction if not a dominant power
+	if = {
+		limit = {
+			NOT = { has_modifier = gw_dominating_world_order }
+		}
+		add = 35
+	}
+	# Top-ranked non-dominant GP — powerful challenger (ranks 1-3)
+	if = {
+		limit = {
+			NOT = { has_modifier = gw_dominating_world_order }
+			global_country_ranking <= 3
+		}
+		add = 25
+	}
+	# Mid-ranked non-dominant GP — rising power (ranks 4-6)
+	else_if = {
+		limit = {
+			NOT = { has_modifier = gw_dominating_world_order }
+			global_country_ranking <= 6
+		}
+		add = 20
+	}
+	# If a dominant power has massive prestige (proxy for hegemonic power)
+	if = {
+		limit = {
+			any_country = {
+				global_country_ranking <= 3
+				has_modifier = gw_dominating_world_order
+				prestige >= 500
+			}
+		}
+		add = 20
+	}
+	# Military superiority over #1 ranked country.
+	# Use power projection here: army_size/navy_size cannot safely compare
+	# against another country's scoped value in every UI/script context.
+	if = {
+		limit = {
+			any_country = {
+				global_country_ranking = 1
+				naval_power_projection < root.naval_power_projection
+			}
+		}
+		add = 15
+	}
+	if = {
+		limit = {
+			any_country = {
+				global_country_ranking = 1
+				army_power_projection < root.army_power_projection
+			}
+		}
+		add = 15
+	}
+	# Too many dominant powers dilutes the order
+	if = {
+		limit = {
+			root.gw_order_dominant_count > 4
+		}
+		add = {
+			value = root.gw_order_dominant_count
+			subtract = 4
+			multiply = 10
+		}
+	}
+
+	min = 0
+	max = 100
+}
+
+# Current-facing dissatisfaction keeps old consumers working while only adding
+# a modest amount of stance inertia. The hybrid model reads the structural
+# value directly for its main order calculations.
+gw_dissatisfaction_score = {
+	value = gw_structural_dissatisfaction_score
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_central
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_allied
+		}
+		add = -10
+	}
+	if = {
+		limit = {
+			has_variable = gw_player_central
+		}
+		add = 25
+	}
+	if = {
+		limit = {
+			has_variable = gw_player_allied
+		}
+		add = -25
+	}
+
+	min = 0
+	max = 100
+}
+
+# Soft historical Central anchors. These are nudges, not rails: diplomacy and
+# structural dissatisfaction can still override them.
+gw_soft_historical_central_anchor_score = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				AND = { exists = c:PRU this = c:PRU }
+				AND = { exists = c:NGF this = c:NGF }
+				AND = { exists = c:GER this = c:GER }
+			}
+		}
+		add = 25
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = { exists = c:AUS this = c:AUS }
+				AND = { exists = c:SGF this = c:SGF }
+			}
+		}
+		add = 20
+	}
+	else_if = {
+		limit = {
+			exists = c:TUR
+			this = c:TUR
+			gw_is_major_or_greater = yes
+			game_date >= 1870.1.1
+		}
+		add = 15
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = { exists = c:ITA this = c:ITA }
+				AND = { exists = c:JAP this = c:JAP }
+			}
+			gw_structural_dissatisfaction_score >= 55
+			NOT = {
+				AND = {
+					gw_has_allied_leader_scope = yes
+					global_var:gw_allied_leader = {
+						has_treaty_alliance_with = { TARGET = root }
+					}
+				}
+			}
+		}
+		add = 10
+	}
+}
+
+# --- Tension Source Values ---
+
+# Count how many GP have military tech ahead of the average
+gw_militarized_gp_count = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			country_rank >= rank_value:great_power
+			OR = {
+				has_technology_researched = dreadnought_tech
+				has_technology_researched = automatic_machine_guns
+			}
+		}
+		add = 1
+	}
+}
+
+# --- GP Military Buildup (for tension calculation) ---
+
+gw_total_gp_army = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			country_rank >= rank_value:great_power
+		}
+		add = army_size
+	}
+}
+
+gw_total_gp_navy = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			country_rank >= rank_value:great_power
+		}
+		add = navy_size
+	}
+}
+
+# --- Bloc Strength Totals (for journal display) ---
+
+gw_allied_bloc_army = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			gw_is_major_or_greater = yes
+			gw_is_allied_member = yes
+			NOT = { gw_is_central_member = yes }
+		}
+		add = army_size
+	}
+}
+
+gw_allied_bloc_navy = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			gw_is_major_or_greater = yes
+			gw_is_allied_member = yes
+			NOT = { gw_is_central_member = yes }
+		}
+		add = navy_size
+	}
+}
+
+gw_central_bloc_army = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			gw_is_major_or_greater = yes
+			gw_is_central_member = yes
+			NOT = { gw_is_allied_member = yes }
+		}
+		add = army_size
+	}
+}
+
+gw_central_bloc_navy = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			gw_is_major_or_greater = yes
+			gw_is_central_member = yes
+			NOT = { gw_is_allied_member = yes }
+		}
+		add = navy_size
+	}
+}
+
+gw_national_support_value = {
+	value = 100
+	if = {
+		limit = { exists = var:gw_national_discontent_value }
+		subtract = var:gw_national_discontent_value
+	}
+	min = 0
+	max = 100
+}
+
+gw_national_discontent_display_value = {
+	value = 0
+	if = {
+		limit = { exists = var:gw_national_discontent_value }
+		add = var:gw_national_discontent_value
+	}
+	min = 0
+	max = 100
+}
+
+gw_home_front_balance_value = {
+	value = 100
+	if = {
+		limit = { exists = var:gw_national_discontent_value }
+		subtract = var:gw_national_discontent_value
+		subtract = var:gw_national_discontent_value
+	}
+	min = -100
+	max = 100
+}
+
+# Year-over-year growth (current - last year's snapshot)
+# Returns 0 if no baseline exists yet (first year)
+gw_gp_army_growth = {
+	value = 0
+	if = {
+		limit = { exists = global_var:gw_last_year_gp_army }
+		add = gw_total_gp_army
+		subtract = global_var:gw_last_year_gp_army
+	}
+	min = 0
+}
+
+gw_gp_navy_growth = {
+	value = 0
+	if = {
+		limit = { exists = global_var:gw_last_year_gp_navy }
+		add = gw_total_gp_navy
+		subtract = global_var:gw_last_year_gp_navy
+	}
+	min = 0
+}
+
+# --- Per-Country Military Growth (for tension attribution) ---
+
+gw_country_army_growth = {
+	value = 0
+	if = {
+		limit = { exists = var:gw_last_army_size }
+		add = army_size
+		subtract = var:gw_last_army_size
+	}
+	min = 0
+}
+
+gw_country_navy_growth = {
+	value = 0
+	if = {
+		limit = { exists = var:gw_last_navy_size }
+		add = navy_size
+		subtract = var:gw_last_navy_size
+	}
+	min = 0
+}
+
+# Count GPs currently at war
+gw_gp_at_war_count = {
+	every_country = {
+		limit = {
+			country_rank >= rank_value:great_power
+			is_at_war = yes
+		}
+		add = 1
+	}
+}

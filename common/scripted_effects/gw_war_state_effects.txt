@@ -1,0 +1,366 @@
+﻿# ============================================================
+# GREAT WAR MOD - War State Scripted Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_apply_war_propaganda = {
+	if = {
+		limit = {
+			NOT = { has_technology_researched = war_propaganda }
+		}
+		every_scope_war = {
+			add_war_war_support = { target = ROOT value = 10 }
+		}
+	}
+	else_if = {
+		limit = {
+			has_technology_researched = war_propaganda
+		}
+		every_scope_war = {
+			add_war_war_support = { target = ROOT value = 25 }
+		}
+	}
+	add_modifier = {
+		name = gw_war_propaganda
+		months = 6
+	}
+}
+
+gw_apply_wartime_rationing = {
+	add_modifier = {
+		name = gw_wartime_rationing
+		months = 24
+	}
+}
+
+gw_apply_suppressing_dissent = {
+	gw_ensure_national_discontent_value = yes
+	set_variable = {
+		name = gw_suppressing_dissent
+		years = 2
+	}
+	add_modifier = {
+		name = gw_suppressing_dissent_mod
+		years = 2
+	}
+	change_variable = { name = gw_national_discontent_value add = -10 }
+	clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+}
+
+gw_apply_wartime_research = {
+	add_modifier = {
+		name = gw_wartime_research_focus
+		months = 24
+	}
+}
+
+gw_apply_regime_change_from_great_war_winner = {
+	save_scope_as = gw_defeated_regime_target
+
+	if = {
+		limit = { exists = global_var:gw_great_war_winning_leader }
+		global_var:gw_great_war_winning_leader = {
+			regime_change = scope:gw_defeated_regime_target
+		}
+	}
+	else_if = {
+		limit = { has_variable = gw_war_side_1 }
+		every_country = {
+			limit = { has_variable = gw_war_side_2_leader }
+			regime_change = scope:gw_defeated_regime_target
+		}
+	}
+	else_if = {
+		limit = { has_variable = gw_war_side_2 }
+		every_country = {
+			limit = { has_variable = gw_war_side_1_leader }
+			regime_change = scope:gw_defeated_regime_target
+		}
+	}
+}
+
+gw_apply_individual_great_war_capitulation = {
+	if = {
+		limit = {
+			has_global_variable = gw_great_war_active
+			OR = {
+				has_variable = gw_war_side_1
+				has_variable = gw_war_side_2
+			}
+			NOR = {
+				has_variable = gw_war_side_1_leader
+				has_variable = gw_war_side_2_leader
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_modifier = gw_major_defeat }
+				NOR = {
+					has_variable = gw_war_side_1_leader
+					has_variable = gw_war_side_2_leader
+				}
+				country_rank >= rank_value:great_power
+			}
+			add_modifier = {
+				name = gw_major_defeat
+				years = 10
+			}
+		}
+		if = {
+			limit = {
+				country_rank >= rank_value:great_power
+				NOT = { has_modifier = gw_war_reparations_paying }
+			}
+			add_modifier = {
+				name = gw_war_reparations_paying
+				years = 10
+			}
+		}
+		gw_apply_regime_change_from_great_war_winner = yes
+		# Side-specific capitulation marker. Duration matches `recent_capitulation`
+		# (set in on_gw_capitulation via short_modifier_time) so gw_resolve_war_end_outcome
+		# does not desynchronize with one marker dropping early and triggering a stale
+		# false-victory inference.
+		if = {
+			limit = { has_variable = gw_war_side_1 }
+			set_variable = {
+				name = gw_recent_capitulation_side_1
+				years = 1
+			}
+		}
+		if = {
+			limit = { has_variable = gw_war_side_2 }
+			set_variable = {
+				name = gw_recent_capitulation_side_2
+				years = 1
+			}
+		}
+		gw_clear_country_war_participation = yes
+	}
+}
+
+gw_side_1_wins_great_war = {
+	set_global_variable = gw_war_outcome_determined
+	every_country = {
+		limit = { has_variable = gw_war_side_1_leader }
+		set_global_variable = { name = gw_great_war_winning_leader value = this }
+	}
+	every_country = {
+		limit = { has_variable = gw_war_side_2 }
+		trigger_event = { id = gw_war.2001 days = 1 }
+	}
+	every_country = {
+		limit = { has_variable = gw_war_side_1 }
+		trigger_event = { id = gw_war.2002 days = 1 }
+	}
+}
+
+gw_side_2_wins_great_war = {
+	set_global_variable = gw_war_outcome_determined
+	every_country = {
+		limit = { has_variable = gw_war_side_2_leader }
+		set_global_variable = { name = gw_great_war_winning_leader value = this }
+	}
+	every_country = {
+		limit = { has_variable = gw_war_side_1 }
+		trigger_event = { id = gw_war.2001 days = 1 }
+	}
+	every_country = {
+		limit = { has_variable = gw_war_side_2 }
+		trigger_event = { id = gw_war.2002 days = 1 }
+	}
+}
+
+gw_resolve_war_end_outcome = {
+	if = {
+		limit = {
+			exists = attacker_warleader
+			exists = defender_warleader
+		}
+		attacker_warleader = { save_scope_as = gw_attacker_warleader }
+		defender_warleader = { save_scope_as = gw_defender_warleader }
+
+		# Attacker capitulated; the defender's side wins.
+		if = {
+			limit = {
+				scope:gw_attacker_warleader = { has_variable = recent_capitulation }
+				NOT = { scope:gw_defender_warleader = { has_variable = recent_capitulation } }
+			}
+			if = {
+				limit = {
+					OR = {
+						scope:gw_attacker_warleader = { has_variable = gw_war_side_1 }
+						scope:gw_attacker_warleader = { has_variable = gw_recent_capitulation_side_1 }
+						scope:gw_defender_warleader = { has_variable = gw_war_side_2 }
+					}
+				}
+				gw_side_2_wins_great_war = yes
+			}
+			else_if = {
+				limit = {
+					OR = {
+						scope:gw_attacker_warleader = { has_variable = gw_war_side_2 }
+						scope:gw_attacker_warleader = { has_variable = gw_recent_capitulation_side_2 }
+						scope:gw_defender_warleader = { has_variable = gw_war_side_1 }
+					}
+				}
+				gw_side_1_wins_great_war = yes
+			}
+		}
+
+		# Defender capitulated; the attacker's side wins.
+		else_if = {
+			limit = {
+				scope:gw_defender_warleader = { has_variable = recent_capitulation }
+				NOT = { scope:gw_attacker_warleader = { has_variable = recent_capitulation } }
+			}
+			if = {
+				limit = {
+					OR = {
+						scope:gw_defender_warleader = { has_variable = gw_war_side_1 }
+						scope:gw_defender_warleader = { has_variable = gw_recent_capitulation_side_1 }
+						scope:gw_attacker_warleader = { has_variable = gw_war_side_2 }
+					}
+				}
+				gw_side_2_wins_great_war = yes
+			}
+			else_if = {
+				limit = {
+					OR = {
+						scope:gw_defender_warleader = { has_variable = gw_war_side_2 }
+						scope:gw_defender_warleader = { has_variable = gw_recent_capitulation_side_2 }
+						scope:gw_attacker_warleader = { has_variable = gw_war_side_1 }
+					}
+				}
+				gw_side_1_wins_great_war = yes
+			}
+		}
+	}
+}
+
+gw_force_faction_backers_in_play = {
+	if = {
+		limit = { is_diplomatic_play_type = gw_dp_reshape_order }
+		save_scope_as = gw_current_play
+		scope:initiator = {
+			save_scope_as = gw_initiator_country
+		}
+		scope:target ?= {
+			save_scope_as = gw_target_country
+		}
+
+		every_country = {
+			limit = {
+				gw_is_major_or_greater = yes
+				gw_is_central_member = yes
+				NOT = { gw_is_allied_member = yes }
+				NOT = { this = scope:gw_initiator_country }
+				NOT = { this = scope:gw_target_country }
+				is_diplomatic_play_committed_participant = no
+			}
+			scope:gw_current_play = {
+				add_initiator_backers = { prev }
+			}
+		}
+
+		every_country = {
+			limit = {
+				gw_is_major_or_greater = yes
+				gw_is_allied_member = yes
+				NOT = { gw_is_central_member = yes }
+				NOT = { this = scope:gw_initiator_country }
+				NOT = { this = scope:gw_target_country }
+				is_diplomatic_play_committed_participant = no
+			}
+			scope:gw_current_play = {
+				add_target_backers = { prev }
+			}
+		}
+	}
+}
+
+gw_mark_play_sides_from_reshape_order = {
+	if = {
+		limit = { is_diplomatic_play_type = gw_dp_reshape_order }
+		every_country = {
+			limit = {
+				OR = {
+					has_variable = gw_war_side_1
+					has_variable = gw_war_side_2
+					has_variable = gw_war_side_1_leader
+					has_variable = gw_war_side_2_leader
+					has_variable = gw_great_war_participant
+				}
+			}
+			remove_variable = gw_war_side_1
+			remove_variable = gw_war_side_2
+			remove_variable = gw_war_side_1_leader
+			remove_variable = gw_war_side_2_leader
+			remove_variable = gw_great_war_participant
+		}
+		scope:initiator = {
+			set_variable = gw_war_side_1
+			set_variable = gw_war_side_1_leader
+			set_variable = gw_great_war_participant
+			gw_ensure_national_discontent_value = yes
+		}
+		scope:target ?= {
+			set_variable = gw_war_side_2
+			set_variable = gw_war_side_2_leader
+			set_variable = gw_great_war_participant
+			gw_ensure_national_discontent_value = yes
+		}
+		every_scope_initiator_ally = {
+			set_variable = gw_war_side_1
+			set_variable = gw_great_war_participant
+			gw_ensure_national_discontent_value = yes
+		}
+		every_scope_target_ally = {
+			set_variable = gw_war_side_2
+			set_variable = gw_great_war_participant
+			gw_ensure_national_discontent_value = yes
+		}
+	}
+}
+
+gw_start_call_to_war = {
+	if = {
+		limit = { gw_can_start_great_war_now = yes }
+		if = { limit = { has_global_variable = gw_ultimatum_issued_central } remove_global_variable = gw_ultimatum_issued_central }
+		if = { limit = { has_global_variable = gw_ultimatum_issued_allied } remove_global_variable = gw_ultimatum_issued_allied }
+		if = { limit = { has_global_variable = gw_hist_neutral_epilogue_sent } remove_global_variable = gw_hist_neutral_epilogue_sent }
+		set_global_variable = gw_call_to_war_active
+		set_global_variable = { name = gw_call_to_war_months value = 0 }
+		set_global_variable = {
+			name = gw_call_to_war_initiator
+			value = root
+		}
+		random_country = {
+			limit = { global_country_ranking = 1 }
+			gw_refresh_bloc_lists = yes
+		}
+		trigger_event = { id = gw_call.1 }
+
+		every_country = {
+			limit = { has_modifier = gw_allied_powers_leader }
+			trigger_event = { id = gw_call.2 }
+		}
+		every_country = {
+			limit = {
+				gw_is_major_or_greater = yes
+				NOT = { has_modifier = gw_central_powers_leader }
+				NOT = { has_modifier = gw_allied_powers_leader }
+			}
+			trigger_event = { id = gw_call.3 }
+		}
+		gw_trigger_soft_historical_call_to_war_events = yes
+		every_country = {
+			limit = {
+				gw_is_major_or_greater = yes
+				has_variable = gw_stance_cooldown
+			}
+			remove_variable = gw_stance_cooldown
+		}
+	}
+}
+

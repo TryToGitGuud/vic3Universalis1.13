@@ -1,0 +1,248 @@
+﻿# ============================================================
+# GREAT WAR MOD - Call to War Events
+# Fired when Central Powers leader clicks "Call to War" button
+# 3-month mobilization window before diplomatic play starts
+# Scope notes:
+# - Root country for gw_call.10 is the Central Powers leader.
+# - Shared stance helpers keep player and AI alignment cleanup identical.
+# ============================================================
+
+namespace = gw_call
+
+# ============================================================
+# NOTIFICATION EVENTS (fired immediately on button click)
+# ============================================================
+
+# Central Powers leader — you have issued the Call to War
+gw_call.1 = {
+	type = country_event
+
+	title = gw_call.1.t
+	desc = gw_call.1.d
+	flavor = gw_call.1.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		# Only fired via button effect
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = gw_call.1.a
+		default_option = yes
+		custom_tooltip = { text = gw_call_mobilization_tt }
+		ai_chance = { base = 10 }
+	}
+}
+
+# Allied Powers leader — the Central Powers have issued a Call to War
+gw_call.2 = {
+	type = country_event
+
+	title = gw_call.2.t
+	desc = gw_call.2.d
+	flavor = gw_call.2.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		# Only fired via button effect
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = gw_call.2.a
+		default_option = yes
+		custom_tooltip = { text = gw_call_allied_prepare_tt }
+		ai_chance = { base = 10 }
+	}
+}
+
+# Other Great Powers — the world is mobilizing, choose your side
+gw_call.3 = {
+	type = country_event
+
+	title = gw_call.3.t
+	desc = gw_call.3.d
+	flavor = gw_call.3.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		# Only fired via button effect
+	}
+
+	immediate = {
+	}
+
+	# Join Central Powers
+	option = {
+		name = gw_call.3.a
+		trigger = {
+			NOT = {
+				OR = {
+					has_variable = gw_alignment_central
+					has_variable = gw_player_central
+				}
+			}
+		}
+		gw_apply_central_alignment = yes
+		custom_tooltip = { text = gw_call_join_central_tt }
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = gw_hybrid_alignment_central_weight_display
+			}
+		}
+	}
+
+	# Join Allied Powers
+	option = {
+		name = gw_call.3.b
+		trigger = {
+			NOT = {
+				OR = {
+					has_variable = gw_alignment_allied
+					has_variable = gw_player_allied
+				}
+			}
+		}
+		gw_apply_allied_alignment = yes
+		custom_tooltip = { text = gw_call_join_allied_tt }
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = gw_hybrid_alignment_allied_weight_display
+			}
+		}
+	}
+
+	# Declare Neutrality
+	option = {
+		name = gw_call.3.c
+		gw_apply_neutral_alignment = yes
+		custom_tooltip = { text = gw_call_stay_neutral_tt }
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = gw_hybrid_alignment_neutral_weight_display
+			}
+		}
+	}
+
+	# Keep current alignment (do nothing)
+	option = {
+		name = gw_call.3.e
+		default_option = yes
+		custom_tooltip = { text = gw_call_keep_current_tt }
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = gw_hybrid_alignment_keep_current_weight_display
+			}
+		}
+	}
+}
+
+# ============================================================
+# WAR START EVENT (fires 90 days after Call to War)
+# Only fires for Central Powers leader — creates the diplomatic play
+# ============================================================
+
+gw_call.10 = {
+	type = country_event
+
+	title = gw_call.10.t
+	desc = gw_call.10.d
+	flavor = gw_call.10.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		has_global_variable = gw_call_to_war_launch_pending
+		NOT = { has_global_variable = gw_great_war_active }
+		exists = global_var:gw_call_to_war_initiator
+		root = global_var:gw_call_to_war_initiator
+	}
+
+	immediate = {
+		# Save a guarded local scope for the defending bloc leader.
+		if = {
+			limit = { gw_has_allied_leader_scope = yes }
+			global_var:gw_allied_leader = {
+				save_scope_as = gw_allied_leader
+			}
+		}
+	}
+
+	# Launch the Great War
+	option = {
+		name = gw_call.10.a
+		default_option = yes
+		trigger = {
+			has_global_variable = gw_call_to_war_active
+			has_global_variable = gw_call_to_war_launch_pending
+			NOT = { has_global_variable = gw_great_war_active }
+			exists = scope:gw_allied_leader
+			gw_can_launch_great_war_from_call = yes
+		}
+
+		# Create the diplomatic play
+		create_diplomatic_play = {
+			name = gw_great_war_dp_name
+			type = gw_dp_reshape_order
+			target_country = scope:gw_allied_leader
+		}
+
+		ai_chance = { base = 100 }
+	}
+
+	option = {
+		name = gw_call.10.b
+		trigger = {
+			OR = {
+				NOT = { exists = scope:gw_allied_leader }
+				NOT = { has_global_variable = gw_call_to_war_active }
+				has_global_variable = gw_great_war_active
+				NOT = { gw_can_launch_great_war_from_call = yes }
+			}
+		}
+		gw_cleanup_call_to_war_tracking = yes
+		custom_tooltip = { text = gw_call_to_war_abort_tt }
+		ai_chance = { base = 100 }
+	}
+}

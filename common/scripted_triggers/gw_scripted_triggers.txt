@@ -1,0 +1,118 @@
+﻿# ============================================================
+# GREAT WAR MOD - Shared Scripted Triggers
+# Purpose: Centralize bloc, congress, and safety checks.
+# Scope: Country unless otherwise noted.
+# ============================================================
+
+# --- Eligibility ---
+gw_is_regular_country = {
+	is_revolutionary = no
+	is_insurrectionary = no
+}
+
+gw_is_major_or_greater = {
+	OR = {
+		country_rank >= rank_value:great_power
+		country_rank >= rank_value:major_power
+	}
+}
+
+gw_can_join_great_war_bloc = {
+	gw_is_major_or_greater = yes
+	NOT = { gw_has_neutral_stance = yes }
+}
+
+# --- Bloc identity ---
+gw_is_central_member = {
+	NOT = { gw_has_neutral_stance = yes }
+	OR = {
+		has_variable = gw_alignment_central
+		has_variable = gw_player_central
+		AND = {
+			has_variable = gw_dissatisfied_with_order
+			NOT = {
+				OR = {
+					has_variable = gw_alignment_allied
+					has_variable = gw_player_allied
+				}
+			}
+		}
+	}
+}
+
+gw_is_allied_member = {
+	NOT = { gw_has_neutral_stance = yes }
+	OR = {
+		has_variable = gw_alignment_allied
+		has_variable = gw_player_allied
+		AND = {
+			has_variable = gw_satisfied_with_order
+			NOT = {
+				OR = {
+					has_variable = gw_alignment_central
+					has_variable = gw_player_central
+				}
+			}
+		}
+	}
+}
+
+gw_has_neutral_stance = {
+	OR = {
+		has_variable = gw_alignment_neutral
+		has_variable = gw_player_neutral
+	}
+}
+
+gw_is_great_war_bloc_leader = {
+	OR = {
+		has_modifier = gw_central_powers_leader
+		has_modifier = gw_allied_powers_leader
+	}
+}
+
+# --- Global scope guards ---
+gw_has_allied_leader_scope = {
+	exists = global_var:gw_allied_leader
+}
+
+gw_has_central_leader_scope = {
+	exists = global_var:gw_central_leader
+}
+
+gw_has_national_discontent_value = {
+	exists = var:gw_national_discontent_value
+}
+
+# --- Great War start gates ---
+gw_has_ready_allied_leader = {
+	gw_has_allied_leader_scope = yes
+	global_var:gw_allied_leader = {
+		has_modifier = gw_allied_powers_leader
+		is_at_war = no
+	}
+}
+
+gw_can_start_great_war_now = {
+	has_modifier = gw_central_powers_leader
+	has_global_variable = gw_system_active
+	has_global_variable = gw_world_tension
+	global_var:gw_world_tension >= 90
+	is_at_war = no
+	gw_has_ready_allied_leader = yes
+	NOT = { has_global_variable = gw_great_war_active }
+	NOT = { has_global_variable = gw_call_to_war_active }
+	NOT = { has_global_variable = gw_great_war_concluded }
+}
+
+gw_can_launch_great_war_from_call = {
+	has_modifier = gw_central_powers_leader
+	has_global_variable = gw_system_active
+	has_global_variable = gw_call_to_war_active
+	NOT = { has_global_variable = gw_great_war_active }
+	NOT = { has_global_variable = gw_great_war_concluded }
+	gw_has_allied_leader_scope = yes
+	global_var:gw_allied_leader = {
+		has_modifier = gw_allied_powers_leader
+	}
+}

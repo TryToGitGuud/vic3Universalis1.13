@@ -1,0 +1,252 @@
+﻿# ============================================================
+# GREAT WAR MOD - Alignment Maintenance Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_evaluate_great_power_alignment = {
+	# Skip if not at least Major Power
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+
+		# --- Evaluate GP alignment from the hybrid model ---
+		if = {
+			limit = {
+				OR = {
+					has_modifier = gw_central_powers_leader
+					has_variable = gw_player_central
+				}
+			}
+			set_variable = gw_dissatisfied_with_order
+			remove_variable = gw_satisfied_with_order
+			set_variable = gw_alignment_central
+			remove_variable = gw_alignment_allied
+			remove_variable = gw_alignment_neutral
+			if = {
+				limit = { has_modifier = gw_allied_powers_leader }
+				remove_modifier = gw_allied_powers_leader
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_modifier = gw_allied_powers_leader
+					has_variable = gw_player_allied
+				}
+			}
+			set_variable = gw_satisfied_with_order
+			remove_variable = gw_dissatisfied_with_order
+			set_variable = gw_alignment_allied
+			remove_variable = gw_alignment_central
+			remove_variable = gw_alignment_neutral
+			if = {
+				limit = { has_modifier = gw_central_powers_leader }
+				remove_modifier = gw_central_powers_leader
+			}
+		}
+		else_if = {
+			limit = {
+				is_ai = yes
+				NOT = { has_variable = gw_ai_alignment_cooldown }
+				NOT = { has_variable = gw_alignment_central }
+				gw_hybrid_alignment_central_probability >= 50
+				OR = {
+					AND = {
+						NOT = { has_variable = gw_alignment_allied }
+						gw_hybrid_alignment_central_margin >= 10
+					}
+					AND = {
+						has_variable = gw_alignment_allied
+						gw_hybrid_alignment_central_probability >= 55
+						gw_hybrid_alignment_central_margin >= 15
+					}
+				}
+			}
+			set_variable = gw_dissatisfied_with_order
+			remove_variable = gw_satisfied_with_order
+			set_variable = gw_alignment_central
+			remove_variable = gw_alignment_allied
+			remove_variable = gw_alignment_neutral
+			set_variable = {
+				name = gw_ai_alignment_cooldown
+				years = 1
+			}
+			if = {
+				limit = { has_modifier = gw_neutral_nation }
+				remove_modifier = gw_neutral_nation
+			}
+			if = {
+				limit = { has_modifier = gw_allied_powers_leader }
+				remove_modifier = gw_allied_powers_leader
+			}
+		}
+		else_if = {
+			limit = {
+				is_ai = yes
+				NOT = { has_variable = gw_ai_alignment_cooldown }
+				NOT = { has_variable = gw_alignment_allied }
+				gw_hybrid_alignment_allied_probability >= 50
+				OR = {
+					AND = {
+						NOT = { has_variable = gw_alignment_central }
+						gw_hybrid_alignment_allied_margin >= 10
+					}
+					AND = {
+						has_variable = gw_alignment_central
+						gw_hybrid_alignment_allied_probability >= 55
+						gw_hybrid_alignment_allied_margin >= 15
+					}
+				}
+			}
+			set_variable = gw_satisfied_with_order
+			remove_variable = gw_dissatisfied_with_order
+			set_variable = gw_alignment_allied
+			remove_variable = gw_alignment_central
+			remove_variable = gw_alignment_neutral
+			set_variable = {
+				name = gw_ai_alignment_cooldown
+				years = 1
+			}
+			if = {
+				limit = { has_modifier = gw_neutral_nation }
+				remove_modifier = gw_neutral_nation
+			}
+			if = {
+				limit = { has_modifier = gw_central_powers_leader }
+				remove_modifier = gw_central_powers_leader
+			}
+		}
+		else_if = {
+			limit = {
+				is_ai = yes
+				NOT = { has_variable = gw_ai_alignment_cooldown }
+				NOT = { has_variable = gw_alignment_neutral }
+				gw_hybrid_alignment_neutral_probability >= 60
+				gw_hybrid_alignment_allied_probability < 40
+				gw_hybrid_alignment_central_probability < 40
+				NOT = { has_modifier = gw_central_powers_leader }
+				NOT = { has_modifier = gw_allied_powers_leader }
+			}
+			remove_variable = gw_satisfied_with_order
+			remove_variable = gw_dissatisfied_with_order
+			remove_variable = gw_alignment_allied
+			remove_variable = gw_alignment_central
+			set_variable = gw_alignment_neutral
+			set_variable = {
+				name = gw_ai_alignment_cooldown
+				years = 1
+			}
+			if = {
+				limit = { NOT = { has_modifier = gw_neutral_nation } }
+				add_modifier = gw_neutral_nation
+			}
+		}
+		else_if = {
+			limit = {
+				gw_has_neutral_stance = yes
+			}
+			remove_variable = gw_satisfied_with_order
+			remove_variable = gw_dissatisfied_with_order
+			remove_variable = gw_alignment_allied
+			remove_variable = gw_alignment_central
+			set_variable = gw_alignment_neutral
+			remove_modifier = gw_central_powers_leader
+			remove_modifier = gw_allied_powers_leader
+		}
+		else = {
+			# No side is clearly dominant; keep the current peacetime alignment.
+		}
+	}
+}
+
+gw_assign_great_war_bloc_leaders = {
+	if = {
+		limit = { global_country_ranking = 1 }
+		if = { limit = { exists = global_var:gw_central_leader } remove_global_variable = gw_central_leader }
+		if = { limit = { exists = global_var:gw_allied_leader } remove_global_variable = gw_allied_leader }
+
+		every_country = {
+			limit = {
+				OR = {
+					country_rank < rank_value:major_power
+					has_modifier = gw_allied_powers_leader
+					has_modifier = gw_central_powers_leader
+				}
+			}
+			if = {
+				limit = { country_rank < rank_value:major_power }
+				remove_variable = gw_satisfied_with_order
+				remove_variable = gw_dissatisfied_with_order
+			}
+			remove_modifier = gw_allied_powers_leader
+			remove_modifier = gw_central_powers_leader
+		}
+
+		ordered_country = {
+			limit = {
+				gw_is_major_or_greater = yes
+				has_variable = gw_dissatisfied_with_order
+				NOT = { has_variable = gw_satisfied_with_order }
+				NOT = { gw_has_neutral_stance = yes }
+			}
+			order_by = prestige
+			position = 0
+			add_modifier = gw_central_powers_leader
+			set_global_variable = { name = gw_central_leader value = this }
+		}
+		ordered_country = {
+			limit = {
+				gw_is_major_or_greater = yes
+				has_variable = gw_satisfied_with_order
+				NOT = { has_variable = gw_dissatisfied_with_order }
+				NOT = { gw_has_neutral_stance = yes }
+			}
+			order_by = prestige
+			position = 0
+			add_modifier = gw_allied_powers_leader
+			set_global_variable = { name = gw_allied_leader value = this }
+		}
+		if = {
+			limit = { NOT = { exists = global_var:gw_central_leader } }
+			# Save the Allied leader (if any) to a stable scope so the alliance guard
+			# below is unambiguous about which country it's checking against.
+			if = {
+				limit = { gw_has_allied_leader_scope = yes }
+				global_var:gw_allied_leader = { save_scope_as = gw_fallback_allied_leader }
+			}
+			ordered_country = {
+				limit = {
+					gw_is_major_or_greater = yes
+					NOT = { gw_has_neutral_stance = yes }
+					NOT = { has_modifier = gw_allied_powers_leader }
+					NOT = { has_variable = gw_satisfied_with_order }
+					NOT = { has_variable = gw_alignment_allied }
+					NOT = { has_variable = gw_player_allied }
+					OR = {
+						gw_structural_dissatisfaction_score >= 55
+						gw_soft_historical_central_anchor_score > 0
+					}
+					# Candidate must NOT be a treaty ally of the existing Allied leader.
+					NOT = {
+						AND = {
+							exists = scope:gw_fallback_allied_leader
+							has_treaty_alliance_with = { TARGET = scope:gw_fallback_allied_leader }
+						}
+					}
+				}
+				order_by = prestige
+				position = 0
+				set_variable = gw_dissatisfied_with_order
+				remove_variable = gw_satisfied_with_order
+				set_variable = gw_alignment_central
+				remove_variable = gw_alignment_allied
+				remove_variable = gw_alignment_neutral
+				add_modifier = gw_central_powers_leader
+				set_global_variable = { name = gw_central_leader value = this }
+			}
+		}
+	}
+}
+

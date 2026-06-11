@@ -1,0 +1,1948 @@
+﻿# ============================================================
+# GREAT WAR MOD - Crisis Events
+# Escalating chain: Arms Race (60%) -> Ultimatum (70/75%) -> Final Crisis (80%)
+# ============================================================
+
+namespace = gw_crisis
+
+# ============================================================
+# PHASE 1: ARMS RACE (Tension >= 60%)
+# ============================================================
+
+# Bloc leaders choose whether to embrace or restrain the arms race.
+gw_crisis.1001 = {
+	type = country_event
+
+	title = gw_crisis.1001.t
+	desc = gw_crisis.1001.d
+	flavor = gw_crisis.1001.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		gw_is_great_war_bloc_leader = yes
+		NOT = { has_variable = gw_arms_race_seen }
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_arms_race_seen
+	}
+
+	option = {
+		name = gw_crisis.1001.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_1001_a_tt }
+		add_modifier = {
+			name = gw_arms_race
+			months = 24
+		}
+		add_modifier = {
+			name = gw_general_staff_program
+			months = 18
+		}
+		trigger_event = { id = gw_crisis.1002 months = 6 }
+		# Launch the four-event Arms Race atmosphere chain on this bloc leader.
+		trigger_event = { id = gw_crisis.1100 months = 6 }
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = { has_variable = gw_dissatisfied_with_order }
+				add = 12
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 75 }
+				add = 8
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.1001.b
+		custom_tooltip = { text = gw_crisis_1001_b_tt }
+		add_modifier = {
+			name = gw_arms_limitation_talks
+			months = 12
+		}
+		change_global_variable = { name = gw_world_tension add = -1 }
+		ai_chance = {
+			base = 8
+			modifier = {
+				trigger = { has_variable = gw_satisfied_with_order }
+				add = 10
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 80 }
+				add = -6
+			}
+		}
+	}
+}
+
+# Follow-up only for leaders who committed to the arms race.
+gw_crisis.1002 = {
+	type = country_event
+
+	title = gw_crisis.1002.t
+	desc = gw_crisis.1002.d
+	flavor = gw_crisis.1002.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		gw_is_great_war_bloc_leader = yes
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+		has_modifier = gw_arms_race
+	}
+
+	option = {
+		name = gw_crisis.1002.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_1002_a_tt }
+		add_modifier = {
+			name = gw_general_staff_program
+			months = 18
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 80 }
+				add = 8
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.1002.b
+		custom_tooltip = { text = gw_crisis_1002_b_tt }
+		add_modifier = {
+			name = gw_arms_limitation_talks
+			months = 12
+		}
+		change_global_variable = { name = gw_world_tension add = -1 }
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = { has_variable = gw_satisfied_with_order }
+				add = 8
+			}
+		}
+	}
+}
+
+# Non-leading powers experience pressure without steering the whole crisis.
+gw_crisis.1003 = {
+	type = country_event
+
+	title = gw_crisis.1003.t
+	desc = gw_crisis.1003.d
+	flavor = gw_crisis.1003.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		NOT = { gw_is_great_war_bloc_leader = yes }
+		NOT = { has_variable = gw_arms_race_seen }
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_arms_race_seen
+	}
+
+	option = {
+		name = gw_crisis.1003.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_1003_a_tt }
+		add_modifier = {
+			name = gw_public_war_scare
+			months = 12
+		}
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = gw_crisis.1003.b
+		custom_tooltip = { text = gw_crisis_1003_b_tt }
+		add_modifier = {
+			name = gw_arms_limitation_talks
+			months = 12
+		}
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = { gw_has_neutral_stance = yes }
+				add = 8
+			}
+		}
+	}
+}
+
+# ============================================================
+# ARMS RACE ATMOSPHERE CHAIN (Phase 1.5, embrace path only)
+# Launched by gw_crisis.1001 embrace option. Four milestone events
+# at +6/+12/+18/+24 months. Hard guard: chain stops if arms_race
+# modifier expires/removed, tension drops below 60, or Great War starts.
+# Each event also echoes to non-leader Major Powers (gw_crisis.111x).
+# ============================================================
+
+# Milestone 1 — Naval Estimates (+6 months from embrace)
+gw_crisis.1100 = {
+	type = country_event
+
+	title = gw_crisis.1100.t
+	desc = gw_crisis.1100.d
+	flavor = gw_crisis.1100.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		gw_is_great_war_bloc_leader = yes
+		has_modifier = gw_arms_race
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	option = {
+		name = gw_crisis.1100.a
+		default_option = yes
+		add_modifier = {
+			name = gw_naval_estimates
+			months = 18
+		}
+		# Echo to non-leader Major Powers
+		every_country = {
+			limit = {
+				country_rank >= rank_value:major_power
+				NOT = { gw_is_great_war_bloc_leader = yes }
+				NOT = { has_global_variable = gw_great_war_active }
+				global_var:gw_world_tension >= 60
+			}
+			trigger_event = { id = gw_crisis.1110 days = 7 }
+		}
+		# Chain next event in 6 months
+		trigger_event = { id = gw_crisis.1101 months = 6 }
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = { has_variable = gw_dissatisfied_with_order }
+				add = 5
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.1100.b
+		# Even if leader defers, the atmospheric chain continues
+		trigger_event = { id = gw_crisis.1101 months = 6 }
+		ai_chance = {
+			base = 4
+			modifier = {
+				trigger = { has_variable = gw_satisfied_with_order }
+				add = 6
+			}
+		}
+	}
+}
+
+# Milestone 2 — Grand Manoeuvres (+12 months from embrace)
+gw_crisis.1101 = {
+	type = country_event
+
+	title = gw_crisis.1101.t
+	desc = gw_crisis.1101.d
+	flavor = gw_crisis.1101.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		gw_is_great_war_bloc_leader = yes
+		has_modifier = gw_arms_race
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	option = {
+		name = gw_crisis.1101.a
+		default_option = yes
+		add_modifier = {
+			name = gw_grand_manoeuvres
+			months = 12
+		}
+		every_country = {
+			limit = {
+				country_rank >= rank_value:major_power
+				NOT = { gw_is_great_war_bloc_leader = yes }
+				NOT = { has_global_variable = gw_great_war_active }
+				global_var:gw_world_tension >= 60
+			}
+			trigger_event = { id = gw_crisis.1111 days = 7 }
+		}
+		trigger_event = { id = gw_crisis.1102 months = 6 }
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = gw_crisis.1101.b
+		trigger_event = { id = gw_crisis.1102 months = 6 }
+		ai_chance = {
+			base = 4
+			modifier = {
+				trigger = { has_variable = gw_satisfied_with_order }
+				add = 6
+			}
+		}
+	}
+}
+
+# Milestone 3 — Defence Industry Expansion (+18 months from embrace)
+gw_crisis.1102 = {
+	type = country_event
+
+	title = gw_crisis.1102.t
+	desc = gw_crisis.1102.d
+	flavor = gw_crisis.1102.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		gw_is_great_war_bloc_leader = yes
+		has_modifier = gw_arms_race
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	option = {
+		name = gw_crisis.1102.a
+		default_option = yes
+		add_modifier = {
+			name = gw_industrial_expansion_orders
+			months = 18
+		}
+		every_country = {
+			limit = {
+				country_rank >= rank_value:major_power
+				NOT = { gw_is_great_war_bloc_leader = yes }
+				NOT = { has_global_variable = gw_great_war_active }
+				global_var:gw_world_tension >= 60
+			}
+			trigger_event = { id = gw_crisis.1112 days = 7 }
+		}
+		trigger_event = { id = gw_crisis.1103 months = 6 }
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = gw_crisis.1102.b
+		trigger_event = { id = gw_crisis.1103 months = 6 }
+		ai_chance = {
+			base = 4
+			modifier = {
+				trigger = { has_variable = gw_satisfied_with_order }
+				add = 6
+			}
+		}
+	}
+}
+
+# Milestone 4 — Conscription Reform (+24 months from embrace, chain finale)
+gw_crisis.1103 = {
+	type = country_event
+
+	title = gw_crisis.1103.t
+	desc = gw_crisis.1103.d
+	flavor = gw_crisis.1103.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		gw_is_great_war_bloc_leader = yes
+		has_modifier = gw_arms_race
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	option = {
+		name = gw_crisis.1103.a
+		default_option = yes
+		add_modifier = {
+			name = gw_conscription_reform
+			months = 24
+		}
+		every_country = {
+			limit = {
+				country_rank >= rank_value:major_power
+				NOT = { gw_is_great_war_bloc_leader = yes }
+				NOT = { has_global_variable = gw_great_war_active }
+				global_var:gw_world_tension >= 60
+			}
+			trigger_event = { id = gw_crisis.1113 days = 7 }
+		}
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = gw_crisis.1103.b
+		ai_chance = {
+			base = 4
+			modifier = {
+				trigger = { has_variable = gw_satisfied_with_order }
+				add = 6
+			}
+		}
+	}
+}
+
+# ============================================================
+# ARMS RACE ECHO EVENTS — fired on non-leader Major Powers
+# when the bloc leader takes a milestone action. Each offers
+# follow (small bonus) or condemn (small infamy) or natural (none).
+# ============================================================
+
+# Echo 1 — Reaction to Naval Estimates
+gw_crisis.1110 = {
+	type = country_event
+
+	title = gw_crisis.1110.t
+	desc = gw_crisis.1110.d
+	flavor = gw_crisis.1110.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = gw_crisis.1110.a
+		add_modifier = {
+			name = gw_arms_race_followers
+			months = 18
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+		}
+	}
+	option = {
+		name = gw_crisis.1110.b
+		change_infamy = 1
+		ai_chance = {
+			base = 4
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 4 }
+		}
+	}
+	option = {
+		name = gw_crisis.1110.c
+		default_option = yes
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { gw_has_neutral_stance = yes } add = 8 }
+		}
+	}
+}
+
+# Echo 2 — Reaction to Grand Manoeuvres
+gw_crisis.1111 = {
+	type = country_event
+
+	title = gw_crisis.1111.t
+	desc = gw_crisis.1111.d
+	flavor = gw_crisis.1111.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = gw_crisis.1111.a
+		add_modifier = {
+			name = gw_arms_race_followers
+			months = 12
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+		}
+	}
+	option = {
+		name = gw_crisis.1111.b
+		change_infamy = 1
+		ai_chance = {
+			base = 4
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 4 }
+		}
+	}
+	option = {
+		name = gw_crisis.1111.c
+		default_option = yes
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { gw_has_neutral_stance = yes } add = 8 }
+		}
+	}
+}
+
+# Echo 3 — Reaction to Defence Industry Expansion
+gw_crisis.1112 = {
+	type = country_event
+
+	title = gw_crisis.1112.t
+	desc = gw_crisis.1112.d
+	flavor = gw_crisis.1112.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = gw_crisis.1112.a
+		add_modifier = {
+			name = gw_arms_race_followers
+			months = 18
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+		}
+	}
+	option = {
+		name = gw_crisis.1112.b
+		change_infamy = 1
+		ai_chance = {
+			base = 4
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 4 }
+		}
+	}
+	option = {
+		name = gw_crisis.1112.c
+		default_option = yes
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { gw_has_neutral_stance = yes } add = 8 }
+		}
+	}
+}
+
+# Echo 4 — Reaction to Conscription Reform
+gw_crisis.1113 = {
+	type = country_event
+
+	title = gw_crisis.1113.t
+	desc = gw_crisis.1113.d
+	flavor = gw_crisis.1113.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = gw_crisis.1113.a
+		add_modifier = {
+			name = gw_arms_race_followers
+			months = 24
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+		}
+	}
+	option = {
+		name = gw_crisis.1113.b
+		change_infamy = 1
+		ai_chance = {
+			base = 4
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 4 }
+		}
+	}
+	option = {
+		name = gw_crisis.1113.c
+		default_option = yes
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { gw_has_neutral_stance = yes } add = 8 }
+		}
+	}
+}
+
+# ============================================================
+# PHASE 2: DIPLOMATIC INCIDENT AND ULTIMATUM (Tension >= 70/75%)
+# ============================================================
+
+# Bloc leaders decide whether to escalate the diplomatic incident.
+gw_crisis.2001 = {
+	type = country_event
+
+	title = gw_crisis.2001.t
+	desc = gw_crisis.2001.d
+	flavor = gw_crisis.2001.f
+
+	event_image = {
+		video = "gfx/event_pictures/africa_diplomats_negotiating.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		gw_is_great_war_bloc_leader = yes
+		NOT = { has_variable = gw_ultimatum_seen }
+		global_var:gw_world_tension >= 70
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_ultimatum_seen
+	}
+
+	option = {
+		name = gw_crisis.2001.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_2001_a_tt }
+		add_modifier = {
+			name = gw_diplomatic_crisis
+			months = 12
+		}
+		if = {
+			limit = { has_modifier = gw_central_powers_leader }
+			set_global_variable = gw_ultimatum_issued_central
+		}
+		if = {
+			limit = { has_modifier = gw_allied_powers_leader }
+			set_global_variable = gw_ultimatum_issued_allied
+		}
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = { has_modifier = gw_central_powers_leader }
+				add = 10
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 85 }
+				add = 8
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.2001.b
+		custom_tooltip = { text = gw_crisis_2001_b_tt }
+		add_modifier = {
+			name = gw_backchannel_diplomacy
+			months = 12
+		}
+		change_global_variable = { name = gw_world_tension add = -2 }
+		ai_chance = {
+			base = 8
+			modifier = {
+				trigger = { has_modifier = gw_allied_powers_leader }
+				add = 8
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension < 85 }
+				add = 6
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.2001.c
+		custom_tooltip = { text = gw_crisis_2001_c_tt }
+		add_modifier = {
+			name = gw_partial_mobilization_plan
+			months = 18
+		}
+		add_modifier = {
+			name = gw_diplomatic_crisis
+			months = 12
+		}
+		if = {
+			limit = { has_modifier = gw_central_powers_leader }
+			set_global_variable = gw_ultimatum_issued_central
+		}
+		if = {
+			limit = { has_modifier = gw_allied_powers_leader }
+			set_global_variable = gw_ultimatum_issued_allied
+		}
+		ai_chance = {
+			base = 5
+			modifier = {
+				trigger = { has_modifier = gw_central_powers_leader }
+				add = 8
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 90 }
+				add = 8
+			}
+		}
+	}
+}
+
+# The opposing bloc leader responds once the crisis reaches the next threshold.
+gw_crisis.2002 = {
+	type = country_event
+
+	title = gw_crisis.2002.t
+	desc = gw_crisis.2002.d
+	flavor = gw_crisis.2002.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 75
+		NOT = { has_variable = gw_ultimatum_response_seen }
+		NOT = { has_global_variable = gw_great_war_active }
+		OR = {
+			AND = {
+				has_modifier = gw_allied_powers_leader
+				has_global_variable = gw_ultimatum_issued_central
+			}
+			AND = {
+				has_modifier = gw_central_powers_leader
+				has_global_variable = gw_ultimatum_issued_allied
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = gw_ultimatum_response_seen
+	}
+
+	option = {
+		name = gw_crisis.2002.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_2002_a_tt }
+		add_modifier = {
+			name = gw_partial_mobilization_plan
+			months = 12
+		}
+		if = { limit = { has_global_variable = gw_ultimatum_issued_central } remove_global_variable = gw_ultimatum_issued_central }
+		if = { limit = { has_global_variable = gw_ultimatum_issued_allied } remove_global_variable = gw_ultimatum_issued_allied }
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 85 }
+				add = 6
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.2002.b
+		custom_tooltip = { text = gw_crisis_2002_b_tt }
+		add_modifier = {
+			name = gw_backchannel_diplomacy
+			months = 12
+		}
+		change_global_variable = { name = gw_world_tension add = -1 }
+		if = { limit = { has_global_variable = gw_ultimatum_issued_central } remove_global_variable = gw_ultimatum_issued_central }
+		if = { limit = { has_global_variable = gw_ultimatum_issued_allied } remove_global_variable = gw_ultimatum_issued_allied }
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = { global_var:gw_world_tension < 85 }
+				add = 6
+			}
+		}
+	}
+}
+
+# Non-leading powers receive news of the diplomatic break.
+gw_crisis.2003 = {
+	type = country_event
+
+	title = gw_crisis.2003.t
+	desc = gw_crisis.2003.d
+	flavor = gw_crisis.2003.f
+
+	event_image = {
+		video = "gfx/event_pictures/africa_diplomats_negotiating.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		NOT = { gw_is_great_war_bloc_leader = yes }
+		NOT = { has_variable = gw_ultimatum_seen }
+		global_var:gw_world_tension >= 70
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_ultimatum_seen
+	}
+
+	option = {
+		name = gw_crisis.2003.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_2003_a_tt }
+		add_modifier = {
+			name = gw_public_war_scare
+			months = 12
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_crisis.2003.b
+		custom_tooltip = { text = gw_crisis_2003_b_tt }
+		add_modifier = {
+			name = gw_backchannel_diplomacy
+			months = 12
+		}
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = { gw_has_neutral_stance = yes }
+				add = 8
+			}
+		}
+	}
+}
+
+# ============================================================
+# PHASE 3: FINAL CRISIS (Tension >= 80%)
+# ============================================================
+
+# Central Powers leader: launch, delay, or de-escalate.
+gw_crisis.3001 = {
+	type = country_event
+
+	title = gw_crisis.3001.t
+	desc = gw_crisis.3001.d
+	flavor = gw_crisis.3001.f
+
+	event_image = {
+		video = "gfx/event_pictures/middleeast_battlefield_trenches.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		has_modifier = gw_central_powers_leader
+		NOT = { has_variable = gw_crisis_peak_seen }
+		NOT = { has_variable = gw_crisis_peak_cooldown }
+		global_var:gw_world_tension >= 80
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_crisis_peak_seen
+	}
+
+	option = {
+		name = gw_crisis.3001.a
+		trigger = { gw_can_start_great_war_now = yes }
+		gw_start_call_to_war = yes
+		custom_tooltip = { text = gw_crisis_3001_a_tt }
+		ai_chance = {
+			base = 4
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 90 }
+				add = 16
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 95 }
+				add = 30
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.3001.g
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_bide_time_tt }
+		remove_variable = gw_crisis_peak_seen
+		set_variable = { name = gw_crisis_peak_cooldown months = 6 }
+		add_modifier = {
+			name = gw_partial_mobilization_plan
+			months = 12
+		}
+		ai_chance = {
+			base = 12
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 90 }
+				add = -8
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 95 }
+				add = -2
+			}
+		}
+	}
+
+	option = {
+		name = gw_crisis.3001.e
+		change_global_variable = { name = gw_world_tension add = -5 }
+		remove_variable = gw_crisis_peak_seen
+		set_variable = { name = gw_crisis_peak_cooldown years = 1 }
+		add_modifier = {
+			name = gw_backchannel_diplomacy
+			months = 12
+		}
+		custom_tooltip = { text = gw_crisis_not_yet_tt }
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 90 }
+				add = -4
+			}
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 95 }
+				add = -1
+			}
+		}
+	}
+}
+
+# Allied Powers leader: prepare the status quo bloc.
+gw_crisis.3002 = {
+	type = country_event
+
+	title = gw_crisis.3002.t
+	desc = gw_crisis.3002.d
+	flavor = gw_crisis.3002.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		has_modifier = gw_allied_powers_leader
+		NOT = { has_variable = gw_crisis_peak_seen }
+		NOT = { has_variable = gw_crisis_peak_cooldown }
+		global_var:gw_world_tension >= 80
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_crisis_peak_seen
+	}
+
+	option = {
+		name = gw_crisis.3002.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_3002_a_tt }
+		add_modifier = {
+			name = gw_defense_readiness
+			months = 18
+		}
+		ai_chance = { base = 12 }
+	}
+
+	option = {
+		name = gw_crisis.3002.b
+		custom_tooltip = { text = gw_crisis_3002_b_tt }
+		add_modifier = {
+			name = gw_backchannel_diplomacy
+			months = 12
+		}
+		change_global_variable = { name = gw_world_tension add = -2 }
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = { global_var:gw_world_tension < 90 }
+				add = 6
+			}
+		}
+	}
+}
+
+# Other Major+ powers watch the last days of peace.
+gw_crisis.3003 = {
+	type = country_event
+
+	title = gw_crisis.3003.t
+	desc = gw_crisis.3003.d
+	flavor = gw_crisis.3003.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		NOT = { gw_is_great_war_bloc_leader = yes }
+		NOT = { has_variable = gw_crisis_peak_seen }
+		NOT = { has_variable = gw_crisis_peak_cooldown }
+		global_var:gw_world_tension >= 80
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_crisis_peak_seen
+	}
+
+	option = {
+		name = gw_crisis.3003.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_3003_a_tt }
+		add_modifier = {
+			name = gw_public_war_scare
+			months = 12
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_crisis.3003.b
+		custom_tooltip = { text = gw_crisis_3003_b_tt }
+		add_modifier = {
+			name = gw_defense_readiness
+			months = 12
+		}
+		ai_chance = {
+			base = 6
+			modifier = {
+				trigger = {
+					OR = {
+						gw_is_allied_member = yes
+						gw_is_central_member = yes
+					}
+				}
+				add = 6
+			}
+		}
+	}
+}
+
+# ============================================================
+# WORLD TENSION ATMOSPHERE EVENTS
+# ============================================================
+
+gw_crisis.4001 = {
+	type = country_event
+
+	title = gw_crisis.4001.t
+	desc = gw_crisis.4001.d
+	flavor = gw_crisis.4001.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 40
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_markets_seen
+	}
+
+	option = {
+		name = gw_crisis.4001.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4001_a_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_crisis.4001.b
+		custom_tooltip = { text = gw_crisis_4001_b_tt }
+		add_modifier = { name = gw_market_war_scare months = 12 }
+		ai_chance = { base = 6 }
+	}
+}
+
+gw_crisis.4002 = {
+	type = country_event
+
+	title = gw_crisis.4002.t
+	desc = gw_crisis.4002.d
+	flavor = gw_crisis.4002.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 55
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_press_seen
+	}
+
+	option = {
+		name = gw_crisis.4002.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4002_a_tt }
+		add_modifier = { name = gw_war_press_campaign months = 12 }
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_crisis.4002.b
+		custom_tooltip = { text = gw_crisis_4002_b_tt }
+		add_modifier = { name = gw_backchannel_diplomacy months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 6 }
+	}
+}
+
+gw_crisis.4003 = {
+	type = country_event
+
+	title = gw_crisis.4003.t
+	desc = gw_crisis.4003.d
+	flavor = gw_crisis.4003.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 65
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_railways_seen
+	}
+
+	option = {
+		name = gw_crisis.4003.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4003_a_tt }
+		add_modifier = { name = gw_mobilization_timetables months = 12 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_crisis.4003.b
+		custom_tooltip = { text = gw_crisis_4003_b_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+gw_crisis.4004 = {
+	type = country_event
+
+	title = gw_crisis.4004.t
+	desc = gw_crisis.4004.d
+	flavor = gw_crisis.4004.f
+
+	event_image = {
+		video = "gfx/event_pictures/africa_diplomats_negotiating.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 65
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_embassies_seen
+	}
+
+	option = {
+		name = gw_crisis.4004.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4004_a_tt }
+		add_modifier = { name = gw_backchannel_diplomacy months = 12 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_crisis.4004.b
+		custom_tooltip = { text = gw_crisis_4004_b_tt }
+		add_modifier = { name = gw_public_war_scare months = 9 }
+		ai_chance = { base = 6 }
+	}
+}
+
+gw_crisis.4005 = {
+	type = country_event
+
+	title = gw_crisis.4005.t
+	desc = gw_crisis.4005.d
+	flavor = gw_crisis.4005.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 75
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_war_scare_seen
+	}
+
+	option = {
+		name = gw_crisis.4005.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4005_a_tt }
+		add_modifier = { name = gw_public_war_scare months = 12 }
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_crisis.4005.b
+		custom_tooltip = { text = gw_crisis_4005_b_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 12 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 6 }
+	}
+}
+
+gw_crisis.4006 = {
+	type = country_event
+
+	title = gw_crisis.4006.t
+	desc = gw_crisis.4006.d
+	flavor = gw_crisis.4006.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 75
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_last_conference_seen
+	}
+
+	option = {
+		name = gw_crisis.4006.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4006_a_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 12 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -2 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_crisis.4006.b
+		custom_tooltip = { text = gw_crisis_4006_b_tt }
+		add_modifier = { name = gw_partial_mobilization_plan months = 9 }
+		ai_chance = { base = 6 }
+	}
+}
+
+gw_crisis.4007 = {
+	type = country_event
+
+	title = gw_crisis.4007.t
+	desc = gw_crisis.4007.d
+	flavor = gw_crisis.4007.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 85
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_border_seen
+	}
+
+	option = {
+		name = gw_crisis.4007.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4007_a_tt }
+		add_modifier = { name = gw_mobilization_timetables months = 12 }
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_crisis.4007.b
+		custom_tooltip = { text = gw_crisis_4007_b_tt }
+		add_modifier = { name = gw_backchannel_diplomacy months = 12 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 6 }
+	}
+}
+
+gw_crisis.4008 = {
+	type = country_event
+
+	title = gw_crisis.4008.t
+	desc = gw_crisis.4008.d
+	flavor = gw_crisis.4008.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 85
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_tension_silence_seen
+	}
+
+	option = {
+		name = gw_crisis.4008.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4008_a_tt }
+		add_modifier = { name = gw_partial_mobilization_plan months = 12 }
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_crisis.4008.b
+		custom_tooltip = { text = gw_crisis_4008_b_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 12 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -2 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 6 }
+	}
+}
+
+# --- Material Tension Event: Arsenal Contracts ---
+gw_crisis.4101 = {
+	type = country_event
+
+	title = gw_crisis.4101.t
+	desc = gw_crisis.4101.d
+	flavor = gw_crisis.4101.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 55
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_arsenal_seen
+	}
+
+	option = {
+		name = gw_crisis.4101.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4101_a_tt }
+		add_modifier = { name = gw_arsenal_contracts months = 12 }
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 75 } add = 3 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4101.b
+		custom_tooltip = { text = gw_crisis_4101_b_tt }
+		add_modifier = { name = gw_last_peace_budget months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 80 } add = -3 }
+		}
+	}
+}
+
+# --- Material Tension Event: Naval Estimates ---
+gw_crisis.4102 = {
+	type = country_event
+
+	title = gw_crisis.4102.t
+	desc = gw_crisis.4102.d
+	flavor = gw_crisis.4102.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_steam_ship.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_naval_seen
+	}
+
+	option = {
+		name = gw_crisis.4102.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4102_a_tt }
+		add_modifier = { name = gw_naval_estimates months = 12 }
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 5 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4102.b
+		custom_tooltip = { text = gw_crisis_4102_b_tt }
+		add_modifier = { name = gw_last_peace_budget months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 5 }
+		}
+	}
+}
+
+# --- Material Tension Event: Staff College Memoranda ---
+gw_crisis.4103 = {
+	type = country_event
+
+	title = gw_crisis.4103.t
+	desc = gw_crisis.4103.d
+	flavor = gw_crisis.4103.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_staff_seen
+	}
+
+	option = {
+		name = gw_crisis.4103.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4103_a_tt }
+		add_modifier = { name = gw_staff_college_memoranda months = 12 }
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 80 } add = 3 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4103.b
+		custom_tooltip = { text = gw_crisis_4103_b_tt }
+		add_modifier = { name = gw_backchannel_diplomacy months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 80 } add = -3 }
+		}
+	}
+}
+
+# --- Material Tension Event: War Insurance ---
+gw_crisis.4104 = {
+	type = country_event
+
+	title = gw_crisis.4104.t
+	desc = gw_crisis.4104.d
+	flavor = gw_crisis.4104.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 65
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_insurance_seen
+	}
+
+	option = {
+		name = gw_crisis.4104.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4104_a_tt }
+		add_modifier = { name = gw_war_insurance months = 12 }
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { global_var:gw_world_tension >= 80 } add = 3 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4104.b
+		custom_tooltip = { text = gw_crisis_4104_b_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 5 }
+		}
+	}
+}
+
+# --- Material Tension Event: Bread and Powder ---
+gw_crisis.4105 = {
+	type = country_event
+
+	title = gw_crisis.4105.t
+	desc = gw_crisis.4105.d
+	flavor = gw_crisis.4105.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 70
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_bread_powder_seen
+	}
+
+	option = {
+		name = gw_crisis.4105.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4105_a_tt }
+		add_modifier = { name = gw_bread_and_powder months = 12 }
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 5 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4105.b
+		custom_tooltip = { text = gw_crisis_4105_b_tt }
+		add_modifier = { name = gw_market_war_scare months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+		}
+	}
+}
+
+# --- Material Tension Event: Emergency Credits ---
+gw_crisis.4106 = {
+	type = country_event
+
+	title = gw_crisis.4106.t
+	desc = gw_crisis.4106.d
+	flavor = gw_crisis.4106.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 75
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_credits_seen
+	}
+
+	option = {
+		name = gw_crisis.4106.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4106_a_tt }
+		add_modifier = { name = gw_emergency_credits months = 12 }
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 85 } add = 3 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4106.b
+		custom_tooltip = { text = gw_crisis_4106_b_tt }
+		add_modifier = { name = gw_last_peace_budget months = 12 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -2 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 85 } add = -4 }
+		}
+	}
+}
+
+# --- Material Tension Event: The Factory Orders ---
+gw_crisis.4107 = {
+	type = country_event
+
+	title = gw_crisis.4107.t
+	desc = gw_crisis.4107.d
+	flavor = gw_crisis.4107.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 80
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_factory_seen
+	}
+
+	option = {
+		name = gw_crisis.4107.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4107_a_tt }
+		add_modifier = { name = gw_factory_orders months = 12 }
+		ai_chance = {
+			base = 9
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 90 } add = 4 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4107.b
+		custom_tooltip = { text = gw_crisis_4107_b_tt }
+		add_modifier = { name = gw_arms_limitation_talks months = 9 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 90 } add = -4 }
+		}
+	}
+}
+
+# --- Material Tension Event: The Last Peace Budget ---
+gw_crisis.4108 = {
+	type = country_event
+
+	title = gw_crisis.4108.t
+	desc = gw_crisis.4108.d
+	flavor = gw_crisis.4108.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_politicians_arguing.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+		global_var:gw_world_tension >= 85
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	immediate = {
+		set_variable = gw_material_budget_seen
+	}
+
+	option = {
+		name = gw_crisis.4108.a
+		default_option = yes
+		custom_tooltip = { text = gw_crisis_4108_a_tt }
+		add_modifier = { name = gw_last_peace_budget months = 12 }
+		if = {
+			limit = { gw_is_great_war_bloc_leader = yes }
+			change_global_variable = { name = gw_world_tension add = -2 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 7 }
+			modifier = { trigger = { global_var:gw_world_tension >= 95 } add = -4 }
+		}
+	}
+
+	option = {
+		name = gw_crisis.4108.b
+		custom_tooltip = { text = gw_crisis_4108_b_tt }
+		add_modifier = { name = gw_arsenal_contracts months = 9 }
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 95 } add = 4 }
+		}
+	}
+}

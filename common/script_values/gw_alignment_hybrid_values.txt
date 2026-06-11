@@ -1,0 +1,825 @@
+﻿# ============================================================
+# GREAT WAR MOD - Hybrid Alignment Values
+# Purpose: One shared scoring model for Great Power bloc leaning,
+# journal probability bars, and Call to War AI weighting.
+# Scope: Country.
+# ============================================================
+
+# ------------------------------------------------------------
+# Score philosophy
+# - Allied: status quo, friendly ties to Allied leader.
+# - Central: revisionist, dissatisfied, friendly ties to Central leader.
+# - Neutral: weak, isolated, officially neutral, or diplomatically uncommitted.
+# Scores are converted into percentages by dividing by the total score.
+# (Infamy security factor removed by design — infamy no longer biases alignment.)
+# ------------------------------------------------------------
+
+gw_hybrid_alignment_allied_score = {
+	value = 10
+
+	# Leadership and player-declared stances are heavy anchors.
+	# AI peacetime alignment is lighter, so countries can still react to
+	# major diplomatic changes before the Call to War.
+	if = {
+		limit = { has_modifier = gw_allied_powers_leader }
+		add = 200
+	}
+	if = {
+		limit = { has_variable = gw_player_allied }
+		add = 80
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_allied
+		}
+		add = 10
+	}
+
+	# World-order satisfaction.
+	if = {
+		limit = { gw_structural_dissatisfaction_score < 25 }
+		add = 40
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score < 50 }
+		add = 25
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score < 65 }
+		add = 10
+	}
+
+	# Direct ties to the Allied leader.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				has_treaty_alliance_with = { TARGET = root }
+			}
+		}
+		add = 35
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				has_treaty_defensive_pact_with = { TARGET = root }
+			}
+		}
+		add = 25
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			OR = {
+				global_var:gw_allied_leader = {
+					has_treaty_trade_privilege_with = { TARGET = root }
+				}
+				global_var:gw_allied_leader = {
+					has_treaty_foreign_investment_rights_with = { TARGET = root }
+				}
+			}
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			is_in_customs_union_with = global_var:gw_allied_leader
+		}
+		add = 5
+	}
+
+	# Hostility or rival ties against the opposing leader push this side.
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			has_diplomatic_pact = {
+				who = global_var:gw_central_leader
+				type = rivalry
+			}
+		}
+		add = 25
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			has_diplomatic_pact = {
+				who = global_var:gw_central_leader
+				type = embargo
+			}
+		}
+		add = 15
+	}
+
+	# Friendly attitude and relations toward the Allied leader.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_allied_leader attitude = genial }
+				has_attitude = { who = global_var:gw_allied_leader attitude = conciliatory }
+				has_attitude = { who = global_var:gw_allied_leader attitude = loyal }
+			}
+		}
+		add = 20
+	}
+	else_if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_allied_leader attitude = cooperative }
+				has_attitude = { who = global_var:gw_allied_leader attitude = protective }
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			"global_var:gw_allied_leader.relations:root" >= relations_threshold:friendly
+		}
+		add = 10
+	}
+	else_if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			"global_var:gw_allied_leader.relations:root" >= relations_threshold:amicable
+		}
+		add = 5
+	}
+
+	# Hostile attitude toward this leader weakens the pull.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_allied_leader attitude = antagonistic }
+				has_attitude = { who = global_var:gw_allied_leader attitude = domineering }
+				has_attitude = { who = global_var:gw_allied_leader attitude = belligerent }
+				has_attitude = { who = global_var:gw_allied_leader attitude = rebellious }
+			}
+		}
+		add = -35
+	}
+
+	# Binding pacts with the opposing leader strongly reduce arbitrary flips.
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				has_treaty_alliance_with = { TARGET = root }
+			}
+		}
+		add = -35
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				has_treaty_defensive_pact_with = { TARGET = root }
+			}
+		}
+		add = -25
+	}
+
+	# Ideological and lobby signals.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			"global_var:gw_allied_leader.ai_ideological_opinion(root)" > 0
+		}
+		add = {
+			value = "global_var:gw_allied_leader.ai_ideological_opinion(root)"
+			multiply = 0.25
+			max = 10
+		}
+	}
+	else_if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			"global_var:gw_allied_leader.ai_ideological_opinion(root)" < 0
+		}
+		add = {
+			value = "global_var:gw_allied_leader.ai_ideological_opinion(root)"
+			multiply = 0.5
+			min = -15
+		}
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_pro_country
+				target = { this = global_var:gw_allied_leader }
+			}
+		}
+		add = 15
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_anti_country
+				target = { this = global_var:gw_allied_leader }
+			}
+		}
+		add = -15
+	}
+
+	# Military security.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				army_power_projection > root.army_power_projection
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				naval_power_projection > root.naval_power_projection
+			}
+		}
+		add = 10
+	}
+
+	# High tension makes bloc commitment more likely.
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 80
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 90
+		}
+		add = 10
+	}
+
+	min = 1
+}
+
+gw_hybrid_alignment_central_score = {
+	value = 10
+
+	if = {
+		limit = { has_modifier = gw_central_powers_leader }
+		add = 200
+	}
+	if = {
+		limit = { has_variable = gw_player_central }
+		add = 80
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_central
+		}
+		add = 10
+	}
+
+	# Revisionist dissatisfaction.
+	if = {
+		limit = { gw_structural_dissatisfaction_score >= 75 }
+		add = 40
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score >= 50 }
+		add = 25
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score >= 35 }
+		add = 10
+	}
+
+	# Soft historical anchors help the Central bloc form without hard rails.
+	if = {
+		limit = { gw_soft_historical_central_anchor_score > 0 }
+		add = gw_soft_historical_central_anchor_score
+	}
+
+	# Direct ties to the Central leader.
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				has_treaty_alliance_with = { TARGET = root }
+			}
+		}
+		add = 35
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				has_treaty_defensive_pact_with = { TARGET = root }
+			}
+		}
+		add = 25
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			OR = {
+				global_var:gw_central_leader = {
+					has_treaty_trade_privilege_with = { TARGET = root }
+				}
+				global_var:gw_central_leader = {
+					has_treaty_foreign_investment_rights_with = { TARGET = root }
+				}
+			}
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			is_in_customs_union_with = global_var:gw_central_leader
+		}
+		add = 5
+	}
+
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			has_diplomatic_pact = {
+				who = global_var:gw_allied_leader
+				type = rivalry
+			}
+		}
+		add = 25
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			has_diplomatic_pact = {
+				who = global_var:gw_allied_leader
+				type = embargo
+			}
+		}
+		add = 15
+	}
+
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_central_leader attitude = genial }
+				has_attitude = { who = global_var:gw_central_leader attitude = conciliatory }
+				has_attitude = { who = global_var:gw_central_leader attitude = loyal }
+			}
+		}
+		add = 20
+	}
+	else_if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_central_leader attitude = cooperative }
+				has_attitude = { who = global_var:gw_central_leader attitude = protective }
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			"global_var:gw_central_leader.relations:root" >= relations_threshold:friendly
+		}
+		add = 10
+	}
+	else_if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			"global_var:gw_central_leader.relations:root" >= relations_threshold:amicable
+		}
+		add = 5
+	}
+
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_central_leader attitude = antagonistic }
+				has_attitude = { who = global_var:gw_central_leader attitude = domineering }
+				has_attitude = { who = global_var:gw_central_leader attitude = belligerent }
+				has_attitude = { who = global_var:gw_central_leader attitude = rebellious }
+			}
+		}
+		add = -35
+	}
+
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				has_treaty_alliance_with = { TARGET = root }
+			}
+		}
+		add = -35
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				has_treaty_defensive_pact_with = { TARGET = root }
+			}
+		}
+		add = -25
+	}
+
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			"global_var:gw_central_leader.ai_ideological_opinion(root)" > 0
+		}
+		add = {
+			value = "global_var:gw_central_leader.ai_ideological_opinion(root)"
+			multiply = 0.25
+			max = 10
+		}
+	}
+	else_if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			"global_var:gw_central_leader.ai_ideological_opinion(root)" < 0
+		}
+		add = {
+			value = "global_var:gw_central_leader.ai_ideological_opinion(root)"
+			multiply = 0.5
+			min = -15
+		}
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_pro_country
+				target = { this = global_var:gw_central_leader }
+			}
+		}
+		add = 15
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_anti_country
+				target = { this = global_var:gw_central_leader }
+			}
+		}
+		add = -15
+	}
+
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				army_power_projection > root.army_power_projection
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				naval_power_projection > root.naval_power_projection
+			}
+		}
+		add = 10
+	}
+
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 80
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 90
+		}
+		add = 10
+	}
+
+	min = 1
+}
+
+gw_hybrid_alignment_neutral_score = {
+	value = 20
+
+	if = {
+		limit = { has_variable = gw_player_neutral }
+		add = 80
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_neutral
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			OR = {
+				has_modifier = gw_allied_powers_leader
+				has_modifier = gw_central_powers_leader
+			}
+		}
+		add = -50
+	}
+
+	# Countries near the middle are more able to remain uncommitted.
+	if = {
+		limit = {
+			gw_structural_dissatisfaction_score >= 35
+			gw_structural_dissatisfaction_score < 65
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			country_rank < rank_value:great_power
+		}
+		add = 20
+	}
+	if = {
+		limit = { army_size < 150 }
+		add = 15
+	}
+	if = {
+		limit = { navy_size < 25 }
+		add = 5
+	}
+	if = {
+		limit = { has_modifier = gw_neutral_nation }
+		add = 15
+	}
+
+	# Strong military ties to bloc leaders make neutrality less credible.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				has_treaty_alliance_with = { TARGET = root }
+			}
+		}
+		add = -25
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				has_treaty_alliance_with = { TARGET = root }
+			}
+		}
+		add = -25
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				has_treaty_defensive_pact_with = { TARGET = root }
+			}
+		}
+		add = -20
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				has_treaty_defensive_pact_with = { TARGET = root }
+			}
+		}
+		add = -20
+	}
+
+	# Economic ties are softer, but still reduce strict neutrality.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			OR = {
+				global_var:gw_allied_leader = {
+					has_treaty_trade_privilege_with = { TARGET = root }
+				}
+				global_var:gw_allied_leader = {
+					has_treaty_foreign_investment_rights_with = { TARGET = root }
+				}
+				is_in_customs_union_with = global_var:gw_allied_leader
+			}
+		}
+		add = -5
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			OR = {
+				global_var:gw_central_leader = {
+					has_treaty_trade_privilege_with = { TARGET = root }
+				}
+				global_var:gw_central_leader = {
+					has_treaty_foreign_investment_rights_with = { TARGET = root }
+				}
+				is_in_customs_union_with = global_var:gw_central_leader
+			}
+		}
+		add = -5
+	}
+
+	# Hostility to both camps can leave a country outside the blocs.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_allied_leader attitude = antagonistic }
+				has_attitude = { who = global_var:gw_allied_leader attitude = domineering }
+				has_attitude = { who = global_var:gw_allied_leader attitude = belligerent }
+				has_attitude = { who = global_var:gw_allied_leader attitude = rebellious }
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			OR = {
+				has_attitude = { who = global_var:gw_central_leader attitude = antagonistic }
+				has_attitude = { who = global_var:gw_central_leader attitude = domineering }
+				has_attitude = { who = global_var:gw_central_leader attitude = belligerent }
+				has_attitude = { who = global_var:gw_central_leader attitude = rebellious }
+			}
+		}
+		add = 10
+	}
+
+	# Internal lobbies against both leaders mildly help neutrality.
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_anti_country
+				target = { this = global_var:gw_allied_leader }
+			}
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_anti_country
+				target = { this = global_var:gw_central_leader }
+			}
+		}
+		add = 5
+	}
+
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 80
+		}
+		add = -25
+	}
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 90
+		}
+		add = -20
+	}
+
+	min = 1
+}
+
+gw_hybrid_alignment_total_score = {
+	value = gw_hybrid_alignment_allied_score
+	add = gw_hybrid_alignment_central_score
+	add = gw_hybrid_alignment_neutral_score
+	min = 1
+}
+
+gw_hybrid_alignment_allied_probability = {
+	value = gw_hybrid_alignment_allied_score
+	multiply = 100
+	divide = gw_hybrid_alignment_total_score
+	min = 0
+	max = 100
+}
+
+gw_hybrid_alignment_central_probability = {
+	value = gw_hybrid_alignment_central_score
+	multiply = 100
+	divide = gw_hybrid_alignment_total_score
+	min = 0
+	max = 100
+}
+
+gw_hybrid_alignment_neutral_probability = {
+	value = gw_hybrid_alignment_neutral_score
+	multiply = 100
+	divide = gw_hybrid_alignment_total_score
+	min = 0
+	max = 100
+}
+
+# Approximate event option weights derived from the same probabilities.
+# They avoid dynamic ai_chance parser risk while keeping choices tied to
+# the visible bars in clear 10-point bands.
+gw_hybrid_alignment_allied_weight_display = {
+	value = gw_hybrid_alignment_allied_probability
+	min = 1
+	max = 100
+}
+
+gw_hybrid_alignment_central_weight_display = {
+	value = gw_hybrid_alignment_central_probability
+	min = 1
+	max = 100
+}
+
+gw_hybrid_alignment_neutral_weight_display = {
+	value = gw_hybrid_alignment_neutral_probability
+	min = 1
+	max = 100
+}
+
+gw_hybrid_alignment_keep_current_weight_display = {
+	value = 1
+	if = {
+		limit = {
+			OR = {
+				has_variable = gw_alignment_allied
+				has_variable = gw_player_allied
+				has_variable = gw_satisfied_with_order
+			}
+		}
+		value = gw_hybrid_alignment_allied_probability
+	}
+	if = {
+		limit = {
+			OR = {
+				has_variable = gw_alignment_central
+				has_variable = gw_player_central
+				has_variable = gw_dissatisfied_with_order
+			}
+		}
+		value = gw_hybrid_alignment_central_probability
+	}
+	if = {
+		limit = {
+			OR = {
+				has_variable = gw_alignment_neutral
+				has_variable = gw_player_neutral
+			}
+		}
+		value = gw_hybrid_alignment_neutral_probability
+	}
+	min = 1
+	max = 100
+}
+
+gw_hybrid_alignment_central_margin = {
+	value = gw_hybrid_alignment_central_probability
+	if = {
+		limit = { gw_hybrid_alignment_allied_probability >= gw_hybrid_alignment_neutral_probability }
+		subtract = gw_hybrid_alignment_allied_probability
+	}
+	else = {
+		subtract = gw_hybrid_alignment_neutral_probability
+	}
+}
+
+gw_hybrid_alignment_allied_margin = {
+	value = gw_hybrid_alignment_allied_probability
+	if = {
+		limit = { gw_hybrid_alignment_central_probability >= gw_hybrid_alignment_neutral_probability }
+		subtract = gw_hybrid_alignment_central_probability
+	}
+	else = {
+		subtract = gw_hybrid_alignment_neutral_probability
+	}
+}
+
+gw_hybrid_alignment_neutral_margin = {
+	value = gw_hybrid_alignment_neutral_probability
+	if = {
+		limit = { gw_hybrid_alignment_allied_probability >= gw_hybrid_alignment_central_probability }
+		subtract = gw_hybrid_alignment_allied_probability
+	}
+	else = {
+		subtract = gw_hybrid_alignment_central_probability
+	}
+}

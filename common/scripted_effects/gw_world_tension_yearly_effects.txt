@@ -1,0 +1,717 @@
+﻿# ============================================================
+# GREAT WAR MOD - World Tension Yearly Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_process_yearly_world_tension_sources = {
+	# === CRISIS EVENT TRIGGERS (per country) ===
+	if = {
+		limit = {
+			NOT = { has_global_variable = gw_call_to_war_active }
+		}
+
+	# Phase 1: Arms Race at 60%
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			gw_is_great_war_bloc_leader = yes
+			global_var:gw_world_tension >= 60
+			NOT = { has_variable = gw_arms_race_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+		trigger_event = { id = gw_crisis.1001 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			NOT = { gw_is_great_war_bloc_leader = yes }
+			global_var:gw_world_tension >= 60
+			NOT = { has_variable = gw_arms_race_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+		trigger_event = { id = gw_crisis.1003 days = 0 }
+	}
+	# Phase 2: Ultimatum at 70%
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			gw_is_great_war_bloc_leader = yes
+			global_var:gw_world_tension >= 70
+			NOT = { has_variable = gw_ultimatum_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+		trigger_event = { id = gw_crisis.2001 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			NOT = { gw_is_great_war_bloc_leader = yes }
+			global_var:gw_world_tension >= 70
+			NOT = { has_variable = gw_ultimatum_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+		trigger_event = { id = gw_crisis.2003 days = 0 }
+	}
+	# Phase 2b: Ultimatum response at 75%
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 75
+			NOT = { has_variable = gw_ultimatum_response_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			OR = {
+				AND = {
+					has_modifier = gw_allied_powers_leader
+					has_global_variable = gw_ultimatum_issued_central
+				}
+				AND = {
+					has_modifier = gw_central_powers_leader
+					has_global_variable = gw_ultimatum_issued_allied
+				}
+			}
+		}
+		trigger_event = { id = gw_crisis.2002 days = 0 }
+	}
+
+	# Ambient world tension events: one progressive atmosphere beat per annual pass.
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 40
+			NOT = { has_variable = gw_tension_markets_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4001 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 55
+			has_variable = gw_tension_markets_seen
+			NOT = { has_variable = gw_tension_press_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4002 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 65
+			has_variable = gw_tension_press_seen
+			NOT = { has_variable = gw_tension_railways_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4003 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 65
+			has_variable = gw_tension_railways_seen
+			NOT = { has_variable = gw_tension_embassies_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4004 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 75
+			has_variable = gw_tension_embassies_seen
+			NOT = { has_variable = gw_tension_war_scare_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4005 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 75
+			has_variable = gw_tension_war_scare_seen
+			NOT = { has_variable = gw_tension_last_conference_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4006 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 85
+			has_variable = gw_tension_last_conference_seen
+			NOT = { has_variable = gw_tension_border_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4007 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 85
+			has_variable = gw_tension_border_seen
+			NOT = { has_variable = gw_tension_silence_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4008 days = 0 }
+	}
+	# Material tension events: one war-economy preparation beat per annual pass.
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 55
+			NOT = { has_variable = gw_material_arsenal_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4101 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 60
+			has_variable = gw_material_arsenal_seen
+			NOT = { has_variable = gw_material_naval_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4102 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 60
+			has_variable = gw_material_naval_seen
+			NOT = { has_variable = gw_material_staff_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4103 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 65
+			has_variable = gw_material_staff_seen
+			NOT = { has_variable = gw_material_insurance_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4104 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 70
+			has_variable = gw_material_insurance_seen
+			NOT = { has_variable = gw_material_bread_powder_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4105 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 75
+			has_variable = gw_material_bread_powder_seen
+			NOT = { has_variable = gw_material_credits_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4106 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 80
+			has_variable = gw_material_credits_seen
+			NOT = { has_variable = gw_material_factory_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4107 days = 0 }
+	}
+	else_if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			global_var:gw_world_tension >= 85
+			has_variable = gw_material_factory_seen
+			NOT = { has_variable = gw_material_budget_seen }
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { gw_has_neutral_stance = yes }
+		}
+		trigger_event = { id = gw_crisis.4108 days = 0 }
+	}
+
+	# Soft historical atmosphere beats run in their own quota so they do not replace
+	# the crisis decision chain or material tension events.
+	gw_trigger_soft_historical_prewar_events = yes
+
+	}
+
+	# === GLOBAL TENSION CHANGES (only #1 ranked processes) ===
+	if = {
+		limit = {
+			global_country_ranking = 1
+		}
+
+		# Reset yearly source trackers for tooltip breakdown
+		set_global_variable = { name = gw_tsrc_decay value = 0 }
+		set_global_variable = { name = gw_tsrc_military value = 0 }
+		set_global_variable = { name = gw_tsrc_political value = 0 }
+		set_global_variable = { name = gw_tsrc_conflicts value = 0 }
+		set_global_variable = { name = gw_direct_conflict_tension_this_year value = 0 }
+		if = {
+			limit = { NOT = { has_global_variable = gw_great_power_conference_cooldown } }
+			set_global_variable = { name = gw_great_power_conference_cooldown value = 0 }
+		}
+		if = {
+			limit = { global_var:gw_great_power_conference_cooldown > 0 }
+			change_global_variable = { name = gw_great_power_conference_cooldown add = -1 }
+		}
+
+		# === DYNAMIC DECAY ===
+		# During Great War: no decay
+		# During GP wars: no natural decay
+		# Normal peacetime: standard decay (-3)
+		# League exists + peacetime: extra decay (-2 additional)
+		if = {
+			limit = {
+				has_global_variable = gw_great_war_active
+			}
+			# No decay during Great War
+		}
+		else_if = {
+			limit = {
+				any_country = {
+					country_rank >= rank_value:great_power
+					is_at_war = yes
+					any_country = {
+						NOT = { this = prev }
+						country_rank >= rank_value:great_power
+						has_war_with = prev
+					}
+				}
+			}
+			# GP vs GP war active — natural decay is suspended
+		}
+		else = {
+			# No GP vs GP war — full peacetime decay
+			change_global_variable = { name = gw_world_tension add = -4 }
+			change_global_variable = { name = gw_tsrc_decay add = -4 }
+		}
+
+		# === TENSION INCREASE SOURCES ===
+
+		# No more colonizable land
+		if = {
+			limit = {
+				NOT = {
+					any_country = {
+						is_country_type = decentralized
+					}
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 2 }
+			change_global_variable = { name = gw_tsrc_political add = 2 }
+		}
+
+		# Less than 50% unrecognized/decentralized nations
+		if = {
+			limit = {
+				NOT = {
+					any_country = {
+						percent >= 0.5
+						OR = {
+							is_country_type = unrecognized
+							is_country_type = decentralized
+						}
+					}
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 2 }
+			change_global_variable = { name = gw_tsrc_political add = 2 }
+		}
+
+		# Many dissatisfied great powers
+		if = {
+			limit = {
+				gw_great_power_dissatisfied_percent >= 0.5
+			}
+			change_global_variable = { name = gw_world_tension add = 3 }
+			change_global_variable = { name = gw_tsrc_political add = 3 }
+		}
+
+		# Military technology proliferation
+		if = {
+			limit = {
+				gw_militarized_gp_count >= 3
+			}
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+		if = {
+			limit = {
+				gw_militarized_gp_count >= 5
+			}
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+
+		# GP army buildup — only GROWTH adds tension.
+		# Compare current total vs last year's snapshot. Thresholds widened and
+		# capped at +3 (was +5 at 200/400/600/800/1000) to slow peacetime accrual.
+		if = {
+			limit = { gw_gp_army_growth >= 300 }
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+		if = {
+			limit = { gw_gp_army_growth >= 600 }
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+		if = {
+			limit = { gw_gp_army_growth >= 900 }
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+
+		# GP naval buildup — only GROWTH adds tension
+		if = {
+			limit = { gw_gp_navy_growth >= 15 }
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+		if = {
+			limit = { gw_gp_navy_growth >= 25 }
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+		if = {
+			limit = { gw_gp_navy_growth >= 50 }
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_military add = 1 }
+		}
+
+		# Save this year's totals as next year's baseline
+		set_global_variable = { name = gw_last_year_gp_army value = gw_total_gp_army }
+		set_global_variable = { name = gw_last_year_gp_navy value = gw_total_gp_navy }
+
+		# Pariah-level Great Power infamy alarms the wider international order.
+		if = {
+			limit = {
+				any_country = {
+					gw_is_regular_country = yes
+					country_rank >= rank_value:great_power
+					infamy >= 100
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 3 }
+			change_global_variable = { name = gw_tsrc_political add = 3 }
+		}
+
+		# Ongoing wars between major powers keep the international situation unstable.
+		if = {
+			limit = {
+				any_country = {
+					country_rank >= rank_value:major_power
+					is_at_war = yes
+					any_country = {
+						NOT = { this = prev }
+						country_rank >= rank_value:major_power
+						has_war_with = prev
+					}
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 1 }
+		}
+		if = {
+			limit = {
+				any_country = {
+					country_rank >= rank_value:great_power
+					is_at_war = yes
+					any_country = {
+						NOT = { this = prev }
+						country_rank >= rank_value:great_power
+						has_war_with = prev
+					}
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 1 }
+		}
+
+		# Multiple simultaneous GP wars — instability
+		if = {
+			limit = {
+				gw_gp_at_war_count >= 3
+			}
+			change_global_variable = { name = gw_world_tension add = 2 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 2 }
+		}
+
+		# Post-Great War revisionism — losing powers rebuild, tension rises again
+		if = {
+			limit = {
+				has_global_variable = gw_great_war_concluded
+				any_country = {
+					has_modifier = gw_major_leader_defeat
+					country_rank >= rank_value:great_power
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 2 }
+			change_global_variable = { name = gw_tsrc_political add = 2 }
+		}
+
+		# === PER-COUNTRY TENSION ATTRIBUTION ===
+		# Calculate each Great/Major Power's individual contribution score
+		every_country = {
+			limit = {
+				gw_is_regular_country = yes
+				country_rank >= rank_value:major_power
+			}
+			set_variable = { name = gw_country_tension_val value = 0 }
+
+			# Great Power infamy attribution (also adds to global tension)
+			if = {
+				limit = { country_rank >= rank_value:great_power }
+				if = {
+					limit = { infamy >= 25 }
+					change_variable = { name = gw_country_tension_val add = 1 }
+					change_global_variable = { name = gw_world_tension add = 1 }
+					change_global_variable = { name = gw_tsrc_political add = 1 }
+				}
+				if = {
+					limit = { infamy >= 50 }
+					change_variable = { name = gw_country_tension_val add = 1 }
+					change_global_variable = { name = gw_world_tension add = 1 }
+					change_global_variable = { name = gw_tsrc_political add = 1 }
+				}
+				if = {
+					limit = { infamy >= 100 }
+					change_variable = { name = gw_country_tension_val add = 3 }
+				}
+			}
+			# Major Power infamy matters, but carries less weight than Great Power aggression.
+			else_if = {
+				limit = { country_rank >= rank_value:major_power }
+				if = {
+					limit = { infamy >= 50 }
+					change_variable = { name = gw_country_tension_val add = 1 }
+					change_global_variable = { name = gw_world_tension add = 1 }
+					change_global_variable = { name = gw_tsrc_political add = 1 }
+				}
+				if = {
+					limit = { infamy >= 100 }
+					change_variable = { name = gw_country_tension_val add = 1 }
+					change_global_variable = { name = gw_world_tension add = 1 }
+					change_global_variable = { name = gw_tsrc_political add = 1 }
+				}
+			}
+
+			# Individual army growth
+			if = {
+				limit = {
+					country_rank >= rank_value:great_power
+					gw_country_army_growth >= 50
+				}
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+			if = {
+				limit = {
+					country_rank >= rank_value:great_power
+					gw_country_army_growth >= 100
+				}
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+			if = {
+				limit = {
+					country_rank >= rank_value:great_power
+					gw_country_army_growth >= 200
+				}
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+
+			# Individual navy growth
+			if = {
+				limit = {
+					country_rank >= rank_value:great_power
+					gw_country_navy_growth >= 10
+				}
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+			if = {
+				limit = {
+					country_rank >= rank_value:great_power
+					gw_country_navy_growth >= 25
+				}
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+
+			# Dissatisfied with the world order
+			if = {
+				limit = { has_variable = gw_dissatisfied_with_order }
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+
+			# At war (contributing to instability)
+			if = {
+				limit = { is_at_war = yes }
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+
+			# Save per-country baseline for next year
+			set_variable = { name = gw_last_army_size value = army_size }
+			set_variable = { name = gw_last_navy_size value = navy_size }
+		}
+
+		# Soft annual source caps keep heavily modded observer games from
+		# racing to crisis solely through repeated yearly accumulation.
+		if = {
+			limit = {
+				game_date < 1870
+				global_var:gw_tsrc_political > 3
+			}
+			set_global_variable = { name = gw_tsrc_cap_excess value = global_var:gw_tsrc_political }
+			change_global_variable = { name = gw_tsrc_cap_excess subtract = 3 }
+			change_global_variable = { name = gw_world_tension subtract = global_var:gw_tsrc_cap_excess }
+			set_global_variable = { name = gw_tsrc_political value = 3 }
+			remove_global_variable = gw_tsrc_cap_excess
+		}
+		else_if = {
+			limit = {
+				game_date < 1880
+				global_var:gw_tsrc_political > 4
+			}
+			set_global_variable = { name = gw_tsrc_cap_excess value = global_var:gw_tsrc_political }
+			change_global_variable = { name = gw_tsrc_cap_excess subtract = 4 }
+			change_global_variable = { name = gw_world_tension subtract = global_var:gw_tsrc_cap_excess }
+			set_global_variable = { name = gw_tsrc_political value = 4 }
+			remove_global_variable = gw_tsrc_cap_excess
+		}
+		else_if = {
+			limit = { global_var:gw_tsrc_political > 8 }
+			set_global_variable = { name = gw_tsrc_cap_excess value = global_var:gw_tsrc_political }
+			change_global_variable = { name = gw_tsrc_cap_excess subtract = 8 }
+			change_global_variable = { name = gw_world_tension subtract = global_var:gw_tsrc_cap_excess }
+			set_global_variable = { name = gw_tsrc_political value = 8 }
+			remove_global_variable = gw_tsrc_cap_excess
+		}
+		if = {
+			limit = {
+				game_date < 1870
+				global_var:gw_tsrc_military > 3
+			}
+			set_global_variable = { name = gw_tsrc_cap_excess value = global_var:gw_tsrc_military }
+			change_global_variable = { name = gw_tsrc_cap_excess subtract = 3 }
+			change_global_variable = { name = gw_world_tension subtract = global_var:gw_tsrc_cap_excess }
+			set_global_variable = { name = gw_tsrc_military value = 3 }
+			remove_global_variable = gw_tsrc_cap_excess
+		}
+		else_if = {
+			limit = {
+				game_date < 1880
+				global_var:gw_tsrc_military > 4
+			}
+			set_global_variable = { name = gw_tsrc_cap_excess value = global_var:gw_tsrc_military }
+			change_global_variable = { name = gw_tsrc_cap_excess subtract = 4 }
+			change_global_variable = { name = gw_world_tension subtract = global_var:gw_tsrc_cap_excess }
+			set_global_variable = { name = gw_tsrc_military value = 4 }
+			remove_global_variable = gw_tsrc_cap_excess
+		}
+		else_if = {
+			limit = { global_var:gw_tsrc_military > 6 }
+			set_global_variable = { name = gw_tsrc_cap_excess value = global_var:gw_tsrc_military }
+			change_global_variable = { name = gw_tsrc_cap_excess subtract = 6 }
+			change_global_variable = { name = gw_world_tension subtract = global_var:gw_tsrc_cap_excess }
+			set_global_variable = { name = gw_tsrc_military value = 6 }
+			remove_global_variable = gw_tsrc_cap_excess
+		}
+		if = {
+			limit = { global_var:gw_tsrc_conflicts > 5 }
+			set_global_variable = { name = gw_tsrc_cap_excess value = global_var:gw_tsrc_conflicts }
+			change_global_variable = { name = gw_tsrc_cap_excess subtract = 5 }
+			change_global_variable = { name = gw_world_tension subtract = global_var:gw_tsrc_cap_excess }
+			set_global_variable = { name = gw_tsrc_conflicts value = 5 }
+			remove_global_variable = gw_tsrc_cap_excess
+		}
+
+		# Concert-era restraint makes very high tension harder to sustain before the late century.
+		# Window extended to 1890 and triggers lowered so the pre-war creep is much slower
+		# (addresses "tension reaches crisis far too early / 1880 event spam").
+		if = {
+			limit = {
+				NOT = { has_global_variable = gw_great_war_active }
+				game_date < 1860
+				global_var:gw_world_tension > 40
+			}
+			change_global_variable = { name = gw_world_tension add = -3 }
+			change_global_variable = { name = gw_tsrc_decay add = -3 }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = gw_great_war_active }
+				game_date < 1860
+				global_var:gw_world_tension > 55
+			}
+			change_global_variable = { name = gw_world_tension add = -3 }
+			change_global_variable = { name = gw_tsrc_decay add = -3 }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = gw_great_war_active }
+				game_date >= 1860
+				game_date < 1890
+				global_var:gw_world_tension > 55
+			}
+			change_global_variable = { name = gw_world_tension add = -3 }
+			change_global_variable = { name = gw_tsrc_decay add = -3 }
+		}
+		if = {
+			limit = {
+				NOT = { has_global_variable = gw_great_war_active }
+				game_date >= 1860
+				game_date < 1890
+				global_var:gw_world_tension > 70
+			}
+			change_global_variable = { name = gw_world_tension add = -2 }
+			change_global_variable = { name = gw_tsrc_decay add = -2 }
+		}
+
+		# Great Power conferences can defuse a crisis during extended peace.
+		if = {
+			limit = {
+				global_var:gw_great_power_conference_cooldown <= 0
+				NOT = { has_global_variable = gw_great_war_active }
+				NOT = { has_global_variable = gw_call_to_war_active }
+				OR = {
+					AND = {
+						game_date < 1880
+						global_var:gw_world_tension >= 45
+					}
+					AND = {
+						game_date >= 1880
+						global_var:gw_world_tension >= 65
+					}
+				}
+				NOT = {
+					any_country = {
+						country_rank >= rank_value:great_power
+						is_at_war = yes
+					}
+				}
+			}
+			trigger_event = { id = gw_conference.1 days = 0 }
+		}
+		gw_refresh_top_tension_contributors = yes
+	}
+}

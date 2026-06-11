@@ -596,6 +596,7 @@ dev.6 = {
 		remove_global_variable = ve_age_1_started
 		remove_global_variable = ve_age_2_started
 		set_global_variable = age_3_started_trigger
+		gw_activate_for_age_3 = yes
 		every_country = {
 			set_variable = {
 				name = ve_splender_points

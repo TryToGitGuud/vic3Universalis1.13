@@ -1,0 +1,609 @@
+﻿# ============================================================
+# GREAT WAR MOD - Customizable Localization
+# V3 syntax: BlockName = { type = country ... }
+# Referenced in loc as [ROOT.GetCountry.GetCustom('BlockName')]
+# Or from global scope: [Localize('BlockName')]
+# ============================================================
+
+# --- Guarded global names ---
+GetGWLeagueHQ = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_league_of_nations_formed }
+		localization_key = gw_loc_league_hq_named
+	}
+	text = {
+		localization_key = gw_loc_unknown_scope
+	}
+}
+
+GetGWLeaguePermanentMembers = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_permanent_member_1
+			exists = global_var:gw_permanent_member_2
+			exists = global_var:gw_permanent_member_3
+			exists = global_var:gw_permanent_member_4
+		}
+		localization_key = gw_loc_permanent_members_full
+	}
+	text = {
+		localization_key = gw_loc_permanent_members_pending
+	}
+}
+
+GetGWAlignmentStatus = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			OR = {
+				has_variable = gw_player_central
+				has_variable = gw_alignment_central
+			}
+		}
+		localization_key = gw_alignment_status_central
+	}
+	text = {
+		trigger = {
+			OR = {
+				has_variable = gw_player_allied
+				has_variable = gw_alignment_allied
+			}
+		}
+		localization_key = gw_alignment_status_allied
+	}
+	text = {
+		trigger = {
+			OR = {
+				has_variable = gw_player_neutral
+				has_variable = gw_alignment_neutral
+			}
+		}
+		localization_key = gw_alignment_status_neutral
+	}
+	text = {
+		trigger = {
+			has_variable = gw_dissatisfied_with_order
+			NOT = {
+				OR = {
+					has_variable = gw_player_allied
+					has_variable = gw_alignment_allied
+					has_variable = gw_player_neutral
+					has_variable = gw_alignment_neutral
+				}
+			}
+		}
+		localization_key = gw_alignment_status_central_leaning
+	}
+	text = {
+		trigger = {
+			has_variable = gw_satisfied_with_order
+			NOT = {
+				OR = {
+					has_variable = gw_player_central
+					has_variable = gw_alignment_central
+					has_variable = gw_player_neutral
+					has_variable = gw_alignment_neutral
+				}
+			}
+		}
+		localization_key = gw_alignment_status_allied_leaning
+	}
+	text = {
+		localization_key = gw_alignment_status_open
+	}
+}
+
+GetGWAlignmentDominantPull = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			gw_hybrid_alignment_central_probability >= gw_hybrid_alignment_allied_probability
+			gw_hybrid_alignment_central_probability >= gw_hybrid_alignment_neutral_probability
+		}
+		localization_key = gw_alignment_dominant_central
+	}
+	text = {
+		trigger = {
+			gw_hybrid_alignment_allied_probability > gw_hybrid_alignment_central_probability
+			gw_hybrid_alignment_allied_probability >= gw_hybrid_alignment_neutral_probability
+		}
+		localization_key = gw_alignment_dominant_allied
+	}
+	text = {
+		trigger = {
+			gw_hybrid_alignment_neutral_probability > gw_hybrid_alignment_central_probability
+			gw_hybrid_alignment_neutral_probability > gw_hybrid_alignment_allied_probability
+		}
+		localization_key = gw_alignment_dominant_neutral
+	}
+	text = {
+		localization_key = gw_alignment_dominant_none
+	}
+}
+
+GetGWCongressTargetName = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_congress_display_target }
+		localization_key = gw_loc_congress_display_target_named
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_target }
+		localization_key = gw_loc_congress_target_named
+	}
+	text = {
+		localization_key = gw_loc_unknown_country
+	}
+}
+
+GetGWCongressInitiatorName = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_congress_display_initiator }
+		localization_key = gw_loc_congress_display_initiator_named
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_initiator }
+		localization_key = gw_loc_congress_initiator_named
+	}
+	text = {
+		localization_key = gw_loc_unknown_country
+	}
+}
+
+GetGWCongressMotionName = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			has_global_variable = gw_congress_type
+			global_var:gw_congress_type = 1
+		}
+		localization_key = gw_loc_congress_motion_denounce
+	}
+	text = {
+		trigger = {
+			has_global_variable = gw_congress_type
+			global_var:gw_congress_type = 2
+		}
+		localization_key = gw_loc_congress_motion_embargo
+	}
+	text = {
+		trigger = {
+			has_global_variable = gw_congress_type
+			global_var:gw_congress_type = 4
+		}
+		localization_key = gw_loc_congress_motion_expel
+	}
+	text = {
+		localization_key = gw_loc_unknown_scope
+	}
+}
+
+GetGWCongressThreshold = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			has_global_variable = gw_congress_type
+			global_var:gw_congress_type = 1
+		}
+		localization_key = gw_loc_congress_threshold_denounce
+	}
+	text = {
+		trigger = {
+			has_global_variable = gw_congress_type
+			global_var:gw_congress_type = 2
+		}
+		localization_key = gw_loc_congress_threshold_embargo
+	}
+	text = {
+		trigger = {
+			has_global_variable = gw_congress_type
+			global_var:gw_congress_type = 4
+		}
+		localization_key = gw_loc_congress_threshold_expel
+	}
+	text = {
+		localization_key = gw_loc_unknown_scope
+	}
+}
+
+GetGWCongressSupportList = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_congress_supporter_4 }
+		localization_key = gw_loc_congress_support_list_4
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_supporter_3 }
+		localization_key = gw_loc_congress_support_list_3
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_supporter_2 }
+		localization_key = gw_loc_congress_support_list_2
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_supporter_1 }
+		localization_key = gw_loc_congress_support_list_1
+	}
+	text = {
+		localization_key = gw_loc_congress_support_list_none
+	}
+}
+
+GetGWCongressOpposeList = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_congress_opposer_4 }
+		localization_key = gw_loc_congress_oppose_list_4
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_opposer_3 }
+		localization_key = gw_loc_congress_oppose_list_3
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_opposer_2 }
+		localization_key = gw_loc_congress_oppose_list_2
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_opposer_1 }
+		localization_key = gw_loc_congress_oppose_list_1
+	}
+	text = {
+		localization_key = gw_loc_congress_oppose_list_none
+	}
+}
+
+GetGWCongressAbstainList = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_congress_abstainer_4 }
+		localization_key = gw_loc_congress_abstain_list_4
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_abstainer_3 }
+		localization_key = gw_loc_congress_abstain_list_3
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_abstainer_2 }
+		localization_key = gw_loc_congress_abstain_list_2
+	}
+	text = {
+		trigger = { exists = global_var:gw_congress_abstainer_1 }
+		localization_key = gw_loc_congress_abstain_list_1
+	}
+	text = {
+		localization_key = gw_loc_congress_abstain_list_none
+	}
+}
+
+GetGWAlliedLeaderName = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_allied_leader }
+		localization_key = gw_loc_allied_leader_named
+	}
+	text = {
+		localization_key = gw_loc_no_bloc_leader
+	}
+}
+
+GetGWCentralLeaderName = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = { exists = global_var:gw_central_leader }
+		localization_key = gw_loc_central_leader_named
+	}
+	text = {
+		localization_key = gw_loc_no_bloc_leader
+	}
+}
+
+GetGWCallToWarCountdown = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			has_global_variable = gw_call_to_war_months
+			global_var:gw_call_to_war_months >= 3
+		}
+		localization_key = gw_call_countdown_ready
+	}
+	text = {
+		trigger = {
+			has_global_variable = gw_call_to_war_months
+			global_var:gw_call_to_war_months >= 2
+		}
+		localization_key = gw_call_countdown_1
+	}
+	text = {
+		trigger = {
+			has_global_variable = gw_call_to_war_months
+			global_var:gw_call_to_war_months >= 1
+		}
+		localization_key = gw_call_countdown_2
+	}
+	text = {
+		localization_key = gw_call_countdown_3
+	}
+}
+
+GetGWTensionContributors = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_top_tension_3
+		}
+		localization_key = gw_tension_contributors_3
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_top_tension_2
+		}
+		localization_key = gw_tension_contributors_2
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_top_tension_1
+		}
+		localization_key = gw_tension_contributors_1
+	}
+	text = {
+		localization_key = gw_tension_contributors_none
+	}
+}
+
+# --- Allied Powers Member List (variable length, up to 4) ---
+GetGWAlliedList = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_allied_gp_4
+		}
+		localization_key = gw_allied_list_4
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_allied_gp_3
+		}
+		localization_key = gw_allied_list_3
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_allied_gp_2
+		}
+		localization_key = gw_allied_list_2
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_allied_gp_1
+		}
+		localization_key = gw_allied_list_1
+	}
+	text = {
+		localization_key = gw_faction_list_none
+	}
+}
+
+# --- Central Powers Member List (variable length, up to 4) ---
+GetGWCentralList = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_central_gp_4
+		}
+		localization_key = gw_central_list_4
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_central_gp_3
+		}
+		localization_key = gw_central_list_3
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_central_gp_2
+		}
+		localization_key = gw_central_list_2
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_central_gp_1
+		}
+		localization_key = gw_central_list_1
+	}
+	text = {
+		localization_key = gw_faction_list_none
+	}
+}
+
+# --- Neutral Powers List (variable length, up to 4) ---
+GetGWNeutralList = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_neutral_gp_4
+		}
+		localization_key = gw_neutral_list_4
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_neutral_gp_3
+		}
+		localization_key = gw_neutral_list_3
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_neutral_gp_2
+		}
+		localization_key = gw_neutral_list_2
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_neutral_gp_1
+		}
+		localization_key = gw_neutral_list_1
+	}
+	text = {
+		localization_key = gw_faction_list_none
+	}
+}
+
+# --- Tension Breakdown: Natural Decay ---
+GetGWDecayTier = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_decay
+			global_var:gw_tsrc_decay <= -5
+		}
+		localization_key = gw_src_decay_strong
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_decay
+			global_var:gw_tsrc_decay <= -3
+		}
+		localization_key = gw_src_decay_moderate
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_decay
+			global_var:gw_tsrc_decay <= -1
+		}
+		localization_key = gw_src_decay_low
+	}
+	text = {
+		trigger = {
+			has_global_variable = gw_great_war_active
+		}
+		localization_key = gw_src_decay_none
+	}
+	text = {
+		localization_key = gw_src_decay_none_yet
+	}
+}
+
+# --- Tension Breakdown: Military Buildup ---
+GetGWMilitaryTier = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_military
+			global_var:gw_tsrc_military >= 6
+		}
+		localization_key = gw_src_military_high
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_military
+			global_var:gw_tsrc_military >= 3
+		}
+		localization_key = gw_src_military_moderate
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_military
+			global_var:gw_tsrc_military >= 1
+		}
+		localization_key = gw_src_military_low
+	}
+	text = {
+		localization_key = gw_src_military_none
+	}
+}
+
+# --- Tension Breakdown: Political Tensions ---
+GetGWPoliticalTier = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_political
+			global_var:gw_tsrc_political >= 7
+		}
+		localization_key = gw_src_political_high
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_political
+			global_var:gw_tsrc_political >= 4
+		}
+		localization_key = gw_src_political_moderate
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_political
+			global_var:gw_tsrc_political >= 1
+		}
+		localization_key = gw_src_political_low
+	}
+	text = {
+		localization_key = gw_src_political_none
+	}
+}
+
+# --- Tension Breakdown: Armed Conflicts ---
+GetGWConflictsTier = {
+	type = country
+	random_valid = no
+
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_conflicts
+			global_var:gw_tsrc_conflicts >= 5
+		}
+		localization_key = gw_src_conflicts_high
+	}
+	text = {
+		trigger = {
+			exists = global_var:gw_tsrc_conflicts
+			global_var:gw_tsrc_conflicts >= 1
+		}
+		localization_key = gw_src_conflicts_some
+	}
+	text = {
+		localization_key = gw_src_conflicts_none
+	}
+}

@@ -1,0 +1,2357 @@
+﻿# ============================================================
+# GREAT WAR MOD - Great War Events
+# ============================================================
+
+namespace = gw_war
+
+# --- Post-War Events ---
+
+# Victory announcement (for winning side)
+gw_war.1001 = {
+	type = country_event
+
+	title = gw_war.1001.t
+	desc = gw_war.1001.d
+	flavor = gw_war.1001.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	option = {
+		name = gw_war.1001.a
+		default_option = yes
+	}
+}
+
+# Defeat announcement (for losing side)
+gw_war.1002 = {
+	type = country_event
+
+	title = gw_war.1002.t
+	desc = gw_war.1002.d
+	flavor = gw_war.1002.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_factory_closed.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	# Accept defeat
+	option = {
+		name = gw_war.1002.a
+		default_option = yes
+	}
+
+	# "This is just a truce!" - flavor for future revanchism
+	option = {
+		name = gw_war.1002.b
+	}
+}
+
+# Stalemate / status quo
+gw_war.1006 = {
+	type = country_event
+
+	title = gw_war.1006.t
+	desc = gw_war.1006.d
+	flavor = gw_war.1006.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		every_country = {
+			limit = {
+				has_modifier = gw_great_war_leader
+			}
+			remove_modifier = gw_great_war_leader
+		}
+		gw_clear_war_state = yes
+		# Global changes — only first country to process (guard: gw_great_war_active still exists)
+		if = {
+			limit = { has_global_variable = gw_great_war_active }
+			remove_global_variable = gw_great_war_active
+			set_global_variable = gw_great_war_concluded
+			if = { limit = { has_global_variable = gw_system_active } remove_global_variable = gw_system_active }
+			if = {
+				limit = { has_global_variable = gw_war_outcome_determined }
+				remove_global_variable = gw_war_outcome_determined
+			}
+			# Clean up Call to War tracking
+			if = {
+				limit = { has_global_variable = gw_call_to_war_active }
+				remove_global_variable = gw_call_to_war_active
+			}
+			if = {
+				limit = { has_global_variable = gw_call_to_war_months }
+				remove_global_variable = gw_call_to_war_months
+			}
+			set_global_variable = { name = gw_world_tension value = 0 }
+			# Once the Great War has ended, pre-war tension and crisis bonuses no longer apply.
+			gw_clear_all_tension_event_modifiers = yes
+		}
+		trigger_event = { id = gw_hist.3004 days = 2 }
+		# Per-country cleanup (safe to run multiple times)
+		gw_clear_crisis_flags = yes
+	}
+
+	option = {
+		name = gw_war.1006.a
+		default_option = yes
+	}
+}
+
+# "Stabbed in the Back" myth - flavor event for losing leader
+gw_war.1007 = {
+	type = country_event
+
+	title = gw_war.1007.t
+	desc = gw_war.1007.d
+	flavor = gw_war.1007.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_factory_closed.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	# Embrace the narrative - radicals gain power
+	option = {
+		name = gw_war.1007.a
+		default_option = yes
+		every_scope_state = {
+			limit = {
+				is_incorporated = yes
+			}
+			add_radicals_in_state = {
+				pop_type = soldiers
+				value = 0.25
+			}
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	# Reject the myth - accept responsibility
+	option = {
+		name = gw_war.1007.b
+		add_radicals = {
+			value = 0.05
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# ============================================================
+# DISCONTENT THRESHOLD EVENTS
+# ============================================================
+
+# --- Discontent 25: Letters from the Front ---
+gw_war.3010 = {
+	type = country_event
+
+	title = gw_war.3010.t
+	desc = gw_war.3010.d
+	flavor = gw_war.3010.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_letters_seen
+	}
+
+	option = {
+		name = gw_war.3010.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3010_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -8 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = {
+			name = gw_war_bond_drive
+			months = 12
+		}
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 10 }
+	}
+
+	option = {
+		name = gw_war.3010.b
+		custom_tooltip = { text = gw_war_3010_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -12 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = {
+			name = gw_frontline_relief
+			months = 12
+		}
+		ai_chance = { base = 6 }
+	}
+}
+
+# --- Discontent 45: The Munitions Ledger ---
+gw_war.3020 = {
+	type = country_event
+
+	title = gw_war.3020.t
+	desc = gw_war.3020.d
+	flavor = gw_war.3020.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_factory_closed.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_industry_seen
+	}
+
+	option = {
+		name = gw_war.3020.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3020_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = {
+			name = gw_munitions_overdrive
+			months = 12
+		}
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 9 }
+	}
+
+	option = {
+		name = gw_war.3020.b
+		custom_tooltip = { text = gw_war_3020_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -10 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		if = {
+			limit = { has_modifier = gw_wartime_rationing }
+			remove_modifier = gw_wartime_rationing
+		}
+		add_modifier = {
+			name = gw_frontline_relief
+			months = 12
+		}
+		every_scope_war = {
+			if = {
+				limit = {
+					OR = {
+						root = {
+							NOR = {
+								has_variable = gw_war_side_1_leader
+								has_variable = gw_war_side_2_leader
+							}
+						}
+						has_war_support = { target = root value > 5 }
+					}
+				}
+				add_war_war_support = { target = root value = -5 }
+			}
+		}
+		ai_chance = { base = 7 }
+	}
+}
+
+# --- Discontent 65: Vote of Confidence ---
+gw_war.3030 = {
+	type = country_event
+
+	title = gw_war.3030.t
+	desc = gw_war.3030.d
+	flavor = gw_war.3030.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_parliament_seen
+	}
+
+	option = {
+		name = gw_war.3030.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3030_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -10 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = {
+			name = gw_war_bond_drive
+			months = 12
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3030.b
+		custom_tooltip = { text = gw_war_3030_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -15 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = {
+			name = gw_civil_liberties_suspended
+			months = 18
+		}
+		every_scope_war = {
+			add_war_war_support = { target = root value = 10 }
+		}
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = gw_war.3030.c
+		custom_tooltip = { text = gw_war_3030_c_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -20 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			if = {
+				limit = {
+					OR = {
+						root = {
+							NOR = {
+								has_variable = gw_war_side_1_leader
+								has_variable = gw_war_side_2_leader
+							}
+						}
+						has_war_support = { target = root value > 10 }
+					}
+				}
+				add_war_war_support = { target = root value = -10 }
+			}
+		}
+		ai_chance = { base = 4 }
+	}
+}
+
+# --- Discontent 80: Cracks in the Home Front ---
+gw_war.3001 = {
+	type = country_event
+
+	title = gw_war.3001.t
+	desc = gw_war.3001.d
+	flavor = gw_war.3001.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+		exists = var:gw_national_discontent_value
+		var:gw_national_discontent_value >= 80
+		has_variable = gw_war_parliament_seen
+		NOT = { has_variable = gw_discontent_warning_seen }
+	}
+
+	immediate = {
+		set_variable = gw_discontent_warning_seen
+	}
+
+	# Crack down harder — temporary relief but more radicalization later
+	option = {
+		name = gw_war.3001.a
+		default_option = yes
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -15 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_state = {
+			limit = { is_incorporated = yes }
+			add_radicals_in_state = {
+				pop_type = laborers
+				value = 0.1
+			}
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+
+	# Make concessions — reduce discontent but weaken war effort
+	option = {
+		name = gw_war.3001.b
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -25 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			if = {
+				limit = {
+					OR = {
+						root = {
+							NOR = {
+								has_variable = gw_war_side_1_leader
+								has_variable = gw_war_side_2_leader
+							}
+						}
+						has_war_support = { target = root value > 15 }
+					}
+				}
+				add_war_war_support = { target = root value = -15 }
+			}
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	# Ignore the warnings
+	option = {
+		name = gw_war.3001.c
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		ai_chance = {
+			base = 3
+		}
+	}
+}
+
+# --- Discontent 100: The Breaking Point ---
+gw_war.3002 = {
+	type = country_event
+
+	title = gw_war.3002.t
+	desc = gw_war.3002.d
+	flavor = gw_war.3002.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+		exists = var:gw_national_discontent_value
+		var:gw_national_discontent_value >= 100
+		has_variable = gw_discontent_warning_seen
+		NOT = { has_variable = gw_discontent_collapse_seen }
+	}
+
+	immediate = {
+		set_variable = gw_discontent_collapse_seen
+	}
+
+	# Military mutiny — army refuses to fight
+	option = {
+		name = gw_war.3002.a
+		default_option = yes
+		add_modifier = {
+			name = gw_military_mutiny
+			months = 24
+		}
+		every_scope_war = {
+			if = {
+				limit = {
+					OR = {
+						root = {
+							NOR = {
+								has_variable = gw_war_side_1_leader
+								has_variable = gw_war_side_2_leader
+							}
+						}
+						has_war_support = { target = root value > 50 }
+					}
+				}
+				add_war_war_support = { target = root value = -50 }
+			}
+		}
+		every_scope_state = {
+			limit = { is_incorporated = yes }
+			add_radicals_in_state = {
+				pop_type = soldiers
+				value = 0.5
+			}
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	# Revolution erupts — home front collapses
+	option = {
+		name = gw_war.3002.b
+		add_modifier = {
+			name = gw_home_front_collapse
+			months = 36
+		}
+		add_radicals = {
+			value = 0.25
+		}
+		every_scope_war = {
+			if = {
+				limit = {
+					OR = {
+						root = {
+							NOR = {
+								has_variable = gw_war_side_1_leader
+								has_variable = gw_war_side_2_leader
+							}
+						}
+						has_war_support = { target = root value > 30 }
+					}
+				}
+				add_war_war_support = { target = root value = -30 }
+			}
+		}
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+# ============================================================
+# WARTIME ATMOSPHERE EVENTS
+# ============================================================
+
+# --- War Opening: The Guns Open ---
+gw_war.3100 = {
+	type = country_event
+
+	title = gw_war.3100.t
+	desc = gw_war.3100.d
+	flavor = gw_war.3100.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_opening_seen
+	}
+
+	option = {
+		name = gw_war.3100.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3100_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_initial_war_fervor months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3100.b
+		custom_tooltip = { text = gw_war_3100_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -6 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_long_war_planning months = 12 }
+		ai_chance = { base = 6 }
+	}
+}
+
+# --- Leader Event: War Aims Before the Nation ---
+gw_war.3101 = {
+	type = country_event
+
+	title = gw_war.3101.t
+	desc = gw_war.3101.d
+	flavor = gw_war.3101.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1_leader
+			has_variable = gw_war_side_2_leader
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_aims_seen
+	}
+
+	option = {
+		name = gw_war.3101.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3101_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_war.3101.b
+		custom_tooltip = { text = gw_war_3101_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_national_unity_cabinet months = 12 }
+		ai_chance = { base = 8 }
+	}
+}
+
+# --- Early Front Event: The First Offensive ---
+gw_war.3102 = {
+	type = country_event
+
+	title = gw_war.3102.t
+	desc = gw_war.3102.d
+	flavor = gw_war.3102.f
+
+	event_image = {
+		video = "gfx/event_pictures/middleeast_battlefield_trenches.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_first_offensive_seen
+	}
+
+	option = {
+		name = gw_war.3102.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3102_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_offensive_spirit months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3102.b
+		custom_tooltip = { text = gw_war_3102_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_entrenched_lines months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = { base = 7 }
+	}
+}
+
+# --- Mid Front Event: The Lines Harden ---
+gw_war.3103 = {
+	type = country_event
+
+	title = gw_war.3103.t
+	desc = gw_war.3103.d
+	flavor = gw_war.3103.f
+
+	event_image = {
+		video = "gfx/event_pictures/middleeast_battlefield_trenches.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_lines_seen
+	}
+
+	option = {
+		name = gw_war.3103.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3103_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_munitions_overdrive months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 3 }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3103.b
+		custom_tooltip = { text = gw_war_3103_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -6 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_frontline_relief months = 9 }
+		ai_chance = { base = 7 }
+	}
+}
+
+# --- Casualty Event: Names on Marble ---
+gw_war.3104 = {
+	type = country_event
+
+	title = gw_war.3104.t
+	desc = gw_war.3104.d
+	flavor = gw_war.3104.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_marble_seen
+	}
+
+	option = {
+		name = gw_war.3104.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3104_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -6 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_national_unity_cabinet months = 12 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3104.b
+		custom_tooltip = { text = gw_war_3104_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 3 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 3 }
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- Staff Event: The General Staff Divided ---
+gw_war.3105 = {
+	type = country_event
+
+	title = gw_war.3105.t
+	desc = gw_war.3105.d
+	flavor = gw_war.3105.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_staff_seen
+	}
+
+	option = {
+		name = gw_war.3105.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3105_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_offensive_spirit months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_war.3105.b
+		custom_tooltip = { text = gw_war_3105_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_long_war_planning months = 12 }
+		ai_chance = { base = 8 }
+	}
+}
+
+# --- Political Event: A Peace Note Crosses the Desk ---
+gw_war.3106 = {
+	type = country_event
+
+	title = gw_war.3106.t
+	desc = gw_war.3106.d
+	flavor = gw_war.3106.f
+
+	event_image = {
+		video = "gfx/event_pictures/africa_diplomats_negotiating.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_peace_note_seen
+	}
+
+	option = {
+		name = gw_war.3106.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3106_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = gw_war.3106.b
+		custom_tooltip = { text = gw_war_3106_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -8 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_national_unity_cabinet months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 5 } }
+				add_war_war_support = { target = root value = -5 }
+			}
+		}
+		ai_chance = { base = 9 }
+	}
+}
+
+# --- Long War Event: The Empire of Paper ---
+gw_war.3107 = {
+	type = country_event
+
+	title = gw_war.3107.t
+	desc = gw_war.3107.d
+	flavor = gw_war.3107.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_factory_closed.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_paper_seen
+	}
+
+	option = {
+		name = gw_war.3107.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3107_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 2 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_long_war_planning months = 18 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3107.b
+		custom_tooltip = { text = gw_war_3107_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -6 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_frontline_relief months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = { base = 7 }
+	}
+}
+
+# --- Late War Event: The Last Offensive ---
+gw_war.3108 = {
+	type = country_event
+
+	title = gw_war.3108.t
+	desc = gw_war.3108.d
+	flavor = gw_war.3108.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_last_offensive_seen
+	}
+
+	option = {
+		name = gw_war.3108.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3108_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 8 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_offensive_spirit months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 10 }
+		}
+		ai_chance = { base = 5 }
+	}
+
+	option = {
+		name = gw_war.3108.b
+		custom_tooltip = { text = gw_war_3108_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -10 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 10 } }
+				add_war_war_support = { target = root value = -10 }
+			}
+		}
+		ai_chance = { base = 8 }
+	}
+}
+
+# --- Memory Event: Songs of the Fallen ---
+gw_war.3109 = {
+	type = country_event
+
+	title = gw_war.3109.t
+	desc = gw_war.3109.d
+	flavor = gw_war.3109.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_songs_seen
+	}
+
+	option = {
+		name = gw_war.3109.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3109_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -8 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_national_unity_cabinet months = 12 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3109.b
+		custom_tooltip = { text = gw_war_3109_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 2 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_initial_war_fervor months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 5 }
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- Neutral Event: Neutral Markets ---
+gw_war.3110 = {
+	type = country_event
+
+	title = gw_war.3110.t
+	desc = gw_war.3110.d
+	flavor = gw_war.3110.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		NOT = { has_global_variable = gw_great_war_play_pending }
+		country_rank >= rank_value:major_power
+		is_at_war = no
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+	}
+
+	immediate = {
+		set_variable = gw_neutral_markets_seen
+	}
+
+	option = {
+		name = gw_war.3110.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3110_a_tt }
+		add_modifier = { name = gw_neutral_trade_boom months = 12 }
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_war.3110.b
+		custom_tooltip = { text = gw_war_3110_b_tt }
+		add_modifier = { name = gw_humanitarian_mission months = 12 }
+		if = {
+			limit = { has_global_variable = gw_world_tension }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 8 }
+	}
+}
+
+# --- Neutral Event: The World Reads the Casualty Lists ---
+gw_war.3111 = {
+	type = country_event
+
+	title = gw_war.3111.t
+	desc = gw_war.3111.d
+	flavor = gw_war.3111.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		NOT = { has_global_variable = gw_great_war_play_pending }
+		country_rank >= rank_value:major_power
+		is_at_war = no
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+	}
+
+	immediate = {
+		set_variable = gw_neutral_casualties_seen
+	}
+
+	option = {
+		name = gw_war.3111.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3111_a_tt }
+		add_modifier = { name = gw_humanitarian_mission months = 12 }
+		if = {
+			limit = { has_global_variable = gw_world_tension }
+			change_global_variable = { name = gw_world_tension add = -1 }
+			if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3111.b
+		custom_tooltip = { text = gw_war_3111_b_tt }
+		add_modifier = { name = gw_long_war_planning months = 9 }
+		ai_chance = { base = 6 }
+	}
+}
+
+# --- War Economy Event: Bread for the Queues ---
+gw_war.3201 = {
+	type = country_event
+
+	title = gw_war.3201.t
+	desc = gw_war.3201.d
+	flavor = gw_war.3201.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_bread_queues_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3201.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3201_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_food_security_measures months = 12 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 45 } add = 8 }
+		}
+	}
+
+	option = {
+		name = gw_war.3201.b
+		custom_tooltip = { text = gw_war_3201_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_breadline_unrest months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 3 }
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value < 40 } add = 5 }
+		}
+	}
+}
+
+# --- War Economy Event: The Shell Contract ---
+gw_war.3202 = {
+	type = country_event
+
+	title = gw_war.3202.t
+	desc = gw_war.3202.d
+	flavor = gw_war.3202.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_shell_contract_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3202.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3202_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 3 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_shell_contracts months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 4 }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3202.b
+		custom_tooltip = { text = gw_war_3202_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -3 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_long_war_planning months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 2 } }
+				add_war_war_support = { target = root value = -2 }
+			}
+		}
+		ai_chance = { base = 6 }
+	}
+}
+
+# --- War Economy Event: Women at the Works ---
+gw_war.3203 = {
+	type = country_event
+
+	title = gw_war.3203.t
+	desc = gw_war.3203.d
+	flavor = gw_war.3203.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_women_works_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3203.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3203_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -3 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_women_in_war_industry months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 2 }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3203.b
+		custom_tooltip = { text = gw_war_3203_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- War Economy Event: Coal for the Railways ---
+gw_war.3204 = {
+	type = country_event
+
+	title = gw_war.3204.t
+	desc = gw_war.3204.d
+	flavor = gw_war.3204.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_trains.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_coal_railways_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3204.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3204_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 3 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_railway_priority months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 3 }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3204.b
+		custom_tooltip = { text = gw_war_3204_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 50 } add = 7 }
+		}
+	}
+}
+
+# --- War Economy Event: War Bonds at the Town Hall ---
+gw_war.3205 = {
+	type = country_event
+
+	title = gw_war.3205.t
+	desc = gw_war.3205.d
+	flavor = gw_war.3205.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_politicians_arguing.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_bond_town_hall_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3205.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3205_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -3 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_war_bond_committees months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 3 }
+		}
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_war.3205.b
+		custom_tooltip = { text = gw_war_3205_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -1 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_emergency_credits months = 9 }
+		ai_chance = { base = 6 }
+	}
+}
+
+# --- War Economy Event: The Black Market ---
+gw_war.3206 = {
+	type = country_event
+
+	title = gw_war.3206.t
+	desc = gw_war.3206.d
+	flavor = gw_war.3206.f
+
+	event_image = {
+		video = "gfx/event_pictures/asia_farmers_market.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_black_market_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3206.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3206_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_black_market_controls months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 2 } }
+				add_war_war_support = { target = root value = -2 }
+			}
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 45 } add = 8 }
+		}
+	}
+
+	option = {
+		name = gw_war.3206.b
+		custom_tooltip = { text = gw_war_3206_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_black_market_spread months = 9 }
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- War Economy Event: Hospital Trains ---
+gw_war.3207 = {
+	type = country_event
+
+	title = gw_war.3207.t
+	desc = gw_war.3207.d
+	flavor = gw_war.3207.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_trains.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_hospital_trains_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3207.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3207_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -6 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_hospital_trains months = 12 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 35 } add = 7 }
+		}
+	}
+
+	option = {
+		name = gw_war.3207.b
+		custom_tooltip = { text = gw_war_3207_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 2 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_munitions_overdrive months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 4 }
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- War Economy Event: The Draft Boards ---
+gw_war.3208 = {
+	type = country_event
+
+	title = gw_war.3208.t
+	desc = gw_war.3208.d
+	flavor = gw_war.3208.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_military_parade.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_draft_boards_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3208.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3208_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_draft_board_drive months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 4 }
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 55 } add = -4 }
+		}
+	}
+
+	option = {
+		name = gw_war.3208.b
+		custom_tooltip = { text = gw_war_3208_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 55 } add = 8 }
+		}
+	}
+}
+
+# --- War Economy Event: The Ministry of Munitions ---
+gw_war.3209 = {
+	type = country_event
+
+	title = gw_war.3209.t
+	desc = gw_war.3209.d
+	flavor = gw_war.3209.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_ministry_munitions_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3209.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3209_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_ministry_of_munitions months = 18 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 4 }
+		}
+		ai_chance = { base = 9 }
+	}
+
+	option = {
+		name = gw_war.3209.b
+		custom_tooltip = { text = gw_war_3209_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -3 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_shell_contracts months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 2 } }
+				add_war_war_support = { target = root value = -2 }
+			}
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- War Economy Event: Winter Fuel ---
+gw_war.3210 = {
+	type = country_event
+
+	title = gw_war.3210.t
+	desc = gw_war.3210.d
+	flavor = gw_war.3210.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_winter_fuel_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3210.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3210_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_winter_fuel_shortage months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 3 }
+		}
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_war.3210.b
+		custom_tooltip = { text = gw_war_3210_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_food_security_measures months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 4 } }
+				add_war_war_support = { target = root value = -4 }
+			}
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 50 } add = 8 }
+		}
+	}
+}
+
+# --- War Economy Event: Censored Letters ---
+gw_war.3211 = {
+	type = country_event
+
+	title = gw_war.3211.t
+	desc = gw_war.3211.d
+	flavor = gw_war.3211.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_politicians_arguing.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_censored_letters_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3211.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3211_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_censored_letters months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 3 }
+		}
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 60 } add = -4 }
+		}
+	}
+
+	option = {
+		name = gw_war.3211.b
+		custom_tooltip = { text = gw_war_3211_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 4 } }
+				add_war_war_support = { target = root value = -4 }
+			}
+		}
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 60 } add = 8 }
+		}
+	}
+}
+
+# --- War Economy Event: Veterans Before Victory ---
+gw_war.3212 = {
+	type = country_event
+
+	title = gw_war.3212.t
+	desc = gw_war.3212.d
+	flavor = gw_war.3212.f
+
+	event_image = {
+		video = "gfx/event_pictures/middleeast_battlefield_trenches.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_veterans_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3212.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3212_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -7 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_veterans_before_victory months = 12 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 50 } add = 8 }
+		}
+	}
+
+	option = {
+		name = gw_war.3212.b
+		custom_tooltip = { text = gw_war_3212_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 4 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_initial_war_fervor months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 4 }
+		}
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- War Economy Event: The Price of Flour ---
+gw_war.3213 = {
+	type = country_event
+
+	title = gw_war.3213.t
+	desc = gw_war.3213.d
+	flavor = gw_war.3213.f
+
+	event_image = {
+		video = "gfx/event_pictures/asia_farmers_market.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_price_flour_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3213.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3213_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -6 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_flour_relief months = 12 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 2 } }
+				add_war_war_support = { target = root value = -2 }
+			}
+		}
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 50 } add = 8 }
+		}
+	}
+
+	option = {
+		name = gw_war.3213.b
+		custom_tooltip = { text = gw_war_3213_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_breadline_unrest months = 9 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 4 }
+		}
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value < 45 } add = 5 }
+		}
+	}
+}
+
+# --- War Economy Event: Factories After Midnight ---
+gw_war.3214 = {
+	type = country_event
+
+	title = gw_war.3214.t
+	desc = gw_war.3214.d
+	flavor = gw_war.3214.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_active
+		is_at_war = yes
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		set_variable = gw_war_factories_midnight_seen
+		set_variable = { name = gw_war_economy_event_cooldown months = 2 }
+	}
+
+	option = {
+		name = gw_war.3214.a
+		default_option = yes
+		custom_tooltip = { text = gw_war_3214_a_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = 5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_night_shift_factories months = 12 }
+		every_scope_war = {
+			add_war_war_support = { target = root value = 4 }
+		}
+		ai_chance = { base = 7 }
+	}
+
+	option = {
+		name = gw_war.3214.b
+		custom_tooltip = { text = gw_war_3214_b_tt }
+		gw_ensure_national_discontent_value = yes
+		change_variable = { name = gw_national_discontent_value add = -5 }
+		clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+		add_modifier = { name = gw_frontline_relief months = 9 }
+		every_scope_war = {
+			if = {
+				limit = { has_war_support = { target = root value > 3 } }
+				add_war_war_support = { target = root value = -3 }
+			}
+		}
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { exists = var:gw_national_discontent_value var:gw_national_discontent_value >= 55 } add = 8 }
+		}
+	}
+}
+
+# --- Hidden: Loser cleanup ---
+gw_war.2001 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		# Subjects become independent
+		every_country = {
+			limit = {
+				is_subject_of = root
+			}
+			make_independent = yes
+		}
+		# Install a friendly regime aligned with the victorious faction leader.
+		gw_apply_regime_change_from_great_war_winner = yes
+		# Apply defeat modifier
+		if = {
+			limit = {
+				NOT = { has_modifier = gw_major_defeat }
+				NOR = {
+					has_variable = gw_war_side_2_leader
+					has_variable = gw_war_side_1_leader
+				}
+				country_rank >= rank_value:great_power
+			}
+			add_modifier = {
+				name = gw_major_defeat
+				years = 10
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_modifier = gw_major_leader_defeat }
+				OR = {
+					has_variable = gw_war_side_2_leader
+					has_variable = gw_war_side_1_leader
+				}
+			}
+			add_modifier = {
+				name = gw_major_leader_defeat
+				years = 10
+			}
+			# Trigger "Stabbed in the Back" myth for the losing leader
+			trigger_event = { id = gw_war.1007 days = 30 }
+		}
+		# War Reparations — losers pay
+		if = {
+			limit = { country_rank >= rank_value:great_power }
+			add_modifier = {
+				name = gw_war_reparations_paying
+				years = 10
+			}
+		}
+		# Remove order status
+		if = {
+			limit = { has_modifier = gw_dominating_world_order }
+			remove_modifier = gw_dominating_world_order
+		}
+		if = {
+			limit = { has_modifier = gw_great_war_leader }
+			remove_modifier = gw_great_war_leader
+		}
+		gw_clear_war_state = yes
+		# NOTE: Do NOT remove gw_great_war_active here — only the winner event (2002)
+		# handles global cleanup. If 2001 removes it first, 2002's global section
+		# (tension reset, league rotation) would never run.
+		gw_clear_crisis_flags = yes
+		trigger_event = { id = gw_war.1002 days = 1 }
+		trigger_event = { id = gw_hist.3002 days = 2 }
+	}
+}
+
+# --- Hidden: Winner cleanup ---
+gw_war.2002 = {
+	type = country_event
+	hidden = yes
+
+	immediate = {
+		# Apply victory modifier
+		if = {
+			limit = {
+				NOT = { has_modifier = gw_major_victory }
+				NOR = {
+					has_variable = gw_war_side_2_leader
+					has_variable = gw_war_side_1_leader
+				}
+				country_rank >= rank_value:great_power
+			}
+			add_modifier = {
+				name = gw_major_victory
+				years = 10
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_modifier = gw_major_leader_victory }
+				OR = {
+					has_variable = gw_war_side_2_leader
+					has_variable = gw_war_side_1_leader
+				}
+			}
+			add_modifier = {
+				name = gw_major_leader_victory
+				years = 10
+			}
+		}
+		# War Reparations — winners receive
+		if = {
+			limit = { country_rank >= rank_value:great_power }
+			add_modifier = {
+				name = gw_war_reparations_receiving
+				years = 10
+			}
+		}
+		# Winners dominate the new order
+		if = {
+			limit = {
+				NOT = { has_modifier = gw_dominating_world_order }
+				country_rank >= rank_value:great_power
+			}
+			add_modifier = gw_dominating_world_order
+		}
+		if = {
+			limit = { has_modifier = gw_great_war_leader }
+			remove_modifier = gw_great_war_leader
+		}
+		# Global changes — only first winner to process.
+		# Also runs for diplomatic-play backdowns, where gw_great_war_active may never be set.
+		if = {
+			limit = {
+				OR = {
+					has_global_variable = gw_great_war_active
+					has_global_variable = gw_war_outcome_determined
+				}
+			}
+			if = {
+				limit = {
+					has_global_variable = gw_great_war_active
+					NOT = { has_global_variable = gw_hist_neutral_epilogue_sent }
+				}
+				set_global_variable = gw_hist_neutral_epilogue_sent
+				every_country = {
+					limit = {
+						gw_is_major_or_greater = yes
+						NOT = { has_variable = gw_great_war_participant }
+						NOT = { has_variable = gw_war_side_1 }
+						NOT = { has_variable = gw_war_side_2 }
+						NOT = { has_variable = gw_war_side_1_leader }
+						NOT = { has_variable = gw_war_side_2_leader }
+						NOT = { has_variable = gw_hist_postwar_seen }
+					}
+					trigger_event = { id = gw_hist.3003 days = 2 }
+				}
+			}
+			if = {
+				limit = { has_global_variable = gw_great_war_active }
+				remove_global_variable = gw_great_war_active
+			}
+			set_global_variable = gw_great_war_concluded
+			if = { limit = { has_global_variable = gw_system_active } remove_global_variable = gw_system_active }
+			if = {
+				limit = { has_global_variable = gw_war_outcome_determined }
+				remove_global_variable = gw_war_outcome_determined
+			}
+			# Clean up Call to War tracking
+			if = {
+				limit = { has_global_variable = gw_call_to_war_active }
+				remove_global_variable = gw_call_to_war_active
+			}
+			if = {
+				limit = { has_global_variable = gw_call_to_war_months }
+				remove_global_variable = gw_call_to_war_months
+			}
+			set_global_variable = { name = gw_world_tension value = 0 }
+			# Once the Great War has ended, pre-war tension and crisis bonuses no longer apply.
+			gw_clear_all_tension_event_modifiers = yes
+		}
+		gw_clear_war_state = yes
+		gw_clear_crisis_flags = yes
+		trigger_event = { id = gw_war.1001 days = 1 }
+		trigger_event = { id = gw_hist.3001 days = 2 }
+	}
+}

@@ -1,0 +1,381 @@
+﻿# ============================================================
+# GREAT WAR MOD - Alignment Tooltip Breakdown Values
+# Purpose: Show the main dynamic contributors behind each
+# hybrid faction alignment probability in progress bar tooltips.
+# Scope: Country.
+# ============================================================
+
+# ------------------------------------------------------------
+# Allied Powers breakdown
+# ------------------------------------------------------------
+
+gw_alignment_allied_base_factor = {
+	value = 10
+}
+
+gw_alignment_allied_anchor_factor = {
+	value = 0
+	if = {
+		limit = { has_modifier = gw_allied_powers_leader }
+		add = 200
+	}
+	if = {
+		limit = { has_variable = gw_player_allied }
+		add = 80
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_allied
+		}
+		add = 10
+	}
+}
+
+gw_alignment_allied_order_factor = {
+	value = 0
+	if = {
+		limit = { gw_structural_dissatisfaction_score < 25 }
+		add = 40
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score < 50 }
+		add = 25
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score < 65 }
+		add = 10
+	}
+}
+
+gw_alignment_allied_ideology_lobby_factor = {
+	value = 0
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			"global_var:gw_allied_leader.ai_ideological_opinion(root)" > 0
+		}
+		add = {
+			value = "global_var:gw_allied_leader.ai_ideological_opinion(root)"
+			multiply = 0.25
+			max = 10
+		}
+	}
+	else_if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			"global_var:gw_allied_leader.ai_ideological_opinion(root)" < 0
+		}
+		add = {
+			value = "global_var:gw_allied_leader.ai_ideological_opinion(root)"
+			multiply = 0.5
+			min = -15
+		}
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_pro_country
+				target = { this = global_var:gw_allied_leader }
+			}
+		}
+		add = 15
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_anti_country
+				target = { this = global_var:gw_allied_leader }
+			}
+		}
+		add = -15
+	}
+}
+
+gw_alignment_allied_infamy_security_factor = {
+	# Name retained for diplomacy_factor calculation compatibility.
+	# Infamy contribution removed — security only reflects military projection now.
+	value = 0
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				army_power_projection > root.army_power_projection
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_allied_leader_scope = yes
+			global_var:gw_allied_leader = {
+				naval_power_projection > root.naval_power_projection
+			}
+		}
+		add = 10
+	}
+}
+
+gw_alignment_allied_tension_factor = {
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 80
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 90
+		}
+		add = 10
+	}
+}
+
+gw_alignment_allied_diplomacy_factor = {
+	value = gw_hybrid_alignment_allied_score
+	subtract = gw_alignment_allied_base_factor
+	subtract = gw_alignment_allied_anchor_factor
+	subtract = gw_alignment_allied_order_factor
+	subtract = gw_alignment_allied_ideology_lobby_factor
+	subtract = gw_alignment_allied_infamy_security_factor
+	subtract = gw_alignment_allied_tension_factor
+}
+
+# ------------------------------------------------------------
+# Central Powers breakdown
+# ------------------------------------------------------------
+
+gw_alignment_central_base_factor = {
+	value = 10
+}
+
+gw_alignment_central_anchor_factor = {
+	value = 0
+	if = {
+		limit = { has_modifier = gw_central_powers_leader }
+		add = 200
+	}
+	if = {
+		limit = { has_variable = gw_player_central }
+		add = 80
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_central
+		}
+		add = 10
+	}
+}
+
+gw_alignment_central_order_factor = {
+	value = 0
+	if = {
+		limit = { gw_structural_dissatisfaction_score >= 75 }
+		add = 40
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score >= 50 }
+		add = 25
+	}
+	else_if = {
+		limit = { gw_structural_dissatisfaction_score >= 35 }
+		add = 10
+	}
+}
+
+gw_alignment_central_historical_factor = {
+	value = gw_soft_historical_central_anchor_score
+}
+
+gw_alignment_central_ideology_lobby_factor = {
+	value = 0
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			"global_var:gw_central_leader.ai_ideological_opinion(root)" > 0
+		}
+		add = {
+			value = "global_var:gw_central_leader.ai_ideological_opinion(root)"
+			multiply = 0.25
+			max = 10
+		}
+	}
+	else_if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			"global_var:gw_central_leader.ai_ideological_opinion(root)" < 0
+		}
+		add = {
+			value = "global_var:gw_central_leader.ai_ideological_opinion(root)"
+			multiply = 0.5
+			min = -15
+		}
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_pro_country
+				target = { this = global_var:gw_central_leader }
+			}
+		}
+		add = 15
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			any_political_lobby = {
+				is_political_lobby_type = lobby_anti_country
+				target = { this = global_var:gw_central_leader }
+			}
+		}
+		add = -15
+	}
+}
+
+gw_alignment_central_infamy_security_factor = {
+	# Name retained for diplomacy_factor calculation compatibility.
+	# Infamy contribution removed — security only reflects military projection now.
+	value = 0
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				army_power_projection > root.army_power_projection
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_central_leader_scope = yes
+			global_var:gw_central_leader = {
+				naval_power_projection > root.naval_power_projection
+			}
+		}
+		add = 10
+	}
+}
+
+gw_alignment_central_tension_factor = {
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 80
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 90
+		}
+		add = 10
+	}
+}
+
+gw_alignment_central_diplomacy_factor = {
+	value = gw_hybrid_alignment_central_score
+	subtract = gw_alignment_central_base_factor
+	subtract = gw_alignment_central_anchor_factor
+	subtract = gw_alignment_central_order_factor
+	subtract = gw_alignment_central_historical_factor
+	subtract = gw_alignment_central_ideology_lobby_factor
+	subtract = gw_alignment_central_infamy_security_factor
+	subtract = gw_alignment_central_tension_factor
+}
+
+# ------------------------------------------------------------
+# Neutrality breakdown
+# ------------------------------------------------------------
+
+gw_alignment_neutral_base_factor = {
+	value = 20
+}
+
+gw_alignment_neutral_anchor_factor = {
+	value = 0
+	if = {
+		limit = { has_variable = gw_player_neutral }
+		add = 80
+	}
+	if = {
+		limit = {
+			is_ai = yes
+			has_variable = gw_alignment_neutral
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			OR = {
+				has_modifier = gw_allied_powers_leader
+				has_modifier = gw_central_powers_leader
+			}
+		}
+		add = -50
+	}
+}
+
+gw_alignment_neutral_order_security_factor = {
+	value = 0
+	if = {
+		limit = {
+			gw_structural_dissatisfaction_score >= 35
+			gw_structural_dissatisfaction_score < 65
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			country_rank >= rank_value:major_power
+			country_rank < rank_value:great_power
+		}
+		add = 20
+	}
+	if = {
+		limit = { army_size < 150 }
+		add = 15
+	}
+	if = {
+		limit = { navy_size < 25 }
+		add = 5
+	}
+	if = {
+		limit = { has_modifier = gw_neutral_nation }
+		add = 15
+	}
+}
+
+gw_alignment_neutral_tension_factor = {
+	value = 0
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 80
+		}
+		add = -25
+	}
+	if = {
+		limit = {
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 90
+		}
+		add = -20
+	}
+}
+
+gw_alignment_neutral_diplomacy_factor = {
+	value = gw_hybrid_alignment_neutral_score
+	subtract = gw_alignment_neutral_base_factor
+	subtract = gw_alignment_neutral_anchor_factor
+	subtract = gw_alignment_neutral_order_security_factor
+	subtract = gw_alignment_neutral_tension_factor
+}

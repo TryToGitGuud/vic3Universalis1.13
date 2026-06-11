@@ -1,0 +1,104 @@
+﻿# ============================================================
+# GREAT WAR MOD - AI Wartime Decisions
+# Purpose: AI-only fallback actions. Players use journal buttons.
+# ============================================================
+
+gw_war_propaganda_decision = {
+	is_shown = {
+		is_ai = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+	possible = {
+		is_at_war = yes
+		NOT = { has_modifier = gw_war_propaganda }
+	}
+	when_taken = {
+		gw_apply_war_propaganda = yes
+	}
+	ai_chance = {
+		value = gw_ai_propaganda_desire
+	}
+}
+
+gw_wartime_rationing_decision = {
+	is_shown = {
+		is_ai = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+	possible = {
+		is_at_war = yes
+		NOT = { has_modifier = gw_wartime_rationing }
+	}
+	when_taken = {
+		gw_apply_wartime_rationing = yes
+	}
+	ai_chance = {
+		value = gw_ai_rationing_desire
+	}
+}
+
+gw_suppressing_dissent_decision = {
+	is_shown = {
+		is_ai = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+	possible = {
+		is_at_war = yes
+		NOT = { has_variable = gw_suppressing_dissent }
+	}
+	when_taken = {
+		gw_apply_suppressing_dissent = yes
+	}
+	ai_chance = {
+		value = gw_ai_suppress_dissent_desire
+	}
+}
+
+gw_wartime_research_decision = {
+	is_shown = {
+		is_ai = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+	possible = {
+		is_at_war = yes
+		NOT = { has_modifier = gw_wartime_research_focus }
+	}
+	when_taken = {
+		gw_apply_wartime_research = yes
+	}
+	ai_chance = {
+		value = gw_ai_research_focus_desire
+	}
+}

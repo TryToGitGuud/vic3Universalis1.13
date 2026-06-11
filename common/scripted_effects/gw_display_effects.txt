@@ -1,0 +1,234 @@
+﻿# ============================================================
+# GREAT WAR MOD - Display Scripted Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_refresh_bloc_lists = {
+	# Only the #1 ranked country maintains global display slots.
+	if = {
+		limit = { global_country_ranking = 1 }
+		if = { limit = { exists = global_var:gw_allied_gp_1 } remove_global_variable = gw_allied_gp_1 }
+		if = { limit = { exists = global_var:gw_allied_gp_2 } remove_global_variable = gw_allied_gp_2 }
+		if = { limit = { exists = global_var:gw_allied_gp_3 } remove_global_variable = gw_allied_gp_3 }
+		if = { limit = { exists = global_var:gw_allied_gp_4 } remove_global_variable = gw_allied_gp_4 }
+		if = { limit = { exists = global_var:gw_central_gp_1 } remove_global_variable = gw_central_gp_1 }
+		if = { limit = { exists = global_var:gw_central_gp_2 } remove_global_variable = gw_central_gp_2 }
+		if = { limit = { exists = global_var:gw_central_gp_3 } remove_global_variable = gw_central_gp_3 }
+		if = { limit = { exists = global_var:gw_central_gp_4 } remove_global_variable = gw_central_gp_4 }
+		if = { limit = { exists = global_var:gw_neutral_gp_1 } remove_global_variable = gw_neutral_gp_1 }
+		if = { limit = { exists = global_var:gw_neutral_gp_2 } remove_global_variable = gw_neutral_gp_2 }
+		if = { limit = { exists = global_var:gw_neutral_gp_3 } remove_global_variable = gw_neutral_gp_3 }
+		if = { limit = { exists = global_var:gw_neutral_gp_4 } remove_global_variable = gw_neutral_gp_4 }
+
+		set_global_variable = { name = gw_allied_members_count value = 0 }
+		set_global_variable = { name = gw_central_members_count value = 0 }
+		set_global_variable = { name = gw_neutral_members_count value = 0 }
+		every_country = {
+			limit = {
+				gw_is_regular_country = yes
+				gw_is_major_or_greater = yes
+				gw_is_allied_member = yes
+				NOT = { gw_is_central_member = yes }
+			}
+			change_global_variable = { name = gw_allied_members_count add = 1 }
+		}
+		every_country = {
+			limit = {
+				gw_is_regular_country = yes
+				gw_is_major_or_greater = yes
+				gw_is_central_member = yes
+				NOT = { gw_is_allied_member = yes }
+			}
+			change_global_variable = { name = gw_central_members_count add = 1 }
+		}
+		every_country = {
+			limit = {
+				gw_is_regular_country = yes
+				country_rank >= rank_value:major_power
+				gw_has_neutral_stance = yes
+			}
+			change_global_variable = { name = gw_neutral_members_count add = 1 }
+		}
+		set_global_variable = { name = gw_allied_army_total value = gw_allied_bloc_army }
+		set_global_variable = { name = gw_allied_navy_total value = gw_allied_bloc_navy }
+		set_global_variable = { name = gw_central_army_total value = gw_central_bloc_army }
+		set_global_variable = { name = gw_central_navy_total value = gw_central_bloc_navy }
+		if = { limit = { global_var:gw_allied_army_total < 0 } set_global_variable = { name = gw_allied_army_total value = 0 } }
+		if = { limit = { global_var:gw_allied_navy_total < 0 } set_global_variable = { name = gw_allied_navy_total value = 0 } }
+		if = { limit = { global_var:gw_central_army_total < 0 } set_global_variable = { name = gw_central_army_total value = 0 } }
+		if = { limit = { global_var:gw_central_navy_total < 0 } set_global_variable = { name = gw_central_navy_total value = 0 } }
+
+		# Top-4 Allied Powers by prestige. Each slot is guarded by the member
+		# count so we never address a `position` beyond the list size — the
+		# engine would otherwise cap to the last entry and produce a duplicate.
+		if = {
+			limit = { global_var:gw_allied_members_count >= 1 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_allied_member = yes
+					NOT = { gw_is_central_member = yes }
+				}
+				order_by = prestige
+				position = 0
+				set_global_variable = { name = gw_allied_gp_1 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_allied_members_count >= 2 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_allied_member = yes
+					NOT = { gw_is_central_member = yes }
+				}
+				order_by = prestige
+				position = 1
+				set_global_variable = { name = gw_allied_gp_2 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_allied_members_count >= 3 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_allied_member = yes
+					NOT = { gw_is_central_member = yes }
+				}
+				order_by = prestige
+				position = 2
+				set_global_variable = { name = gw_allied_gp_3 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_allied_members_count >= 4 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_allied_member = yes
+					NOT = { gw_is_central_member = yes }
+				}
+				order_by = prestige
+				position = 3
+				set_global_variable = { name = gw_allied_gp_4 value = this }
+			}
+		}
+
+		# Top-4 Central Powers by prestige (count-guarded).
+		if = {
+			limit = { global_var:gw_central_members_count >= 1 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_central_member = yes
+					NOT = { gw_is_allied_member = yes }
+				}
+				order_by = prestige
+				position = 0
+				set_global_variable = { name = gw_central_gp_1 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_central_members_count >= 2 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_central_member = yes
+					NOT = { gw_is_allied_member = yes }
+				}
+				order_by = prestige
+				position = 1
+				set_global_variable = { name = gw_central_gp_2 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_central_members_count >= 3 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_central_member = yes
+					NOT = { gw_is_allied_member = yes }
+				}
+				order_by = prestige
+				position = 2
+				set_global_variable = { name = gw_central_gp_3 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_central_members_count >= 4 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					gw_is_major_or_greater = yes
+					gw_is_central_member = yes
+					NOT = { gw_is_allied_member = yes }
+				}
+				order_by = prestige
+				position = 3
+				set_global_variable = { name = gw_central_gp_4 value = this }
+			}
+		}
+
+		# Top-4 Neutrals by prestige (count-guarded).
+		if = {
+			limit = { global_var:gw_neutral_members_count >= 1 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					country_rank >= rank_value:major_power
+					gw_has_neutral_stance = yes
+				}
+				order_by = prestige
+				position = 0
+				set_global_variable = { name = gw_neutral_gp_1 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_neutral_members_count >= 2 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					country_rank >= rank_value:major_power
+					gw_has_neutral_stance = yes
+				}
+				order_by = prestige
+				position = 1
+				set_global_variable = { name = gw_neutral_gp_2 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_neutral_members_count >= 3 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					country_rank >= rank_value:major_power
+					gw_has_neutral_stance = yes
+				}
+				order_by = prestige
+				position = 2
+				set_global_variable = { name = gw_neutral_gp_3 value = this }
+			}
+		}
+		if = {
+			limit = { global_var:gw_neutral_members_count >= 4 }
+			ordered_country = {
+				limit = {
+					gw_is_regular_country = yes
+					country_rank >= rank_value:major_power
+					gw_has_neutral_stance = yes
+				}
+				order_by = prestige
+				position = 3
+				set_global_variable = { name = gw_neutral_gp_4 value = this }
+			}
+		}
+	}
+}
+

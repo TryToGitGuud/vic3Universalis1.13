@@ -1,0 +1,164 @@
+﻿# ============================================================
+# GREAT WAR MOD - AI Script Values
+# Purpose: General AI heuristics for Great War launch appetite
+# and wartime decision usage.
+# Scope: Country unless otherwise noted.
+#
+# Alignment-specific calculations live in:
+# common/script_values/gw_alignment_hybrid_values.txt
+# ============================================================
+
+# --- Great War launch appetite ---
+gw_ai_call_to_war_desire = {
+	value = 0
+
+	if = {
+		limit = { global_var:gw_world_tension >= 80 }
+		add = 10
+	}
+	if = {
+		limit = { global_var:gw_world_tension >= 85 }
+		add = 10
+	}
+	if = {
+		limit = { global_var:gw_world_tension >= 90 }
+		add = 20
+	}
+	if = {
+		limit = { global_var:gw_world_tension >= 95 }
+		add = 25
+	}
+	if = {
+		limit = { has_modifier = gw_central_powers_leader }
+		add = 20
+	}
+	if = {
+		limit = { army_size >= 250 }
+		add = 20
+	}
+	if = {
+		limit = { navy_size >= 80 }
+		add = 10
+	}
+	if = {
+		limit = { exists = global_var:gw_central_gp_2 }
+		add = 15
+	}
+	if = {
+		limit = { exists = global_var:gw_central_gp_3 }
+		add = 10
+	}
+	if = {
+		limit = { exists = global_var:gw_central_gp_4 }
+		add = 5
+	}
+	if = {
+		limit = { NOT = { gw_has_ready_allied_leader = yes } }
+		add = -100
+	}
+	if = {
+		limit = { is_at_war = yes }
+		add = -75
+	}
+}
+
+# --- Wartime policy appetite ---
+gw_ai_propaganda_desire = {
+	value = 10
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value >= 30
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value >= 60
+		}
+		add = 15
+	}
+	if = {
+		limit = {
+			any_scope_war = {
+				num_country_casualties = { target = root value > 400000 }
+			}
+		}
+		add = 10
+	}
+}
+
+gw_ai_rationing_desire = {
+	value = 5
+	if = {
+		limit = {
+			any_scope_war = {
+				num_country_casualties = { target = root value > 600000 }
+			}
+		}
+		add = 20
+	}
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value < 50
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value >= 70
+		}
+		add = -10
+	}
+}
+
+gw_ai_suppress_dissent_desire = {
+	value = 0
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value >= 40
+		}
+		add = 20
+	}
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value >= 70
+		}
+		add = 30
+	}
+	if = {
+		limit = { has_modifier = gw_home_front_collapse }
+		add = 20
+	}
+}
+
+gw_ai_research_focus_desire = {
+	value = 5
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value < 40
+		}
+		add = 20
+	}
+	if = {
+		limit = {
+			gw_has_national_discontent_value = yes
+			var:gw_national_discontent_value >= 70
+		}
+		add = -20
+	}
+	if = {
+		limit = {
+			any_scope_war = {
+				num_country_casualties = { target = root value < 400000 }
+			}
+		}
+		add = 10
+	}
+}

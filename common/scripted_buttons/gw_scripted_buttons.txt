@@ -1,0 +1,5 @@
+﻿# ============================================================
+# GREAT WAR MOD - Scripted Buttons Index
+# Remaining definitions after mechanical split.
+# ============================================================
+

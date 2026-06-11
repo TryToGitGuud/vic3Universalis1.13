@@ -1,0 +1,1063 @@
+﻿# ============================================================
+# GREAT WAR MOD - Soft Historical Events
+# ============================================================
+
+namespace = gw_hist
+
+# --- Pre-War Historical Tension: Anglo-German Naval Rivalry ---
+gw_hist.1001 = {
+	type = country_event
+
+	title = gw_hist.1001.t
+	desc = gw_hist.1001.d
+	flavor = gw_hist.1001.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_steam_ship.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		game_date >= 1880.1.1
+		global_var:gw_world_tension >= 60
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_global_variable = gw_call_to_war_active }
+		NOT = { has_variable = gw_hist_naval_rivalry_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_naval_rivalry_seen
+	}
+
+	option = {
+		name = gw_hist.1001.a
+		custom_tooltip = { text = gw_hist_1001_a_tt }
+		add_modifier = { name = gw_naval_estimates months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 80 } add = 4 }
+		}
+	}
+
+	option = {
+		name = gw_hist.1001.b
+		default_option = yes
+		custom_tooltip = { text = gw_hist_1001_b_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 9 }
+		gw_hist_tension_remove_1 = yes
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+		}
+	}
+}
+
+# --- Pre-War Historical Tension: Balkan Flashpoint ---
+gw_hist.1002 = {
+	type = country_event
+
+	title = gw_hist.1002.t
+	desc = gw_hist.1002.d
+	flavor = gw_hist.1002.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		game_date >= 1880.1.1
+		global_var:gw_world_tension >= 65
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_global_variable = gw_call_to_war_active }
+		NOT = { has_variable = gw_hist_balkan_flashpoint_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_balkan_flashpoint_seen
+	}
+
+	option = {
+		name = gw_hist.1002.a
+		custom_tooltip = { text = gw_hist_1002_a_tt }
+		add_modifier = { name = gw_war_entry_preparations months = 9 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+		}
+	}
+
+	option = {
+		name = gw_hist.1002.b
+		default_option = yes
+		custom_tooltip = { text = gw_hist_1002_b_tt }
+		add_modifier = { name = gw_backchannel_diplomacy months = 9 }
+		gw_hist_tension_remove_1 = yes
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+		}
+	}
+}
+
+# --- Pre-War Historical Tension: Belgian Neutrality ---
+gw_hist.1003 = {
+	type = country_event
+
+	title = gw_hist.1003.t
+	desc = gw_hist.1003.d
+	flavor = gw_hist.1003.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		game_date >= 1880.1.1
+		global_var:gw_world_tension >= 70
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_global_variable = gw_call_to_war_active }
+		NOT = { has_variable = gw_hist_belgian_neutrality_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_belgian_neutrality_seen
+	}
+
+	option = {
+		name = gw_hist.1003.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_1003_a_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 12 }
+		gw_hist_tension_remove_1 = yes
+		ai_chance = { base = 9 }
+	}
+
+	option = {
+		name = gw_hist.1003.b
+		custom_tooltip = { text = gw_hist_1003_b_tt }
+		add_modifier = { name = gw_secret_war_promises months = 9 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 4 }
+		}
+	}
+}
+
+# --- Pre-War Historical Tension: The July Note ---
+gw_hist.1004 = {
+	type = country_event
+
+	title = gw_hist.1004.t
+	desc = gw_hist.1004.d
+	flavor = gw_hist.1004.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_politicians_arguing.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		game_date >= 1880.1.1
+		global_var:gw_world_tension >= 75
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_global_variable = gw_call_to_war_active }
+		NOT = { has_variable = gw_hist_july_note_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_july_note_seen
+	}
+
+	option = {
+		name = gw_hist.1004.a
+		custom_tooltip = { text = gw_hist_1004_a_tt }
+		add_modifier = { name = gw_secret_war_promises months = 12 }
+		gw_hist_tension_add_2 = yes
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 8 }
+			modifier = { trigger = { global_var:gw_world_tension >= 85 } add = 4 }
+		}
+	}
+
+	option = {
+		name = gw_hist.1004.b
+		default_option = yes
+		custom_tooltip = { text = gw_hist_1004_b_tt }
+		add_modifier = { name = gw_backchannel_diplomacy months = 12 }
+		gw_hist_tension_remove_2 = yes
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+		}
+	}
+}
+
+# --- Pre-War Historical Tension: Neutral Rights ---
+gw_hist.1005 = {
+	type = country_event
+
+	title = gw_hist.1005.t
+	desc = gw_hist.1005.d
+	flavor = gw_hist.1005.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_steam_ship.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		game_date >= 1880.1.1
+		global_var:gw_world_tension >= 75
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_global_variable = gw_call_to_war_active }
+		NOT = { has_variable = gw_hist_neutral_rights_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_neutral_rights_seen
+	}
+
+	option = {
+		name = gw_hist.1005.a
+		custom_tooltip = { text = gw_hist_1005_a_tt }
+		add_modifier = { name = gw_neutral_pressure months = 9 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { global_var:gw_world_tension >= 85 } add = 4 }
+		}
+	}
+
+	option = {
+		name = gw_hist.1005.b
+		default_option = yes
+		custom_tooltip = { text = gw_hist_1005_b_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 9 }
+		gw_hist_tension_remove_1 = yes
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_alignment_neutral } add = 5 }
+		}
+	}
+}
+
+# --- Pre-War Historical Tension: The Last Week of Peace ---
+gw_hist.1006 = {
+	type = country_event
+
+	title = gw_hist.1006.t
+	desc = gw_hist.1006.d
+	flavor = gw_hist.1006.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		game_date >= 1880.1.1
+		global_var:gw_world_tension >= 85
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_global_variable = gw_call_to_war_active }
+		NOT = { has_variable = gw_hist_last_week_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_last_week_seen
+	}
+
+	option = {
+		name = gw_hist.1006.a
+		custom_tooltip = { text = gw_hist_1006_a_tt }
+		add_modifier = { name = gw_war_entry_preparations months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 90 } add = 4 }
+		}
+	}
+
+	option = {
+		name = gw_hist.1006.b
+		default_option = yes
+		custom_tooltip = { text = gw_hist_1006_b_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 12 }
+		gw_hist_tension_remove_2 = yes
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+			modifier = { trigger = { global_var:gw_world_tension >= 90 } add = -3 }
+		}
+	}
+}
+
+# --- Call to War: Belgium ---
+gw_hist.2001 = {
+	type = country_event
+
+	title = gw_hist.2001.t
+	desc = gw_hist.2001.d
+	flavor = gw_hist.2001.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2001.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2001_a_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 12 }
+		gw_hist_tension_remove_1 = yes
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_hist.2001.b
+		custom_tooltip = { text = gw_hist_2001_b_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 55 } add = 12 }
+		}
+	}
+}
+
+# --- Call to War: Britain ---
+gw_hist.2002 = {
+	type = country_event
+
+	title = gw_hist.2002.t
+	desc = gw_hist.2002.d
+	flavor = gw_hist.2002.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_steam_ship.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2002.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2002_a_tt }
+		add_modifier = { name = gw_neutral_pressure months = 9 }
+		ai_chance = { base = 5 }
+	}
+
+	option = {
+		name = gw_hist.2002.b
+		custom_tooltip = { text = gw_hist_2002_b_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 50 } add = 12 }
+			modifier = { trigger = { has_variable = gw_satisfied_with_order } add = 6 }
+		}
+	}
+}
+
+# --- Call to War: Ottoman Empire ---
+gw_hist.2003 = {
+	type = country_event
+
+	title = gw_hist.2003.t
+	desc = gw_hist.2003.d
+	flavor = gw_hist.2003.f
+
+	event_image = {
+		video = "gfx/event_pictures/middleeast_battlefield_trenches.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2003.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2003_a_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 9 }
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = gw_hist.2003.b
+		custom_tooltip = { text = gw_hist_2003_b_tt }
+		gw_apply_central_alignment = yes
+		add_modifier = { name = gw_secret_war_promises months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 10
+			modifier = { trigger = { gw_hybrid_alignment_central_weight_display >= 50 } add = 12 }
+			modifier = { trigger = { has_variable = gw_dissatisfied_with_order } add = 6 }
+		}
+	}
+
+	option = {
+		name = gw_hist.2003.c
+		custom_tooltip = { text = gw_hist_2003_c_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 9 }
+		ai_chance = {
+			base = 4
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 60 } add = 8 }
+		}
+	}
+}
+
+# --- Call to War: Italy ---
+gw_hist.2004 = {
+	type = country_event
+
+	title = gw_hist.2004.t
+	desc = gw_hist.2004.d
+	flavor = gw_hist.2004.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_politicians_arguing.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2004.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2004_a_tt }
+		add_modifier = { name = gw_secret_war_promises months = 9 }
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { has_variable = gw_alignment_neutral } add = 5 }
+		}
+	}
+
+	option = {
+		name = gw_hist.2004.b
+		custom_tooltip = { text = gw_hist_2004_b_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_secret_war_promises months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 55 } add = 10 }
+		}
+	}
+
+	option = {
+		name = gw_hist.2004.c
+		custom_tooltip = { text = gw_hist_2004_c_tt }
+		gw_apply_central_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { gw_hybrid_alignment_central_weight_display >= 60 } add = 10 }
+		}
+	}
+}
+
+# --- Call to War: Japan ---
+gw_hist.2005 = {
+	type = country_event
+
+	title = gw_hist.2005.t
+	desc = gw_hist.2005.d
+	flavor = gw_hist.2005.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_steam_ship.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2005.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2005_a_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 9 }
+		ai_chance = { base = 6 }
+	}
+
+	option = {
+		name = gw_hist.2005.b
+		custom_tooltip = { text = gw_hist_2005_b_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 9
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 50 } add = 10 }
+		}
+	}
+}
+
+# --- Call to War: Romania ---
+gw_hist.2006 = {
+	type = country_event
+
+	title = gw_hist.2006.t
+	desc = gw_hist.2006.d
+	flavor = gw_hist.2006.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2006.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2006_a_tt }
+		add_modifier = { name = gw_secret_war_promises months = 9 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_hist.2006.b
+		custom_tooltip = { text = gw_hist_2006_b_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 7
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 55 } add = 10 }
+		}
+	}
+}
+
+# --- Call to War: Bulgaria ---
+gw_hist.2007 = {
+	type = country_event
+
+	title = gw_hist.2007.t
+	desc = gw_hist.2007.d
+	flavor = gw_hist.2007.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_political_extremism.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2007.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2007_a_tt }
+		add_modifier = { name = gw_secret_war_promises months = 9 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_hist.2007.b
+		custom_tooltip = { text = gw_hist_2007_b_tt }
+		gw_apply_central_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 8
+			modifier = { trigger = { gw_hybrid_alignment_central_weight_display >= 55 } add = 10 }
+		}
+	}
+}
+
+# --- Call to War: United States ---
+gw_hist.2008 = {
+	type = country_event
+
+	title = gw_hist.2008.t
+	desc = gw_hist.2008.d
+	flavor = gw_hist.2008.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_steam_ship.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2008.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2008_a_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 12 }
+		gw_hist_tension_remove_1 = yes
+		ai_chance = {
+			base = 9
+			modifier = { trigger = { has_variable = gw_alignment_neutral } add = 5 }
+		}
+	}
+
+	option = {
+		name = gw_hist.2008.b
+		custom_tooltip = { text = gw_hist_2008_b_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_neutral_pressure months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 60 } add = 10 }
+			modifier = { trigger = { global_var:gw_world_tension >= 90 } add = 5 }
+		}
+	}
+}
+
+# --- Call to War: China ---
+gw_hist.2009 = {
+	type = country_event
+
+	title = gw_hist.2009.t
+	desc = gw_hist.2009.d
+	flavor = gw_hist.2009.f
+
+	event_image = {
+		video = "gfx/event_pictures/southamerica_factory_opening.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2009.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2009_a_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 9 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_hist.2009.b
+		custom_tooltip = { text = gw_hist_2009_b_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_secret_war_promises months = 12 }
+		gw_hist_tension_add_1 = yes
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 55 } add = 8 }
+		}
+	}
+}
+
+# --- Call to War: Smaller Aligned Observers ---
+gw_hist.2010 = {
+	type = country_event
+
+	title = gw_hist.2010.t
+	desc = gw_hist.2010.d
+	flavor = gw_hist.2010.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_before_the_battle.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_call_to_war_active
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_variable = gw_hist_call_to_war_seen }
+		NOT = { has_variable = gw_war_side_1 }
+		NOT = { has_variable = gw_war_side_2 }
+		NOT = { has_variable = gw_player_allied }
+		NOT = { has_variable = gw_player_central }
+		NOT = { has_variable = gw_player_neutral }
+	}
+
+	immediate = {
+		set_variable = gw_hist_call_to_war_seen
+	}
+
+	option = {
+		name = gw_hist.2010.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_2010_a_tt }
+		add_modifier = { name = gw_neutral_pressure months = 9 }
+		ai_chance = {
+			base = 6
+			modifier = { trigger = { gw_hybrid_alignment_keep_current_weight_display >= 50 } add = 10 }
+		}
+	}
+
+	option = {
+		name = gw_hist.2010.b
+		custom_tooltip = { text = gw_hist_2010_b_tt }
+		gw_apply_central_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 9 }
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { gw_hybrid_alignment_central_weight_display >= 55 } add = 12 }
+		}
+	}
+
+	option = {
+		name = gw_hist.2010.c
+		custom_tooltip = { text = gw_hist_2010_c_tt }
+		gw_apply_allied_alignment = yes
+		add_modifier = { name = gw_war_entry_preparations months = 9 }
+		ai_chance = {
+			base = 5
+			modifier = { trigger = { gw_hybrid_alignment_allied_weight_display >= 55 } add = 12 }
+		}
+	}
+}
+
+# --- Post-War: The Victors' Table ---
+gw_hist.3001 = {
+	type = country_event
+
+	title = gw_hist.3001.t
+	desc = gw_hist.3001.d
+	flavor = gw_hist.3001.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_concluded
+		NOT = { has_variable = gw_hist_postwar_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_postwar_seen
+	}
+
+	option = {
+		name = gw_hist.3001.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_3001_a_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 12 }
+		ai_chance = { base = 10 }
+	}
+}
+
+# --- Post-War: The Defeated Delegation ---
+gw_hist.3002 = {
+	type = country_event
+
+	title = gw_hist.3002.t
+	desc = gw_hist.3002.d
+	flavor = gw_hist.3002.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_factory_closed.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_concluded
+		NOT = { has_variable = gw_hist_postwar_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_postwar_seen
+	}
+
+	option = {
+		name = gw_hist.3002.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_3002_a_tt }
+		add_modifier = { name = gw_neutral_pressure months = 12 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_hist.3002.b
+		custom_tooltip = { text = gw_hist_3002_b_tt }
+		add_modifier = { name = gw_secret_war_promises months = 12 }
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- Post-War: Neutral Observers ---
+gw_hist.3003 = {
+	type = country_event
+
+	title = gw_hist.3003.t
+	desc = gw_hist.3003.d
+	flavor = gw_hist.3003.f
+
+	event_image = {
+		video = "gfx/event_pictures/asia_farmers_market.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_concluded
+		NOT = { has_variable = gw_hist_postwar_seen }
+		NOT = { has_variable = gw_great_war_participant }
+	}
+
+	immediate = {
+		set_variable = gw_hist_postwar_seen
+	}
+
+	option = {
+		name = gw_hist.3003.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_3003_a_tt }
+		add_modifier = { name = gw_neutrality_guarantee months = 12 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_hist.3003.b
+		custom_tooltip = { text = gw_hist_3003_b_tt }
+		add_modifier = { name = gw_neutral_pressure months = 9 }
+		ai_chance = { base = 5 }
+	}
+}
+
+# --- Post-War: The Settlement Debated ---
+gw_hist.3004 = {
+	type = country_event
+
+	title = gw_hist.3004.t
+	desc = gw_hist.3004.d
+	flavor = gw_hist.3004.f
+
+	event_image = {
+		video = "gfx/event_pictures/unspecific_politicians_arguing.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		has_global_variable = gw_great_war_concluded
+		NOT = { has_variable = gw_hist_postwar_seen }
+	}
+
+	immediate = {
+		set_variable = gw_hist_postwar_seen
+	}
+
+	option = {
+		name = gw_hist.3004.a
+		default_option = yes
+		custom_tooltip = { text = gw_hist_3004_a_tt }
+		add_modifier = { name = gw_last_conference_spirit months = 12 }
+		ai_chance = { base = 8 }
+	}
+
+	option = {
+		name = gw_hist.3004.b
+		custom_tooltip = { text = gw_hist_3004_b_tt }
+		add_modifier = { name = gw_neutral_pressure months = 9 }
+		ai_chance = { base = 5 }
+	}
+}

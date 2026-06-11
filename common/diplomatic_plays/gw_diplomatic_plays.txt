@@ -1,0 +1,57 @@
+﻿# ============================================================
+# GREAT WAR MOD - Diplomatic Plays
+# ============================================================
+
+gw_dp_reshape_order = {
+	war_goal = gw_wg_reshape_world_order
+	mirror_war_goal = yes
+	allow_negotiated_peace = no
+	initiator_can_add_war_goals = no
+	target_can_add_war_goals = no
+	add_infamy_for_starting_initiator_wargoals = no
+	add_infamy_for_starting_target_wargoals = no
+	requires_interest_marker = no
+	texture = "gfx/interface/icons/war_goals/contain_threat.dds"
+
+	possible = {
+		has_global_variable = gw_system_active
+		has_global_variable = gw_world_tension
+		global_var:gw_world_tension >= 90
+		NOT = { has_global_variable = gw_great_war_concluded }
+		custom_tooltip = {
+			text = gw_must_be_central_powers_leader
+			has_modifier = gw_central_powers_leader
+		}
+		scope:target_country = {
+			custom_tooltip = {
+				text = gw_must_be_allied_powers_leader
+				has_modifier = gw_allied_powers_leader
+			}
+		}
+		custom_tooltip = {
+			text = gw_no_great_war_active
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+	}
+
+	additional_involvement_trigger = {
+		NOT = { gw_has_neutral_stance = yes }
+		OR = {
+			# Faction members (explicit choice or assigned by tension system)
+			gw_is_central_member = yes
+			gw_is_allied_member = yes
+			AND = {
+				country_rank >= rank_value:major_power
+				OR = {
+					any_scope_ally = {
+						this = scope:initiator
+					}
+					any_scope_ally = {
+						this = scope:target_country
+					}
+				}
+			}
+		}
+	}
+
+}

@@ -1,0 +1,635 @@
+﻿# ============================================================
+# GREAT WAR MOD - Great War Journal Entry (National Discontent)
+# ============================================================
+
+# Shown to countries participating in the Great War
+# Tracks national discontent internally, displayed as inverse national support.
+je_gw_great_war = {
+	icon = "gfx/interface/icons/invention_icons/pan_nationalism.dds"
+	group = je_group_foreign_affairs
+	can_revolution_inherit = no
+
+	is_shown_when_inactive = {
+		gw_is_regular_country = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	immediate = {
+		gw_ensure_national_discontent_value = yes
+		set_variable = { name = gw_home_front_balance_bar_current value = gw_home_front_balance_value }
+	}
+
+	possible = {
+		gw_is_regular_country = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+	}
+
+	scripted_button = gw_war_propaganda_button
+	scripted_button = gw_suppressing_dissent_button
+	scripted_button = gw_wartime_rationing_button
+	scripted_button = gw_wartime_research_button
+
+	scripted_progress_bar = gw_home_front_balance_progress_bar
+
+	on_weekly_pulse = {
+		effect = {
+			set_variable = { name = gw_home_front_balance_bar_current value = "scope:journal_entry.scripted_bar_progress(gw_home_front_balance_progress_bar)" }
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = gw_great_war_ended
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+	}
+
+	on_complete = {
+		remove_variable = gw_suppressing_dissent
+		if = { limit = { has_modifier = gw_wartime_rationing } remove_modifier = gw_wartime_rationing }
+		if = { limit = { has_modifier = gw_war_propaganda } remove_modifier = gw_war_propaganda }
+		if = { limit = { has_modifier = gw_wartime_research_focus } remove_modifier = gw_wartime_research_focus }
+		if = { limit = { has_modifier = gw_war_bond_drive } remove_modifier = gw_war_bond_drive }
+		if = { limit = { has_modifier = gw_frontline_relief } remove_modifier = gw_frontline_relief }
+		if = { limit = { has_modifier = gw_munitions_overdrive } remove_modifier = gw_munitions_overdrive }
+		if = { limit = { has_modifier = gw_civil_liberties_suspended } remove_modifier = gw_civil_liberties_suspended }
+		if = { limit = { has_modifier = gw_initial_war_fervor } remove_modifier = gw_initial_war_fervor }
+		if = { limit = { has_modifier = gw_long_war_planning } remove_modifier = gw_long_war_planning }
+		if = { limit = { has_modifier = gw_offensive_spirit } remove_modifier = gw_offensive_spirit }
+		if = { limit = { has_modifier = gw_entrenched_lines } remove_modifier = gw_entrenched_lines }
+		if = { limit = { has_modifier = gw_national_unity_cabinet } remove_modifier = gw_national_unity_cabinet }
+		if = { limit = { has_modifier = gw_food_security_measures } remove_modifier = gw_food_security_measures }
+		if = { limit = { has_modifier = gw_breadline_unrest } remove_modifier = gw_breadline_unrest }
+		if = { limit = { has_modifier = gw_shell_contracts } remove_modifier = gw_shell_contracts }
+		if = { limit = { has_modifier = gw_women_in_war_industry } remove_modifier = gw_women_in_war_industry }
+		if = { limit = { has_modifier = gw_railway_priority } remove_modifier = gw_railway_priority }
+		if = { limit = { has_modifier = gw_war_bond_committees } remove_modifier = gw_war_bond_committees }
+		if = { limit = { has_modifier = gw_black_market_controls } remove_modifier = gw_black_market_controls }
+		if = { limit = { has_modifier = gw_black_market_spread } remove_modifier = gw_black_market_spread }
+		if = { limit = { has_modifier = gw_hospital_trains } remove_modifier = gw_hospital_trains }
+		if = { limit = { has_modifier = gw_draft_board_drive } remove_modifier = gw_draft_board_drive }
+		if = { limit = { has_modifier = gw_ministry_of_munitions } remove_modifier = gw_ministry_of_munitions }
+		if = { limit = { has_modifier = gw_winter_fuel_shortage } remove_modifier = gw_winter_fuel_shortage }
+		if = { limit = { has_modifier = gw_censored_letters } remove_modifier = gw_censored_letters }
+		if = { limit = { has_modifier = gw_veterans_before_victory } remove_modifier = gw_veterans_before_victory }
+		if = { limit = { has_modifier = gw_flour_relief } remove_modifier = gw_flour_relief }
+		if = { limit = { has_modifier = gw_night_shift_factories } remove_modifier = gw_night_shift_factories }
+		if = { limit = { has_modifier = gw_national_discontent } remove_modifier = gw_national_discontent }
+	}
+
+	invalid = {
+		OR = {
+			is_revolutionary = yes
+			is_insurrectionary = yes
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gw_discontent_frenzy
+				trigger = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 0
+					var:gw_national_discontent_value < 20
+				}
+			}
+			triggered_desc = {
+				desc = gw_discontent_doubtful
+				trigger = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 20
+					var:gw_national_discontent_value < 40
+				}
+			}
+			triggered_desc = {
+				desc = gw_discontent_tired
+				trigger = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 40
+					var:gw_national_discontent_value < 60
+				}
+			}
+			triggered_desc = {
+				desc = gw_discontent_angry
+				trigger = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 60
+					var:gw_national_discontent_value < 80
+				}
+			}
+			triggered_desc = {
+				desc = gw_discontent_revolt
+				trigger = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 80
+				}
+			}
+			triggered_desc = {
+				desc = gw_discontent_frenzy
+				trigger = {
+					NOT = { exists = var:gw_national_discontent_value }
+				}
+			}
+		}
+	}
+
+	# Monthly pulse: Calculate national discontent from radical pops and casualties
+	on_monthly_pulse = {
+		effect = {
+			gw_ensure_national_discontent_value = yes
+			if = {
+				limit = {
+					is_at_war = yes
+					NOT = { exists = var:gw_great_war_months_active }
+				}
+				set_variable = { name = gw_great_war_months_active value = 0 }
+			}
+			if = {
+				limit = {
+					is_at_war = yes
+					exists = var:gw_great_war_months_active
+				}
+				change_variable = { name = gw_great_war_months_active add = 1 }
+			}
+
+			# Educated classes radicalized
+			if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.5 pop_type = academics }
+						radical_fraction = { value > 0.5 pop_type = engineers }
+						radical_fraction = { value > 0.5 pop_type = bureaucrats }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 2 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.25 pop_type = academics }
+						radical_fraction = { value > 0.25 pop_type = engineers }
+						radical_fraction = { value > 0.25 pop_type = bureaucrats }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 1 }
+			}
+
+			# Military radicalized
+			if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.3 pop_type = officers }
+						radical_fraction = { value > 0.3 pop_type = soldiers }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 2 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.15 pop_type = officers }
+						radical_fraction = { value > 0.15 pop_type = soldiers }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 1 }
+			}
+
+			# Working class radicalized
+			if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.5 pop_type = laborers }
+						radical_fraction = { value > 0.5 pop_type = machinists }
+						radical_fraction = { value > 0.5 pop_type = peasants }
+						radical_fraction = { value > 0.5 pop_type = farmers }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 2 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.25 pop_type = laborers }
+						radical_fraction = { value > 0.25 pop_type = machinists }
+						radical_fraction = { value > 0.25 pop_type = peasants }
+						radical_fraction = { value > 0.25 pop_type = farmers }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 1 }
+			}
+
+			# Elite classes radicalized
+			if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.3 pop_type = aristocrats }
+						radical_fraction = { value > 0.3 pop_type = capitalists }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 2 }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						radical_fraction = { value > 0.15 pop_type = aristocrats }
+						radical_fraction = { value > 0.15 pop_type = capitalists }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 1 }
+			}
+
+			# War propaganda reduces discontent
+			if = {
+				limit = {
+					has_modifier = gw_war_propaganda
+					var:gw_national_discontent_value >= 0
+				}
+				change_variable = { name = gw_national_discontent_value add = -3 }
+			}
+
+			# Suppressing dissent reduces discontent
+			if = {
+				limit = {
+					has_variable = gw_suppressing_dissent
+					var:gw_national_discontent_value >= 0
+				}
+				change_variable = { name = gw_national_discontent_value add = -5 }
+			}
+
+			# Wartime rationing increases discontent
+			if = {
+				limit = {
+					has_modifier = gw_wartime_rationing
+				}
+				change_variable = { name = gw_national_discontent_value add = 2 }
+			}
+
+			# Casualties increase discontent
+			if = {
+				limit = {
+					any_scope_war = {
+						num_country_casualties = { target = root value > 200000 }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 1 }
+			}
+			if = {
+				limit = {
+					any_scope_war = {
+						num_country_casualties = { target = root value > 400000 }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 2 }
+			}
+			if = {
+				limit = {
+					any_scope_war = {
+						num_country_casualties = { target = root value > 800000 }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 3 }
+			}
+			if = {
+				limit = {
+					any_scope_war = {
+						num_country_casualties = { target = root value > 1500000 }
+					}
+				}
+				change_variable = { name = gw_national_discontent_value add = 4 }
+			}
+
+			# Clamp after all changes
+			clamp_variable = { name = gw_national_discontent_value max = 100 min = 0 }
+
+			# --- Wartime Atmosphere Events ---
+			# At most one of these fires per monthly pulse.
+			if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_opening_seen }
+				}
+				trigger_event = { id = gw_war.3100 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					OR = {
+						has_variable = gw_war_side_1_leader
+						has_variable = gw_war_side_2_leader
+					}
+					NOT = { has_variable = gw_war_aims_seen }
+				}
+				trigger_event = { id = gw_war.3101 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 3
+					NOT = { has_variable = gw_war_first_offensive_seen }
+				}
+				trigger_event = { id = gw_war.3102 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 6
+					NOT = { has_variable = gw_war_lines_seen }
+				}
+				trigger_event = { id = gw_war.3103 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					any_scope_war = {
+						num_country_casualties = { target = root value > 200000 }
+					}
+					NOT = { has_variable = gw_war_marble_seen }
+				}
+				trigger_event = { id = gw_war.3104 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 9
+					NOT = { has_variable = gw_war_staff_seen }
+				}
+				trigger_event = { id = gw_war.3105 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 55
+					NOT = { has_variable = gw_war_peace_note_seen }
+				}
+				trigger_event = { id = gw_war.3106 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 12
+					NOT = { has_variable = gw_war_paper_seen }
+				}
+				trigger_event = { id = gw_war.3107 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					any_scope_war = {
+						num_country_casualties = { target = root value > 400000 }
+					}
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 30
+					NOT = { has_variable = gw_war_songs_seen }
+				}
+				trigger_event = { id = gw_war.3109 days = 1 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 18
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 40
+					NOT = { has_variable = gw_war_last_offensive_seen }
+				}
+				trigger_event = { id = gw_war.3108 days = 1 }
+			}
+
+			# --- War Economy and Home Front Events ---
+			if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 2
+					NOT = { has_variable = gw_war_bread_queues_seen }
+				}
+				trigger_event = { id = gw_war.3201 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 4
+					NOT = { has_variable = gw_war_shell_contract_seen }
+				}
+				trigger_event = { id = gw_war.3202 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 5
+					has_variable = gw_war_shell_contract_seen
+					NOT = { has_variable = gw_war_women_works_seen }
+				}
+				trigger_event = { id = gw_war.3203 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 7
+					NOT = { has_variable = gw_war_coal_railways_seen }
+				}
+				trigger_event = { id = gw_war.3204 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 8
+					NOT = { has_variable = gw_war_bond_town_hall_seen }
+				}
+				trigger_event = { id = gw_war.3205 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 9
+					OR = {
+						NOT = { exists = var:gw_national_discontent_value }
+						var:gw_national_discontent_value >= 35
+					}
+					NOT = { has_variable = gw_war_black_market_seen }
+				}
+				trigger_event = { id = gw_war.3206 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					any_scope_war = {
+						num_country_casualties = { target = root value > 300000 }
+					}
+					NOT = { has_variable = gw_war_hospital_trains_seen }
+				}
+				trigger_event = { id = gw_war.3207 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 10
+					NOT = { has_variable = gw_war_draft_boards_seen }
+				}
+				trigger_event = { id = gw_war.3208 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 12
+					NOT = { has_variable = gw_war_ministry_munitions_seen }
+				}
+				trigger_event = { id = gw_war.3209 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 14
+					NOT = { has_variable = gw_war_winter_fuel_seen }
+				}
+				trigger_event = { id = gw_war.3210 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 45
+					NOT = { has_variable = gw_war_censored_letters_seen }
+				}
+				trigger_event = { id = gw_war.3211 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					any_scope_war = {
+						num_country_casualties = { target = root value > 600000 }
+					}
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 35
+					NOT = { has_variable = gw_war_veterans_seen }
+				}
+				trigger_event = { id = gw_war.3212 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 12
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 50
+					NOT = { has_variable = gw_war_price_flour_seen }
+				}
+				trigger_event = { id = gw_war.3213 days = 2 }
+			}
+			else_if = {
+				limit = {
+					is_at_war = yes
+					NOT = { has_variable = gw_war_economy_event_cooldown }
+					exists = var:gw_great_war_months_active
+					var:gw_great_war_months_active >= 16
+					NOT = { has_variable = gw_war_factories_midnight_seen }
+				}
+				trigger_event = { id = gw_war.3214 days = 2 }
+			}
+
+			# --- Discontent Threshold Events ---
+			# Strain at 25
+			if = {
+				limit = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 25
+					NOT = { has_variable = gw_war_letters_seen }
+				}
+				trigger_event = { id = gw_war.3010 days = 1 }
+			}
+			# War weariness at 45
+			if = {
+				limit = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 45
+					has_variable = gw_war_letters_seen
+					NOT = { has_variable = gw_war_industry_seen }
+				}
+				trigger_event = { id = gw_war.3020 days = 1 }
+			}
+			# Political crisis at 65
+			if = {
+				limit = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 65
+					has_variable = gw_war_industry_seen
+					NOT = { has_variable = gw_war_parliament_seen }
+				}
+				trigger_event = { id = gw_war.3030 days = 1 }
+			}
+			# Warning at 80
+			if = {
+				limit = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 80
+					has_variable = gw_war_parliament_seen
+					NOT = { has_variable = gw_discontent_warning_seen }
+				}
+				trigger_event = { id = gw_war.3001 days = 1 }
+			}
+			# Breaking point at 100
+			if = {
+				limit = {
+					exists = var:gw_national_discontent_value
+					var:gw_national_discontent_value >= 100
+					has_variable = gw_discontent_warning_seen
+					NOT = { has_variable = gw_discontent_collapse_seen }
+				}
+				trigger_event = { id = gw_war.3002 days = 1 }
+			}
+
+			# Apply discontent as a scaled modifier
+			if = {
+				limit = { has_modifier = gw_national_discontent }
+				remove_modifier = gw_national_discontent
+			}
+			if = {
+				limit = { exists = var:gw_national_discontent_value }
+				add_modifier = {
+					name = gw_national_discontent
+					multiplier = var:gw_national_discontent_value
+				}
+			}
+		}
+	}
+
+	weight = 100
+}
