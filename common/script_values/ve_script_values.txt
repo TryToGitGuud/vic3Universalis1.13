@@ -816,7 +816,35 @@ monthly_culture_reform_point = {
 			limit = {
 				is_ai = no
 			}
-			add = 7			# 840 for 10 years.
+			add = 15
+			if = {
+				limit = { 
+					has_law_or_variant = law_type:law_ethnostate
+				}
+				add = 20
+			}
+			if = {
+				limit = { 
+					has_law_or_variant = law_type:law_national_supremacy
+				}
+				add = 15
+			}
+			if = {
+				limit = { 
+					OR = {
+						has_law_or_variant = law_type:law_subjecthood
+						has_law_or_variant = law_type:law_racial_segregation
+						has_law_or_variant = law_type:law_cultural_exclusion
+					}
+				}
+				add = 10
+			}
+			if = {
+				limit = { 
+					has_law_or_variant = law_type:law_multicultural
+				}
+				add = 5
+			}
 		}
 		else = {
 			if = {
