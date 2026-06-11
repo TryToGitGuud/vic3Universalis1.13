@@ -7,7 +7,7 @@
  ve_culture_reform_point:0 "Reform Point"
  ve_cultural_missionary:0 "Bureaucrats"
  ve_call_cultural_missionary:0 "Call All Bureaucrats"
- ve_culture_reform_point_tt:0 "#tooltippable_concept Monthly Culture Reform Points: \n#Y Base: #P +7"
+ ve_culture_reform_point_tt:0 "#tooltippable_concept Monthly Culture Reform Points: \n#Y Base: #P +15 \n#Y Ethnostate: #P +20 \n#Y National Supremacy: #P +15 \n#Y Subjecthood: #P +10 \n#Y Racial Segregation: #P +10 \n#Y Cultural Exclusion: #P +10 \n#Y Multiculturalism: #P +5"
  ve_cultural_missionary_tt:0 "#tooltippable_concept Bureaucrats: \n#Y Base: +1 \nIf Ethnostate law is activated: +4 \nIf National Supremacy law is activated: +3 \nIf Racial Segregation law is activated: +2 \nIf Cultural Exclusion law is activated: +1 \n#negative_value If Multicultural law is activated, the mechanic will be disabled."
  bar_no_effect:0 "No effect"
  ve_cultural_missionary_power_txt:0 "Bureaucrat Power"
