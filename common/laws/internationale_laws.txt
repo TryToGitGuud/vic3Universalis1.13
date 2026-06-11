@@ -1525,13 +1525,15 @@ law_syndicalist_land_reform = {
 	}
 
 	unlocking_laws = {
-		law_command_economy
-		law_cooperative_ownership
 	}
 
 	can_enact = {
 		has_variable = bel_de_paepe_var
 		intl_law_permanently_enabled = { LAW = syndicalist_land_reform }
+		OR = {
+			has_law_or_variant = law_type:law_command_economy
+			has_law_or_variant = law_type:law_cooperative_ownership
+		}
 	}
 
 	can_impose = {
