@@ -13,7 +13,7 @@ ve_golden_age = {
 		set_variable = clicked_golden_age
 		add_modifier = {
 			name = golden_age_mdf
-			years = 20
+			years = 10
 		}
 	}
 }

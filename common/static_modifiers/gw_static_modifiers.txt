@@ -1,0 +1,577 @@
+﻿# ============================================================
+# GREAT WAR MOD - Static Modifiers
+# ============================================================
+
+# --- World Tension Tier Modifiers ---
+
+# Applied when world tension < 20% (peace dividend)
+gw_peace_dividend = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_trade_advantage_mult = 0.05
+	country_military_wages_mult = -0.1
+	country_prestige_mult = 0.05
+}
+
+# Applied when world tension >= 40% and < 60% (nations prepare)
+gw_growing_tensions = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	building_training_rate_mult = 0.05
+	country_weekly_innovation_add = 10
+	country_diplomatic_play_maneuvers_add = 10
+}
+
+# Applied when world tension >= 60%
+gw_high_tension = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	country_infamy_decay_mult = 0.5
+}
+
+# Applied when 80 <= world tension < 90
+gw_explosive_tension = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_positive.dds
+	country_diplomatic_play_maneuvers_add = 50
+}
+
+# Applied when world tension >= 90% — Great War may be triggered by Central leader.
+gw_critical_tension = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_diplomatic_play_maneuvers_add = 100
+	country_infamy_decay_mult = 0.25
+	building_training_rate_mult = 0.10
+	country_military_wages_mult = -0.10
+}
+
+# --- World Order Modifiers ---
+
+# For countries that dominate the world order (initially GBR, FRA, RUS, USA)
+gw_dominating_world_order = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_radicals_and_loyalists_from_sol_change_mult = 0.1
+	country_influence_mult = 0.2
+	state_trade_capacity_mult = 0.25
+	state_trade_advantage_mult = 0.1
+}
+
+# Leader of the Central Powers - the revisionist great power
+gw_central_powers_leader = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_prestige_mult = 0.10
+}
+
+# Leader of the Allied Powers - the status quo great power
+gw_allied_powers_leader = {
+	icon = gfx/interface/icons/sol_icons/wealthy.dds
+	country_influence_mult = 0.2
+}
+
+# --- Crisis Modifiers ---
+
+# Arms Race modifier (tension >= 60%)
+gw_arms_race = {
+	icon = gfx/interface/icons/invention_icons/wargaming.dds
+	country_weekly_innovation_add = 25
+	building_training_rate_mult = 0.1
+	country_prestige_mult = 0.05
+}
+
+# Diplomatic Crisis modifier (tension >= 70%)
+gw_diplomatic_crisis = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_influence_mult = -0.1
+	country_diplomatic_play_maneuvers_add = 25
+}
+
+gw_general_staff_program = {
+	icon = gfx/interface/icons/invention_icons/wargaming.dds
+	building_training_rate_mult = 0.08
+	country_diplomatic_play_maneuvers_add = 15
+	country_military_wages_mult = 0.05
+}
+
+gw_arms_limitation_talks = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.05
+	country_infamy_decay_mult = 0.10
+	building_training_rate_mult = -0.03
+}
+
+gw_partial_mobilization_plan = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_diplomatic_play_maneuvers_add = 25
+	building_training_rate_mult = 0.10
+	country_military_wages_mult = 0.10
+}
+
+gw_backchannel_diplomacy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.08
+	country_infamy_decay_mult = 0.15
+	country_diplomatic_play_maneuvers_add = -5
+}
+
+gw_defense_readiness = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_defense_mult = 0.05
+	building_training_rate_mult = 0.05
+	country_diplomatic_play_maneuvers_add = 10
+}
+
+gw_public_war_scare = {
+	icon = gfx/interface/icons/alert_icons/radicalized.dds
+	country_prestige_mult = -0.03
+	state_radicals_from_political_movements_mult = 0.05
+	state_trade_advantage_mult = -0.03
+}
+
+# --- Arms Race Event Chain Modifiers (Phase 1, tension 60-79%) ---
+
+# Grand Autumn Manoeuvres — large-scale exercises, training & morale.
+gw_grand_manoeuvres = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	building_training_rate_mult = 0.05
+	unit_morale_recovery_mult = 0.03
+}
+
+# Defence Industry Expansion — new contracts, factory orders.
+gw_industrial_expansion_orders = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	building_group_bg_military_industry_throughput_add = 0.03
+	building_group_bg_military_industry_construction_efficiency_add = 0.05
+}
+
+# Conscription Reform — manpower base broadened; military tech accelerates.
+gw_conscription_reform = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_military_tech_spread_mult = 0.05
+	building_training_rate_mult = 0.05
+}
+
+# Non-leader echo modifiers (smaller, for Major Powers that join the buildup)
+gw_arms_race_followers = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_weekly_innovation_add = 8
+	building_group_bg_military_industry_throughput_add = 0.02
+}
+
+# --- Great War Modifiers ---
+
+# Given to war leaders when Great War starts
+gw_great_war_leader = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_diplomatic_play_maneuvers_add = 100
+	country_infamy_decay_mult = 1.0
+}
+
+# Post-war modifiers
+gw_major_defeat = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_influence_mult = -0.1
+}
+
+gw_major_victory = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.1
+}
+
+gw_major_leader_defeat = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_influence_mult = -0.2
+}
+
+gw_major_leader_victory = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.2
+}
+
+# --- Wartime Decision Modifiers ---
+
+gw_war_propaganda = {
+	icon = gfx/interface/icons/invention_icons/war_propaganda.dds
+	country_war_exhaustion_casualties_mult = -0.15
+}
+
+gw_wartime_rationing = {
+	icon = gfx/interface/icons/invention_icons/logistics_tech.dds
+	country_military_wages_mult = -0.2
+	building_mobilization_cost_mult = -0.2
+	state_radicals_from_political_movements_mult = 0.2
+	state_loyalists_from_political_movements_mult = -0.2
+}
+
+gw_wartime_research_focus = {
+	icon = gfx/interface/icons/invention_icons/wargaming.dds
+	country_weekly_innovation_add = 25
+}
+
+# Suppressing anti-war dissent
+gw_suppressing_dissent_mod = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	state_radicals_from_political_movements_mult = 0.15
+	state_loyalists_from_political_movements_mult = -0.15
+	country_war_exhaustion_casualties_mult = -0.1
+}
+
+gw_war_bond_drive = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_tax_income_add = 5000
+	country_prestige_mult = 0.03
+	state_loyalists_from_political_movements_mult = 0.05
+}
+
+gw_frontline_relief = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_war_exhaustion_casualties_mult = -0.2
+	building_mobilization_cost_mult = 0.1
+}
+
+gw_munitions_overdrive = {
+	icon = gfx/interface/icons/invention_icons/logistics_tech.dds
+	building_mobilization_cost_mult = -0.1
+	country_military_wages_mult = 0.05
+	state_radicals_from_political_movements_mult = 0.05
+}
+
+gw_civil_liberties_suspended = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	country_war_exhaustion_casualties_mult = -0.1
+	state_radicals_from_political_movements_mult = 0.15
+	state_loyalists_from_political_movements_mult = -0.1
+}
+
+gw_initial_war_fervor = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.03
+	country_war_exhaustion_casualties_mult = -0.05
+}
+
+gw_long_war_planning = {
+	icon = gfx/interface/icons/invention_icons/logistics_tech.dds
+	building_mobilization_cost_mult = -0.05
+	country_military_wages_mult = -0.05
+}
+
+gw_offensive_spirit = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_offense_mult = 0.03
+	unit_defense_mult = -0.01
+}
+
+gw_entrenched_lines = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_defense_mult = 0.03
+	unit_offense_mult = -0.01
+	country_war_exhaustion_casualties_mult = -0.03
+}
+
+gw_national_unity_cabinet = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.03
+	state_radicals_from_political_movements_mult = -0.05
+}
+
+gw_neutral_trade_boom = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_trade_advantage_mult = 0.05
+	country_prestige_mult = 0.02
+}
+
+gw_humanitarian_mission = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.04
+	country_prestige_mult = 0.02
+}
+
+# National discontent during Great War - scaled by variable
+gw_national_discontent = {
+	icon = gfx/interface/icons/alert_icons/radicalized.dds
+	state_radicals_from_political_movements_mult = 0.01
+	state_loyalists_from_political_movements_mult = -0.01
+	unit_offense_mult = -0.005
+	unit_defense_mult = -0.005
+}
+
+# --- War Reparations ---
+
+# Paying reparations (losers)
+gw_war_reparations_paying = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_prestige_mult = -0.2
+	country_tax_income_add = -10000
+	country_influence_mult = -0.15
+	building_mobilization_cost_mult = 0.25
+}
+
+# Receiving reparations (winners)
+gw_war_reparations_receiving = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.1
+	country_tax_income_add = 5000
+	country_influence_mult = 0.1
+}
+
+# --- Neutrality ---
+
+# Declared neutral in the Great Power conflict
+gw_neutral_nation = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_war_exhaustion_casualties_mult = -0.1
+	country_influence_mult = 0.03
+	country_prestige_mult = -0.1
+}
+
+# --- Discontent Crisis ---
+
+# Military mutiny — army refuses to fight
+gw_military_mutiny = {
+	icon = gfx/interface/icons/alert_icons/radicalized.dds
+	unit_offense_mult = -0.5
+	unit_defense_mult = -0.3
+	unit_morale_loss_mult = 0.5
+}
+
+# Home front collapse — revolution imminent
+gw_home_front_collapse = {
+	icon = gfx/interface/icons/alert_icons/radicalized.dds
+	state_radicals_from_political_movements_mult = 0.5
+	state_loyalists_from_political_movements_mult = -0.5
+	country_influence_mult = -0.3
+}
+
+# --- World Tension Atmosphere ---
+
+gw_market_war_scare = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_trade_advantage_mult = -0.05
+	country_prestige_mult = -0.02
+}
+
+gw_mobilization_timetables = {
+	icon = gfx/interface/icons/invention_icons/logistics_tech.dds
+	building_training_rate_mult = 0.04
+	country_military_wages_mult = 0.03
+}
+
+gw_war_press_campaign = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.03
+	state_radicals_from_political_movements_mult = 0.04
+}
+
+gw_last_conference_spirit = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.05
+	country_diplomatic_play_maneuvers_add = -5
+	country_infamy_decay_mult = 0.05
+}
+
+# --- Great War Material Tension ---
+
+gw_arsenal_contracts = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	building_arms_industry_throughput_add = 0.05
+	building_munition_plant_throughput_add = 0.05
+	building_artillery_foundry_throughput_add = 0.05
+	country_military_goods_cost_mult = -0.03
+}
+
+gw_naval_estimates = {
+	icon = gfx/interface/icons/invention_icons/battleship_tech.dds
+	building_shipyard_throughput_add = 0.06
+	goods_output_steamers_mult = 0.03
+	goods_output_ironclads_mult = 0.03
+	country_military_wages_mult = 0.03
+}
+
+gw_staff_college_memoranda = {
+	icon = gfx/interface/icons/invention_icons/logistics_tech.dds
+	building_training_rate_mult = 0.05
+	country_weekly_innovation_add = 5
+	country_military_wages_mult = 0.03
+}
+
+gw_war_insurance = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_trade_advantage_mult = -0.03
+	country_prestige_mult = -0.01
+}
+
+gw_bread_and_powder = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_goods_positive.dds
+	building_food_industry_throughput_add = 0.04
+	building_group_bg_military_industry_throughput_add = 0.03
+	state_standard_of_living_add = -0.25
+}
+
+gw_emergency_credits = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_military_goods_cost_mult = -0.04
+	country_tax_income_add = 3000
+	country_prestige_mult = 0.01
+}
+
+gw_factory_orders = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_factory_positive.dds
+	building_group_bg_military_industry_throughput_add = 0.05
+	building_group_bg_heavy_industry_throughput_add = 0.03
+	state_radicals_from_political_movements_mult = 0.03
+}
+
+gw_last_peace_budget = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_influence_mult = 0.03
+	country_military_wages_mult = -0.03
+	country_diplomatic_play_maneuvers_add = -5
+}
+
+# --- Great War Home Front and War Economy ---
+
+gw_food_security_measures = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_goods_positive.dds
+	building_food_industry_throughput_add = 0.04
+	building_rye_farm_throughput_add = 0.03
+	building_wheat_farm_throughput_add = 0.03
+	building_rice_farm_throughput_add = 0.03
+	building_maize_farm_throughput_add = 0.03
+	building_livestock_ranch_throughput_add = 0.03
+	building_fishing_wharf_throughput_add = 0.03
+	state_standard_of_living_add = 0.25
+}
+
+gw_breadline_unrest = {
+	icon = gfx/interface/icons/alert_icons/radicalized.dds
+	state_standard_of_living_add = -0.5
+	state_radicals_from_political_movements_mult = 0.08
+	state_loyalists_from_political_movements_mult = -0.04
+}
+
+gw_shell_contracts = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	building_arms_industry_throughput_add = 0.06
+	building_munition_plant_throughput_add = 0.06
+	building_artillery_foundry_throughput_add = 0.06
+	country_military_goods_cost_mult = -0.03
+	country_military_wages_mult = 0.04
+}
+
+gw_women_in_war_industry = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_factory_positive.dds
+	building_group_bg_military_industry_throughput_add = 0.04
+	building_group_bg_heavy_industry_throughput_add = 0.04
+	state_loyalists_from_political_movements_mult = 0.03
+}
+
+gw_railway_priority = {
+	icon = gfx/interface/icons/invention_icons/railways.dds
+	building_mobilization_cost_mult = -0.05
+	building_training_rate_mult = 0.03
+	state_trade_advantage_mult = -0.03
+}
+
+gw_war_bond_committees = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_tax_income_add = 3000
+	country_prestige_mult = 0.02
+	state_loyalists_from_political_movements_mult = 0.03
+}
+
+gw_black_market_controls = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_standard_of_living_add = 0.15
+	state_radicals_from_political_movements_mult = -0.03
+	state_trade_advantage_mult = -0.02
+}
+
+gw_black_market_spread = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_standard_of_living_add = -0.5
+	state_radicals_from_political_movements_mult = 0.08
+}
+
+gw_hospital_trains = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_goods_positive.dds
+	country_war_exhaustion_casualties_mult = -0.07
+	building_mobilization_cost_mult = 0.03
+}
+
+gw_draft_board_drive = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	state_conscription_rate_add = 0.03
+	building_training_rate_mult = 0.04
+	state_radicals_from_political_movements_mult = 0.04
+}
+
+gw_ministry_of_munitions = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_factory_positive.dds
+	building_arms_industry_throughput_add = 0.08
+	building_munition_plant_throughput_add = 0.08
+	building_artillery_foundry_throughput_add = 0.08
+	country_military_goods_cost_mult = -0.04
+	state_radicals_from_political_movements_mult = 0.04
+}
+
+gw_winter_fuel_shortage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_goods_negative.dds
+	building_mobilization_cost_mult = 0.05
+	state_standard_of_living_add = -0.5
+	state_trade_advantage_mult = -0.03
+}
+
+gw_censored_letters = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_war_exhaustion_casualties_mult = -0.04
+	state_radicals_from_political_movements_mult = 0.05
+	state_loyalists_from_political_movements_mult = -0.03
+}
+
+gw_veterans_before_victory = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_war_exhaustion_casualties_mult = -0.05
+	unit_defense_mult = 0.02
+	unit_offense_mult = -0.01
+}
+
+gw_flour_relief = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_goods_positive.dds
+	building_food_industry_throughput_add = 0.04
+	building_rye_farm_throughput_add = 0.04
+	building_wheat_farm_throughput_add = 0.04
+	building_rice_farm_throughput_add = 0.04
+	building_maize_farm_throughput_add = 0.04
+	state_standard_of_living_add = 0.5
+	country_military_wages_mult = 0.02
+}
+
+gw_night_shift_factories = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_factory_positive.dds
+	building_group_bg_military_industry_throughput_add = 0.05
+	building_group_bg_heavy_industry_throughput_add = 0.05
+	country_military_wages_mult = 0.03
+	state_radicals_from_political_movements_mult = 0.05
+}
+
+# --- Soft Historical Great War Pressure ---
+
+gw_neutrality_guarantee = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_influence_mult = 0.03
+	country_prestige_mult = 0.02
+}
+
+gw_war_entry_preparations = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	building_training_rate_mult = 0.04
+	country_military_wages_mult = 0.03
+}
+
+gw_secret_war_promises = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_influence_mult = 0.03
+	country_infamy_decay_mult = -0.05
+	state_radicals_from_political_movements_mult = 0.03
+}
+
+gw_neutral_pressure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_trade_advantage_mult = -0.03
+	country_influence_mult = 0.02
+}

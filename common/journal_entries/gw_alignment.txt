@@ -1,0 +1,152 @@
+﻿# ============================================================
+# GREAT WAR MOD - Great Power Alignment Journal Entry
+# ============================================================
+
+je_gw_alignment = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_foreign_affairs
+	can_revolution_inherit = no
+
+	is_shown_when_inactive = {
+		has_global_variable = gw_system_active
+		NOT = { has_global_variable = gw_great_war_concluded }
+		gw_is_regular_country = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		gw_is_major_or_greater = yes
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	possible = {
+		has_global_variable = gw_system_active
+		NOT = { has_global_variable = gw_great_war_concluded }
+		gw_is_regular_country = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		gw_is_major_or_greater = yes
+		NOT = { has_global_variable = gw_great_war_active }
+	}
+
+	scripted_button = gw_alignment_allied_button
+	scripted_button = gw_alignment_neutral_button
+	scripted_button = gw_alignment_central_button
+	scripted_button = gw_alignment_revoke_neutrality_button
+
+	scripted_progress_bar = gw_alignment_allied_probability_bar
+	scripted_progress_bar = gw_alignment_central_probability_bar
+	scripted_progress_bar = gw_alignment_neutral_probability_bar
+
+	immediate = {
+		set_variable = { name = gw_alignment_allied_bar_current value = gw_hybrid_alignment_allied_probability }
+		set_variable = { name = gw_alignment_central_bar_current value = gw_hybrid_alignment_central_probability }
+		set_variable = { name = gw_alignment_neutral_bar_current value = gw_hybrid_alignment_neutral_probability }
+
+		scope:journal_entry = {
+			add_progress = { value = owner.gw_hybrid_alignment_allied_probability name = gw_alignment_allied_probability_bar }
+			add_progress = { value = owner.gw_hybrid_alignment_central_probability name = gw_alignment_central_probability_bar }
+			add_progress = { value = owner.gw_hybrid_alignment_neutral_probability name = gw_alignment_neutral_probability_bar }
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			set_variable = { name = gw_alignment_allied_bar_current value = "scope:journal_entry.scripted_bar_progress(gw_alignment_allied_probability_bar)" }
+			set_variable = { name = gw_alignment_central_bar_current value = "scope:journal_entry.scripted_bar_progress(gw_alignment_central_probability_bar)" }
+			set_variable = { name = gw_alignment_neutral_bar_current value = "scope:journal_entry.scripted_bar_progress(gw_alignment_neutral_probability_bar)" }
+		}
+	}
+
+	complete = {
+		# This is an ongoing diplomatic stance panel.
+	}
+
+	invalid = {
+		OR = {
+			is_revolutionary = yes
+			is_insurrectionary = yes
+			has_global_variable = gw_great_war_active
+			has_global_variable = gw_great_war_concluded
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gw_alignment_status_central
+				trigger = {
+					OR = {
+						has_variable = gw_player_central
+						has_variable = gw_alignment_central
+					}
+				}
+			}
+			triggered_desc = {
+				desc = gw_alignment_status_allied
+				trigger = {
+					OR = {
+						has_variable = gw_player_allied
+						has_variable = gw_alignment_allied
+					}
+				}
+			}
+			triggered_desc = {
+				desc = gw_alignment_status_neutral
+				trigger = {
+					OR = {
+						has_variable = gw_player_neutral
+						has_variable = gw_alignment_neutral
+					}
+				}
+			}
+			triggered_desc = {
+				desc = gw_alignment_status_central_leaning
+				trigger = {
+					has_variable = gw_dissatisfied_with_order
+					NOT = {
+						OR = {
+							has_variable = gw_player_allied
+							has_variable = gw_alignment_allied
+							has_variable = gw_player_neutral
+							has_variable = gw_alignment_neutral
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = gw_alignment_status_allied_leaning
+				trigger = {
+					has_variable = gw_satisfied_with_order
+					NOT = {
+						OR = {
+							has_variable = gw_player_central
+							has_variable = gw_alignment_central
+							has_variable = gw_player_neutral
+							has_variable = gw_alignment_neutral
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = gw_alignment_status_open
+				trigger = {
+					NOR = {
+						has_variable = gw_player_central
+						has_variable = gw_alignment_central
+						has_variable = gw_player_allied
+						has_variable = gw_alignment_allied
+						has_variable = gw_player_neutral
+						has_variable = gw_alignment_neutral
+						has_variable = gw_dissatisfied_with_order
+						has_variable = gw_satisfied_with_order
+					}
+				}
+			}
+		}
+	}
+
+	weight = 95
+}

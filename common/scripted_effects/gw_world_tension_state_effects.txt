@@ -1,0 +1,153 @@
+﻿# ============================================================
+# GREAT WAR MOD - World Tension State Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_initialize_world_tension_state = {
+	# Global state is maintained once by the top-ranked country.
+	if = {
+		limit = { global_country_ranking = 1 }
+		if = {
+			limit = { NOT = { has_global_variable = gw_world_tension } }
+			set_global_variable = { name = gw_world_tension value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gw_bloc_display_initialized } }
+			gw_refresh_bloc_lists = yes
+			set_global_variable = gw_bloc_display_initialized
+		}
+		if = {
+			limit = { global_var:gw_world_tension > 100 }
+			set_global_variable = { name = gw_world_tension value = 100 }
+		}
+		else_if = {
+			limit = { global_var:gw_world_tension < 0 }
+			set_global_variable = { name = gw_world_tension value = 0 }
+		}
+	}
+}
+
+gw_apply_world_tension_tier_modifiers = {
+	# Single mutually-exclusive tier resolution: a country is guaranteed to
+	# carry at most one tension-tier modifier at any time. Each branch removes
+	# the other four tier modifiers if present, then adds its own.
+	if = {
+		limit = { country_rank < rank_value:major_power }
+		# Below Major Power: never carry a tension tier modifier.
+		if = { limit = { has_modifier = gw_peace_dividend } remove_modifier = gw_peace_dividend }
+		if = { limit = { has_modifier = gw_growing_tensions } remove_modifier = gw_growing_tensions }
+		if = { limit = { has_modifier = gw_high_tension } remove_modifier = gw_high_tension }
+		if = { limit = { has_modifier = gw_explosive_tension } remove_modifier = gw_explosive_tension }
+		if = { limit = { has_modifier = gw_critical_tension } remove_modifier = gw_critical_tension }
+	}
+	else_if = {
+		limit = { global_var:gw_world_tension >= 90 }
+		# --- 90%+: Critical — Call to War may be issued ---
+		if = { limit = { has_modifier = gw_peace_dividend } remove_modifier = gw_peace_dividend }
+		if = { limit = { has_modifier = gw_growing_tensions } remove_modifier = gw_growing_tensions }
+		if = { limit = { has_modifier = gw_high_tension } remove_modifier = gw_high_tension }
+		if = { limit = { has_modifier = gw_explosive_tension } remove_modifier = gw_explosive_tension }
+		if = {
+			limit = { NOT = { has_modifier = gw_critical_tension } }
+			add_modifier = { name = gw_critical_tension }
+		}
+	}
+	else_if = {
+		limit = { global_var:gw_world_tension >= 80 }
+		# --- 80-89%: Explosive (war imminent warning stage) ---
+		if = { limit = { has_modifier = gw_peace_dividend } remove_modifier = gw_peace_dividend }
+		if = { limit = { has_modifier = gw_growing_tensions } remove_modifier = gw_growing_tensions }
+		if = { limit = { has_modifier = gw_high_tension } remove_modifier = gw_high_tension }
+		if = { limit = { has_modifier = gw_critical_tension } remove_modifier = gw_critical_tension }
+		if = {
+			limit = { NOT = { has_modifier = gw_explosive_tension } }
+			add_modifier = { name = gw_explosive_tension }
+		}
+	}
+	else_if = {
+		limit = { global_var:gw_world_tension >= 60 }
+		# --- 60-79%: High Tension ---
+		if = { limit = { has_modifier = gw_peace_dividend } remove_modifier = gw_peace_dividend }
+		if = { limit = { has_modifier = gw_growing_tensions } remove_modifier = gw_growing_tensions }
+		if = { limit = { has_modifier = gw_explosive_tension } remove_modifier = gw_explosive_tension }
+		if = { limit = { has_modifier = gw_critical_tension } remove_modifier = gw_critical_tension }
+		if = {
+			limit = { NOT = { has_modifier = gw_high_tension } }
+			add_modifier = { name = gw_high_tension }
+		}
+	}
+	else_if = {
+		limit = { global_var:gw_world_tension >= 40 }
+		# --- 40-59%: Growing Tensions ---
+		if = { limit = { has_modifier = gw_peace_dividend } remove_modifier = gw_peace_dividend }
+		if = { limit = { has_modifier = gw_high_tension } remove_modifier = gw_high_tension }
+		if = { limit = { has_modifier = gw_explosive_tension } remove_modifier = gw_explosive_tension }
+		if = { limit = { has_modifier = gw_critical_tension } remove_modifier = gw_critical_tension }
+		if = {
+			limit = { NOT = { has_modifier = gw_growing_tensions } }
+			add_modifier = { name = gw_growing_tensions }
+		}
+	}
+	else_if = {
+		limit = { global_var:gw_world_tension < 20 }
+		# --- 0-19%: Peace Dividend ---
+		if = { limit = { has_modifier = gw_growing_tensions } remove_modifier = gw_growing_tensions }
+		if = { limit = { has_modifier = gw_high_tension } remove_modifier = gw_high_tension }
+		if = { limit = { has_modifier = gw_explosive_tension } remove_modifier = gw_explosive_tension }
+		if = { limit = { has_modifier = gw_critical_tension } remove_modifier = gw_critical_tension }
+		if = {
+			limit = { NOT = { has_modifier = gw_peace_dividend } }
+			add_modifier = { name = gw_peace_dividend }
+		}
+	}
+	else = {
+		# --- 20-39%: intentional dead zone (no tier modifier) ---
+		if = { limit = { has_modifier = gw_peace_dividend } remove_modifier = gw_peace_dividend }
+		if = { limit = { has_modifier = gw_growing_tensions } remove_modifier = gw_growing_tensions }
+		if = { limit = { has_modifier = gw_high_tension } remove_modifier = gw_high_tension }
+		if = { limit = { has_modifier = gw_explosive_tension } remove_modifier = gw_explosive_tension }
+		if = { limit = { has_modifier = gw_critical_tension } remove_modifier = gw_critical_tension }
+	}
+}
+
+gw_process_call_to_war_timer = {
+	# Safety cleanup: if Call to War was issued but war never started after ~6 months, reset
+	if = {
+		limit = {
+			global_country_ranking = 1
+			has_global_variable = gw_call_to_war_active
+			NOT = { has_global_variable = gw_great_war_active }
+			has_global_variable = gw_call_to_war_months
+			global_var:gw_call_to_war_months >= 6
+		}
+		gw_cleanup_call_to_war_tracking = yes
+	}
+	# Increment the Call to War month counter
+	else_if = {
+		limit = {
+			global_country_ranking = 1
+			has_global_variable = gw_call_to_war_active
+			NOT = { has_global_variable = gw_great_war_active }
+			has_global_variable = gw_call_to_war_months
+		}
+		change_global_variable = { name = gw_call_to_war_months add = 1 }
+	}
+
+	# Launch the Great War from the stored initiator once mobilization is complete.
+	if = {
+		limit = {
+			global_country_ranking = 1
+			has_global_variable = gw_call_to_war_active
+			NOT = { has_global_variable = gw_great_war_active }
+			has_global_variable = gw_call_to_war_months
+			global_var:gw_call_to_war_months >= 3
+			NOT = { has_global_variable = gw_call_to_war_launch_pending }
+			exists = global_var:gw_call_to_war_initiator
+		}
+		set_global_variable = gw_call_to_war_launch_pending
+		global_var:gw_call_to_war_initiator = {
+			trigger_event = { id = gw_call.10 days = 0 }
+		}
+	}
+}
+

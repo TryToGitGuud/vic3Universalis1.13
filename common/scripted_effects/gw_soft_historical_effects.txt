@@ -1,0 +1,208 @@
+﻿# ============================================================
+# GREAT WAR MOD - Soft Historical Event Effects
+# ============================================================
+
+# Tension-increase removed by design: events are tension-neutral (they may calm
+# tension but no longer raise it). The tension economy is driven by the yearly
+# sources instead. These helpers are kept as guarded no-ops so every existing
+# soft-historical call site (gw_hist_tension_add_1/2 = yes) remains valid; the
+# only retained command is the safety init, which never triggers in practice
+# because tension already exists by the time these events fire.
+gw_hist_tension_add_1 = {
+	if = {
+		limit = { NOT = { has_global_variable = gw_world_tension } }
+		set_global_variable = { name = gw_world_tension value = 0 }
+	}
+}
+
+gw_hist_tension_add_2 = {
+	if = {
+		limit = { NOT = { has_global_variable = gw_world_tension } }
+		set_global_variable = { name = gw_world_tension value = 0 }
+	}
+}
+
+gw_hist_tension_remove_1 = {
+	if = {
+		limit = { NOT = { has_global_variable = gw_world_tension } }
+		set_global_variable = { name = gw_world_tension value = 0 }
+	}
+	change_global_variable = { name = gw_world_tension add = -1 }
+	if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+}
+
+gw_hist_tension_remove_2 = {
+	if = {
+		limit = { NOT = { has_global_variable = gw_world_tension } }
+		set_global_variable = { name = gw_world_tension value = 0 }
+	}
+	change_global_variable = { name = gw_world_tension add = -2 }
+	if = { limit = { global_var:gw_world_tension < 0 } set_global_variable = { name = gw_world_tension value = 0 } }
+}
+
+gw_trigger_soft_historical_prewar_events = {
+	if = {
+		limit = {
+			game_date >= 1880.1.1
+			global_var:gw_world_tension >= 60
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+			NOT = { has_variable = gw_hist_naval_rivalry_seen }
+			OR = {
+				AND = { exists = c:GBR this = c:GBR }
+				AND = { exists = c:GER this = c:GER }
+				AND = { exists = c:PRU this = c:PRU }
+				AND = { exists = c:NGF this = c:NGF }
+			}
+		}
+		trigger_event = { id = gw_hist.1001 days = 0 }
+	}
+	else_if = {
+		limit = {
+			game_date >= 1880.1.1
+			global_var:gw_world_tension >= 65
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+			NOT = { has_variable = gw_hist_balkan_flashpoint_seen }
+			OR = {
+				AND = { exists = c:AUS this = c:AUS }
+				AND = { exists = c:SGF this = c:SGF }
+				AND = { exists = c:TUR this = c:TUR }
+				AND = { exists = c:RUS this = c:RUS }
+				AND = { exists = c:SER this = c:SER }
+			}
+		}
+		trigger_event = { id = gw_hist.1002 days = 0 }
+	}
+	else_if = {
+		limit = {
+			game_date >= 1880.1.1
+			global_var:gw_world_tension >= 70
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+			NOT = { has_variable = gw_hist_belgian_neutrality_seen }
+			OR = {
+				AND = { exists = c:BEL this = c:BEL }
+				AND = { exists = c:GBR this = c:GBR }
+				AND = { exists = c:FRA this = c:FRA }
+				AND = { exists = c:GER this = c:GER }
+				AND = { exists = c:PRU this = c:PRU }
+			}
+		}
+		trigger_event = { id = gw_hist.1003 days = 0 }
+	}
+	else_if = {
+		limit = {
+			game_date >= 1880.1.1
+			global_var:gw_world_tension >= 75
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+			NOT = { has_variable = gw_hist_july_note_seen }
+			OR = {
+				AND = { exists = c:AUS this = c:AUS }
+				AND = { exists = c:SGF this = c:SGF }
+				AND = { exists = c:RUS this = c:RUS }
+				AND = { exists = c:SER this = c:SER }
+			}
+		}
+		trigger_event = { id = gw_hist.1004 days = 0 }
+	}
+	else_if = {
+		limit = {
+			game_date >= 1880.1.1
+			global_var:gw_world_tension >= 75
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+			NOT = { has_variable = gw_hist_neutral_rights_seen }
+			OR = {
+				AND = { exists = c:USA this = c:USA }
+				has_variable = gw_alignment_neutral
+			}
+		}
+		trigger_event = { id = gw_hist.1005 days = 0 }
+	}
+	else_if = {
+		limit = {
+			game_date >= 1880.1.1
+			global_var:gw_world_tension >= 85
+			NOT = { has_global_variable = gw_great_war_active }
+			NOT = { has_global_variable = gw_call_to_war_active }
+			NOT = { has_variable = gw_hist_last_week_seen }
+			gw_is_great_war_bloc_leader = yes
+		}
+		trigger_event = { id = gw_hist.1006 days = 0 }
+	}
+}
+
+gw_trigger_soft_historical_call_to_war_events = {
+	every_country = {
+		limit = {
+			gw_is_regular_country = yes
+			has_global_variable = gw_call_to_war_active
+			NOT = { has_global_variable = gw_great_war_active }
+			OR = {
+				is_country_type = recognized
+				is_country_type = colonial
+				AND = { exists = c:BEL this = c:BEL }
+				AND = { exists = c:GBR this = c:GBR }
+				AND = { exists = c:TUR this = c:TUR }
+				AND = { exists = c:ITA this = c:ITA }
+				AND = { exists = c:JAP this = c:JAP }
+				AND = { exists = c:ROM this = c:ROM }
+				AND = { exists = c:BUL this = c:BUL }
+				AND = { exists = c:USA this = c:USA }
+				AND = { exists = c:CHI this = c:CHI }
+			}
+			NOT = { has_variable = gw_hist_call_to_war_seen }
+			NOT = { has_variable = gw_war_side_1 }
+			NOT = { has_variable = gw_war_side_2 }
+			NOT = { has_variable = gw_player_allied }
+			NOT = { has_variable = gw_player_central }
+			NOT = { has_variable = gw_player_neutral }
+		}
+		if = {
+			limit = { exists = c:BEL this = c:BEL }
+			trigger_event = { id = gw_hist.2001 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:GBR this = c:GBR }
+			trigger_event = { id = gw_hist.2002 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:TUR this = c:TUR }
+			trigger_event = { id = gw_hist.2003 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:ITA this = c:ITA }
+			trigger_event = { id = gw_hist.2004 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:JAP this = c:JAP }
+			trigger_event = { id = gw_hist.2005 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:ROM this = c:ROM }
+			trigger_event = { id = gw_hist.2006 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:BUL this = c:BUL }
+			trigger_event = { id = gw_hist.2007 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:USA this = c:USA }
+			trigger_event = { id = gw_hist.2008 days = 1 }
+		}
+		else_if = {
+			limit = { exists = c:CHI this = c:CHI }
+			trigger_event = { id = gw_hist.2009 days = 1 }
+		}
+		else_if = {
+			limit = {
+				gw_is_major_or_greater = yes
+				NOT = { has_modifier = gw_central_powers_leader }
+				NOT = { has_modifier = gw_allied_powers_leader }
+			}
+			trigger_event = { id = gw_hist.2010 days = 1 }
+		}
+	}
+}

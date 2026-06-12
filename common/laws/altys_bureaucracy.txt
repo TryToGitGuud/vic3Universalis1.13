@@ -26,7 +26,7 @@ law_imperial_federal_bureaucracy = {
 	modifier = {
 		country_bureaucracy_investment_cost_factor_mult = -0.15
 		state_decree_cost_mult = -0.1
-		building_group_bg_monuments_throughput_add = 0.1
+		building_group_bg_monuments_throughput_add = 0.5
 	}
 }
 

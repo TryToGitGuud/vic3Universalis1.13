@@ -1,0 +1,49 @@
+﻿# ============================================================
+# GREAT WAR MOD - Call to War Scripted Buttons
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_call_to_war_button = {
+	name = "gw_call_to_war_button"
+	desc = "gw_call_to_war_button_desc"
+
+	visible = {
+		has_modifier = gw_central_powers_leader
+		has_global_variable = gw_system_active
+		NOT = { has_global_variable = gw_great_war_concluded }
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = gw_call_to_war_tension_tt
+			has_global_variable = gw_world_tension
+			global_var:gw_world_tension >= 90
+		}
+		custom_tooltip = {
+			text = gw_call_to_war_not_at_war_tt
+			is_at_war = no
+		}
+		custom_tooltip = {
+			text = gw_call_to_war_allied_exists_tt
+			gw_has_ready_allied_leader = yes
+		}
+		custom_tooltip = {
+			text = gw_call_to_war_no_war_active_tt
+			NOT = { has_global_variable = gw_great_war_active }
+		}
+		custom_tooltip = {
+			text = gw_call_to_war_no_call_active_tt
+			NOT = { has_global_variable = gw_call_to_war_active }
+		}
+	}
+
+	effect = {
+		gw_start_call_to_war = yes
+		custom_tooltip = { text = gw_call_to_war_effect_tt }
+	}
+
+	ai_chance = {
+		value = gw_ai_call_to_war_desire
+	}
+}
+

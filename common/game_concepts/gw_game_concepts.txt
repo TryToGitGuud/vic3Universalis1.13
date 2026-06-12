@@ -1,0 +1,76 @@
+# ============================================================
+# GREAT WAR - Core Game Concepts
+# ============================================================
+
+concept_gw_world_tension = {
+	texture = "gfx/interface/icons/state_status_icons/has_devastation.dds"
+	is_loading_tip = yes
+}
+
+concept_gw_central_powers = {
+	texture = "gfx/interface/icons/invention_icons/pan_nationalism.dds"
+}
+
+concept_gw_allied_powers = {
+	texture = "gfx/interface/icons/invention_icons/pan_nationalism.dds"
+}
+
+concept_gw_great_war = {
+	texture = "gfx/interface/icons/alert_icons/secession.dds"
+}
+
+concept_gw_war_reparations = {
+	texture = "gfx/interface/icons/topbar/income_power_icon.dds"
+}
+
+concept_gw_crisis = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+}
+
+concept_gw_arms_race = {
+	texture = "gfx/interface/icons/invention_icons/wargaming.dds"
+}
+
+concept_gw_peace_dividend = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+}
+
+concept_gw_growing_tensions = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+}
+
+concept_gw_tier_arms_race = {
+	texture = "gfx/interface/icons/invention_icons/wargaming.dds"
+}
+
+concept_gw_tier_ultimatum = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+}
+
+concept_gw_tier_crisis = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+}
+
+concept_gw_call_to_war = {
+	texture = "gfx/interface/icons/event_icons/event_military.dds"
+}
+
+concept_gw_alignment_score = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+}
+
+concept_gw_dissatisfied_with_order = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+}
+
+concept_gw_satisfied_with_order = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+}
+
+concept_gw_war_reparations_paying = {
+	texture = "gfx/interface/icons/topbar/income_power_icon.dds"
+}
+
+concept_gw_major_defeat = {
+	texture = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+}

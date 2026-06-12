@@ -1,0 +1,71 @@
+﻿gw_wg_reshape_world_order = {
+	icon = "gfx/interface/icons/war_goals/contain_threat.dds"
+
+	kind = custom
+
+	settings = {
+		require_target_be_part_of_war
+		skip_build_list
+
+		# Validation
+		validate_conflicts_war_goals_all
+	}
+
+	execution_priority = 60
+
+	contestion_type = control_target_country_capital
+
+	target_type = country
+
+	possible = {
+		ROOT = {
+			OR = {
+				has_modifier = gw_central_powers_leader
+				has_modifier = gw_allied_powers_leader
+			}
+		}
+		scope:target_country = {
+			OR = {
+				has_modifier = gw_central_powers_leader
+				has_modifier = gw_allied_powers_leader
+			}
+		}
+	}
+
+	valid = {
+		ROOT = {
+			OR = {
+				has_modifier = gw_central_powers_leader
+				has_modifier = gw_allied_powers_leader
+				has_modifier = gw_great_war_leader
+				has_variable = gw_war_side_1_leader
+				has_variable = gw_war_side_2_leader
+			}
+		}
+		scope:target_country = {
+			OR = {
+				has_modifier = gw_central_powers_leader
+				has_modifier = gw_allied_powers_leader
+				has_modifier = gw_great_war_leader
+				has_variable = gw_war_side_1_leader
+				has_variable = gw_war_side_2_leader
+			}
+		}
+	}
+
+	maneuvers = {
+		value = 0
+	}
+
+	infamy = {
+		value = 0
+	}
+
+	on_enforced = {
+		# Great War settlement is handled by gw_war.2001 / gw_war.2002.
+	}
+
+	ai = {
+		is_significant_demand = yes
+	}
+}

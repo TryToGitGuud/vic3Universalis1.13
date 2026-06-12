@@ -251,6 +251,12 @@ je_internationale = {
 
 	group = je_group_global_international_situations
 
+	widget = {
+		gui = "gui/internationale_journal_button.gui"
+		name = "internationale_journal_button"
+		container = "custom_widget_container_1"
+	}
+
 	should_be_pinned_by_default = yes
 
 	is_shown_when_inactive = {
@@ -315,6 +321,12 @@ je_the_internationale = {
 	icon = "gfx/interface/icons/event_icons/internationale_flag.png"
 
 	group = je_group_global_international_situations
+
+	widget = {
+		gui = "gui/internationale_status_widget.gui"
+		name = "internationale_status_widget"
+		container = "custom_widget_container_1"
+	}
 
 	should_be_pinned_by_default = yes
 

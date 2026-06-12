@@ -1,0 +1,367 @@
+﻿# ============================================================
+# GREAT WAR MOD - Cleanup Scripted Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_clear_crisis_flags = {
+	remove_variable = gw_arms_race_seen
+	remove_variable = gw_ultimatum_seen
+	remove_variable = gw_ultimatum_response_seen
+	remove_variable = gw_crisis_peak_seen
+	remove_variable = gw_crisis_peak_cooldown
+	remove_variable = gw_discontent_warning_seen
+	remove_variable = gw_discontent_collapse_seen
+	remove_variable = gw_war_letters_seen
+	remove_variable = gw_war_industry_seen
+	remove_variable = gw_war_parliament_seen
+	remove_variable = gw_war_opening_seen
+	remove_variable = gw_war_aims_seen
+	remove_variable = gw_war_first_offensive_seen
+	remove_variable = gw_war_lines_seen
+	remove_variable = gw_war_marble_seen
+	remove_variable = gw_war_staff_seen
+	remove_variable = gw_war_peace_note_seen
+	remove_variable = gw_war_paper_seen
+	remove_variable = gw_war_last_offensive_seen
+	remove_variable = gw_war_songs_seen
+	remove_variable = gw_great_war_months_active
+	remove_variable = gw_neutral_markets_seen
+	remove_variable = gw_neutral_casualties_seen
+	remove_variable = gw_tension_markets_seen
+	remove_variable = gw_tension_press_seen
+	remove_variable = gw_tension_railways_seen
+	remove_variable = gw_tension_embassies_seen
+	remove_variable = gw_tension_war_scare_seen
+	remove_variable = gw_tension_last_conference_seen
+	remove_variable = gw_tension_border_seen
+	remove_variable = gw_tension_silence_seen
+	remove_variable = gw_material_arsenal_seen
+	remove_variable = gw_material_naval_seen
+	remove_variable = gw_material_staff_seen
+	remove_variable = gw_material_insurance_seen
+	remove_variable = gw_material_bread_powder_seen
+	remove_variable = gw_material_credits_seen
+	remove_variable = gw_material_factory_seen
+	remove_variable = gw_material_budget_seen
+	remove_variable = gw_war_economy_event_cooldown
+	remove_variable = gw_war_bread_queues_seen
+	remove_variable = gw_war_shell_contract_seen
+	remove_variable = gw_war_women_works_seen
+	remove_variable = gw_war_coal_railways_seen
+	remove_variable = gw_war_bond_town_hall_seen
+	remove_variable = gw_war_black_market_seen
+	remove_variable = gw_war_hospital_trains_seen
+	remove_variable = gw_war_draft_boards_seen
+	remove_variable = gw_war_ministry_munitions_seen
+	remove_variable = gw_war_winter_fuel_seen
+	remove_variable = gw_war_censored_letters_seen
+	remove_variable = gw_war_veterans_seen
+	remove_variable = gw_war_price_flour_seen
+	remove_variable = gw_war_factories_midnight_seen
+	remove_variable = gw_hist_naval_rivalry_seen
+	remove_variable = gw_hist_balkan_flashpoint_seen
+	remove_variable = gw_hist_belgian_neutrality_seen
+	remove_variable = gw_hist_july_note_seen
+	remove_variable = gw_hist_neutral_rights_seen
+	remove_variable = gw_hist_last_week_seen
+	remove_variable = gw_hist_call_to_war_seen
+	remove_variable = gw_hist_postwar_seen
+}
+
+gw_clear_tension_event_modifiers = {
+	if = { limit = { has_modifier = gw_peace_dividend } remove_modifier = gw_peace_dividend }
+	if = { limit = { has_modifier = gw_growing_tensions } remove_modifier = gw_growing_tensions }
+	if = { limit = { has_modifier = gw_high_tension } remove_modifier = gw_high_tension }
+	if = { limit = { has_modifier = gw_explosive_tension } remove_modifier = gw_explosive_tension }
+	if = { limit = { has_modifier = gw_arms_race } remove_modifier = gw_arms_race }
+	if = { limit = { has_modifier = gw_diplomatic_crisis } remove_modifier = gw_diplomatic_crisis }
+	if = { limit = { has_modifier = gw_general_staff_program } remove_modifier = gw_general_staff_program }
+	if = { limit = { has_modifier = gw_arms_limitation_talks } remove_modifier = gw_arms_limitation_talks }
+	if = { limit = { has_modifier = gw_partial_mobilization_plan } remove_modifier = gw_partial_mobilization_plan }
+	if = { limit = { has_modifier = gw_backchannel_diplomacy } remove_modifier = gw_backchannel_diplomacy }
+	if = { limit = { has_modifier = gw_defense_readiness } remove_modifier = gw_defense_readiness }
+	if = { limit = { has_modifier = gw_public_war_scare } remove_modifier = gw_public_war_scare }
+	if = { limit = { has_modifier = gw_market_war_scare } remove_modifier = gw_market_war_scare }
+	if = { limit = { has_modifier = gw_mobilization_timetables } remove_modifier = gw_mobilization_timetables }
+	if = { limit = { has_modifier = gw_war_press_campaign } remove_modifier = gw_war_press_campaign }
+	if = { limit = { has_modifier = gw_last_conference_spirit } remove_modifier = gw_last_conference_spirit }
+	if = { limit = { has_modifier = gw_arsenal_contracts } remove_modifier = gw_arsenal_contracts }
+	if = { limit = { has_modifier = gw_naval_estimates } remove_modifier = gw_naval_estimates }
+	if = { limit = { has_modifier = gw_staff_college_memoranda } remove_modifier = gw_staff_college_memoranda }
+	if = { limit = { has_modifier = gw_war_insurance } remove_modifier = gw_war_insurance }
+	if = { limit = { has_modifier = gw_bread_and_powder } remove_modifier = gw_bread_and_powder }
+	if = { limit = { has_modifier = gw_emergency_credits } remove_modifier = gw_emergency_credits }
+	if = { limit = { has_modifier = gw_factory_orders } remove_modifier = gw_factory_orders }
+	if = { limit = { has_modifier = gw_last_peace_budget } remove_modifier = gw_last_peace_budget }
+	if = { limit = { has_modifier = gw_neutrality_guarantee } remove_modifier = gw_neutrality_guarantee }
+	if = { limit = { has_modifier = gw_war_entry_preparations } remove_modifier = gw_war_entry_preparations }
+	if = { limit = { has_modifier = gw_secret_war_promises } remove_modifier = gw_secret_war_promises }
+	if = { limit = { has_modifier = gw_neutral_pressure } remove_modifier = gw_neutral_pressure }
+}
+
+gw_clear_all_tension_event_modifiers = {
+	every_country = {
+		limit = {
+			OR = {
+				has_modifier = gw_peace_dividend
+				has_modifier = gw_growing_tensions
+				has_modifier = gw_high_tension
+				has_modifier = gw_explosive_tension
+				has_modifier = gw_arms_race
+				has_modifier = gw_diplomatic_crisis
+				has_modifier = gw_general_staff_program
+				has_modifier = gw_arms_limitation_talks
+				has_modifier = gw_partial_mobilization_plan
+				has_modifier = gw_backchannel_diplomacy
+				has_modifier = gw_defense_readiness
+				has_modifier = gw_public_war_scare
+				has_modifier = gw_market_war_scare
+				has_modifier = gw_mobilization_timetables
+				has_modifier = gw_war_press_campaign
+				has_modifier = gw_last_conference_spirit
+				has_modifier = gw_arsenal_contracts
+				has_modifier = gw_naval_estimates
+				has_modifier = gw_staff_college_memoranda
+				has_modifier = gw_war_insurance
+				has_modifier = gw_bread_and_powder
+				has_modifier = gw_emergency_credits
+				has_modifier = gw_factory_orders
+				has_modifier = gw_last_peace_budget
+				has_modifier = gw_neutrality_guarantee
+				has_modifier = gw_war_entry_preparations
+				has_modifier = gw_secret_war_promises
+				has_modifier = gw_neutral_pressure
+			}
+		}
+		gw_clear_tension_event_modifiers = yes
+	}
+}
+
+gw_ensure_national_discontent_value = {
+	if = {
+		limit = {
+			has_variable = gw_national_discontent_value
+			NOT = { exists = var:gw_national_discontent_value }
+		}
+		remove_variable = gw_national_discontent_value
+	}
+	if = {
+		limit = {
+			NOT = { exists = var:gw_national_discontent_value }
+		}
+		set_variable = {
+			name = gw_national_discontent_value
+			value = 0
+		}
+	}
+}
+
+gw_clear_war_state = {
+	if = {
+		limit = { has_global_variable = gw_ultimatum_issued_central }
+		remove_global_variable = gw_ultimatum_issued_central
+	}
+	if = {
+		limit = { has_global_variable = gw_ultimatum_issued_allied }
+		remove_global_variable = gw_ultimatum_issued_allied
+	}
+	if = {
+		limit = { has_global_variable = gw_great_war_play_pending }
+		remove_global_variable = gw_great_war_play_pending
+	}
+	if = { limit = { has_modifier = gw_central_powers_leader } remove_modifier = gw_central_powers_leader }
+	if = { limit = { has_modifier = gw_allied_powers_leader } remove_modifier = gw_allied_powers_leader }
+	if = { limit = { has_modifier = gw_neutral_nation } remove_modifier = gw_neutral_nation }
+	remove_variable = gw_national_discontent_value
+	remove_variable = gw_great_war_months_active
+	remove_variable = gw_suppressing_dissent
+	if = { limit = { has_modifier = gw_war_propaganda } remove_modifier = gw_war_propaganda }
+	if = { limit = { has_modifier = gw_wartime_rationing } remove_modifier = gw_wartime_rationing }
+	if = { limit = { has_modifier = gw_wartime_research_focus } remove_modifier = gw_wartime_research_focus }
+	if = { limit = { has_modifier = gw_war_bond_drive } remove_modifier = gw_war_bond_drive }
+	if = { limit = { has_modifier = gw_frontline_relief } remove_modifier = gw_frontline_relief }
+	if = { limit = { has_modifier = gw_munitions_overdrive } remove_modifier = gw_munitions_overdrive }
+	if = { limit = { has_modifier = gw_civil_liberties_suspended } remove_modifier = gw_civil_liberties_suspended }
+	if = { limit = { has_modifier = gw_initial_war_fervor } remove_modifier = gw_initial_war_fervor }
+	if = { limit = { has_modifier = gw_long_war_planning } remove_modifier = gw_long_war_planning }
+	if = { limit = { has_modifier = gw_offensive_spirit } remove_modifier = gw_offensive_spirit }
+	if = { limit = { has_modifier = gw_entrenched_lines } remove_modifier = gw_entrenched_lines }
+	if = { limit = { has_modifier = gw_national_unity_cabinet } remove_modifier = gw_national_unity_cabinet }
+	if = { limit = { has_modifier = gw_food_security_measures } remove_modifier = gw_food_security_measures }
+	if = { limit = { has_modifier = gw_breadline_unrest } remove_modifier = gw_breadline_unrest }
+	if = { limit = { has_modifier = gw_shell_contracts } remove_modifier = gw_shell_contracts }
+	if = { limit = { has_modifier = gw_women_in_war_industry } remove_modifier = gw_women_in_war_industry }
+	if = { limit = { has_modifier = gw_railway_priority } remove_modifier = gw_railway_priority }
+	if = { limit = { has_modifier = gw_war_bond_committees } remove_modifier = gw_war_bond_committees }
+	if = { limit = { has_modifier = gw_black_market_controls } remove_modifier = gw_black_market_controls }
+	if = { limit = { has_modifier = gw_black_market_spread } remove_modifier = gw_black_market_spread }
+	if = { limit = { has_modifier = gw_hospital_trains } remove_modifier = gw_hospital_trains }
+	if = { limit = { has_modifier = gw_draft_board_drive } remove_modifier = gw_draft_board_drive }
+	if = { limit = { has_modifier = gw_ministry_of_munitions } remove_modifier = gw_ministry_of_munitions }
+	if = { limit = { has_modifier = gw_winter_fuel_shortage } remove_modifier = gw_winter_fuel_shortage }
+	if = { limit = { has_modifier = gw_censored_letters } remove_modifier = gw_censored_letters }
+	if = { limit = { has_modifier = gw_veterans_before_victory } remove_modifier = gw_veterans_before_victory }
+	if = { limit = { has_modifier = gw_flour_relief } remove_modifier = gw_flour_relief }
+	if = { limit = { has_modifier = gw_night_shift_factories } remove_modifier = gw_night_shift_factories }
+	if = { limit = { has_modifier = gw_national_discontent } remove_modifier = gw_national_discontent }
+	if = { limit = { has_modifier = gw_military_mutiny } remove_modifier = gw_military_mutiny }
+	if = { limit = { has_modifier = gw_home_front_collapse } remove_modifier = gw_home_front_collapse }
+	gw_clear_tension_event_modifiers = yes
+	remove_variable = gw_war_side_1
+	remove_variable = gw_war_side_2
+	remove_variable = gw_war_side_1_leader
+	remove_variable = gw_war_side_2_leader
+	remove_variable = gw_great_war_participant
+	remove_variable = gw_recent_capitulation_side_1
+	remove_variable = gw_recent_capitulation_side_2
+	remove_variable = gw_alignment_central
+	remove_variable = gw_alignment_allied
+	remove_variable = gw_alignment_neutral
+	remove_variable = gw_player_central
+	remove_variable = gw_player_allied
+	remove_variable = gw_player_neutral
+	remove_variable = gw_ai_alignment_cooldown
+	gw_clear_crisis_flags = yes
+}
+
+gw_cleanup_call_to_war_tracking = {
+	if = {
+		limit = { has_global_variable = gw_ultimatum_issued_central }
+		remove_global_variable = gw_ultimatum_issued_central
+	}
+	if = {
+		limit = { has_global_variable = gw_ultimatum_issued_allied }
+		remove_global_variable = gw_ultimatum_issued_allied
+	}
+	if = {
+		limit = { has_global_variable = gw_call_to_war_active }
+		remove_global_variable = gw_call_to_war_active
+	}
+	if = {
+		limit = { has_global_variable = gw_call_to_war_months }
+		remove_global_variable = gw_call_to_war_months
+	}
+	if = {
+		limit = { exists = global_var:gw_call_to_war_initiator }
+		remove_global_variable = gw_call_to_war_initiator
+	}
+	if = {
+		limit = { has_global_variable = gw_call_to_war_launch_pending }
+		remove_global_variable = gw_call_to_war_launch_pending
+	}
+	if = {
+		limit = { has_global_variable = gw_hist_neutral_epilogue_sent }
+		remove_global_variable = gw_hist_neutral_epilogue_sent
+	}
+	if = {
+		limit = { has_global_variable = gw_prewar_backdown_retries }
+		remove_global_variable = gw_prewar_backdown_retries
+	}
+}
+
+gw_cleanup_orphaned_great_war_state = {
+	if = {
+		limit = { has_global_variable = gw_great_war_active }
+		remove_global_variable = gw_great_war_active
+	}
+	if = {
+		limit = { has_global_variable = gw_war_outcome_determined }
+		remove_global_variable = gw_war_outcome_determined
+	}
+	if = {
+		limit = { has_global_variable = gw_great_war_play_pending }
+		remove_global_variable = gw_great_war_play_pending
+	}
+	set_global_variable = gw_great_war_concluded
+	if = {
+		limit = { has_global_variable = gw_system_active }
+		remove_global_variable = gw_system_active
+	}
+	gw_cleanup_call_to_war_tracking = yes
+	every_country = {
+		limit = {
+			OR = {
+				has_variable = gw_war_side_1
+				has_variable = gw_war_side_2
+				has_variable = gw_war_side_1_leader
+				has_variable = gw_war_side_2_leader
+				has_variable = gw_great_war_participant
+				has_modifier = gw_great_war_leader
+				has_modifier = gw_national_discontent
+				has_modifier = gw_war_propaganda
+				has_modifier = gw_wartime_rationing
+				has_modifier = gw_wartime_research_focus
+				has_variable = gw_suppressing_dissent
+				has_modifier = gw_initial_war_fervor
+				has_modifier = gw_long_war_planning
+				has_modifier = gw_offensive_spirit
+				has_modifier = gw_entrenched_lines
+				has_modifier = gw_national_unity_cabinet
+				has_modifier = gw_food_security_measures
+				has_modifier = gw_breadline_unrest
+				has_modifier = gw_shell_contracts
+				has_modifier = gw_women_in_war_industry
+				has_modifier = gw_railway_priority
+				has_modifier = gw_war_bond_committees
+				has_modifier = gw_black_market_controls
+				has_modifier = gw_black_market_spread
+				has_modifier = gw_hospital_trains
+				has_modifier = gw_draft_board_drive
+				has_modifier = gw_ministry_of_munitions
+				has_modifier = gw_winter_fuel_shortage
+				has_modifier = gw_censored_letters
+				has_modifier = gw_veterans_before_victory
+				has_modifier = gw_flour_relief
+				has_modifier = gw_night_shift_factories
+			}
+		}
+		gw_clear_country_war_participation = yes
+	}
+	set_global_variable = { name = gw_world_tension value = 0 }
+	gw_clear_all_tension_event_modifiers = yes
+}
+
+gw_clear_country_war_participation = {
+	if = { limit = { has_modifier = gw_great_war_leader } remove_modifier = gw_great_war_leader }
+	remove_variable = gw_war_side_1
+	remove_variable = gw_war_side_2
+	remove_variable = gw_war_side_1_leader
+	remove_variable = gw_war_side_2_leader
+	remove_variable = gw_great_war_participant
+	remove_variable = gw_national_discontent_value
+	remove_variable = gw_great_war_months_active
+	remove_variable = gw_suppressing_dissent
+	if = { limit = { has_modifier = gw_war_propaganda } remove_modifier = gw_war_propaganda }
+	if = { limit = { has_modifier = gw_wartime_rationing } remove_modifier = gw_wartime_rationing }
+	if = { limit = { has_modifier = gw_wartime_research_focus } remove_modifier = gw_wartime_research_focus }
+	if = { limit = { has_modifier = gw_war_bond_drive } remove_modifier = gw_war_bond_drive }
+	if = { limit = { has_modifier = gw_frontline_relief } remove_modifier = gw_frontline_relief }
+	if = { limit = { has_modifier = gw_munitions_overdrive } remove_modifier = gw_munitions_overdrive }
+	if = { limit = { has_modifier = gw_civil_liberties_suspended } remove_modifier = gw_civil_liberties_suspended }
+	if = { limit = { has_modifier = gw_initial_war_fervor } remove_modifier = gw_initial_war_fervor }
+	if = { limit = { has_modifier = gw_long_war_planning } remove_modifier = gw_long_war_planning }
+	if = { limit = { has_modifier = gw_offensive_spirit } remove_modifier = gw_offensive_spirit }
+	if = { limit = { has_modifier = gw_entrenched_lines } remove_modifier = gw_entrenched_lines }
+	if = { limit = { has_modifier = gw_national_unity_cabinet } remove_modifier = gw_national_unity_cabinet }
+	if = { limit = { has_modifier = gw_food_security_measures } remove_modifier = gw_food_security_measures }
+	if = { limit = { has_modifier = gw_breadline_unrest } remove_modifier = gw_breadline_unrest }
+	if = { limit = { has_modifier = gw_shell_contracts } remove_modifier = gw_shell_contracts }
+	if = { limit = { has_modifier = gw_women_in_war_industry } remove_modifier = gw_women_in_war_industry }
+	if = { limit = { has_modifier = gw_railway_priority } remove_modifier = gw_railway_priority }
+	if = { limit = { has_modifier = gw_war_bond_committees } remove_modifier = gw_war_bond_committees }
+	if = { limit = { has_modifier = gw_black_market_controls } remove_modifier = gw_black_market_controls }
+	if = { limit = { has_modifier = gw_black_market_spread } remove_modifier = gw_black_market_spread }
+	if = { limit = { has_modifier = gw_hospital_trains } remove_modifier = gw_hospital_trains }
+	if = { limit = { has_modifier = gw_draft_board_drive } remove_modifier = gw_draft_board_drive }
+	if = { limit = { has_modifier = gw_ministry_of_munitions } remove_modifier = gw_ministry_of_munitions }
+	if = { limit = { has_modifier = gw_winter_fuel_shortage } remove_modifier = gw_winter_fuel_shortage }
+	if = { limit = { has_modifier = gw_censored_letters } remove_modifier = gw_censored_letters }
+	if = { limit = { has_modifier = gw_veterans_before_victory } remove_modifier = gw_veterans_before_victory }
+	if = { limit = { has_modifier = gw_flour_relief } remove_modifier = gw_flour_relief }
+	if = { limit = { has_modifier = gw_night_shift_factories } remove_modifier = gw_night_shift_factories }
+	if = { limit = { has_modifier = gw_national_discontent } remove_modifier = gw_national_discontent }
+	if = { limit = { has_modifier = gw_military_mutiny } remove_modifier = gw_military_mutiny }
+	if = { limit = { has_modifier = gw_home_front_collapse } remove_modifier = gw_home_front_collapse }
+	gw_clear_tension_event_modifiers = yes
+	gw_clear_crisis_flags = yes
+}

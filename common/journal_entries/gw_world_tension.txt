@@ -1,0 +1,144 @@
+﻿# ============================================================
+# GREAT WAR MOD - World Tension Journal Entry
+# ============================================================
+
+je_gw_world_tension = {
+	icon = "gfx/interface/icons/state_status_icons/has_devastation.dds"
+	group = je_group_foreign_affairs
+	can_revolution_inherit = no
+
+	is_shown_when_inactive = {
+		has_global_variable = gw_system_active
+		NOT = { has_global_variable = gw_great_war_concluded }
+		gw_is_regular_country = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+	}
+
+	possible = {
+		has_global_variable = gw_system_active
+		NOT = { has_global_variable = gw_great_war_concluded }
+		gw_is_regular_country = yes
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+	}
+
+	scripted_button = gw_call_to_war_button
+
+	complete = {
+		has_global_variable = gw_great_war_concluded
+	}
+
+	invalid = {
+		OR = {
+			is_revolutionary = yes
+			is_insurrectionary = yes
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = gw_tension_stable
+				trigger = {
+					NOT = { has_global_variable = gw_world_tension }
+				}
+			}
+			triggered_desc = {
+				desc = gw_status_call_to_war_active
+				trigger = {
+					has_global_variable = gw_call_to_war_active
+					NOT = { has_global_variable = gw_great_war_active }
+				}
+			}
+			triggered_desc = {
+				desc = gw_status_war_dynamic
+				trigger = { has_global_variable = gw_great_war_active }
+			}
+			triggered_desc = {
+				desc = gw_status_stable_dynamic
+				trigger = { global_var:gw_world_tension < 20 }
+			}
+			triggered_desc = {
+				desc = gw_status_calm_dynamic
+				trigger = {
+					global_var:gw_world_tension >= 20
+					global_var:gw_world_tension < 40
+				}
+			}
+			triggered_desc = {
+				desc = gw_status_rising_dynamic
+				trigger = {
+					global_var:gw_world_tension >= 40
+					global_var:gw_world_tension < 60
+				}
+			}
+			triggered_desc = {
+				desc = gw_status_high_dynamic
+				trigger = {
+					global_var:gw_world_tension >= 60
+					global_var:gw_world_tension < 80
+				}
+			}
+			triggered_desc = {
+				desc = gw_status_explosive_dynamic
+				trigger = {
+					global_var:gw_world_tension >= 80
+					global_var:gw_world_tension < 90
+					NOT = { has_global_variable = gw_great_war_active }
+				}
+			}
+			triggered_desc = {
+				desc = gw_status_critical_dynamic
+				trigger = {
+					global_var:gw_world_tension >= 90
+					NOT = { has_global_variable = gw_great_war_active }
+				}
+			}
+		}
+	}
+	current_value = {
+		value = 0
+		if = {
+			limit = { has_global_variable = gw_world_tension }
+			add = global_var:gw_world_tension
+		}
+	}
+
+	goal_add_value = {
+		value = 100
+	}
+
+	# --- Weekly Pulse: display refresh and tension tier modifiers ---
+	on_weekly_pulse = {
+		effect = {
+			gw_initialize_world_tension_state = yes
+			gw_apply_world_tension_tier_modifiers = yes
+		}
+	}
+
+	# --- Monthly Pulse: Call to War, alignment, and crisis display ---
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = { global_country_ranking = 1 }
+				gw_process_call_to_war_timer = yes
+			}
+			gw_process_crisis_threshold_events = yes
+		}
+	}
+
+	# --- Yearly Pulse: Tension sources, decay, and crisis triggers ---
+	on_yearly_pulse = {
+		effect = {
+			gw_process_yearly_world_tension_sources = yes
+		}
+	}
+	weight = 100
+}
+
+

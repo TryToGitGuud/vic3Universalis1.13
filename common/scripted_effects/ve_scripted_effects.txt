@@ -183,6 +183,13 @@
 	}
 	else_if = {
 		limit = {
+			exists = c:POR
+			this = c:POR
+		}
+		portuguese_ideas = yes
+	}
+	else_if = {
+		limit = {
 			exists = c:BRZ
 			this = c:BRZ
 		}
@@ -396,6 +403,13 @@ cancel_national_idea_mdf = {
 			this = c:ki_CEL
 		}
 		cancel_irish_ideas = yes
+	}
+	else_if = {
+		limit = {
+			exists = c:POR
+			this = c:POR
+		}
+		cancel_portuguese_ideas = yes
 	}
 	else_if = {
 		limit = {

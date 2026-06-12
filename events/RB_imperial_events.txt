@@ -41,7 +41,7 @@ imperial_events.2 = {
 				}
 				save_temporary_scope_as = imperial_federation_annex_target
 				c:GBR = {
-					annex = scope:imperial_federation_annex_target
+					annex_with_incorporation = scope:imperial_federation_annex_target
 				}
 			}
 			add_primary_culture = cu:anglo_canadian

@@ -49,6 +49,9 @@
 		interest_group_ig_trade_unions_pol_str_mult = 0.25
 		state_working_adult_ratio_add = 0.10
 		state_pop_support_movement_labor_mult = -0.10
+		building_group_bg_manufacturing_employee_mult = -0.05
+		building_group_bg_mining_employee_mult = -0.05
+		building_group_bg_service_employee_mult = -0.05
 		state_pop_support_movement_communist_mult = 0.20
 		state_pop_support_movement_anarchist_mult = 0.20
 		building_group_bg_manufacturing_allowed_collectivization_add = 0.5
@@ -254,8 +257,11 @@ REPLACE:law_corporatized_unions = {
 
 	modifier = {
 		interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.25
-		state_working_adult_ratio_add = 0.075
+		state_working_adult_ratio_add = 0.1
 		country_authority_mult = 0.05
+		building_group_bg_manufacturing_employee_mult = -0.05
+		building_group_bg_mining_employee_mult = -0.05
+		building_group_bg_service_employee_mult = -0.05
 		state_radicals_and_loyalists_from_sol_change_mult = 0.15
 		state_pop_support_movement_communist_mult = -0.05
 		state_pop_support_movement_anarchist_mult = -0.05

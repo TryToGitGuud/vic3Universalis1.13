@@ -1,0 +1,35 @@
+﻿# ============================================================
+# GREAT WAR MOD - Starting Setup Effect
+# ============================================================
+
+# Activated once when Universalis enters the Age of the Great Wars.
+gw_activate_for_age_3 = {
+	if = {
+		limit = {
+			has_global_variable = ve_age_3_started
+			NOT = { has_global_variable = gw_system_active }
+			NOT = { has_global_variable = gw_great_war_concluded }
+		}
+		set_global_variable = gw_system_active
+		set_global_variable = { name = gw_world_tension value = 20 }
+		set_global_variable = { name = gw_allied_army_total value = 0 }
+		set_global_variable = { name = gw_allied_navy_total value = 0 }
+		set_global_variable = { name = gw_central_army_total value = 0 }
+		set_global_variable = { name = gw_central_navy_total value = 0 }
+
+		every_country = {
+			limit = {
+				global_country_ranking <= 4
+				country_rank >= rank_value:great_power
+			}
+			add_modifier = { name = gw_dominating_world_order }
+		}
+
+		every_country = {
+			limit = { country_rank >= rank_value:major_power }
+			gw_evaluate_great_power_alignment = yes
+		}
+		gw_assign_great_war_bloc_leaders = yes
+		gw_refresh_bloc_lists = yes
+	}
+}

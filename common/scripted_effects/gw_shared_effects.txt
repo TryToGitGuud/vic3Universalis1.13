@@ -1,0 +1,5 @@
+﻿# ============================================================
+# GREAT WAR MOD - Shared Scripted Effects Index
+# Remaining definitions after mechanical split.
+# ============================================================
+

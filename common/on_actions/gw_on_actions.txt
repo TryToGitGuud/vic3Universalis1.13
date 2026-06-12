@@ -1,0 +1,638 @@
+﻿# ============================================================
+# GREAT WAR MOD - On Actions Index
+# Delegates to custom on_actions to avoid overriding base game
+# ============================================================
+
+# Root = Diplomatic Play
+on_diplomatic_play_started = {
+	on_actions = {
+		on_gw_diplomatic_play_started
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_back_down = {
+	on_actions = {
+		on_gw_diplo_play_back_down
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_war_start = {
+	on_actions = {
+		on_gw_diplo_play_war_start
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_join_side = {
+	on_actions = {
+		on_gw_diplo_play_join_side
+	}
+}
+
+# Root = War
+on_war_end = {
+	on_actions = {
+		on_gw_war_end
+	}
+}
+
+# Root = Country
+on_capitulation = {
+	on_actions = {
+		on_gw_capitulation
+	}
+}
+
+# Root = Country
+on_monthly_pulse_country = {
+	on_actions = {
+		on_gw_monthly_pulse_country
+	}
+}
+
+# ============================================================
+# GREAT WAR MOD - Custom On Action Implementations
+#
+# Scope convention reference (root + saved scopes for each on_action):
+#   on_gw_diplomatic_play_started  -> root = Diplomatic Play; scope:initiator, scope:target
+#   on_gw_diplo_play_back_down     -> root = Diplomatic Play; scope:actor (the side backing down),
+#                                     scope:initiator, scope:target
+#   on_gw_diplo_play_war_start     -> root = Diplomatic Play; scope:initiator, scope:target
+#   on_gw_diplo_play_join_side     -> root = Diplomatic Play; scope:actor (the joiner)
+#   on_gw_war_end                  -> root = War object; attacker_warleader / defender_warleader
+#                                     accessible as transient scopes
+#   on_gw_capitulation             -> root = Country (the capitulating country)
+#   on_gw_monthly_pulse_country    -> root = Country (each country, once per month)
+# ============================================================
+
+on_gw_diplomatic_play_started = {
+	# Root: Diplomatic Play. scope:initiator/target are the play participants.
+	effect = {
+		if = {
+			limit = {
+				is_diplomatic_play_type = gw_dp_reshape_order
+			}
+			if = {
+				limit = { NOT = { has_global_variable = gw_great_war_active } }
+				set_global_variable = gw_great_war_active
+			}
+			set_global_variable = gw_great_war_play_pending
+			if = {
+				limit = { exists = global_var:gw_great_war_winning_leader }
+				remove_global_variable = gw_great_war_winning_leader
+			}
+			gw_force_faction_backers_in_play = yes
+			gw_mark_play_sides_from_reshape_order = yes
+			gw_cleanup_call_to_war_tracking = yes
+			scope:initiator = {
+				if = {
+					limit = { NOT = { has_modifier = gw_great_war_leader } }
+					add_modifier = {
+						name = gw_great_war_leader
+						years = 10
+					}
+				}
+			}
+			scope:target ?= {
+				if = {
+					limit = { NOT = { has_modifier = gw_great_war_leader } }
+					add_modifier = {
+						name = gw_great_war_leader
+						years = 10
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					gw_is_major_or_greater = yes
+					NOT = { has_variable = gw_stance_cooldown }
+				}
+				set_variable = {
+					name = gw_stance_cooldown
+					years = 10
+				}
+			}
+		}
+	}
+}
+
+on_gw_diplo_play_back_down = {
+	# Root: Diplomatic Play. scope:actor is the side that backed down.
+	effect = {
+		if = {
+			limit = {
+				is_diplomatic_play_type = gw_dp_reshape_order
+			}
+			# Pre-war back-down: the diplomatic play collapsed in the maneuver phase
+			# BEFORE the war actually started. Do NOT declare a winner — there was no war.
+			# Reset play state and auto-relaunch the Call to War (the mod's premise is that
+			# the Great War MUST happen). Limit to 2 retries to avoid infinite loops.
+			if = {
+				limit = {
+					has_global_variable = gw_great_war_play_pending
+				}
+				if = {
+					limit = { has_global_variable = gw_great_war_play_pending }
+					remove_global_variable = gw_great_war_play_pending
+				}
+				if = {
+					limit = { has_global_variable = gw_great_war_active }
+					remove_global_variable = gw_great_war_active
+				}
+				if = {
+					limit = { exists = global_var:gw_great_war_winning_leader }
+					remove_global_variable = gw_great_war_winning_leader
+				}
+				if = {
+					limit = { has_global_variable = gw_war_outcome_determined }
+					remove_global_variable = gw_war_outcome_determined
+				}
+				every_country = {
+					limit = {
+						OR = {
+							has_variable = gw_war_side_1
+							has_variable = gw_war_side_2
+							has_variable = gw_war_side_1_leader
+							has_variable = gw_war_side_2_leader
+							has_variable = gw_great_war_participant
+						}
+					}
+					remove_variable = gw_war_side_1
+					remove_variable = gw_war_side_2
+					remove_variable = gw_war_side_1_leader
+					remove_variable = gw_war_side_2_leader
+					remove_variable = gw_great_war_participant
+				}
+				gw_cleanup_call_to_war_tracking = yes
+
+				# Initialize and increment retry counter.
+				if = {
+					limit = { NOT = { has_global_variable = gw_prewar_backdown_retries } }
+					set_global_variable = { name = gw_prewar_backdown_retries value = 0 }
+				}
+				change_global_variable = { name = gw_prewar_backdown_retries add = 1 }
+
+				# Auto-relaunch if under retry cap AND both bloc leaders still exist.
+				if = {
+					limit = {
+						global_var:gw_prewar_backdown_retries <= 2
+						any_country = {
+							has_modifier = gw_central_powers_leader
+							is_at_war = no
+						}
+						any_country = {
+							has_modifier = gw_allied_powers_leader
+							is_at_war = no
+						}
+					}
+					# Re-arm Call to War tracking so gw_call.10 can fire again on the Central leader.
+					random_country = {
+						limit = { has_modifier = gw_central_powers_leader }
+						save_scope_as = gw_relaunch_central_leader
+					}
+					random_country = {
+						limit = { has_modifier = gw_allied_powers_leader }
+						save_scope_as = gw_relaunch_allied_leader
+					}
+					set_global_variable = {
+						name = gw_allied_leader
+						value = scope:gw_relaunch_allied_leader
+					}
+					set_global_variable = {
+						name = gw_call_to_war_initiator
+						value = scope:gw_relaunch_central_leader
+					}
+					set_global_variable = gw_call_to_war_active
+					set_global_variable = { name = gw_call_to_war_months value = 0 }
+					set_global_variable = gw_call_to_war_launch_pending
+					scope:gw_relaunch_central_leader = {
+						trigger_event = { id = gw_call.10 days = 30 }
+					}
+				}
+				else_if = {
+					limit = { global_var:gw_prewar_backdown_retries > 2 }
+					# Give up after 2 retries — reset counter so a future, fresh Call to War can try again.
+					remove_global_variable = gw_prewar_backdown_retries
+				}
+			}
+			else = {
+				# Post-war-start back-down: a side genuinely surrendered after war began.
+				# scope:actor = the losing side (game's own war resolution, NOT a heuristic)
+				gw_mark_play_sides_from_reshape_order = yes
+				if = {
+					limit = {
+						scope:actor = {
+							has_variable = gw_war_side_1
+						}
+					}
+					# Central Powers (side 1) backed down / capitulated - Allied wins
+					set_global_variable = gw_war_outcome_determined
+					every_country = {
+						limit = { has_variable = gw_war_side_2_leader }
+						set_global_variable = { name = gw_great_war_winning_leader value = this }
+					}
+					every_country = {
+						limit = { has_variable = gw_war_side_1 }
+						trigger_event = { id = gw_war.2001 days = 1 }
+					}
+					every_country = {
+						limit = { has_variable = gw_war_side_2 }
+						trigger_event = { id = gw_war.2002 days = 1 }
+					}
+				}
+				else_if = {
+					limit = {
+						scope:actor = {
+							has_variable = gw_war_side_2
+						}
+					}
+					# Allied Powers (side 2) backed down / capitulated - Central wins
+					set_global_variable = gw_war_outcome_determined
+					every_country = {
+						limit = { has_variable = gw_war_side_1_leader }
+						set_global_variable = { name = gw_great_war_winning_leader value = this }
+					}
+					every_country = {
+						limit = { has_variable = gw_war_side_2 }
+						trigger_event = { id = gw_war.2001 days = 1 }
+					}
+					every_country = {
+						limit = { has_variable = gw_war_side_1 }
+						trigger_event = { id = gw_war.2002 days = 1 }
+					}
+				}
+			}
+		}
+	}
+}
+
+on_gw_diplo_play_war_start = {
+	# Root: Diplomatic Play. scope:initiator/target reference the leaders whose war just started.
+	effect = {
+		if = {
+			limit = {
+				has_global_variable = gw_system_active
+				NOT = { has_global_variable = gw_great_war_concluded }
+			}
+		# Initialize global tension if a war fires before the journal pulse has done so.
+		if = {
+			limit = { NOT = { has_global_variable = gw_world_tension } }
+			set_global_variable = { name = gw_world_tension value = 0 }
+		}
+		# Initialize conflict tracker if not yet created
+		if = {
+			limit = { NOT = { exists = global_var:gw_tsrc_conflicts } }
+			set_global_variable = { name = gw_tsrc_conflicts value = 0 }
+		}
+		if = {
+			limit = { NOT = { has_global_variable = gw_direct_conflict_tension_this_year } }
+			set_global_variable = { name = gw_direct_conflict_tension_this_year value = 0 }
+		}
+		# GP vs GP war increases tension more
+		if = {
+			limit = {
+				initiator = { country_rank >= rank_value:great_power }
+				target = { country_rank >= rank_value:great_power }
+			}
+			change_global_variable = { name = gw_world_tension add = 5 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 5 }
+			if = {
+				limit = { NOT = { is_diplomatic_play_type = gw_dp_reshape_order } }
+				change_global_variable = { name = gw_direct_conflict_tension_this_year add = 5 }
+			}
+			initiator = {
+				if = {
+					limit = { NOT = { exists = var:gw_country_tension_val } }
+					set_variable = { name = gw_country_tension_val value = 0 }
+				}
+				change_variable = { name = gw_country_tension_val add = 5 }
+			}
+		}
+		# Major Power or Great Power wars still affect the international situation.
+		else_if = {
+			limit = {
+				initiator = { country_rank >= rank_value:major_power }
+				target = { country_rank >= rank_value:major_power }
+			}
+			change_global_variable = { name = gw_world_tension add = 3 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 3 }
+			if = {
+				limit = { NOT = { is_diplomatic_play_type = gw_dp_reshape_order } }
+				change_global_variable = { name = gw_direct_conflict_tension_this_year add = 3 }
+			}
+			initiator = {
+				if = {
+					limit = { NOT = { exists = var:gw_country_tension_val } }
+					set_variable = { name = gw_country_tension_val value = 0 }
+				}
+				change_variable = { name = gw_country_tension_val add = 3 }
+			}
+		}
+		# Any war involving a Great Power increases tension, regardless of who started it.
+		else_if = {
+			limit = {
+				OR = {
+					initiator = { country_rank >= rank_value:great_power }
+					target = { country_rank >= rank_value:great_power }
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 2 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 2 }
+			if = {
+				limit = { NOT = { is_diplomatic_play_type = gw_dp_reshape_order } }
+				change_global_variable = { name = gw_direct_conflict_tension_this_year add = 2 }
+			}
+			initiator = {
+				if = {
+					limit = { NOT = { exists = var:gw_country_tension_val } }
+					set_variable = { name = gw_country_tension_val value = 0 }
+				}
+				change_variable = { name = gw_country_tension_val add = 2 }
+			}
+		}
+
+		# GP conquest/annexation increases tension (additional, stacks with above)
+		if = {
+			limit = {
+				initiator = { country_rank >= rank_value:great_power }
+				OR = {
+					is_diplomatic_play_type = dp_annex_subject
+					is_diplomatic_play_type = dp_conquer_state
+				}
+			}
+			change_global_variable = { name = gw_world_tension add = 3 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 3 }
+			if = {
+				limit = { NOT = { is_diplomatic_play_type = gw_dp_reshape_order } }
+				change_global_variable = { name = gw_direct_conflict_tension_this_year add = 3 }
+			}
+			initiator = {
+				if = {
+					limit = { NOT = { exists = var:gw_country_tension_val } }
+					set_variable = { name = gw_country_tension_val value = 0 }
+				}
+				change_variable = { name = gw_country_tension_val add = 3 }
+			}
+		}
+
+		# Protectorate wars expand spheres of influence and raise tension, but less than direct conquest.
+		if = {
+			limit = {
+				is_diplomatic_play_type = dp_make_protectorate
+				initiator = { country_rank >= rank_value:great_power }
+			}
+			change_global_variable = { name = gw_world_tension add = 2 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 2 }
+			if = {
+				limit = { NOT = { is_diplomatic_play_type = gw_dp_reshape_order } }
+				change_global_variable = { name = gw_direct_conflict_tension_this_year add = 2 }
+			}
+			initiator = {
+				if = {
+					limit = { NOT = { exists = var:gw_country_tension_val } }
+					set_variable = { name = gw_country_tension_val value = 0 }
+				}
+				change_variable = { name = gw_country_tension_val add = 2 }
+			}
+		}
+		else_if = {
+			limit = {
+				is_diplomatic_play_type = dp_make_protectorate
+				initiator = { country_rank >= rank_value:major_power }
+			}
+			change_global_variable = { name = gw_world_tension add = 1 }
+			change_global_variable = { name = gw_tsrc_conflicts add = 1 }
+			if = {
+				limit = { NOT = { is_diplomatic_play_type = gw_dp_reshape_order } }
+				change_global_variable = { name = gw_direct_conflict_tension_this_year add = 1 }
+			}
+			initiator = {
+				if = {
+					limit = { NOT = { exists = var:gw_country_tension_val } }
+					set_variable = { name = gw_country_tension_val value = 0 }
+				}
+				change_variable = { name = gw_country_tension_val add = 1 }
+			}
+		}
+		gw_apply_direct_conflict_tension_cap = yes
+
+		# Mark allies in reshape order wars
+		if = {
+			limit = {
+				is_diplomatic_play_type = gw_dp_reshape_order
+			}
+			gw_force_faction_backers_in_play = yes
+			gw_mark_play_sides_from_reshape_order = yes
+			if = {
+				limit = { exists = global_var:gw_great_war_winning_leader }
+				remove_global_variable = gw_great_war_winning_leader
+			}
+			if = {
+				limit = { has_global_variable = gw_great_war_play_pending }
+				remove_global_variable = gw_great_war_play_pending
+			}
+			if = {
+				limit = { has_global_variable = gw_prewar_backdown_retries }
+				remove_global_variable = gw_prewar_backdown_retries
+			}
+			set_global_variable = gw_great_war_active
+		}
+		}
+	}
+}
+
+on_gw_diplo_play_join_side = {
+	# Root: Diplomatic Play. scope:actor is the country that joined a side.
+	effect = {
+		if = {
+			limit = {
+				is_diplomatic_play_type = gw_dp_reshape_order
+			}
+			gw_mark_play_sides_from_reshape_order = yes
+		}
+	}
+}
+
+on_gw_war_end = {
+	# Root: War object. attacker_warleader / defender_warleader are accessible scopes.
+	# NOTE: this is the generic on_war_end — it fires for EVERY war that ends in the
+	# world, not just the Great War. The outer guard below ensures we only touch
+	# Great War state when the war that actually ended IS the Great War (one of its
+	# warleaders is a bloc leader). Without this guard, any unrelated war ending
+	# (a colonial war, an AI border war, a minor's conflict) while gw_great_war_active
+	# is set would spuriously conclude the Great War in a stalemate ~immediately.
+	effect = {
+		if = {
+			limit = {
+				has_global_variable = gw_great_war_active
+				OR = {
+					AND = {
+						exists = attacker_warleader
+						attacker_warleader = {
+							OR = {
+								has_variable = gw_war_side_1_leader
+								has_variable = gw_war_side_2_leader
+							}
+						}
+					}
+					AND = {
+						exists = defender_warleader
+						defender_warleader = {
+							OR = {
+								has_variable = gw_war_side_1_leader
+								has_variable = gw_war_side_2_leader
+							}
+						}
+					}
+				}
+			}
+			# Great War end — first try to derive a real winner from leader capitulation.
+			# Only fall back to stalemate if no decisive outcome can be inferred.
+			if = {
+				limit = {
+					exists = attacker_warleader
+					exists = defender_warleader
+					NOT = { has_global_variable = gw_war_outcome_determined }
+				}
+				gw_resolve_war_end_outcome = yes
+			}
+			if = {
+				limit = {
+					NOT = { has_global_variable = gw_war_outcome_determined }
+				}
+				# No clear defeated leader could be identified, but the Great War war object ended.
+				# Treat it as a status quo peace so the journal and post-war systems cannot hang.
+				every_country = {
+					limit = {
+						OR = {
+							has_variable = gw_war_side_1
+							has_variable = gw_war_side_2
+						}
+					}
+					trigger_event = { id = gw_war.1006 days = 1 }
+				}
+				if = {
+					limit = {
+						NOT = {
+							any_country = {
+								OR = {
+									has_variable = gw_war_side_1
+									has_variable = gw_war_side_2
+								}
+							}
+						}
+					}
+					gw_cleanup_orphaned_great_war_state = yes
+				}
+			}
+		}
+		# Safety net: ensure gw_war_outcome_determined is cleaned up if no post-war event consumed it.
+		if = {
+			limit = {
+				has_global_variable = gw_war_outcome_determined
+				NOT = { has_global_variable = gw_great_war_active }
+			}
+			remove_global_variable = gw_war_outcome_determined
+		}
+	}
+}
+
+on_gw_capitulation = {
+	# Root: the Country that just capitulated.
+	effect = {
+		if = {
+			limit = {
+				has_global_variable = gw_system_active
+				NOT = { has_global_variable = gw_great_war_concluded }
+			}
+		set_variable = {
+			name = recently_lost_war
+			days = 1825
+			value = yes
+		}
+		set_variable = {
+			name = recent_capitulation
+			days = short_modifier_time
+		}
+		gw_apply_individual_great_war_capitulation = yes
+		}
+	}
+}
+
+on_gw_monthly_pulse_country = {
+	# Root: each Country in turn (fires once per month per country).
+	effect = {
+		if = {
+			limit = {
+				global_country_ranking = 1
+				has_global_variable = ve_age_3_started
+				NOT = { has_global_variable = gw_system_active }
+				NOT = { has_global_variable = gw_great_war_concluded }
+			}
+			gw_activate_for_age_3 = yes
+		}
+		# Global Great War diplomacy maintenance. Running this from the monthly
+		# country pulse keeps AI alignment independent from player journal UI.
+		if = {
+			limit = {
+				global_country_ranking = 1
+				has_global_variable = gw_system_active
+				NOT = { has_global_variable = gw_great_war_concluded }
+			}
+			every_country = {
+				limit = {
+					country_rank >= rank_value:major_power
+					NOT = { has_global_variable = gw_great_war_active }
+				}
+				gw_evaluate_great_power_alignment = yes
+			}
+			gw_assign_great_war_bloc_leaders = yes
+			gw_refresh_bloc_lists = yes
+		}
+
+		if = {
+			limit = {
+				global_country_ranking = 1
+				has_global_variable = gw_great_war_active
+				NOT = { has_global_variable = gw_great_war_play_pending }
+				NOT = {
+					any_country = {
+						OR = {
+							has_variable = gw_war_side_1
+							has_variable = gw_war_side_2
+						}
+						is_at_war = yes
+					}
+				}
+			}
+			gw_cleanup_orphaned_great_war_state = yes
+		}
+		if = {
+			limit = {
+				country_rank >= rank_value:major_power
+				has_global_variable = gw_great_war_active
+				NOT = { has_global_variable = gw_great_war_play_pending }
+				NOT = { has_variable = gw_war_side_1 }
+				NOT = { has_variable = gw_war_side_2 }
+				is_at_war = no
+				NOT = { has_variable = gw_neutral_markets_seen }
+			}
+			trigger_event = { id = gw_war.3110 days = 1 }
+		}
+		else_if = {
+			limit = {
+				country_rank >= rank_value:major_power
+				has_global_variable = gw_great_war_active
+				NOT = { has_global_variable = gw_great_war_play_pending }
+				NOT = { has_variable = gw_war_side_1 }
+				NOT = { has_variable = gw_war_side_2 }
+				is_at_war = no
+				has_variable = gw_neutral_markets_seen
+				NOT = { has_variable = gw_neutral_casualties_seen }
+			}
+			trigger_event = { id = gw_war.3111 days = 1 }
+		}
+	}
+}

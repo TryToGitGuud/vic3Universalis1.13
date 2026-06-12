@@ -1,0 +1,149 @@
+﻿# ============================================================
+# GREAT WAR MOD - Wartime Scripted Buttons
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_war_propaganda_button = {
+	name = "gw_war_propaganda_button"
+	desc = "gw_war_propaganda_button_desc"
+
+	visible = {
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = gw_wartime_button_at_war_tt
+			is_at_war = yes
+		}
+		custom_tooltip = {
+			text = gw_war_propaganda_available_tt
+			NOT = { has_modifier = gw_war_propaganda }
+		}
+	}
+
+	effect = {
+		gw_apply_war_propaganda = yes
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+gw_suppressing_dissent_button = {
+	name = "gw_suppressing_dissent_button"
+	desc = "gw_suppressing_dissent_button_desc"
+
+	visible = {
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = gw_wartime_button_at_war_tt
+			is_at_war = yes
+		}
+		custom_tooltip = {
+			text = gw_suppressing_dissent_available_tt
+			NOT = { has_variable = gw_suppressing_dissent }
+		}
+	}
+
+	effect = {
+		gw_apply_suppressing_dissent = yes
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+gw_wartime_rationing_button = {
+	name = "gw_wartime_rationing_button"
+	desc = "gw_wartime_rationing_button_desc"
+
+	visible = {
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = gw_wartime_button_at_war_tt
+			is_at_war = yes
+		}
+		custom_tooltip = {
+			text = gw_wartime_rationing_available_tt
+			NOT = { has_modifier = gw_wartime_rationing }
+		}
+	}
+
+	effect = {
+		gw_apply_wartime_rationing = yes
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+gw_wartime_research_button = {
+	name = "gw_wartime_research_button"
+	desc = "gw_wartime_research_button_desc"
+
+	visible = {
+		OR = {
+			is_country_type = recognized
+			is_country_type = colonial
+		}
+		has_global_variable = gw_great_war_active
+		OR = {
+			has_variable = gw_war_side_1
+			has_variable = gw_war_side_2
+		}
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = gw_wartime_button_at_war_tt
+			is_at_war = yes
+		}
+		custom_tooltip = {
+			text = gw_wartime_research_available_tt
+			NOT = { has_modifier = gw_wartime_research_focus }
+		}
+	}
+
+	effect = {
+		gw_apply_wartime_research = yes
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+

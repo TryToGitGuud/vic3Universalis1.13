@@ -1,0 +1,112 @@
+﻿# ============================================================
+# GREAT WAR MOD - Great Power Conference Events
+# Purpose: Concert-style diplomacy before formal world institutions.
+# ============================================================
+
+namespace = gw_conference
+
+# --- Great Power Conference Called ---
+gw_conference.1 = {
+	type = country_event
+	title = gw_conference.1.t
+	desc = gw_conference.1.d
+	flavor = gw_conference.1.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+
+	trigger = {
+		global_country_ranking = 1
+		NOT = { has_global_variable = gw_great_war_active }
+		NOT = { has_global_variable = gw_call_to_war_active }
+		has_global_variable = gw_world_tension
+		has_global_variable = gw_great_power_conference_cooldown
+		global_var:gw_great_power_conference_cooldown <= 0
+		OR = {
+			AND = {
+				game_date < 1880
+				global_var:gw_world_tension >= 45
+			}
+			AND = {
+				game_date >= 1880
+				global_var:gw_world_tension >= 65
+			}
+		}
+		NOT = {
+			any_country = {
+				country_rank >= rank_value:great_power
+				is_at_war = yes
+			}
+		}
+	}
+
+	option = {
+		name = gw_conference.1.a
+		default_option = yes
+		custom_tooltip = { text = gw_conference_convene_tt }
+		set_global_variable = { name = gw_great_power_conference_cooldown value = 5 }
+		change_global_variable = { name = gw_world_tension add = -6 }
+		change_global_variable = { name = gw_tsrc_decay add = -6 }
+		every_country = {
+			limit = {
+				country_rank >= rank_value:major_power
+				NOT = { this = root }
+			}
+			trigger_event = { id = gw_conference.2 days = 1 }
+		}
+		ai_chance = {
+			base = 14
+			modifier = {
+				trigger = { global_var:gw_world_tension >= 70 }
+				add = 10
+			}
+			modifier = {
+				trigger = { has_modifier = gw_allied_powers_leader }
+				add = 8
+			}
+		}
+	}
+
+	option = {
+		name = gw_conference.1.b
+		custom_tooltip = { text = gw_conference_decline_tt }
+		set_global_variable = { name = gw_great_power_conference_cooldown value = 3 }
+		ai_chance = {
+			base = 4
+			modifier = {
+				trigger = { has_modifier = gw_central_powers_leader }
+				add = 6
+			}
+		}
+	}
+}
+
+# --- Great Power Conference Notification ---
+gw_conference.2 = {
+	type = country_event
+	title = gw_conference.2.t
+	desc = gw_conference.2.d
+	flavor = gw_conference.2.f
+
+	event_image = {
+		video = "gfx/event_pictures/europenorthamerica_capitalists_meeting.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	duration = 3
+
+	trigger = {
+		country_rank >= rank_value:major_power
+	}
+
+	option = {
+		name = gw_conference.2.a
+		default_option = yes
+	}
+}

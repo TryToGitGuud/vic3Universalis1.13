@@ -1,0 +1,28 @@
+﻿# ============================================================
+# GREAT WAR MOD - Great War Home Front Progress Bar
+# ============================================================
+
+gw_home_front_balance_progress_bar = {
+	name = "gw_home_front_balance_progress_bar"
+	desc = "gw_home_front_balance_progress_bar_desc"
+	second_desc = "gw_home_front_balance_progress_bar_second_desc"
+
+	double_sided_two_spains = yes
+
+	weekly_progress = {
+		if = {
+			limit = {
+				owner = { has_variable = gw_home_front_balance_bar_current }
+			}
+			add = {
+				desc = "gw_home_front_balance_progress_sync"
+				value = owner.gw_home_front_balance_value
+				subtract = owner.var:gw_home_front_balance_bar_current
+			}
+		}
+	}
+
+	start_value = 100
+	min_value = -100
+	max_value = 100
+}

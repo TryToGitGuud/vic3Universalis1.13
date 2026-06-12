@@ -83,13 +83,13 @@ ideology_zamindar_system = {
 
 	lawgroup_economic_system = {
 		law_traditionalism = approve
-		law_agrarianism = approve
-		law_interventionism = neutral
+		law_agrarianism = strongly_approve
+		law_extraction_economy = approve
+		law_interventionism = neutralf
 		law_industry_banned = disapprove
 		law_laissez_faire = disapprove
 		law_cooperative_ownership = strongly_disapprove
 		law_command_economy = strongly_disapprove
-		law_extraction_economy = strongly_approve
 	}
 
 	lawgroup_trade_policy = {

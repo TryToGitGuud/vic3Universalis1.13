@@ -1,0 +1,51 @@
+﻿# ============================================================
+# GREAT WAR MOD - World Tension Scripted Effects Index
+# Remaining definitions after mechanical split.
+# ============================================================
+
+gw_apply_direct_conflict_tension_cap = {
+	# Direct war-start tension is capped so heavily modded observer games do
+	# not race to crisis from several minor Great/Major Power wars in one year.
+	if = {
+		limit = {
+			NOT = { is_diplomatic_play_type = gw_dp_reshape_order }
+			NOT = { has_global_variable = gw_direct_conflict_tension_this_year }
+		}
+		set_global_variable = { name = gw_direct_conflict_tension_this_year value = 0 }
+	}
+	if = {
+		limit = {
+			NOT = { is_diplomatic_play_type = gw_dp_reshape_order }
+			game_date < 1880
+			global_var:gw_direct_conflict_tension_this_year > 8
+		}
+		set_global_variable = { name = gw_direct_conflict_tension_excess value = global_var:gw_direct_conflict_tension_this_year }
+		change_global_variable = { name = gw_direct_conflict_tension_excess subtract = 8 }
+		change_global_variable = { name = gw_world_tension subtract = global_var:gw_direct_conflict_tension_excess }
+		change_global_variable = { name = gw_tsrc_conflicts subtract = global_var:gw_direct_conflict_tension_excess }
+		set_global_variable = { name = gw_direct_conflict_tension_this_year value = 8 }
+		remove_global_variable = gw_direct_conflict_tension_excess
+	}
+	else_if = {
+		limit = {
+			NOT = { is_diplomatic_play_type = gw_dp_reshape_order }
+			game_date >= 1880
+			global_var:gw_direct_conflict_tension_this_year > 12
+		}
+		set_global_variable = { name = gw_direct_conflict_tension_excess value = global_var:gw_direct_conflict_tension_this_year }
+		change_global_variable = { name = gw_direct_conflict_tension_excess subtract = 12 }
+		change_global_variable = { name = gw_world_tension subtract = global_var:gw_direct_conflict_tension_excess }
+		change_global_variable = { name = gw_tsrc_conflicts subtract = global_var:gw_direct_conflict_tension_excess }
+		set_global_variable = { name = gw_direct_conflict_tension_this_year value = 12 }
+		remove_global_variable = gw_direct_conflict_tension_excess
+	}
+	if = {
+		limit = { global_var:gw_world_tension < 0 }
+		set_global_variable = { name = gw_world_tension value = 0 }
+	}
+	if = {
+		limit = { global_var:gw_tsrc_conflicts < 0 }
+		set_global_variable = { name = gw_tsrc_conflicts value = 0 }
+	}
+}
+

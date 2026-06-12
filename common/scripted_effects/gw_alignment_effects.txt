@@ -1,0 +1,79 @@
+﻿# ============================================================
+# GREAT WAR MOD - Alignment Scripted Effects
+# Auto-split from larger scripted files for readability.
+# ============================================================
+
+gw_apply_central_alignment = {
+	remove_variable = gw_alignment_allied
+	remove_variable = gw_alignment_neutral
+	remove_variable = gw_satisfied_with_order
+	set_variable = gw_dissatisfied_with_order
+	if = {
+		limit = { has_modifier = gw_neutral_nation }
+		remove_modifier = gw_neutral_nation
+	}
+	# Strip the opposite-side leader modifier if the country was carrying it.
+	# Without this, switching alignment while holding the wrong leader modifier
+	# leaves an inconsistent state (e.g., Allied leader joining Central Powers).
+	if = {
+		limit = { has_modifier = gw_allied_powers_leader }
+		remove_modifier = gw_allied_powers_leader
+	}
+	set_variable = gw_alignment_central
+	if = {
+		limit = { is_ai = no }
+		remove_variable = gw_player_allied
+		remove_variable = gw_player_neutral
+		set_variable = gw_player_central
+	}
+}
+
+gw_apply_allied_alignment = {
+	remove_variable = gw_alignment_central
+	remove_variable = gw_alignment_neutral
+	remove_variable = gw_dissatisfied_with_order
+	set_variable = gw_satisfied_with_order
+	if = {
+		limit = { has_modifier = gw_neutral_nation }
+		remove_modifier = gw_neutral_nation
+	}
+	if = {
+		limit = { has_modifier = gw_central_powers_leader }
+		remove_modifier = gw_central_powers_leader
+	}
+	set_variable = gw_alignment_allied
+	if = {
+		limit = { is_ai = no }
+		remove_variable = gw_player_central
+		remove_variable = gw_player_neutral
+		set_variable = gw_player_allied
+	}
+}
+
+gw_apply_neutral_alignment = {
+	remove_variable = gw_alignment_central
+	remove_variable = gw_alignment_allied
+	remove_variable = gw_satisfied_with_order
+	remove_variable = gw_dissatisfied_with_order
+	set_variable = gw_alignment_neutral
+	if = {
+		limit = { NOT = { has_modifier = gw_neutral_nation } }
+		add_modifier = gw_neutral_nation
+	}
+	# Neutrals never hold a bloc leader modifier.
+	if = {
+		limit = { has_modifier = gw_central_powers_leader }
+		remove_modifier = gw_central_powers_leader
+	}
+	if = {
+		limit = { has_modifier = gw_allied_powers_leader }
+		remove_modifier = gw_allied_powers_leader
+	}
+	if = {
+		limit = { is_ai = no }
+		remove_variable = gw_player_central
+		remove_variable = gw_player_allied
+		set_variable = gw_player_neutral
+	}
+}
+

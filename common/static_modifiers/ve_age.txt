@@ -1,9 +1,10 @@
 golden_age_mdf = {
 	icon = gfx/interface/icon_splendor_tiny.dds
 	unit_army_offense_mult = 0.1
-	unit_navy_offense_mult = 0.1
+	unit_army_defense_mult = 0.1
 	building_group_bg_manufacturing_throughput_add = 0.1
 	building_group_bg_mining_throughput_add = 0.1
+	state_construction_mult = 0.1
 	#idea, piety ve kültür cost indirimi
 }
 

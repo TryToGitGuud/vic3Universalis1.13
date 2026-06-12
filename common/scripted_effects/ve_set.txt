@@ -555,6 +555,7 @@ set_national_idea = {
 				this = c:ki_ANS
 				this = c:IRE
 				this = c:ki_CEL
+				this = c:POR
 				this = c:BRZ
 				this = c:POL
 				this = c:KRA
@@ -1169,6 +1170,28 @@ national_idea_traditions = {
 			}
 			add_modifier = {
 				name = ire_idea_tradition_2
+				months = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			exists = c:POR
+			this = c:POR
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_modifier = por_idea_tradition_1
+					has_modifier = por_idea_tradition_2
+				}
+			}
+			add_modifier = {
+				name = por_idea_tradition_1
+				months = -1
+			}
+			add_modifier = {
+				name = por_idea_tradition_2
 				months = -1
 			}
 		}
