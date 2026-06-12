@@ -189,6 +189,12 @@ principle_economic_imperialism_1 = {
 	visible = {
 		has_dlc_feature = power_bloc_features
 	}
+	
+	leader_modifier = {
+		country_mass_migration_attraction_mult = 0.05
+		state_migration_pull_add = 10
+	}
+	
 	non_leader_modifier = {
 		state_construction_mult = 0.05
 	}
@@ -232,6 +238,12 @@ principle_economic_imperialism_2 = {
 	visible = {
 		has_dlc_feature = power_bloc_features
 	}
+
+	leader_modifier = {
+		country_mass_migration_attraction_mult = 0.10
+		state_migration_pull_add = 15
+	}
+	
 	non_leader_modifier = {
 		state_construction_mult = 0.05
 		building_group_bg_plantations_throughput_add = 0.1
@@ -263,6 +275,7 @@ principle_economic_imperialism_3 = {
 
 	leader_modifier = {
 		country_mass_migration_attraction_mult = 0.15
+		state_migration_pull_add = 20
 	}
 	
 	ai_weight = {
